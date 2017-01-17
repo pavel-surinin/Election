@@ -26,4 +26,10 @@ public class PartyController {
     public List<PartyReport> getPartijaList(){
         return service.getPartyList();
     }
+//
+//    @GetMapping("/party")
+//    public PartyReport getParty(){
+//        return service.getParty();
+//    }
+
 }
