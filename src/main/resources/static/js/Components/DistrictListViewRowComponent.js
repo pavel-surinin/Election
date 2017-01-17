@@ -10,6 +10,9 @@ var DistrictListViewRowComponent = React.createClass({
                 {this.props.name}
               </td>
               <td>
+                {this.props.adress}
+              </td>
+              <td>
                 {this.props.county}
               </td>
               <td>

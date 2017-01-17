@@ -1,14 +1,34 @@
 var CandidatesListViewComponent = React.createClass({
 
-  render: function() {
+	render: function() {
+	    var array = [];
+	    this.props.districtList.map(function(cand,index) {
+	      array.push(
+	        <DistrictListViewRowComponent
+	          id={cand.id}
+	          key={index}
+	          name={cand.name}
+	          surname={cand.surname}
+	          birthDate={cand.birthDate}
+	          partijosId={cand.partijosId}
+	          partijosPavadinimas={cand.partijosPavadinimas}
+	          description={cand.description}
+	        />
+	      );
+	    });
+	    
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading"><h2>Kandidatų sąrašas</h2></div>
-          <div className="panel-body">
-          </div>
+    	<div className="panel panel-default">
+          <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
+            <div className="panel-body">
+              <span>
+                <h5>Registruoti naują kandidatą </h5>
+              </span>
+              <a href="#/candidates/createCandidate"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+            </div>
             <table className="table table-striped">
-            <thead>
-            <tr>
+             <thead>
+              <tr>
               <th>
                 Eil. Nr.
               </th>
@@ -17,6 +37,9 @@ var CandidatesListViewComponent = React.createClass({
               </th>
               <th>
                 Pavardė
+              </th>
+              <th>
+                Gimimo data
               </th>
               <th>
                 Partinė priklausomybė
@@ -30,8 +53,7 @@ var CandidatesListViewComponent = React.createClass({
             </tr>
             </thead>
             <tbody>
-			  <CandidatesListViewRowComponent name="Sigita" surname="Sigitaite" party="TS-LKD"/>
-			  <CandidatesListViewRowComponent name="Marija" surname="Marijaite" party="LRLS"/>
+			  {array}
             </tbody>
           </table>
         </div>
