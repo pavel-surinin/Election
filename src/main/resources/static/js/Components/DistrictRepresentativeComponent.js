@@ -18,6 +18,9 @@ var DistrictRespesentativeComponent = React.createClass({
               <th>
                 Atstovas
               </th>
+              <th>
+                Atstovas
+              </th>
             </tr>
             </thead>
             <tbody>
