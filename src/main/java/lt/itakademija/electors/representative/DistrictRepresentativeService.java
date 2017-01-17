@@ -21,8 +21,13 @@ public class DistrictRepresentativeService {
                 .map(ent -> {
                     DistrictRepresentativeReport rep = new DistrictRepresentativeReport();
                     rep.setId(ent.getId());
-                    rep.setDistrictId(ent.getDistrict().getId());
-                    rep.setDistrictName(ent.getDistrict().getName());
+                    if (ent.getDistrict() == null) {
+                        rep.setDistrictId(null);
+                        rep.setDistrictName(null);
+                    }else{
+                        rep.setDistrictId(ent.getDistrict().getId());
+                        rep.setDistrictName(ent.getDistrict().getName());
+                    }
                     rep.setName(ent.getName());
                     rep.setSurname(ent.getSurname());
                     return rep;
