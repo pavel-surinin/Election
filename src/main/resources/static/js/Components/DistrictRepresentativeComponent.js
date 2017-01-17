@@ -1,4 +1,4 @@
-var DistrictRespesentativeComponent = React.createClass({
+var DistrictRepresentativeComponent = React.createClass({
   render: function() {
     return (
       <div className="panel panel-default">
@@ -42,4 +42,4 @@ var DistrictRespesentativeComponent = React.createClass({
   }
 });
 
-window.DistrictRespesentativeComponent = DistrictRespesentativeComponent;
+window.DistrictRepresentativeComponent = DistrictRepresentativeComponent;
