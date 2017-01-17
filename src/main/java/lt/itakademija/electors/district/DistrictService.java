@@ -23,8 +23,13 @@ public class DistrictService {
                     rep.setId(ent.getId());
                     rep.setName(ent.getName());
                     rep.setAdress(ent.getAdress());
-                    rep.setRepresentativeId(ent.getRepresentative().getId());
-                    rep.setRepresentativeName(ent.getRepresentative().getName() + " " + ent.getRepresentative().getSurname());
+                    if (ent.getRepresentative() == null) {
+                        rep.setRepresentativeId(null);
+                        rep.setRepresentativeName(null);
+                    } else {
+                        rep.setRepresentativeId(ent.getRepresentative().getId());
+                        rep.setRepresentativeName(ent.getRepresentative().getName() + " " + ent.getRepresentative().getSurname());
+                    }
                     return rep;
                 })
                 .collect(Collectors.toList());
