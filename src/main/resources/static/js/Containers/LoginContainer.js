@@ -13,6 +13,19 @@ var LoginContainer = React.createClass({
     .post('users/login', self.state)
     .then(function(response){
       console.log(response.data);
+
+    })
+    .catch(function(err){
+      console.error('axios error at LoginContainer', err);
+    });
+  },
+  checkWhoIsLogged: function() {
+    var self = this;
+    axios
+    .get('users/logged')
+    .then(function(response){
+      console.log(response.data);
+      return response.data;
     })
     .catch(function(err){
       console.error('axios error at LoginContainer', err);
@@ -31,6 +44,7 @@ var LoginContainer = React.createClass({
       onHandleSubmit={this.onHandleSubmit}
       onHandlePasswordChange={this.onHandlePasswordChange}
       onHandleUsernameChange={this.onHandleUsernameChange}
+      userLogged={this.checkWhoIsLogged}
       />
     );
   }

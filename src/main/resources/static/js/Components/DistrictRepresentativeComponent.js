@@ -1,5 +1,19 @@
 var DistrictRepresentativeComponent = React.createClass({
   render: function() {
+    var array = [];
+    this.props.representativesList.map(function(rep,index) {
+      array.push(
+        <DistrictRespesentativeListViewRowComponent
+          id={rep.id}
+          key={index}
+          name={rep.name}
+          surname={rep.surname}
+          districtId={rep.districtId}
+          districtName={rep.districtName}
+        />
+      );
+    });
+
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
@@ -32,9 +46,7 @@ var DistrictRepresentativeComponent = React.createClass({
                 </tr>
               </thead>
               <tbody>
-                <DistrictRespesentativeListViewRowComponent name="Jonas" nr="1"/>
-                <DistrictRespesentativeListViewRowComponent name="Petras" nr="2"/>
-                <DistrictRespesentativeListViewRowComponent name="As" nr="3"/>
+              {array}
               </tbody>
             </table>
         </div>
