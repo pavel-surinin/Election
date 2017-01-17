@@ -9,6 +9,11 @@ var App = React.createClass({
                 <li><a href="#/">Home<span className="sr-only">(current)</span></a></li>
                 <li><a href="#/login">Login<span className="sr-only">(current)</span></a></li>
                 <li><a href="#/rep">Representavie<span className="sr-only">(current)</span></a></li>
+
+                <li><a href="#/dist">Apylinkės<span className="sr-only">(current)</span></a></li>
+                <li><a href="#/creedit">Apylinkės redagavimas<span className="sr-only">(current)</span></a></li>
+                <li><a href="#/candidates">Kandidatai<span className="sr-only">(current)</span></a></li>
+                <li><a href="#/cand">Kandidatų redagavimas<span className="sr-only">(current)</span></a></li>
                 <li><a href="#/county">County<span className="sr-only">(current)</span></a></li>
               </ul>
           </div>
@@ -36,6 +41,10 @@ ReactDOM.render((
       <IndexRoute component={HomeComponent} />
       <Route path="/create" component={CreateBookContainer} />
       <Route path="/login" component={LoginContainer} />
+      <Route path="/dist" component={DistrictListViewComponent} />
+      <Route path="/creedit" component={DistrictCreateEditContainer} />
+      <Route path="/candidates" component={CandidatesListViewComponent} />
+      <Route path="/cand" component={CandidateEditContainer} />
       <Route path="/rep" component={DistrictRepresentativeComponent} />
       <Route path="/rep/createRep" component={DistrictRepresentativeCreateFormComponent} />
       <Route path="/county" component={CountyListViewComponent} />
