@@ -1,19 +1,44 @@
 
 var App = React.createClass({
+  getInitialState: function() {
+    return {
+      userLogged: 'svecias',
+    };
+  },
+  componentWillMount: function() {
+    var self = this;
+    axios
+    .get('users/logged')
+    .then(function(response){
+      console.log(response.data);
+      self.setState({userLogged : response.data});
+    })
+    .catch(function(err){
+      console.error('axios error at App', err);
+    });
+  },
   render: function() {
     return (
       <div style={{ paddingTop: '20px' }}>
         <nav className="navbar navbar-default">
           <div className="container-fluid">
               <ul className="nav navbar-nav">
-                <li><a href="#/">Home<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/login">Login<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/rep">Representative<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/dist">Apylinkės<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/creedit">Apylinkės redagavimas<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/candidates">Kandidatai<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/cand">Kandidatų redagavimas<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/county">County<span className="sr-only">(current)</span></a></li>
+                <li><a href="#/">Pradinis</a></li>
+                <li><a href="#/login">Prisijungti</a></li>
+                <li className="dropdown">
+                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administratoriaus Menu <span className="caret"></span></a>
+                  <ul className="dropdown-menu">
+                    <li><a href="#/county">Apygardos</a></li>
+                    <li><a href="#/dist">Apylinkės</a></li>
+                    <li><a href="#/creedit">Apylinkės redagavimas</a></li>
+                    <li><a href="#/rep">Apylinkių Atstovai</a></li>
+                    <li><a href="#/candidates">Kandidatai</a></li>
+                    <li><a href="#/cand">Kandidatų redagavimas</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li><a href="#/">{this.state.userLogged}</a></li>
               </ul>
           </div>
         </nav>
@@ -22,6 +47,9 @@ var App = React.createClass({
     );
   }
 });
+
+window.App = App;
+
 
 var NoMatch = React.createClass({
   render: function() {
