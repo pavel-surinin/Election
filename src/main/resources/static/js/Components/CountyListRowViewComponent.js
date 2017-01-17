@@ -4,10 +4,10 @@ var CountyListRowViewComponent = React.createClass({
     return (
             <tr>
               <td>
-                {this.props.nr}
+                {this.props.id}
               </td>
               <td>
-                {this.props.countyName}
+                {this.props.name}
               </td>
               <td>
                 <button type="button" className="btn btn-primary btn-sm">Naujinti</button>

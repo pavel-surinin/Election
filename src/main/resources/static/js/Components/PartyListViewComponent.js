@@ -1,6 +1,16 @@
 var PartyListViewComponent = React.createClass({
-
   render: function() {
+    var array = [];
+    this.props.partyList.map(function(party,index) {
+      array.push(
+        <PartyListViewRowComponent
+          id={party.id}
+          key={index}
+          name={party.name}
+        />
+      );
+    });
+
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
@@ -27,9 +37,7 @@ var PartyListViewComponent = React.createClass({
                 </tr>
               </thead>
               <tbody>
-                <PartyListViewRowComponent partyName="Vilnius" nr="1"/>
-                <PartyListViewRowComponent partyName="Kaunas" nr="2"/>
-                <PartyListViewRowComponent partyName="Centras" nr="3"/>
+                {array}
               </tbody>
             </table>
         </div>
