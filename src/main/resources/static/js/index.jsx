@@ -44,7 +44,7 @@ ReactDOM.render((
       <Route path="/creedit" component={DistrictCreateEditContainer} />
       <Route path="/candidates" component={CandidatesListViewComponent} />
       <Route path="/cand" component={CandidateEditContainer} />
-      <Route path="/rep" component={DistrictRepresentativeComponent} />
+      <Route path="/rep" component={DistrictRepresentativeContainer} />
       <Route path="/rep/createRep" component={DistrictRepresentativeCreateFormComponent} />
       <Route path="/county" component={CountyListViewComponent} />
       <Route path="/county/createCounty" component={CountyCreateEditFormComponent} />
