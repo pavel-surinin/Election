@@ -8,8 +8,7 @@ var App = React.createClass({
               <ul className="nav navbar-nav">
                 <li><a href="#/">Home<span className="sr-only">(current)</span></a></li>
                 <li><a href="#/login">Login<span className="sr-only">(current)</span></a></li>
-                <li><a href="#/rep">Representavie<span className="sr-only">(current)</span></a></li>
-
+                <li><a href="#/rep">Representative<span className="sr-only">(current)</span></a></li>
                 <li><a href="#/dist">Apylinkės<span className="sr-only">(current)</span></a></li>
                 <li><a href="#/creedit">Apylinkės redagavimas<span className="sr-only">(current)</span></a></li>
                 <li><a href="#/candidates">Kandidatai<span className="sr-only">(current)</span></a></li>
