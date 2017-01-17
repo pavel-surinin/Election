@@ -13,6 +13,9 @@ var CandidatesListViewRowComponent = React.createClass({
                 {this.props.surname}
               </td>
               <td>
+                {this.props.birthDate}
+              </td>
+              <td>
                 {this.props.party}
               </td>
               <td>
