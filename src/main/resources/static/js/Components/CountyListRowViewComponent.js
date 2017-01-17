@@ -1,4 +1,5 @@
-var DistrictRespesentativeListViewRowComponent = React.createClass({
+var CountyListRowViewComponent = React.createClass({
+
   render: function() {
     return (
             <tr>
@@ -6,13 +7,7 @@ var DistrictRespesentativeListViewRowComponent = React.createClass({
                 {this.props.nr}
               </td>
               <td>
-                {this.props.name}
-              </td>
-              <td>
-                Petravicius
-              </td>
-              <td>
-                Zirmunu Apylinke
+                {this.props.countyName}
               </td>
               <td>
                 <button type="button" className="btn btn-primary btn-sm">Naujinti</button>
@@ -24,4 +19,4 @@ var DistrictRespesentativeListViewRowComponent = React.createClass({
 
 });
 
-window.DistrictRespesentativeListViewRowComponent = DistrictRespesentativeListViewRowComponent;
+window.CountyListRowViewComponent = CountyListRowViewComponent;
