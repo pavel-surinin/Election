@@ -7,7 +7,7 @@ var PartyListViewComponent = React.createClass({
           <h3>Partijų sąrašas</h3>
         </div>
           <div className="panel-body">
-            <a href="#/county/createCounty"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+            <a href="#/party/createParty"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
             <span>
               <h5>Registruoti naują partiją </h5>
             </span>
@@ -27,9 +27,9 @@ var PartyListViewComponent = React.createClass({
                 </tr>
               </thead>
               <tbody>
-                <CountyListRowViewComponent partyName="Vilnius" nr="1"/>
-                <CountyListRowViewComponent partyName="Kaunas" nr="2"/>
-                <CountyListRowViewComponent partyName="Centras" nr="3"/>
+                <PartyListViewRowComponent partyName="Vilnius" nr="1"/>
+                <PartyListViewRowComponent partyName="Kaunas" nr="2"/>
+                <PartyListViewRowComponent partyName="Centras" nr="3"/>
               </tbody>
             </table>
         </div>

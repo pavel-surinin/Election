@@ -4,7 +4,7 @@ var CountyCreateEditFormComponent = React.createClass({
       <div>
         <form>
           <div className="form-heading">
-            <h2> Registruoti/naujinti apylinkės atstovą </h2>
+            <h2> Registruoti/naujinti apygardą </h2>
           </div>
           <div className="form-group">
               <label for="cntName">Apygardos pavadinimas:</label>
