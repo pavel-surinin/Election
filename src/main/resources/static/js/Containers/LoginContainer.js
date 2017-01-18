@@ -6,8 +6,8 @@ var LoginContainer = React.createClass({
     };
   },
   onHandleSubmit : function(){
-    var self = this;
     event.preventDefault();
+    var self = this;
     console.log(this.state);
     axios
     .post('users/login', self.state)
