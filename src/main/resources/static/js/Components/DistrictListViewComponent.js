@@ -1,5 +1,4 @@
 var DistrictListViewComponent = React.createClass({
-
 	render: function() {
 	    var array = [];
 	    this.props.districtList.map(function(dist,index) {
