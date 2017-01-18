@@ -1,5 +1,4 @@
 var DistrictListViewRowComponent = React.createClass({
-
   render: function() {
     return (
             <tr>

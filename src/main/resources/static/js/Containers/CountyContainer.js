@@ -11,6 +11,7 @@ var CountyContainer = React.createClass({
       .get('/county')
       .then(function(response){
         self.setState({
+          console.log(response);
           county :  response.data,
           isLoading : false,
         });
