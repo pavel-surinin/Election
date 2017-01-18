@@ -1,4 +1,4 @@
-var DistrictListViewRowComponent = React.createClass({
+﻿var DistrictListViewRowComponent = React.createClass({
   render: function() {
     return (
             <tr>
@@ -30,4 +30,6 @@ var DistrictListViewRowComponent = React.createClass({
     );
   }
 });
+
 window.DistrictListViewRowComponent = DistrictListViewRowComponent;
+

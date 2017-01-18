@@ -1,4 +1,4 @@
-
+﻿
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -32,6 +32,8 @@ var App = React.createClass({
                     <li><a href="#/dist">Apylinkės</a></li>
                     <li><a href="#/rep">Apylinkių Atstovai</a></li>
                     <li><a href="#/candidates">Kandidatai</a></li>
+                    <li><a href="#/cand">Kandidatų redagavimas</a></li>
+                    <li><a href="#/party">Partijos</a></li>
                   </ul>
                 </li>
               </ul>
@@ -72,8 +74,10 @@ ReactDOM.render((
       <Route path="/candidates/createCandidate" component={CandidateEditContainer} />
       <Route path="/rep" component={DistrictRepresentativeContainer} />
       <Route path="/rep/createRep" component={DistrictRepresentativeCreateFormComponent} />
-      <Route path="/county" component={CountyListViewComponent} />
+      <Route path="/county" component={CountyContainer} />
       <Route path="/county/createCounty" component={CountyCreateEditFormComponent} />
+      <Route path="/party" component={PartyContainer} />
+      <Route path="/party/createParty" component={PartyCreateEditForm} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
