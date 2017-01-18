@@ -12,7 +12,6 @@ var DistrictListViewRowComponent = React.createClass({
                 {this.props.adress}
               </td>
               <td>
-                
               </td>
               <td>
                 {this.props.representativeName}
@@ -31,5 +30,4 @@ var DistrictListViewRowComponent = React.createClass({
     );
   }
 });
-
 window.DistrictListViewRowComponent = DistrictListViewRowComponent;
