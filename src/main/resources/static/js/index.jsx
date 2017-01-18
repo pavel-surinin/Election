@@ -1,4 +1,4 @@
-
+﻿
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -30,10 +30,8 @@ var App = React.createClass({
                   <ul className="dropdown-menu">
                     <li><a href="#/county">Apygardos</a></li>
                     <li><a href="#/dist">Apylinkės</a></li>
-                    <li><a href="#/creedit">Apylinkės redagavimas</a></li>
-                    <li><a href="#/rep">Apylinkių Atstovai</a></li>
+                    <li><a href="#/rep">Apylinkių atstovai</a></li>
                     <li><a href="#/candidates">Kandidatai</a></li>
-                    <li><a href="#/cand">Kandidatų redagavimas</a></li>
                     <li><a href="#/party">Partijos</a></li>
                   </ul>
                 </li>
@@ -69,10 +67,10 @@ ReactDOM.render((
       <IndexRoute component={HomeComponent} />
       <Route path="/create" component={CreateBookContainer} />
       <Route path="/login" component={LoginContainer} />
-      <Route path="/dist" component={DistrictListViewComponent} />
-      <Route path="/creedit" component={DistrictCreateEditContainer} />
-      <Route path="/candidates" component={CandidatesListViewComponent} />
-      <Route path="/cand" component={CandidateEditContainer} />
+      <Route path="/dist" component={DistrictListContainer} />
+      <Route path="/dist/createDist" component={DistrictCreateEditContainer} />
+      <Route path="/candidates" component={CandidateContainer} />
+      <Route path="/candidates/createCandidate" component={CandidateEditContainer} />
       <Route path="/rep" component={DistrictRepresentativeContainer} />
       <Route path="/rep/createRep" component={DistrictRepresentativeCreateFormComponent} />
       <Route path="/county" component={CountyContainer} />
