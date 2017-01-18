@@ -40,10 +40,10 @@ var CountyCreateEditFormComponent = React.createClass({
                         <button type="button" className="close" data-dismiss="modal">&times;</button>
                         <h4 className="modal-title">Pažymėkite apygardai priklausančius kandidatus</h4>
                       </div>
-                      <div className="modal-body">
-                        <div className="checkbox">
+                      <div className="modal-body2">
+                        <div className="checkbox2">
                           <label>
-                            <input type="checkbox"/> Kandidatas
+                            <input type="checkbox2"/> Kandidatas
                           </label>
                         </div>
                       </div>
