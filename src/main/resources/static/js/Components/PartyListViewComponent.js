@@ -1,16 +1,12 @@
-
-var CountyListViewComponent = React.createClass({
+var PartyListViewComponent = React.createClass({
   render: function() {
     var array = [];
-    this.props.countyList.map(function(county,index) {
+    this.props.partyList.map(function(party,index) {
       array.push(
-        <CountyListRowViewComponent
-          id={county.id}
+        <PartyListViewRowComponent
+          id={party.id}
           key={index}
-          name={county.name}
-          districts={county.districts}
-          candidates={county.candidates}
-          parties={county.parties}
+          name={party.name}
         />
       );
     });
@@ -18,12 +14,12 @@ var CountyListViewComponent = React.createClass({
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3>Rinkimų apygardų sąrašas</h3>
+          <h3>Partijų sąrašas</h3>
         </div>
           <div className="panel-body">
-            <a href="#/county/createCounty"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+            <a href="#/party/createParty"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
             <span>
-              <h5>Registruoti naują apygardą </h5>
+              <h5>Registruoti naują partiją </h5>
             </span>
           </div>
             <table className="table table-striped">
@@ -33,7 +29,7 @@ var CountyListViewComponent = React.createClass({
                     Nr
                   </th>
                   <th>
-                    Apygarda
+                    Partija
                   </th>
                   <th>
                     Redaguoti
@@ -50,4 +46,4 @@ var CountyListViewComponent = React.createClass({
 
 });
 
-window.CountyListViewComponent = CountyListViewComponent;
+window.PartyListViewComponent = PartyListViewComponent;

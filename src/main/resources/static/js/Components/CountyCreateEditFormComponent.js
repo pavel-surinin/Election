@@ -4,7 +4,7 @@ var CountyCreateEditFormComponent = React.createClass({
       <div>
         <form>
           <div className="form-heading">
-            <h2> Registruoti/naujinti apylinkės atstovą </h2>
+            <h2> Registruoti/naujinti apygardą </h2>
           </div>
           <div className="form-group">
               <label for="cntName">Apygardos pavadinimas:</label>
@@ -24,7 +24,31 @@ var CountyCreateEditFormComponent = React.createClass({
                         <CountyCreateFormCheckBoxDistrictNameComponent/>
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-default" data-dismiss="modal">Uždaryti</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div className="form-group">
+                <label>Apygardai priklausančių kandidatų sąrašas:</label>
+                <button type="button" className="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Kandidatų sąrašas</button>
+                <div id="myModal" className="modal fade" role="dialog">
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <button type="button" className="close" data-dismiss="modal">&times;</button>
+                        <h4 className="modal-title">Pažymėkite apygardai priklausančius kandidatus</h4>
+                      </div>
+                      <div className="modal-body">
+                        <div className="checkbox">
+                          <label>
+                            <input type="checkbox"/> Kandidatas
+                          </label>
+                        </div>
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-default" data-dismiss="modal">Uždaryti</button>
                       </div>
                     </div>
                   </div>
