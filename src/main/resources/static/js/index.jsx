@@ -68,7 +68,7 @@ ReactDOM.render((
       <Route path="/create" component={CreateBookContainer} />
       <Route path="/login" component={LoginContainer} />
       <Route path="/dist" component={DistrictListContainer} />
-      <Route path="/dist/createDist" component={DistrictCreateEditContainer} />
+      <Route path="/dist/createDist" component={DistrictCreateContainer} />
       <Route path="/candidates" component={CandidateContainer} />
       <Route path="/candidates/createCandidate" component={CandidateEditContainer} />
       <Route path="/rep" component={DistrictRepresentativeContainer} />
