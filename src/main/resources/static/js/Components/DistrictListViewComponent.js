@@ -1,5 +1,4 @@
 var DistrictListViewComponent = React.createClass({
-
   render: function() {
     return (
       <div className="panel panel-default">

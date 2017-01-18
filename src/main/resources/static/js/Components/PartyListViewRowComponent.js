@@ -1,4 +1,4 @@
-var CountyListRowViewComponent = React.createClass({
+var  PartyListViewRowComponent= React.createClass({
 
   render: function() {
     return (
@@ -19,4 +19,4 @@ var CountyListRowViewComponent = React.createClass({
 
 });
 
-window.CountyListRowViewComponent = CountyListRowViewComponent;
+window.PartyListViewRowComponent = PartyListViewRowComponent;
