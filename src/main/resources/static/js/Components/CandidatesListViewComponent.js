@@ -2,16 +2,16 @@ var CandidatesListViewComponent = React.createClass({
 
 	render: function() {
 	    var array = [];
-	    this.props.districtList.map(function(cand,index) {
+	    this.props.candidateList.map(function(cand,index) {
 	      array.push(
-	        <DistrictListViewRowComponent
+	        <CandidatesListViewRowComponent
 	          id={cand.id}
 	          key={index}
 	          name={cand.name}
 	          surname={cand.surname}
 	          birthDate={cand.birthDate}
-	          partijosId={cand.partijosId}
-	          partijosPavadinimas={cand.partijosPavadinimas}
+	          partyId={cand.partyId}
+	          partyName={cand.partyName}
 	          description={cand.description}
 	        />
 	      );

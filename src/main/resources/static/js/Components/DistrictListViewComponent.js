@@ -9,8 +9,6 @@ var DistrictListViewComponent = React.createClass({
 	          key={index}
 	          name={dist.name}
 	          adress={dist.adress}
-	          countyId={dist.countyId}
-	          countyName={dist.countyName}
 	          representativeId={dist.representativeId}
 	          representativeName={dist.representativeName}
 	        />

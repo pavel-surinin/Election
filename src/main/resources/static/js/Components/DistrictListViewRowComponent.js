@@ -4,7 +4,7 @@ var DistrictListViewRowComponent = React.createClass({
     return (
             <tr>
               <td>
-                #
+                {this.props.id}
               </td>
               <td>
                 {this.props.name}
@@ -13,10 +13,10 @@ var DistrictListViewRowComponent = React.createClass({
                 {this.props.adress}
               </td>
               <td>
-                {this.props.county}
+                
               </td>
               <td>
-                {this.props.representative}
+                {this.props.representativeName}
               </td>
               <td>
                 <div>

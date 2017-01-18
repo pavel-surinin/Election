@@ -18,8 +18,8 @@ var CandidateContainer = React.createClass({
         });
       })
       .catch(function(err){
-        console.error('CandidateContainer.componentWillMount.axios.get.candidate', err);
-      });
+          console.error('CandidateContainer.componentWillMount.axios.get.cand', err);
+        });
   },
 
   render: function() {
@@ -30,7 +30,6 @@ var CandidateContainer = React.createClass({
         </div>
       );
     } else {
-      console.log(this.state.candidateList);
       return (
         <CandidatesListViewComponent candidateList={this.state.candidateList}/>
       );
