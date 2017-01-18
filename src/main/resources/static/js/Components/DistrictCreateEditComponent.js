@@ -1,51 +1,57 @@
 var DistrictCreateEditComponent = React.createClass({
 
   render: function() {
+    var counties = [];
+    this.props.countyList.map(function(county,index) {
+      counties.push(
+        <option key={index} value={county.id}>{county.name}</option>
+      );
+    });
+
     return (
-        <div className="panel panel-default">
-          <div className="panel-body">
-            <form onSubmit={this.props.onHandleSubmit}>
-              <div className="form-group">
-                <label>Pavadinimas</label>
-                <input onChange={this.props.onHandleTitleChange} className="form-control"/>
-              </div>
-              <div className="form-group">
-                <label>Apygardos</label>
-                <div className="dropdown">
-                  <button onChange={this.props.onHandleCountyChange} className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Pasirinkite
-                    <span className="caret"></span>
-                  </button>
-                    <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="#">Žirmūnai</a></li>
-                      <li><a href="#">Senamiestis</a></li>
-                      <li><a href="#">Antakalnis</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul>
-                  </div>
-                </div>
+      <div className="container vertical-center">
+        <div className="row">
+          <div className="col-md-4 col-md-offset-4">
+            <div className="login-panel panel panel-default">
+              <div className="panel-body">
+                <form onSubmit={this.props.onHandleSubmit} role="form">
+                <div className="input-group">
+                <label>Apylinkės Pavadinimas</label>
+                  <input
+                    type="text"
+                    onChange={this.props.onHandleNameChange}
+                    value={this.props.name}
+                    className="form-control"
+                    placeholder="Pavadinimas"
+                    required
+                  />
+                </div><br/>
+                <div className="input-group">
+                <label>Apylinkės Adresas</label>
+                  <input
+                    type="text"
+                    onChange={this.props.onHandleAdressChange}
+                    value={this.props.Adress}
+                    className="form-control"
+                    placeholder="Adresas"
+                    required
+                  />
+                </div><br/>
                 <div className="form-group">
-                <label>Atstovai</label>
-                <div className="dropdown">
-                  <button onChange={this.props.onHandleRepresentativesChange} className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Pasirinkite
-                    <span className="caret"></span>
-                  </button>
-                    <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <li><a href="#">Jonaitis</a></li>
-                      <li><a href="#">Petraitis</a></li>
-                      <li><a href="#">Antanaitis</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li><a href="#">Separated link</a></li>
-                    </ul>
-                  </div>
-                </div>
-              <button onHandle={this.props.onHandleSubmit} type="submit" className="btn btn-primary">Išsaugoti</button>
-              <button onHandle={this.props.onHandleCancel} type="cancel" className="btn btn-danger">Atšaukti</button>
-            </form>
+                  <label>Atstovaujama Apygarda:</label>
+                  <select value={this.props.county} onChange={this.props.onHandleCountyChange} className="form-control">
+                    {counties}
+                  </select>
+                </div><br/>
+                <button className='btn btn-success btn-block'>
+                  {this.props.action}
+                </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
     );
   }
 
