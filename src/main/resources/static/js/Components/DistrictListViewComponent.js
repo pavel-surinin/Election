@@ -1,9 +1,28 @@
-var DistrictListViewComponent = React.createClass({
-  render: function() {
+﻿var DistrictListViewComponent = React.createClass({
+
+	render: function() {
+	    var array = [];
+	    this.props.districtList.map(function(dist,index) {
+	      array.push(
+	        <DistrictListViewRowComponent
+	          id={dist.id}
+	          key={index}
+	          name={dist.name}
+	          adress={dist.adress}
+	          representativeId={dist.representativeId}
+	          representativeName={dist.representativeName}
+	        />
+	      );
+	    });
+  
     return (
       <div className="panel panel-default">
         <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
           <div className="panel-body">
+            <span>
+              <h5>Registruoti naują apylinkę </h5>
+            </span>
+            <a href="#/dist/createDist"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
           </div>
             <table className="table table-striped">
             <thead>
@@ -13,6 +32,9 @@ var DistrictListViewComponent = React.createClass({
               </th>
               <th>
                 Pavadinimas
+              </th>
+              <th>
+                Adresas
               </th>
               <th>
                 Apygarda
@@ -26,8 +48,7 @@ var DistrictListViewComponent = React.createClass({
             </tr>
             </thead>
             <tbody>
-			  <DistrictListViewRowComponent name="Pilies" county="Senamiestis" representative="M. Šilkienė"/>
-			  <DistrictListViewRowComponent name="Sodų" county="Senamiestis" representative="J. Jonaitis"/>
+			  {array}
             </tbody>
           </table>
         </div>

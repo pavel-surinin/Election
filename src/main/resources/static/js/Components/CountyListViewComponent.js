@@ -1,4 +1,4 @@
-
+﻿
 var CountyListViewComponent = React.createClass({
   render: function() {
     var array = [];
@@ -41,7 +41,7 @@ var CountyListViewComponent = React.createClass({
                 </tr>
               </thead>
               <tbody>
-                {array}
+               {array}
               </tbody>
             </table>
         </div>
