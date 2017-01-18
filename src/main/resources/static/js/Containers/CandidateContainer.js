@@ -18,7 +18,7 @@ var CandidateContainer = React.createClass({
         });
       })
       .catch(function(err){
-          console.error('CandidateContainer.componentWillMount.axios.get.cand', err);
+          console.error('CandidateContainer.componentWillMount.axios.get.candidate', err);
         });
   },
 

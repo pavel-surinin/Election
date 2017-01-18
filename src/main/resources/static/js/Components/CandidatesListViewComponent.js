@@ -10,8 +10,8 @@ var CandidatesListViewComponent = React.createClass({
 	          name={cand.name}
 	          surname={cand.surname}
 	          birthDate={cand.birthDate}
-	          partyId={cand.partyId}
-	          partyName={cand.partyName}
+	          partijosId={cand.partijosId}
+	          partijosPavadinimas={cand.partijosPavadinimas}
 	          description={cand.description}
 	        />
 	      );
@@ -19,7 +19,7 @@ var CandidatesListViewComponent = React.createClass({
 	    
     return (
     	<div className="panel panel-default">
-          <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
+          <div className="panel-heading"><h2>Kandidatų sąrašas</h2></div>
             <div className="panel-body">
               <span>
                 <h5>Registruoti naują kandidatą </h5>
