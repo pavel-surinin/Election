@@ -1,20 +1,21 @@
 ﻿var DistrictListViewComponent = React.createClass({
 
-	render: function() {
-	    var array = [];
-	    this.props.districtList.map(function(dist,index) {
-	      array.push(
-	        <DistrictListViewRowComponent
-	          id={dist.id}
-	          key={index}
-	          name={dist.name}
-	          adress={dist.adress}
-	          representativeId={dist.representativeId}
-	          representativeName={dist.representativeName}
-	        />
-	      );
-	    });
-  
+  render: function() {
+    var array = [];
+    this.props.districtList.map(function(dist,index) {
+      array.push(
+				<DistrictListViewRowComponent
+				id={dist.id}
+				key={index}
+				name={dist.name}
+				adress={dist.adress}
+				countyName={dist.countyName}
+				representativeId={dist.representativeId}
+				representativeName={dist.representativeName}
+				/>
+			);
+    });
+
     return (
       <div className="panel panel-default">
         <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
@@ -22,7 +23,7 @@
             <span>
               <h5>Registruoti naują apylinkę </h5>
             </span>
-            <a href="#/dist/createDist"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+            <a href="#/district/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
           </div>
             <table className="table table-striped">
             <thead>
@@ -48,7 +49,7 @@
             </tr>
             </thead>
             <tbody>
-			  {array}
+							{array}
             </tbody>
           </table>
         </div>

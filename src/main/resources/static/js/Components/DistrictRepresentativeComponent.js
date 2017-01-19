@@ -1,3 +1,5 @@
+var generalStyles = window.generalStyles;
+
 var DistrictRepresentativeComponent = React.createClass({
   render: function() {
     var array = [];
@@ -13,9 +15,8 @@ var DistrictRepresentativeComponent = React.createClass({
         />
       );
     });
-
     return (
-      <div className="panel panel-default">
+      <div style={window.generalStyles.shopperStyle} className="panel panel-default">
         <div className="panel-heading">
           <h3>Apylinkės Atstovų sarašas</h3>
         </div>
