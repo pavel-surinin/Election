@@ -4,11 +4,15 @@ var CountyCreateContainer = React.createClass({
       name : '',
     };
   },
+  onHandleNameChange : function(event){
+  this.setState({name : event.target.value});
+},
   onHandleSubmit : function(event){
     var self = this;
     event.preventDefault();
+    var countyName = {name: this.state.name};
     axios
-      .post('/county')
+      .post('/county', countyName)
       .then(function(response){
         console.log(response);
         self.context.router.push('/county');
@@ -17,24 +21,18 @@ var CountyCreateContainer = React.createClass({
         console.error('CountyCreateContainer.onHandleSubmit.axios', err);
       });
   },
-    onHandleNameChange : function(event){
-    this.setState({name : event.target.value});
-  },
   render: function() {
     return (
-      <CountyCreateContainer
+      <CountyCreateEditFormComponent
        onHandleNameChange={this.onHandleNameChange}
        name={this.state.name}
        onHandleSubmit={this.onHandleSubmit}
-       countyList={this.state.countyList}
 
        action='Sukurti'
        />
     );
   }
-
 });
-
 CountyCreateContainer.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };
