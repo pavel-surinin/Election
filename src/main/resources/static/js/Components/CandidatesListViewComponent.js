@@ -20,37 +20,31 @@ var CandidatesListViewComponent = React.createClass({
     return (
     	<div className="panel panel-default">
           <div className="panel-heading"><h2>Kandidatų sąrašas</h2></div>
-            <div className="panel-body">
-              <span>
-                <h5>Registruoti naują kandidatą </h5>
-              </span>
-              <a href="#/candidates/createCandidate"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
-            </div>
             <table className="table table-striped">
              <thead>
               <tr>
-              <th>
-                Eil. Nr.
-              </th>
-              <th>
-                Vardas
-              </th>
-              <th>
-                Pavardė
-              </th>
-              <th>
-                Gimimo data
-              </th>
-              <th>
-                Partinė priklausomybė
-              </th>
-              <th>
-                Informacija
-              </th>
-              <th>
-                Veiksmai
-              </th>
-            </tr>
+	              <th>
+	                Eil. Nr.
+	              </th>
+	              <th>
+	                Vardas
+	              </th>
+	              <th>
+	                Pavardė
+	              </th>
+	              <th>
+	                Gimimo data
+	              </th>
+	              <th>
+	                Partinė priklausomybė
+	              </th>
+	              <th>
+	                Informacija
+	              </th>
+	              <th>
+	                Veiksmai
+	              </th>
+              </tr>
             </thead>
             <tbody>
 			  {array}
