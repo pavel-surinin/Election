@@ -31,11 +31,8 @@ var CountyCreateContainer = React.createClass({
       <div>
       <CountyCreateEditFormComponent
           submitButtonName='Registruoti'
-
           name={this.state.name}
-
           onHandleNameChange={this.onHandleNameChange}
-
           onHandleSubmit={this.onHandleSubmit}
           onHandleCancel={this.onHandleCancel}
 
