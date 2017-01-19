@@ -33,6 +33,7 @@ var App = React.createClass({
                     <li><a href="#/representative">Apylinkių atstovai</a></li>
                     <li><a href="#/candidate">Kandidatai</a></li>
                     <li><a href="#/party">Partijos</a></li>
+                    <li><a href="#/party/detail">Partijos detales</a></li>
                   </ul>
                 </li>
               </ul>
@@ -77,6 +78,7 @@ ReactDOM.render((
       <Route path="/county/create" component={CountyCreateContainer} />
       <Route path="/party" component={PartyContainer} />
       <Route path="/party/create" component={PartyCreateContainer} />
+      <Route path="/party/detail" component={PartyDetailViewComponent} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
