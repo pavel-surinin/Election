@@ -33,7 +33,6 @@ var App = React.createClass({
                     <li><a href="#/representative">Apylinkių atstovai</a></li>
                     <li><a href="#/candidate">Kandidatai</a></li>
                     <li><a href="#/party">Partijos</a></li>
-                    <li><a href="#/party/detail">Partijos detales</a></li>
                   </ul>
                 </li>
               </ul>
