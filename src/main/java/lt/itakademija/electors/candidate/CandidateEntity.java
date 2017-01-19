@@ -1,5 +1,6 @@
 package lt.itakademija.electors.candidate;
 
+import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.party.PartyEntity;
 
 import javax.persistence.*;
@@ -31,8 +32,20 @@ public class CandidateEntity {
 
     private String description;
 
+    @ManyToOne
+    @JoinColumn(nullable = true, name= "COUNTY_ID")
+    private CountyEntity county;
+
     public Long getId() {
         return id;
+    }
+
+    public CountyEntity getCounty() {
+        return county;
+    }
+
+    public void setCounty(CountyEntity county) {
+        this.county = county;
     }
 
     public void setId(Long id) {

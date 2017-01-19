@@ -35,7 +35,7 @@ public class DistrictService {
                         rep.setCountyName(null);
                     } else {
                         rep.setCountyId(ent.getCounty().getId());
-                        rep.setCountyName(ent.getName());
+                        rep.setCountyName(ent.getCounty().getName());
                     }
                     return rep;
                 })

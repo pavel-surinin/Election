@@ -1,10 +1,7 @@
 package lt.itakademija.electors.county;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,6 +24,10 @@ public class CountyController {
         return service.save(county);
     }
 
+    @GetMapping("/county/{id}")
+    public CountyDetailsReport getCountyDetals(@PathVariable Long id){
+        return service.getCountyById(id);
+    }
 
 
 }
