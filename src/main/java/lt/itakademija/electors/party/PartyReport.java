@@ -2,6 +2,8 @@ package lt.itakademija.electors.party;
 
 import java.util.List;
 
+import lt.itakademija.electors.candidate.CandidateReport;
+
 /**
  * Created by Pavel on 2017-01-12.
  */
@@ -11,7 +13,7 @@ public class PartyReport {
 
     private String name;
 
-    private List<Long> members;
+    private List<CandidateReport> members;
 
     public Long getId() {
         return id;
@@ -29,11 +31,11 @@ public class PartyReport {
         this.name = name;
     }
 
-    public List<Long> getMembers() {
+    public List<CandidateReport> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Long> members) {
+    public void setMembers(List<CandidateReport> members) {
         this.members = members;
     }
 }
