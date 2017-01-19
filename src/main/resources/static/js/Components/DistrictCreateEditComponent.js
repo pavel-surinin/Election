@@ -50,6 +50,9 @@ var DistrictCreateEditComponent = React.createClass({
                   {this.props.action}
                 </button>
                 </form>
+                <div>
+                  <a className="btn btn-danger btn-block" href="#/district" role="button">Atšaukti</a>
+                </div>
               </div>
             </div>
           </div>
