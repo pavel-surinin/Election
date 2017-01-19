@@ -28,4 +28,9 @@ public class CountyRepository {
         em.merge(county);
         return county;
     }
+
+
+    public CountyEntity findById(Long id) {
+       return em.find(CountyEntity.class, id);
+    }
 }

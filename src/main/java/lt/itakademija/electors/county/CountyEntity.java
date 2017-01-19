@@ -3,7 +3,6 @@ package lt.itakademija.electors.county;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.party.PartyEntity;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -25,7 +24,7 @@ public class CountyEntity {
     @OneToMany(mappedBy="county", cascade = CascadeType.ALL)
     private List<DistrictEntity> districts;
 
-    @OneToMany
+    @OneToMany(mappedBy="county", cascade = CascadeType.ALL)
     private List<CandidateEntity> candidates;
 
     @OneToMany
