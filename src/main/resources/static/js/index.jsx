@@ -78,7 +78,7 @@ ReactDOM.render((
       <Route path="/county/create" component={CountyCreateContainer} />
       <Route path="/party" component={PartyContainer} />
       <Route path="/party/create" component={PartyCreateContainer} />
-      <Route path="/party/detail" component={PartyDetailViewComponent} />
+      <Route path="/party/:id" component={PartyDetailViewContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>

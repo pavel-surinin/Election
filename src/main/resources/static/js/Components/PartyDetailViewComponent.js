@@ -1,24 +1,22 @@
 var PartyDetailViewComponent = React.createClass({
   render: function() {
       var array = [];
-      this.props.candidateidateList.map(function(candidate,index) {
+      this.props.partyDetails.members.map(function(member,index) {
         array.push(
           <PartyDetailListRowViewComponent
-            id={candidate.id}
+            id={member.id}
             key={index}
-            name={candidate.name}
-            surname={candidate.surname}
-            birthDate={candidate.birthDate}
-            partijosId={candidate.partijosId}
-            partijosPavadinimas={candidate.partijosPavadinimas}
-            description={candidate.description}
+            name={member.name}
+            surname={member.surname}
+            birthDate={member.birthDate}
+            description={member.description}
           />
         );
       });
 
     return (
       <div className="panel panel-default">
-          <div className="panel-heading"><h2>Partijos pavadinimas</h2></div>
+          <div className="panel-heading"><h2>{this.props.partyDetails.name}</h2></div>
             <table className="table table-striped">
              <thead>
               <tr>

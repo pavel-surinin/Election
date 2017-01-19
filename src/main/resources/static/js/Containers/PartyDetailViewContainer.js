@@ -1,22 +1,23 @@
 var PartyDetailViewContainer = React.createClass({
   getInitialState: function() {
     return {
-      PartyCandidateList : [],
+      partyDetails : null,
       isLoading : true,
     };
   },
   componentWillMount: function() {
     var self = this;
     axios
-      .get('/candidate')
+      .get('/party/' + this.props.params.id)
       .then(function(response){
+        console.log(response.data);
         self.setState({
-          PartyCandidateList :  response.data,
+          partyDetails :  response.data,
           isLoading : false,
         });
       })
       .catch(function(err){
-        console.error('PartyCandidateListContainer.componentWillMount.axios.get.candidate', err);
+        console.error('PartyDetailViewContainer.componentWillMount.axios.get.party/:id', err);
       });
   },
   render: function() {
@@ -27,9 +28,9 @@ var PartyDetailViewContainer = React.createClass({
         </div>
       );
     } else {
-      console.log(this.state.PartyCandidateList);
+      console.log(this.state.partyDetails);
       return (
-        <PartyDetailViewComponent PartyCandidateList={this.state.PartyCandidateList}/>
+        <PartyDetailViewComponent partyDetails={this.state.partyDetails}/>
       );
     }
   }
