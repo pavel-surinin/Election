@@ -14,7 +14,10 @@ var DistrictCreateEditComponent = React.createClass({
           <div className="col-md-4 col-md-offset-4">
             <div className="login-panel panel panel-default">
               <div className="panel-body">
-                <form onSubmit={this.props.onHandleSubmit} role="form">
+              	<div className="form-heading">
+              	  <h4> Registruoti apylinkę </h4>
+              	</div>
+              	<form onSubmit={this.props.onHandleSubmit} role="form">
                 <div className="input-group">
                 <label>Apylinkės Pavadinimas</label>
                   <input
@@ -57,7 +60,6 @@ var DistrictCreateEditComponent = React.createClass({
       </div>
     );
   }
-
 });
 
 window.DistrictCreateEditComponent = DistrictCreateEditComponent;

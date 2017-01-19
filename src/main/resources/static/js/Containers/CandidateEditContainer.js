@@ -32,7 +32,7 @@ var CandidateEditContainer = React.createClass({
   onHandleSubmit: function(event){
     var self = this;
     event.preventDefault();
-    axios.post('/api/candidates', this.state)
+    axios.post('/candidate', this.state)
     .then(function(response){
       console.log(response);
       self.context.router.push('/');
