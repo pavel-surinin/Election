@@ -17,18 +17,7 @@ var CountyCreateContainer = React.createClass({
         console.error('CountyCreateContainer.onHandleSubmit.axios', err);
       });
   },
-  componentWillMount: function() {
-    var self = this;
-    axios
-      .get('/county')
-      .then(function(response){
-        self.setState({countyList : response.data});
-      })
-      .catch(function(error){
-        console.error('CountyCreateContainer.componentWillMount.axios', error);
-      });
-  },
-  onHandleNameChange : function(event){
+    onHandleNameChange : function(event){
     this.setState({name : event.target.value});
   },
   render: function() {
