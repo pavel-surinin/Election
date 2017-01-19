@@ -30,7 +30,7 @@ var App = React.createClass({
                   <ul className="dropdown-menu">
                     <li><a href="#/county">Apygardos</a></li>
                     <li><a href="#/district">Apylinkės</a></li>
-                    <li><a href="#/rep">Apylinkių atstovai</a></li>
+                    <li><a href="#/representative">Apylinkių atstovai</a></li>
                     <li><a href="#/candidates">Kandidatai</a></li>
                     <li><a href="#/party">Partijos</a></li>
                   </ul>
@@ -72,8 +72,8 @@ ReactDOM.render((
       <Route path="/district/create" component={DistrictCreateContainer} />
       <Route path="/candidates" component={CandidateContainer} />
       <Route path="/candidates/createCandidate" component={CandidateEditContainer} />
-      <Route path="/rep" component={DistrictRepresentativeContainer} />
-      <Route path="/rep/createRep" component={DistrictRepresentativeCreateFormComponent} />
+      <Route path="/representative" component={DistrictRepresentativeContainer} />
+      <Route path="/representative/create" component={DistrictRepresentativeCreateContainer} />
       <Route path="/county" component={CountyContainer} />
       <Route path="/county/createCounty" component={CountyCreateEditFormComponent} />
       <Route path="/party" component={PartyContainer} />
