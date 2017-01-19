@@ -22,6 +22,9 @@
                   {this.props.action}
                 </button>
                 </form>
+                <div>
+                  <a className="btn btn-danger btn-block" href="#/county" role="button">Atšaukti</a>
+                </div>
               </div>
             </div>
           </div>
