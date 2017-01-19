@@ -30,6 +30,13 @@ public class DistrictService {
                         rep.setRepresentativeId(ent.getRepresentative().getId());
                         rep.setRepresentativeName(ent.getRepresentative().getName() + " " + ent.getRepresentative().getSurname());
                     }
+                    if (ent.getCounty() == null) {
+                        rep.setCountyId(null);
+                        rep.setCountyName(null);
+                    } else {
+                        rep.setCountyId(ent.getCounty().getId());
+                        rep.setCountyName(ent.getName());
+                    }
                     return rep;
                 })
                 .collect(Collectors.toList());
