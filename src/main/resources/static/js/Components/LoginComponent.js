@@ -13,7 +13,7 @@ var LoginComponent = React.createClass({
                     <input onChange={this.props.onHandleUsernameChange} className="form-control"/>
                   </div>
                   <div className="form-group">
-                    <label for="pwd">Slaptažodis:</label>
+                    <label>Slaptažodis:</label>
                     <input onChange={this.props.onHandlePasswordChange} type="password" className="form-control" id="pwd"/>
                   </div>
                   <button type="submit" className="btn btn-default">Prisijungti</button>

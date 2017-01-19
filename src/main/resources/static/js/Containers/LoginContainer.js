@@ -5,13 +5,15 @@ var LoginContainer = React.createClass({
       password : '',
     };
   },
-  onHandleSubmit : function(){
-    var self = this;
+  onHandleSubmit : function(event){
     event.preventDefault();
+    var self = this;
     console.log(this.state);
     axios
     .post('users/login', self.state)
     .then(function(response){
+      window.App.call;
+      self.context.router.push('/county');
       console.log(response.data);
 
     })
@@ -50,5 +52,9 @@ var LoginContainer = React.createClass({
   }
 
 });
+
+LoginContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
 
 window.LoginContainer = LoginContainer;

@@ -1,4 +1,4 @@
-var CountyCreateEditFormComponent = React.createClass({
+﻿var CountyCreateEditFormComponent = React.createClass({
   render: function() {
     return (
       <div>
@@ -29,6 +29,7 @@ var CountyCreateEditFormComponent = React.createClass({
                       </div>
                       <div className="modal-footer">
                         <button type="button" className="btn btn-default" data-dismiss="modal">Uždaryti</button>
+
                       </div>
                     </div>
                   </div>
