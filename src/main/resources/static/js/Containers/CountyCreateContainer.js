@@ -4,46 +4,49 @@ var CountyCreateContainer = React.createClass({
       name : '',
     };
   },
-
-  onHandleNameChange : function(event){
-    this.setState({name: event.target.value});
-  },
-
-  onHandleSubmit: function(event){
+  onHandleSubmit : function(event){
     var self = this;
     event.preventDefault();
-    axios.post('/county', this.state)
-    .then(function(response){
-      console.log(response);
-      self.context.router.push('/county');
-    })
-    .catch(function(err){
-      console.log('CountyCreateContainer.onHandleSubmit - ',err);
-    });
+    axios
+      .post('/county')
+      .then(function(response){
+        console.log(response);
+        self.context.router.push('/county');
+      })
+      .catch(function(err){
+        console.error('CountyCreateContainer.onHandleSubmit.axios', err);
+      });
   },
-
-  onHandleCancel:function(){
-    this.context.router.push('/county');
+  componentWillMount: function() {
+    var self = this;
+    axios
+      .get('/county')
+      .then(function(response){
+        self.setState({countyList : response.data});
+      })
+      .catch(function(error){
+        console.error('CountyCreateContainer.componentWillMount.axios', error);
+      });
   },
-
+  onHandleNameChange : function(event){
+    this.setState({name : event.target.value});
+  },
   render: function() {
     return (
-      <div>
-      <CountyCreateEditFormComponent
-          submitButtonName='Registruoti'
-          name={this.state.name}
-          onHandleNameChange={this.onHandleNameChange}
-          onHandleSubmit={this.onHandleSubmit}
-          onHandleCancel={this.onHandleCancel}
+      <CountyCreateContainer
+       onHandleNameChange={this.onHandleNameChange}
+       name={this.state.name}
+       onHandleSubmit={this.onHandleSubmit}
+       countyList={this.state.countyList}
 
-        />
-      </div>
+       action='Sukurti'
+       />
     );
   }
-  });
 
-  CountyCreateContainer.contextTypes = {
+});
+
+CountyCreateContainer.contextTypes = {
   router: React.PropTypes.object.isRequired,
-  };
-
+};
 window.CountyCreateContainer = CountyCreateContainer ;
