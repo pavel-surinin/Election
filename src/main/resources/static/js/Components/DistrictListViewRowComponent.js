@@ -12,13 +12,14 @@
                 {this.props.adress}
               </td>
               <td>
+                {this.props.countyName}
               </td>
               <td>
                 {this.props.representativeName}
               </td>
               <td>
                 <div>
-                	<button type="button" onClick={this.edit} className="btn btn-primary" aria-label="Left Align">
+                  <button type="button" onClick={this.edit} className="btn btn-primary" aria-label="Left Align">
                       Redaguoti
                     </button>
                     <button type="button" onClick={this.delete} className="btn btn-danger" aria-label="Left Align">
@@ -32,4 +33,3 @@
 });
 
 window.DistrictListViewRowComponent = DistrictListViewRowComponent;
-
