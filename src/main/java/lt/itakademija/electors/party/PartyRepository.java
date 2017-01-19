@@ -32,13 +32,8 @@ public class PartyRepository {
         return list;
     }
 
-<<<<<<< HEAD
 	public PartyEntity getById(Long id) {
 		return em.find(PartyEntity.class, id);
 	}
-=======
-    public PartyEntity getById(Long id) {
-        return em.find(PartyEntity.class,id);
-    }
->>>>>>> 3e06cced98022a8b331b3cea0cf9691b7f667ddf
+
 }

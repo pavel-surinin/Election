@@ -1,5 +1,20 @@
 var PartyDetailViewComponent = React.createClass({
   render: function() {
+      var array = [];
+      this.props.candidateidateList.map(function(candidate,index) {
+        array.push(
+          <PartyDetailListRowViewComponent
+            id={candidate.id}
+            key={index}
+            name={candidate.name}
+            surname={candidate.surname}
+            birthDate={candidate.birthDate}
+            partijosId={candidate.partijosId}
+            partijosPavadinimas={candidate.partijosPavadinimas}
+            description={candidate.description}
+          />
+        );
+      });
 
     return (
       <div className="panel panel-default">
@@ -25,7 +40,7 @@ var PartyDetailViewComponent = React.createClass({
               </tr>
             </thead>
             <tbody>
-                <PartyDetailListRowViewComponent />
+                {array}
             </tbody>
           </table>
         </div>
