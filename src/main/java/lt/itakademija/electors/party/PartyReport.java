@@ -1,5 +1,7 @@
 package lt.itakademija.electors.party;
 
+import lt.itakademija.electors.candidate.CandidateReport;
+
 import java.util.List;
 
 import lt.itakademija.electors.candidate.CandidateReport;
