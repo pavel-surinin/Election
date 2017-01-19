@@ -35,24 +35,25 @@ public class PartyService {
         return list;
     }
 
-    public PartyReport getPartyBiId(Long id) {
-        PartyEntity party = repository.getById(id);
-        PartyReport pr = new PartyReport();
-        pr.setId(party.getId());
-        pr.setName(party.getName());
-        List<CandidateReport> members = party.getMembers()
-                .stream()
-                .map(c -> {
-                    CandidateReport cr = new CandidateReport();
-                    cr.setId(c.getId());
-                    cr.setName(c.getName());
-                    cr.setSurname(c.getSurname());
-                    cr.setBirthDate(c.getBirthDate());
-                    cr.setDescription(c.getDescription());
-                    return cr;
-                })
-                .collect(Collectors.toList());
-        pr.setMembers(members);
-        return pr;
-    }
+	public PartyReport getPartyById(Long id) {
+		PartyEntity party = repository.getById(id);
+		PartyReport pr =new PartyReport();
+		pr.setId(party.getId());
+		pr.setName(party.getName());
+		List<CandidateReport> members = party.getMembers()
+			.stream()	
+			.map(c -> {
+				CandidateReport cr = new CandidateReport();
+				cr.setId(c.getId());
+				cr.setName(c.getName());
+				cr.setSurname(c.getSurname());
+				cr.setBirthDate(c.getBirthDate());
+				cr.setDescription(c.getDescription());
+				return cr;
+			})
+			.collect(Collectors.toList());
+		pr.setMembers(members);
+		return pr;
+	}
+
 }

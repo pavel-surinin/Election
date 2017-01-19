@@ -23,10 +23,10 @@ public class PartyController {
     public List<PartyReport> getPartijaList(){
         return service.getPartyList();
     }
-
+ 
     @GetMapping("/party/{id}")
     public PartyReport getPartyById(@PathVariable Long id){
-        return service.getPartyBiId(id);
+    	return service.getPartyById(id);
     }
 
 }
