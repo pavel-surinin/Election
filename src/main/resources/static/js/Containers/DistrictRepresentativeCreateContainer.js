@@ -35,7 +35,10 @@ var DistrictRepresentativeCreateContainer = React.createClass({
     axios
       .get('/district')
       .then(function(response){
-        self.setState({districtList : response.data});
+        self.setState({
+          districtList : response.data,
+          district : response.data[0].id,
+        });
       })
       .catch(function(error){
         console.error('DistrictRepresentativeCreateContainer.componentWillMount.axios', error);

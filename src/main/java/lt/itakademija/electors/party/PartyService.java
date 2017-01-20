@@ -54,6 +54,13 @@ public class PartyService {
 			.collect(Collectors.toList());
 		pr.setMembers(members);
 		return pr;
+    }
+
+    public PartyEntity getPartyEntityById(Long id){
+    	return repository.getById(id);
 	}
 
+	public void detach(PartyEntity partyEntity) {
+    	repository.detach(partyEntity);
+	}
 }

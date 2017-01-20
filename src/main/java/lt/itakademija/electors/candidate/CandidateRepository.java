@@ -29,4 +29,10 @@ public class CandidateRepository {
                 .getResultList();
         return list;
     }
+
+    public boolean delete(Long id) {
+        CandidateEntity candidate = em.find(CandidateEntity.class, id);
+        em.remove(candidate);
+        return true;
+    }
 }

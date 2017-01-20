@@ -48,4 +48,10 @@ public class DistrictService {
     public DistrictEntity save(DistrictEntity apylinke) {
         return repository.save(apylinke);
     }
+
+    @Transactional
+    public boolean delete(Long id) {
+        repository.delete(id);
+        return true;
+    }
 }

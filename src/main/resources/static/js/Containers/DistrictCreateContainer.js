@@ -35,7 +35,10 @@ var DistrictCreateContainer = React.createClass({
     axios
       .get('/county')
       .then(function(response){
-        self.setState({countyList : response.data});
+        self.setState({
+          countyList : response.data,
+          county : response.data[0].id,
+        });
       })
       .catch(function(error){
         console.error('DistrictCreateContainer.componentWillMount.axios', error);
