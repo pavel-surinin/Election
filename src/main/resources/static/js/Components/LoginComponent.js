@@ -1,29 +1,50 @@
 var LoginComponent = React.createClass({
-
   render: function() {
-    return (
-      <div className="container vertical-center">
-        <div className="row">
-          <div className="col-md-4 col-md-offset-4">
-            <div className="login-panel panel panel-default">
-              <div className="panel-body">
-                <form onSubmit={this.props.onHandleSubmit}>
-                  <div className="form-group">
-                    <label>Prisijungimo vardas:</label>
-                    <input onChange={this.props.onHandleUsernameChange} className="form-control"/>
-                  </div>
-                  <div className="form-group">
-                    <label>Slaptažodis:</label>
-                    <input onChange={this.props.onHandlePasswordChange} type="password" className="form-control" id="pwd"/>
-                  </div>
-                  <button type="submit" className="btn btn-default">Prisijungti</button>
-                </form>
+    var isLoggedMessage =
+    (<div className="alert alert-info" role="alert">Jūs jau prisijungęs.
+    <br/>
+    <button className="btn btn-info" onClick={this.props.onHandleLogoutClick}>
+      Atsijungti
+    </button> </div>);
+    if (this.props.isLogged) {
+      return isLoggedMessage;
+    } else {
+      var message = '';
+      if (this.props.wrongAuth) {
+        message = (
+          <div className="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <strong>Dėmesio!</strong> Bloagai įvestas prisijungimo vardas arba slaptažodis.
+          </div>
+        );
+      } else {
+        message = '';
+      }
+      return (
+        <div className="container vertical-center">
+          <div className="row">
+            <div className="col-md-4 col-md-offset-4">
+              <div className="login-panel panel panel-default">
+                <div className="panel-body">
+                  <form onSubmit={this.props.onHandleSubmit}>
+                    <div className="form-group">
+                      <label>Prisijungimo vardas:</label>
+                      <input onChange={this.props.onHandleUsernameChange} className="form-control"/>
+                    </div>
+                    <div className="form-group">
+                      <label>Slaptažodis:</label>
+                      <input onChange={this.props.onHandlePasswordChange} type="password" className="form-control" id="pwd"/>
+                      </div>
+                    <button type="submit" className="btn btn-default">Prisijungti</button>
+                  </form>
+                  {message}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 
 });
