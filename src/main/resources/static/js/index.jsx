@@ -75,7 +75,7 @@ ReactDOM.render((
       <Route path="/representative/create" component={DistrictRepresentativeCreateContainer} />
       <Route path="/county" component={CountyContainer} />
       <Route path="/county/create" component={CountyCreateContainer} />
-      <Route path="/county/details" component={CountyDetailViewComponent} />
+      <Route path="/county/details" component={CountyDetailViewContainer} />
       <Route path="/party" component={PartyContainer} />
       <Route path="/party/create" component={PartyCreateContainer} />
       <Route path="*" component={NoMatch}/>
