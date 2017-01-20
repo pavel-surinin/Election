@@ -36,6 +36,9 @@ var CountyListViewComponent = React.createClass({
                     Apygarda
                   </th>
                   <th>
+                    Detali informacija
+                  </th>
+                  <th>
                     Redaguoti
                   </th>
                 </tr>
