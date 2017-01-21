@@ -65,20 +65,20 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
-      <Route path="/create" component={CreateBookContainer} />
-      <Route path="/login" component={LoginContainer} />
-      <Route path="/district" component={DistrictListContainer} />
-      <Route path="/district/create" component={DistrictCreateContainer} />
-      <Route path="/candidate" component={CandidateContainer} />
-      <Route path="/candidate/edit" component={CandidateEditContainer} />
-      <Route path="/representative" component={DistrictRepresentativeContainer} />
-      <Route path="/representative/create" component={DistrictRepresentativeCreateContainer} />
-      <Route path="/county" component={CountyContainer} />
-      <Route path="/county/create" component={CountyCreateContainer} />
-      <Route path="/county/:id" component={CountyDetailViewContainer} />
-      <Route path="/party" component={PartyContainer} />
-      <Route path="/party/create" component={PartyCreateContainer} />
-      <Route path="/party/:id" component={PartyDetailViewContainer} />
+      <Route path="/admin/create" component={CreateBookContainer} />
+      <Route path="/admin/login" component={LoginContainer} />
+      <Route path="/admin/district" component={DistrictListContainer} />
+      <Route path="/admin/district/create" component={DistrictCreateContainer} />
+      <Route path="/admin/candidate" component={CandidateContainer} />
+      <Route path="/admin/candidate/edit" component={CandidateEditContainer} />
+      <Route path="/admin/representative" component={DistrictRepresentativeContainer} />
+      <Route path="/admin/representative/create" component={DistrictRepresentativeCreateContainer} />
+      <Route path="/admin/county" component={CountyContainer} />
+      <Route path="/admin/county/create" component={CountyCreateContainer} />
+      <Route path="/admin/county/:id" component={CountyDetailViewContainer} />
+      <Route path="/admin/party" component={PartyContainer} />
+      <Route path="/admin/party/create" component={PartyCreateContainer} />
+      <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
