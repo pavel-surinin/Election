@@ -34,7 +34,7 @@ var LoginContainer = React.createClass({
     })
     .then(function(response){
       if (response.data) {
-        self.context.router.push('/county');
+        self.context.router.push('/admin/');
       } else {
         self.setState({wrongAuth : true});
       }

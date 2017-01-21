@@ -13,7 +13,7 @@ var DistrictCreateContainer = React.createClass({
       .post('/district', postRequest)
       .then(function(response){
         console.log(response);
-        self.context.router.push('/district');
+        self.context.router.push('/admin/district');
       })
       .catch(function(err){
         console.error('DistrictCreateContainer.onHandleSubmit.axios', err);
@@ -35,7 +35,10 @@ var DistrictCreateContainer = React.createClass({
     axios
       .get('/county')
       .then(function(response){
-        self.setState({countyList : response.data});
+        self.setState({
+          countyList : response.data,
+          county : response.data[0].id,
+        });
       })
       .catch(function(error){
         console.error('DistrictCreateContainer.componentWillMount.axios', error);

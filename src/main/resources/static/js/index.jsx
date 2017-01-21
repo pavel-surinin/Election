@@ -10,7 +10,6 @@ var App = React.createClass({
     axios
     .get('users/logged')
     .then(function(response){
-      console.log(response.data);
       self.setState({userLogged : response.data});
     })
     .catch(function(err){
@@ -25,16 +24,7 @@ var App = React.createClass({
               <ul className="nav navbar-nav">
                 <li><a href="#/">Pradinis</a></li>
                 <li><a href="#/login">Prisijungti</a></li>
-                <li className="dropdown">
-                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administratoriaus Menu <span className="caret"></span></a>
-                  <ul className="dropdown-menu">
-                    <li><a href="#/county">Apygardos</a></li>
-                    <li><a href="#/district">Apylinkės</a></li>
-                    <li><a href="#/representative">Apylinkių atstovai</a></li>
-                    <li><a href="#/candidate">Kandidatai</a></li>
-                    <li><a href="#/party">Partijos</a></li>
-                  </ul>
-                </li>
+
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><a href="#/">{this.state.userLogged}</a></li>
@@ -49,6 +39,17 @@ var App = React.createClass({
 
 window.App = App;
 
+var EmptyComponent = React.createClass({
+
+  render: function() {
+    return (
+      <div />
+    );
+  }
+
+});
+
+window.EmptyComponent = EmptyComponent;
 
 var NoMatch = React.createClass({
   render: function() {
@@ -63,22 +64,26 @@ var hashHistory = ReactRouter.hashHistory;
 
 ReactDOM.render((
   <Router history={hashHistory}>
+    <Route path="/admin" component={AdminComponent}>
+      <IndexRoute component={EmptyComponent} />
+
+      <Route path="/admin/district" component={DistrictListContainer} />
+      <Route path="/admin/district/create" component={DistrictCreateContainer} />
+      <Route path="/admin/candidate" component={CandidateContainer} />
+      <Route path="/admin/candidate/edit" component={CandidateEditContainer} />
+      <Route path="/admin/representative" component={DistrictRepresentativeContainer} />
+      <Route path="/admin/representative/create" component={DistrictRepresentativeCreateContainer} />
+      <Route path="/admin/county" component={CountyContainer} />
+      <Route path="/admin/county/create" component={CountyCreateContainer} />
+      <Route path="/admin/county/details" component={CountyDetailViewComponent} />
+      <Route path="/admin/party" component={PartyContainer} />
+      <Route path="/admin/party/create" component={PartyCreateContainer} />
+      <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
+      <Route path="*" component={NoMatch}/>
+    </Route>
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
-      <Route path="/create" component={CreateBookContainer} />
       <Route path="/login" component={LoginContainer} />
-      <Route path="/district" component={DistrictListContainer} />
-      <Route path="/district/create" component={DistrictCreateContainer} />
-      <Route path="/candidate" component={CandidateContainer} />
-      <Route path="/candidate/edit" component={CandidateEditContainer} />
-      <Route path="/representative" component={DistrictRepresentativeContainer} />
-      <Route path="/representative/create" component={DistrictRepresentativeCreateContainer} />
-      <Route path="/county" component={CountyContainer} />
-      <Route path="/county/create" component={CountyCreateContainer} />
-      <Route path="/county/details" component={CountyDetailViewComponent} />
-      <Route path="/party" component={PartyContainer} />
-      <Route path="/party/create" component={PartyCreateContainer} />
-      <Route path="/party/:id" component={PartyDetailViewContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>

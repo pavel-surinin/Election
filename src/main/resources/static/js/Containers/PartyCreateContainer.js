@@ -15,7 +15,7 @@ var PartyCreateContainer = React.createClass({
       .post('/party', partyName)
       .then(function(response){
         console.log(response);
-        self.context.router.push('/party');
+        self.context.router.push('/admin/party');
       })
       .catch(function(err){
         console.error('PartyCreateContainer.onHandleSubmit.axios', err);

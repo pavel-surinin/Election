@@ -1,6 +1,7 @@
 var DistrictCreateEditComponent = React.createClass({
 
   render: function() {
+
     var counties = [];
     this.props.countyList.map(function(county,index) {
       counties.push(
@@ -11,8 +12,8 @@ var DistrictCreateEditComponent = React.createClass({
     return (
       <div className="container vertical-center">
         <div className="row">
-          <div className="col-md-4 col-md-offset-4">
-            <div className="login-panel panel panel-default">
+          <div className="col-md-6 col-md-offset-1">
+            <div className="panel panel-default">
               <div className="panel-body">
               	<div className="form-heading">
               	  <h4> Registruoti apylinkę </h4>
@@ -42,7 +43,7 @@ var DistrictCreateEditComponent = React.createClass({
                 </div><br/>
                 <div className="form-group">
                   <label>Atstovaujama Apygarda:</label>
-                  <select value={this.props.county} onChange={this.props.onHandleCountyChange} className="form-control">
+                  <select value={this.props.county} onChange={this.props.onHandleCountyChange} className="form-control"required>
                     {counties}
                   </select>
                 </div><br/>
@@ -51,7 +52,7 @@ var DistrictCreateEditComponent = React.createClass({
                 </button>
                 </form>
                 <div>
-                  <a className="btn btn-danger btn-block" href="#/district" role="button">Atšaukti</a>
+                  <a className="btn btn-danger btn-block" href="#/admin/district" role="button">Atšaukti</a>
                 </div>
               </div>
             </div>

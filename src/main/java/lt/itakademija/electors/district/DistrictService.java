@@ -16,8 +16,8 @@ public class DistrictService {
     @Autowired
     DistrictRepository repository;
 
-    public List getDistrictsList() {
-        List<DistrictReport> list = repository.findAll().stream()
+    private List<DistrictReport> mappingToReport(List<DistrictEntity> list){
+       return list.stream()
                 .map(ent -> {
                     DistrictReport rep = new DistrictReport();
                     rep.setId(ent.getId());
@@ -40,12 +40,29 @@ public class DistrictService {
                     return rep;
                 })
                 .collect(Collectors.toList());
+    }
 
-        return list;
+    public List getDistrictsList() {
+        List<DistrictEntity> list = repository.findAll();
+        return mappingToReport(list);
     }
 
     @Transactional
     public DistrictEntity save(DistrictEntity apylinke) {
         return repository.save(apylinke);
+    }
+
+    @Transactional
+    public boolean delete(Long id) {
+        repository.delete(id);
+        return true;
+    }
+
+    public List getDistrictsWithNullRepresentativesList() {
+        List<DistrictEntity> list = repository.findAll()
+                .stream()
+                .filter(d -> d.getRepresentative() == null)
+                .collect(Collectors.toList());
+        return mappingToReport(list);
     }
 }
