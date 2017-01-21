@@ -15,7 +15,7 @@ var CountyCreateContainer = React.createClass({
       .post('/county', countyName)
       .then(function(response){
         console.log(response);
-        self.context.router.push('/county');
+        self.context.router.push('/admin/county');
       })
       .catch(function(err){
         console.error('CountyCreateContainer.onHandleSubmit.axios', err);

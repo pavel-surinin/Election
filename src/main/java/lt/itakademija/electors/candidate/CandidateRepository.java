@@ -32,10 +32,9 @@ public class CandidateRepository {
         return list;
     }
 
-	public void delete(CandidateEntity member) {
-		em.createQuery("DELETE FROM CANDIDATE_ENTITY WHERE : c.PARTY_ID = PARTY_ID")
-		.setParameter("id", member.getId());
-		}
-
-	
+    public boolean delete(Long id) {
+        CandidateEntity candidate = em.find(CandidateEntity.class, id);
+        em.remove(candidate);
+        return true;
+    }
 }

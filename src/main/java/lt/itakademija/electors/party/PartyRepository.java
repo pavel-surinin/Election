@@ -1,10 +1,11 @@
 package lt.itakademija.electors.party;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import javax.persistence.EntityManager;
-import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -36,9 +37,8 @@ public class PartyRepository {
 		return em.find(PartyEntity.class, id);
 	}
 
-	public void refresh(PartyEntity party) {
-		em.merge(party);
-		
-	}
+    public void detach(PartyEntity partyEntity) {
+        em.detach(partyEntity);
+    }
 
 }

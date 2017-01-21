@@ -33,7 +33,7 @@ public class DistrictEntity {
     @JoinColumn(nullable = true, name= "COUNTY_ID")
     private CountyEntity county;
 
-    @OneToOne(mappedBy = "district")
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
     private DistrictRepresentativeEntity representative;
 
     public DistrictRepresentativeEntity getRepresentative() {

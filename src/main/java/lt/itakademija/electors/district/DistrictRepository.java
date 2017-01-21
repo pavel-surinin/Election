@@ -31,4 +31,9 @@ public class DistrictRepository {
         em.merge(district);
         return district;
     }
+
+    public void delete(Long id) {
+        DistrictEntity district = em.find(DistrictEntity.class, id);
+        em.remove(district);
+    }
 }

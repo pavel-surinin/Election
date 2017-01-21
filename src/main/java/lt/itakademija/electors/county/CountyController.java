@@ -29,5 +29,10 @@ public class CountyController {
         return service.getCountyById(id);
     }
 
+    @DeleteMapping("/county/{id}")
+    public boolean deletecounty(@PathVariable Long id){
+        return service.delete(id);
+    }
+
 
 }

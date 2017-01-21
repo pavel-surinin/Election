@@ -60,6 +60,10 @@ public class PartyService {
 			.collect(Collectors.toList());
 		pr.setMembers(members);
 		return pr;
+    }
+
+    public PartyEntity getPartyEntityById(Long id){
+    	return repository.getById(id);
 	}
 	@Transactional
 	public PartyReport deletePartyMembersList(Long id) {
@@ -70,4 +74,7 @@ public class PartyService {
 		return this.getPartyById(id);
 	}
 
+	public void detach(PartyEntity partyEntity) {
+    	repository.detach(partyEntity);
+	}
 }

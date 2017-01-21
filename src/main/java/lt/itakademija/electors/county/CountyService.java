@@ -70,4 +70,10 @@ public class CountyService {
 
         return report;
     }
+
+    @Transactional
+    public boolean delete(Long id) {
+        repository.delete(id);
+        return true;
+    }
 }

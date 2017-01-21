@@ -1,10 +1,7 @@
 package lt.itakademija.electors.district;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +19,21 @@ public class DistrictController {
         return service.getDistrictsList();
     }
 
+    @GetMapping("/district/nonerepresentatives")
+    public List getDistrictsWithNullRepresentativesList(){
+        return service.getDistrictsWithNullRepresentativesList();
+    }
+
+
     @PostMapping("/district")
     public DistrictEntity save(@RequestBody DistrictEntity district){
         return service.save(district);
     }
+
+    @DeleteMapping("/district/{id}")
+    public boolean deleteDistrict(@PathVariable Long id) {
+        return service.delete(id);
+    }
+
+
 }
