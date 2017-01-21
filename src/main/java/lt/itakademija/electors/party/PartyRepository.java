@@ -32,8 +32,13 @@ public class PartyRepository {
         return list;
     }
 
-	public PartyEntity getById(Long id) {
+    public PartyEntity getById(Long id) {
 		return em.find(PartyEntity.class, id);
+	}
+
+	public void refresh(PartyEntity party) {
+		em.merge(party);
+		
 	}
 
 }

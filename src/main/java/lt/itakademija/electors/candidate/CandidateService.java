@@ -3,6 +3,9 @@ package lt.itakademija.electors.candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lt.itakademija.electors.party.PartyEntity;
+import lt.itakademija.electors.party.PartyReport;
+
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,4 +39,11 @@ public class CandidateService {
         }
         return list;
     }
+    @Transactional
+	public void delete(CandidateEntity members) {
+		repository.delete(members);
+	}
+
+	
+
 }

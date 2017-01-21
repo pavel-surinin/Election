@@ -3,6 +3,8 @@ package lt.itakademija.electors.candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import lt.itakademija.electors.party.PartyEntity;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -29,4 +31,11 @@ public class CandidateRepository {
                 .getResultList();
         return list;
     }
+
+	public void delete(CandidateEntity member) {
+		em.createQuery("DELETE FROM CANDIDATE_ENTITY WHERE : c.PARTY_ID = PARTY_ID")
+		.setParameter("id", member.getId());
+		}
+
+	
 }
