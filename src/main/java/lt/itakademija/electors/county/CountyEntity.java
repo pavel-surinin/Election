@@ -18,6 +18,7 @@ public class CountyEntity {
     @Column(name = "COUNTY_ID")
     private Long id;
 
+    @Column(unique=true)
     @NotNull
     private String name;
 
