@@ -32,8 +32,8 @@ public class CandidateRepository {
         return list;
     }
 
-    public boolean delete(Long id) {
-        CandidateEntity candidate = em.find(CandidateEntity.class, id);
+    public boolean delete(CandidateEntity member) {
+        CandidateEntity candidate = em.find(CandidateEntity.class, member);
         em.remove(candidate);
         return true;
     }
