@@ -24,13 +24,18 @@ var CountyListViewComponent = React.createClass({
 			<div className="col-xs-12 col-sm-9 col-md-9 col-lg-9 text-left">
     		  <div className="panel panel-default">
 		        <div className="panel-heading">
-		          <h3>Rinkimų apygardų sąrašas</h3>
+		          <h3>Rinkimų apygardų sąrašas
+		          
+		          </h3>
 		        </div>
 		          <div className="panel-body">
-		            <a href="#/county/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
-		            <span>
-		              <h5>Registruoti naują apygardą </h5>
-		            </span>
+		          	<h5>
+		              <a href="#/admin/county/create">
+		                  <button type="button" className="btn btn-success btn-sm">
+			                Registruoti naują Apygarda
+			              </button>
+		              </a>
+		            </h5>
 		          </div>
 		            <table className="table table-striped">
 		              <thead>

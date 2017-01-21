@@ -10,8 +10,8 @@ var PartyCreateEditFormComponent = React.createClass({
   			<div className="col-xs-12 col-sm-9 col-md-9 col-lg-9 text-left">
 		      <div className="container vertical-center">
 		        <div className="row">
-		          <div className="col-md-4 col-md-offset-1">
-		            <div className="login-panel panel panel-default">
+		          <div className="col-md-6 col-md-offset-1">
+		            <div className="panel panel panel-default">
 		              <div className="panel-body">
 		                <form onSubmit={this.props.onHandleSubmit} role="form">
 			              <div className="input-group">
@@ -35,7 +35,7 @@ var PartyCreateEditFormComponent = React.createClass({
 		                  </button>
 		                </form>
 		                <div>
-		                  <a className="btn btn-danger btn-block" href="#/party" role="button">Atšaukti</a>
+		                  <a className="btn btn-danger btn-block" href="#/admin/party" role="button">Atšaukti</a>
 		                </div>
 		              </div>
 		            </div>

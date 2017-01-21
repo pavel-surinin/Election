@@ -28,7 +28,7 @@ var DistrictRepresentativeComponent = React.createClass({
 		          <h3>Apylinkės Atstovų sarašas</h3>
 		        </div>
 		          <div className="panel-body">
-		            <a href="#/representative/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+		            <a href="#/admin/representative/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
 		            <span>
 		              <h5>Registruoti naują apylinkės atstovą </h5>
 		            </span>
