@@ -2,23 +2,26 @@ var CountyCreateContainer = React.createClass({
   getInitialState: function() {
     return {
       name : '',
+      nameClone : false,
     };
   },
+
   onHandleNameChange : function(event){
-  this.setState({name : event.target.value});
-},
+    this.setState({name : event.target.value});
+  },
   onHandleSubmit : function(event){
+    var countyName = {name: this.state.name};
     var self = this;
     event.preventDefault();
-    var countyName = {name: this.state.name};
-    axios
+      axios
       .post('/county', countyName)
       .then(function(response){
         console.log(response);
-        self.context.router.push('/county');
+        self.context.router.push('/admin/county');
       })
       .catch(function(err){
         console.error('CountyCreateContainer.onHandleSubmit.axios', err);
+        self.setState({nameClone : true});
       });
   },
   render: function() {
@@ -27,7 +30,7 @@ var CountyCreateContainer = React.createClass({
        onHandleNameChange={this.onHandleNameChange}
        name={this.state.name}
        onHandleSubmit={this.onHandleSubmit}
-
+       nameClone={this.state.nameClone}
        action='Sukurti'
        />
     );

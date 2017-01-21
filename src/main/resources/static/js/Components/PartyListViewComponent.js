@@ -12,13 +12,14 @@ var PartyListViewComponent = React.createClass({
     });
 
     return (
+
 	    <div className="container-fluid">
 		  <div className="row">
 			<div className="col-xs-12 col-sm-3 col-md-3 col-lg-3 sidenav">
 			  <SideNavBarComponent />
 			</div>
 			<div className="col-xs-12 col-sm-9 col-md-9 col-lg-9 text-left">
-			  <div className="panel panel-default">
+		      <div className="panel panel-default">
 		        <div className="panel-heading">
 		          <h3>Partijų sąrašas</h3>
 		        </div>
@@ -38,7 +39,7 @@ var PartyListViewComponent = React.createClass({
 		                    Partija
 		                  </th>
 		                  <th>
-		                    Kandidatų sąrašas
+		                    Redaguoti
 		                  </th>
 		                </tr>
 		              </thead>
@@ -47,9 +48,6 @@ var PartyListViewComponent = React.createClass({
 		              </tbody>
 		            </table>
 		        </div>
-		      </div>
-		    </div>
-		  </div>
     );
   }
 

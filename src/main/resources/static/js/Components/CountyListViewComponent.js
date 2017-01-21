@@ -22,18 +22,18 @@ var CountyListViewComponent = React.createClass({
 				<SideNavBarComponent />
 			</div>
 			<div className="col-xs-12 col-sm-9 col-md-9 col-lg-9 text-left">
-    		  <div className="panel panel-default">
+		      <div className="panel panel-default">
 		        <div className="panel-heading">
 		          <h3>Rinkimų apygardų sąrašas
-		          
+		
 		          </h3>
 		        </div>
 		          <div className="panel-body">
-		          	<h5>
+		            <h5>
 		              <a href="#/admin/county/create">
-		                  <button type="button" className="btn btn-success btn-sm">
-			                Registruoti naują Apygarda
-			              </button>
+		                <button type="button" className="btn btn-success btn-sm">
+		                  Registruoti naują Apygarda
+		                </button>
 		              </a>
 		            </h5>
 		          </div>
@@ -59,9 +59,6 @@ var CountyListViewComponent = React.createClass({
 		              </tbody>
 		            </table>
 		        </div>
-		      </div>
-		    </div>
-		  </div>
     );
   }
 

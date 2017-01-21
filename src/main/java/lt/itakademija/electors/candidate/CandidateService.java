@@ -42,21 +42,21 @@ public class CandidateService {
         }
         return list;
     }
-   
+
     @Transactional
-	public boolean delete(Long id) {
-		return repository.delete(id);
-	}
-    
+    public boolean delete(Long id){
+        return repository.delete(id);
+    }
+
     @Transactional
-    public boolean deleteCandidatesByPartyId(Long id){
-    	PartyEntity partyEntity = partyService.getPartyEntityById(id);
-    	List<CandidateReport> candidates = partyService.getPartyById(id).getMembers();
-    	partyService.detach(partyEntity);
-    	for (CandidateReport candidate : candidates){
-    		System.out.println(candidate.getId());
-    		repository.delete(candidate.getId());
-    	}
-    	return true;
+    public boolean deleteCandidatesByPartyId(Long id) {
+        PartyEntity partyEntity = partyService.getPartyEntityById(id);
+        List<CandidateReport> candidates = partyService.getPartyById(id).getMembers();
+        partyService.detach(partyEntity);
+        for (CandidateReport candidate : candidates) {
+            System.out.println(candidate.getId());
+            repository.delete(candidate.getId());
+        }
+    return true;
     }
 }

@@ -24,7 +24,11 @@ var App = React.createClass({
               <ul className="nav navbar-nav">
                 <li><a href="#/">Pradinis</a></li>
                 <li><a href="#/login">Prisijungti</a></li>
+<<<<<<< HEAD
               
+=======
+
+>>>>>>> pavel-surinin-master
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><a href="#/">{this.state.userLogged}</a></li>
@@ -40,6 +44,7 @@ var App = React.createClass({
 window.App = App;
 
 var EmptyComponent = React.createClass({
+<<<<<<< HEAD
     
       render: function() {
         return (
@@ -48,6 +53,18 @@ var EmptyComponent = React.createClass({
       }
     
     });
+=======
+
+  render: function() {
+    return (
+      <div />
+    );
+  }
+
+});
+
+window.EmptyComponent = EmptyComponent;
+>>>>>>> pavel-surinin-master
 
 window.EmptyComponent = EmptyComponent;
     
@@ -66,7 +83,11 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/admin" component={AdminComponent}>
       <IndexRoute component={EmptyComponent} />
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> pavel-surinin-master
       <Route path="/admin/district" component={DistrictListContainer} />
       <Route path="/admin/district/create" component={DistrictCreateContainer} />
       <Route path="/admin/candidate" component={CandidateContainer} />
@@ -75,10 +96,22 @@ ReactDOM.render((
       <Route path="/admin/representative/create" component={DistrictRepresentativeCreateContainer} />
       <Route path="/admin/county" component={CountyContainer} />
       <Route path="/admin/county/create" component={CountyCreateContainer} />
+<<<<<<< HEAD
       <Route path="/admin/county/:id" component={CountyDetailViewContainer} />
       <Route path="/admin/party" component={PartyContainer} />
       <Route path="/admin/party/create" component={PartyCreateContainer} />
       <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
+=======
+      <Route path="/admin/county/details" component={CountyDetailViewComponent} />
+      <Route path="/admin/party" component={PartyContainer} />
+      <Route path="/admin/party/create" component={PartyCreateContainer} />
+      <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
+      <Route path="*" component={NoMatch}/>
+    </Route>
+    <Route path="/" component={App}>
+      <IndexRoute component={HomeComponent} />
+      <Route path="/login" component={LoginContainer} />
+>>>>>>> pavel-surinin-master
       <Route path="*" component={NoMatch}/>
     </Route>
     <Route path="/" component={App}>

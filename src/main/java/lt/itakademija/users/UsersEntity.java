@@ -1,9 +1,6 @@
 package lt.itakademija.users;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -17,9 +14,11 @@ public class UsersEntity {
     @GeneratedValue
     private Long id;
 
+    @Column(unique = true)
     @NotNull
     private String username;
 
+    @Column(unique = true)
     @NotNull
     private String password;
 

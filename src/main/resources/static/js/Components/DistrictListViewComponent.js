@@ -24,7 +24,7 @@
 			  <SideNavBarComponent />
 		    </div>
 		    <div className="col-xs-12 col-sm-9 col-md-9 col-lg-9 text-left">
-    		  <div className="panel panel-default">
+		      <div className="panel panel-default">
 		        <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
 		          <div className="panel-body">
 		            <span>
@@ -56,13 +56,10 @@
 		            </tr>
 		            </thead>
 		            <tbody>
-						{array}
+									{array}
 		            </tbody>
 		          </table>
 		        </div>
-		      </div>
-		    </div>
-		  </div>
     );
   }
 
