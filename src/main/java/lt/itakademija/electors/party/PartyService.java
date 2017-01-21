@@ -1,6 +1,8 @@
 package lt.itakademija.electors.party;
 
 import lt.itakademija.electors.candidate.CandidateReport;
+import lt.itakademija.electors.candidate.CandidateService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,9 @@ public class PartyService {
     @Autowired
     PartyRepository repository;
 
+    @Autowired
+    CandidateService candidateService;
+    
     @Transactional
     public PartyEntity save(PartyEntity party) {
         return repository.save(party);
@@ -54,6 +59,14 @@ public class PartyService {
 			.collect(Collectors.toList());
 		pr.setMembers(members);
 		return pr;
+	}
+	@Transactional
+	public PartyReport deletePartyMembersList(Long id) {
+		PartyEntity party = repository.getById(id);
+		party.getMembers().stream().forEach(
+				mem -> candidateService.delete(mem));
+		
+		return this.getPartyById(id);
 	}
 
 }

@@ -18,42 +18,51 @@
     });
 
     return (
-      <div className="panel panel-default">
-        <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
-          <div className="panel-body">
-            <span>
-              <h5>Registruoti naują apylinkę </h5>
-            </span>
-            <a href="#/district/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
-          </div>
-            <table className="table table-striped">
-            <thead>
-            <tr>
-              <th>
-                Eil. Nr.
-              </th>
-              <th>
-                Pavadinimas
-              </th>
-              <th>
-                Adresas
-              </th>
-              <th>
-                Apygarda
-              </th>
-              <th>
-                Atstovas
-              </th>
-              <th>
-                Veiksmai
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-							{array}
-            </tbody>
-          </table>
-        </div>
+    	<div className="container-fluid">
+		  <div className="row">
+		    <div className="col-xs-12 col-sm-3 col-md-3 col-lg-3 sidenav">
+			  <SideNavBarComponent />
+		    </div>
+		    <div className="col-xs-12 col-sm-9 col-md-9 col-lg-9 text-left">
+    		  <div className="panel panel-default">
+		        <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
+		          <div className="panel-body">
+		            <span>
+		              <h5>Registruoti naują apylinkę </h5>
+		            </span>
+		            <a href="#/district/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+		          </div>
+		            <table className="table table-striped">
+		            <thead>
+		            <tr>
+		              <th>
+		                Eil. Nr.
+		              </th>
+		              <th>
+		                Pavadinimas
+		              </th>
+		              <th>
+		                Adresas
+		              </th>
+		              <th>
+		                Apygarda
+		              </th>
+		              <th>
+		                Atstovas
+		              </th>
+		              <th>
+		                Veiksmai
+		              </th>
+		            </tr>
+		            </thead>
+		            <tbody>
+						{array}
+		            </tbody>
+		          </table>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
     );
   }
 

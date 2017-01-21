@@ -1,7 +1,14 @@
 var CountyListRowViewComponent = React.createClass({
 
-  render: function() {
-    return (
+	handleDetailsClick: function(id){
+	    var self = this;
+	    return function() {
+	      self.context.router.push('/county/' + id);
+	    };
+	  },
+	  
+	render: function() {
+      return (
             <tr>
               <td>
                 {this.props.id}
@@ -10,7 +17,7 @@ var CountyListRowViewComponent = React.createClass({
                 {this.props.name}
               </td>
               <td>
-              <a href="#/county/details"><button type="button" className="btn btn-success btn-sm">Žiūrėti</button></a>
+                <button onClick={this.handleDetailsClick(this.props.id)} className='btn btn-primary btn-sm' role='button'>Detaliau</button>
               </td>
               <td>
                 <button type="button" className="btn btn-primary btn-sm">Naujinti</button>
@@ -22,4 +29,7 @@ var CountyListRowViewComponent = React.createClass({
 
 });
 
+CountyListRowViewComponent.contextTypes = {
+		  router: React.PropTypes.object.isRequired,
+		};
 window.CountyListRowViewComponent = CountyListRowViewComponent;

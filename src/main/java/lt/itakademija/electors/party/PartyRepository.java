@@ -36,4 +36,5 @@ public class PartyRepository {
 		return em.find(PartyEntity.class, id);
 	}
 
+
 }

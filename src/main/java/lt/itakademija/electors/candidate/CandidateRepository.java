@@ -29,4 +29,10 @@ public class CandidateRepository {
                 .getResultList();
         return list;
     }
+
+	public void delete(CandidateEntity mem) {
+		em.createQuery("DELETE c FROM CandidateEntity c WHERE PARTYID like :id")
+		.setParameter("id", mem.getId());
+		
+	}
 }

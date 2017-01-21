@@ -1,22 +1,23 @@
-var CountyDetailDistrictViewContainer = React.createClass({
+var CountyDetailViewContainer = React.createClass({
   getInitialState: function() {
     return {
-      countyList : [],
+      countyDetails : null,
       isLoading : true,
     };
   },
   componentWillMount: function() {
     var self = this;
     axios
-      .get('/county')
+      .get('/county/' + this.props.params.id)
       .then(function(response){
+        console.log(response.data);
         self.setState({
-          countyList :  response.data,
+          countyDetails :  response.data,
           isLoading : false,
         });
       })
       .catch(function(err){
-        console.error('CountyDetailViewContainer.componentWillMount.axios.get.county', err);
+        console.error('CountyDetailViewContainer.componentWillMount.axios.get.county/:id', err);
       });
   },
   render: function() {
@@ -27,12 +28,12 @@ var CountyDetailDistrictViewContainer = React.createClass({
         </div>
       );
     } else {
-      console.log(this.state.countyList);
+      console.log(this.state.countyDetails);
       return (
-        <CountyListViewComponent countyList={this.state.countyList}/>
+        <CountyDetailViewComponent countyDetails={this.state.countyDetails}/>
       );
     }
   }
-});
+  });
 
-window.CountyDetailDistrictViewContainer = CountyDetailDistrictViewContainer;
+window.CountyDetailViewContainer = CountyDetailViewContainer;

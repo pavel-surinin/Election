@@ -36,4 +36,10 @@ public class CandidateService {
         }
         return list;
     }
+   
+    @Transactional
+	public void delete(CandidateEntity mem) {
+		
+		repository.delete(mem);
+	}
 }
