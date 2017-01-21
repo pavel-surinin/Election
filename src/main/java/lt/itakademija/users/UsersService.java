@@ -34,4 +34,8 @@ public class UsersService {
     public void logout() {
         auth.setUserLogged("none");
     }
+
+    public void saveUser(UsersEntity user){
+        rep.save(user);
+    }
 }
