@@ -13,7 +13,7 @@ var DistrictRepresentativeCreateContainer = React.createClass({
       .post('/representative', postRequest)
       .then(function(response){
         console.log(response);
-        self.context.router.push('/representative');
+        self.context.router.push('/admin/representative');
       })
       .catch(function(err){
         console.error('DistrictRepresentativeCreateContainer.onHandleSubmit.axios', err);
