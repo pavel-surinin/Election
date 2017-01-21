@@ -1,11 +1,10 @@
 package lt.itakademija.electors.party;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -33,12 +32,11 @@ public class PartyRepository {
         return list;
     }
 
-    public PartyEntity getById(Long id) {
+	public PartyEntity getById(Long id) {
 		return em.find(PartyEntity.class, id);
 	}
 
     public void detach(PartyEntity partyEntity) {
         em.detach(partyEntity);
     }
-
 }

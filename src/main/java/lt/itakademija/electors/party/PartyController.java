@@ -28,10 +28,6 @@ public class PartyController {
     public PartyReport getPartyById(@PathVariable Long id){
     	return service.getPartyById(id);
     }
-    @DeleteMapping("/party/candidates/{id}")
-    public PartyReport deletePartyMembersList(@PathVariable Long id){
-    	return service.deletePartyMembersList(id);
-    }
 
 }
 

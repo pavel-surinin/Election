@@ -1,16 +1,13 @@
 package lt.itakademija.electors.party;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
+import lt.itakademija.electors.candidate.CandidateReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lt.itakademija.electors.candidate.CandidateReport;
-import lt.itakademija.electors.candidate.CandidateService;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -20,9 +17,6 @@ public class PartyService {
 
     @Autowired
     PartyRepository repository;
-    
-    @Autowired
-    CandidateService candidateService;
 
     @Transactional
     public PartyEntity save(PartyEntity party) {
@@ -64,14 +58,6 @@ public class PartyService {
 
     public PartyEntity getPartyEntityById(Long id){
     	return repository.getById(id);
-	}
-	@Transactional
-	public PartyReport deletePartyMembersList(Long id) {
-		PartyEntity party = repository.getById(id);
-		party.getMembers().stream().forEach(
-				member -> candidateService.delete(member)
-				);
-		return this.getPartyById(id);
 	}
 
 	public void detach(PartyEntity partyEntity) {

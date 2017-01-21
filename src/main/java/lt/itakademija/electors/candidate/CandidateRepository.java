@@ -3,8 +3,6 @@ package lt.itakademija.electors.candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import lt.itakademija.electors.party.PartyEntity;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -32,8 +30,8 @@ public class CandidateRepository {
         return list;
     }
 
-    public boolean delete(Long long1) {
-        CandidateEntity candidate = em.find(CandidateEntity.class, long1);
+    public boolean delete(Long id) {
+        CandidateEntity candidate = em.find(CandidateEntity.class, id);
         em.remove(candidate);
         return true;
     }
