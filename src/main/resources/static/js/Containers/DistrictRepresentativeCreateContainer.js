@@ -7,13 +7,11 @@ var DistrictRepresentativeCreateContainer = React.createClass({
       surname : this.state.surname,
       district : districtId,
     };
-    console.log(postRequest);
     var self = this;
     axios
       .post('/representative', postRequest)
       .then(function(response){
-        console.log(response);
-        self.context.router.push('/representative');
+        self.context.router.push('/admin/representative');
       })
       .catch(function(err){
         console.error('DistrictRepresentativeCreateContainer.onHandleSubmit.axios', err);
@@ -33,9 +31,17 @@ var DistrictRepresentativeCreateContainer = React.createClass({
   componentWillMount: function() {
     var self = this;
     axios
-      .get('/district')
+      .get('/district/nonerepresentatives')
       .then(function(response){
-        self.setState({districtList : response.data});
+        console.log(response.data);
+        if (response.data.length == 0) {
+          console.log(response.data);
+        } else {
+          self.setState({
+            districtList : response.data,
+            district : response.data[0].id,
+          });
+        }
       })
       .catch(function(error){
         console.error('DistrictRepresentativeCreateContainer.componentWillMount.axios', error);
@@ -44,7 +50,6 @@ var DistrictRepresentativeCreateContainer = React.createClass({
   onHandleDistrictChange : function(event){
     var districtId = parseInt(event.target.value);
     this.setState({district : districtId});
-    console.log(this.state);
   },
   onHandleNameChange : function(event){
     this.setState({name : event.target.value});
@@ -64,7 +69,6 @@ var DistrictRepresentativeCreateContainer = React.createClass({
        district={this.state.district}
        onHandleSubmit={this.onHandleSubmit}
        districtList={this.state.districtList}
-
        action='Sukurti'
        />
     );

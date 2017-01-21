@@ -36,4 +36,7 @@ public class PartyRepository {
 		return em.find(PartyEntity.class, id);
 	}
 
+    public void detach(PartyEntity partyEntity) {
+        em.detach(partyEntity);
+    }
 }
