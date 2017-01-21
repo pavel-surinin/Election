@@ -17,12 +17,9 @@ import java.util.stream.Collectors;
 @Service
 public class PartyService {
 
-    @Autowired
+	@Autowired
     PartyRepository repository;
 
-    @Autowired
-    CandidateService candidateService;
-    
     @Transactional
     public PartyEntity save(PartyEntity party) {
         return repository.save(party);
@@ -63,14 +60,6 @@ public class PartyService {
 
     public PartyEntity getPartyEntityById(Long id){
     	return repository.getById(id);
-	}
-	@Transactional
-	public PartyReport deletePartyMembersList(Long id) {
-		PartyEntity party = repository.getById(id);
-		party.getMembers().stream().forEach(
-				mem -> candidateService.delete(mem));
-		
-		return this.getPartyById(id);
 	}
 
 	public void detach(PartyEntity partyEntity) {

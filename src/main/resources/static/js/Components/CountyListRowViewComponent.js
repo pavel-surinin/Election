@@ -3,7 +3,7 @@ var CountyListRowViewComponent = React.createClass({
 	handleDetailsClick: function(id){
 	    var self = this;
 	    return function() {
-	      self.context.router.push('/county/' + id);
+	      self.context.router.push('/admin/county/' + id);
 	    };
 	  },
 	  

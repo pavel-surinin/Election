@@ -18,12 +18,6 @@
     });
 
     return (
-    	<div className="container-fluid">
-		  <div className="row">
-		    <div className="col-xs-12 col-sm-3 col-md-3 col-lg-3 sidenav">
-			  <SideNavBarComponent />
-		    </div>
-		    <div className="col-xs-12 col-sm-9 col-md-9 col-lg-9 text-left">
 		      <div className="panel panel-default">
 		        <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
 		          <div className="panel-body">
