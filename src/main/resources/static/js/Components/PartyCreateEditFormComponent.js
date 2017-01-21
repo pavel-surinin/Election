@@ -5,7 +5,7 @@ var PartyCreateEditFormComponent = React.createClass({
       <div className="container vertical-center">
         <div className="row">
           <div className="col-md-6 col-md-offset-1">
-            <div className="login-panel panel panel-default">
+            <div className="panel panel-default">
               <div className="panel-body">
                 <form onSubmit={this.props.onHandleSubmit} role="form">
                 <div className="input-group">

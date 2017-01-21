@@ -1,11 +1,13 @@
 ﻿var CountyCreateEditFormComponent = React.createClass({
   render: function() {
     return (
+
       <div className="container vertical-center">
         <div className="row">
-          <div className="col-md-6 col-md-offset-1">
-            <div className="login-panel panel panel-default">
+          <div className="col-md-6 col-md-offset-1 col-xs-6">
+            <div className="panel panel-default">
               <div className="panel-body">
+                <div className="form-heading">
                 <form onSubmit={this.props.onHandleSubmit} role="form">
                 <div className="input-group">
                 <label>Apygardos Pavadinimas</label>
@@ -30,6 +32,7 @@
           </div>
         </div>
       </div>
+    </div>
     );
   }
 

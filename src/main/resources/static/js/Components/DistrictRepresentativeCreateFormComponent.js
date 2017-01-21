@@ -1,17 +1,22 @@
 var DistrictRepresentativeCreateFormComponent = React.createClass({
 	  render: function() {
+
 		    var districts = [];
 		    this.props.districtList.map(function(district,index) {
 		    	districts.push(
 		        <option key={index} value={district.id}>{district.name}</option>
 		      );
 		    });
+				var disabled = '';
+				if (this.props.districtDropdownDisabled) {
+					disabled = 'disabled';
+				};
 
 		    return (
 		      <div className="container vertical-center">
 		        <div className="row">
 		          <div className="col-md-6 col-md-offset-1">
-		            <div className="login-panel panel panel-default">
+		            <div className="panel panel-default">
 		              <div className="panel-body">
 		              	<div className="form-heading">
 		              		<h4> Registruoti apylinkės atstovą </h4>
@@ -41,7 +46,7 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 		                </div><br/>
 		                <div className="form-group">
 		                  <label>Atstovaujama apylinkė:</label>
-		                  <select value={this.props.district} onChange={this.props.onHandleDistrictChange} className="form-control">
+		                  <select value={this.props.district} onChange={this.props.onHandleDistrictChange} className="form-control" required>
 		                    {districts}
 		                  </select>
 		                </div><br/>

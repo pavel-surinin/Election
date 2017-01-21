@@ -19,6 +19,12 @@ public class DistrictController {
         return service.getDistrictsList();
     }
 
+    @GetMapping("/district/nonerepresentatives")
+    public List getDistrictsWithNullRepresentativesList(){
+        return service.getDistrictsWithNullRepresentativesList();
+    }
+
+
     @PostMapping("/district")
     public DistrictEntity save(@RequestBody DistrictEntity district){
         return service.save(district);
@@ -28,4 +34,6 @@ public class DistrictController {
     public boolean deleteDistrict(@PathVariable Long id) {
         return service.delete(id);
     }
+
+
 }

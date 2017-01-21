@@ -136,7 +136,7 @@ var AdminComponent = React.createClass({
                                   </div>
                                   <div className="col-xs-9 text-right">
                                       <div className="huge">13</div>
-                                      <div>Parijų</div>
+                                      <div>Partijų</div>
                                   </div>
                               </div>
                           </div>
