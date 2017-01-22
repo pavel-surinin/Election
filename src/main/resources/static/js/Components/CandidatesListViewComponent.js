@@ -18,8 +18,7 @@ var CandidatesListViewComponent = React.createClass({
 	    });
 
     return (
-
-			<div className="panel panel-default">
+			    <div className="panel panel-default">
 					<div className="panel-heading">
 							<h4><i className="fa fa-table"></i> Kandidatu sąrašas</h4>
 					</div>
@@ -39,20 +38,21 @@ var CandidatesListViewComponent = React.createClass({
 			  {array}
             </tbody>
           </table>
-				</div>
+			</div>
 				<script src="../vendor/jquery/jquery.min.js"></script>
 
-		    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+			    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	
+			    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+	
+			    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+			    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+			    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+	
+			    <script src="../dist/js/sb-admin-2.js"></script>
 
-		    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+			</div>
 
-		    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-		    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-		    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-		    <script src="../dist/js/sb-admin-2.js"></script>
-
-        </div>
     );
 }
 });

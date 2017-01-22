@@ -28,6 +28,5 @@ public class PartyController {
     public PartyReport getPartyById(@PathVariable Long id){
     	return service.getPartyById(id);
     }
-
 }
 
