@@ -25,7 +25,7 @@ public class CountyEntity {
     @OneToMany(mappedBy="county", cascade = CascadeType.ALL)
     private List<DistrictEntity> districts;
 
-    @OneToMany(mappedBy="county", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="county", cascade = CascadeType.MERGE)
     private List<CandidateEntity> candidates;
 
     @OneToMany
