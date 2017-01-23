@@ -21,6 +21,9 @@ public class CountyService {
     @Autowired
     CountyRepository repository;
 
+    @Autowired
+    CandidateService candidateService;
+
     public List getAll() {
         return repository.findAll()
                 .stream()
@@ -73,6 +76,11 @@ public class CountyService {
 
     @Transactional
     public boolean delete(Long id) {
+        repository.findById(id).getCandidates()
+                .stream().forEach(c -> {
+                    c.setCounty(null);
+                    candidateService.save(c);
+        });
         repository.delete(id);
         return true;
     }

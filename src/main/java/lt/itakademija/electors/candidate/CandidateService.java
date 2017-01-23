@@ -21,7 +21,7 @@ public class CandidateService {
 
     @Autowired
     PartyService partyService;
-
+    
     @Transactional
     public CandidateEntity save(CandidateEntity candidateEntity) {
         return repository.save(candidateEntity);
