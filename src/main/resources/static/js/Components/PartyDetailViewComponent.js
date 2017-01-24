@@ -17,7 +17,8 @@ var PartyDetailViewComponent = React.createClass({
     return (
       <div className="panel panel-default">
           <div className="panel-heading"><h2>{this.props.partyDetails.name}</h2>
-            <button onClick={this.props.onHandleDeleteClick} className="btn btn-danger btn-sm fa fa-trash"></button>
+            <a className="btn btn-danger" onClick={this.props.onHandleDeleteClick}>  <i className="fa fa-trash-o fa-lg"></i> Ištrinti sąrašą</a>
+            <a className="btn btn-success" href="#/admin/party" role="button">Atgal</a>
           </div>
             <table className="table table-striped">
              <thead>
