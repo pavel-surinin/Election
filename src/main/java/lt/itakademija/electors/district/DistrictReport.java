@@ -1,16 +1,5 @@
 package lt.itakademija.electors.district;
 
-import lt.itakademija.electors.RinkejasEntity;
-import lt.itakademija.electors.county.CountyEntity;
-import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
 /**
  * Created by Pavel on 2017-01-16.
  */

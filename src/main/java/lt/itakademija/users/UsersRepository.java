@@ -24,4 +24,9 @@ public class UsersRepository {
                         .setParameter("pw", user.getPassword())
                         .getResultList();
     }
+
+
+    public void save(UsersEntity user) {
+        em.persist(user);
+    }
 }

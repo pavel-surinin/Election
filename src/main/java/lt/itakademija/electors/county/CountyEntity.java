@@ -18,13 +18,14 @@ public class CountyEntity {
     @Column(name = "COUNTY_ID")
     private Long id;
 
+    @Column(unique=true)
     @NotNull
     private String name;
 
     @OneToMany(mappedBy="county", cascade = CascadeType.ALL)
     private List<DistrictEntity> districts;
 
-    @OneToMany(mappedBy="county", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="county", cascade = CascadeType.MERGE)
     private List<CandidateEntity> candidates;
 
     @OneToMany

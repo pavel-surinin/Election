@@ -1,4 +1,26 @@
 var AdminComponent = React.createClass({
+  getInitialState: function() {
+    return {
+      adminIsLogged : false,
+    };
+  },
+  componentWillMount: function() {
+    var self = this;
+    axios
+    .get('/users/logged')
+    .then(function(response) {
+      if (response.data == 'admin') {
+        self.setState({adminIsLogged : true});
+      } else {
+        self.setState({adminIsLogged : false});
+        self.context.router.push('/login');
+      }
+    })
+    .catch(function(err){
+      console.error('AdminComponent.onHandleLogout.axios',err);
+    });
+
+  },
   onHandleLogout : function(){
     var self = this;
     axios
@@ -13,12 +35,12 @@ var AdminComponent = React.createClass({
 
 
   render: function() {
+    if (this.state.adminIsLogged == false) {
+      return <div><img src='https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'/></div>;
+    }
     return (
       <div>
-
-
       <div id="wrapper">
-
           <nav className="navbar navbar-default navbar-static-top" role="navigation" style={{marginBottom: 0}}>
               <div className="navbar-header">
                   <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
