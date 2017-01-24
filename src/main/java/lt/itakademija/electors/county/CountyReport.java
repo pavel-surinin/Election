@@ -23,6 +23,9 @@ public class CountyReport {
         this.name = name;
     }
 
+    public CountyReport() {
+    }
+
     public Long getId() {
         return id;
     }

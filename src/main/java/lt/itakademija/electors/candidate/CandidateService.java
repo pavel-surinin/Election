@@ -36,11 +36,20 @@ public class CandidateService {
             kr.setSurname(candidateEntity.getSurname());
             kr.setDescription(candidateEntity.getDescription());
             kr.setBirthDate(candidateEntity.getBirthDate());
-            kr.setPartijosId(candidateEntity.getPartyDependencies().getId());
-            kr.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
+            if (candidateEntity.getPartyDependencies() == null) {
+                kr.setPartijosId(null);
+                kr.setPartijosPavadinimas(null);
+            } else {
+                kr.setPartijosId(candidateEntity.getPartyDependencies().getId());
+                kr.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
+            }
             list.add(kr);
         }
         return list;
+    }
+
+    public CandidateEntity findByIdEntity(Long id){
+        return repository.finById(id);
     }
 
     @Transactional

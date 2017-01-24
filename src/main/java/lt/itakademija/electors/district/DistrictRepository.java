@@ -36,4 +36,8 @@ public class DistrictRepository {
         DistrictEntity district = em.find(DistrictEntity.class, id);
         em.remove(district);
     }
+
+    public DistrictEntity findById(Long id){
+        return em.find(DistrictEntity.class, id);
+    }
 }
