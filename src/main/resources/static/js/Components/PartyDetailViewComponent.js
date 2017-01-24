@@ -16,7 +16,9 @@ var PartyDetailViewComponent = React.createClass({
 
     return (
       <div className="panel panel-default">
-          <div className="panel-heading"><h2>{this.props.partyDetails.name}</h2></div>
+          <div className="panel-heading"><h2>{this.props.partyDetails.name}</h2>
+            <button onClick={this.props.onHandleDeleteClick} className="btn btn-danger btn-sm fa fa-trash"></button>
+          </div>
             <table className="table table-striped">
              <thead>
               <tr>
