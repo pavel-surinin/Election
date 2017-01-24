@@ -3,6 +3,7 @@ package lt.itakademija.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -35,6 +36,7 @@ public class UsersService {
         auth.setUserLogged("none");
     }
 
+    @Transactional
     public void saveUser(UsersEntity user){
         rep.save(user);
     }

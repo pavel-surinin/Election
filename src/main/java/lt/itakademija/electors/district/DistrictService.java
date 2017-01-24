@@ -1,5 +1,6 @@
 package lt.itakademija.electors.district;
 
+import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class DistrictService {
                 .collect(Collectors.toList());
     }
 
-    public List getDistrictsList() {
+    public List<DistrictReport> getDistrictsList() {
         List<DistrictEntity> list = repository.findAll();
         return mappingToReport(list);
     }
@@ -65,4 +66,5 @@ public class DistrictService {
                 .collect(Collectors.toList());
         return mappingToReport(list);
     }
+
 }
