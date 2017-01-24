@@ -2,11 +2,7 @@ var  PartyListViewRowComponent= React.createClass({
   handleDetailsClick: function(id){
     var self = this;
     return function() {
-<<<<<<< HEAD
       self.context.router.push('admin/party/' + id);
-=======
-      self.context.router.push('/admin/party/' + id);
->>>>>>> 33d72678e7d3758dbf8d8a5ed27014994b4f68c8
     };
   },
   render: function() {
