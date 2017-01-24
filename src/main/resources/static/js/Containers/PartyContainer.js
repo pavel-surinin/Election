@@ -29,7 +29,7 @@ var PartyContainer = React.createClass({
     } else {
       console.log(this.state.partyList);
       return (
-        <PartyListViewComponent partyList={this.state.partyList}/>
+        <PartyListViewComponent partyList={this.state.partyList} />
       );
     }
   }
