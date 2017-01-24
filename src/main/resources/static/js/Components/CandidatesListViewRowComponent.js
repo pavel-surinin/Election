@@ -19,8 +19,8 @@ var CandidatesListViewRowComponent = React.createClass({
                 {this.props.partijosPavadinimas}
               </td>
               <td>
-                <button type="button" className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target="#myModal"></button>
-                <div id="myModal" className="modal fade" role="dialog">
+                <button type="button" className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}></button>
+                <div id={this.props.id} className="modal fade" role="dialog">
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">

@@ -13,7 +13,6 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 				};
 
 		    return (
-
 					      <div className="container vertical-center">
 					        <div className="row">
 					          <div className="col-md-6 col-md-offset-1">
@@ -63,7 +62,6 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					          </div>
 					        </div>
 					      </div>
-
 		    );
 		  }
 		});
