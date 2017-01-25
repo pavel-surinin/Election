@@ -14,30 +14,28 @@ var CountyDetailViewComponent = React.createClass({
 	    });
 
 		  var cand = [];
-		  this.props.countyDetails.candidates.map(function(candidates,index) {
+		  this.props.countyDetails.candidates.map(function(candidate,index) {
 			  cand.push(
-		      <CountyDetailViewCandidatesRowComponent
-		          id={candidates.id}
-		          key={index}
-		          name={candidates.name}
-		          surname={candidates.surname}
-		          birthDate={candidates.birthDate}
-		          partijosId={candidates.partijosId}
-		          partijosPavadinimas={candidates.partijosPavadinimas}
-		      />
+					<li className="list-group-item text-primary" key={index}>{candidate.name} {candidate.surname} - {candidate.partijosPavadinimas}</li>
 		    );
 		  });
+<<<<<<< HEAD
 
+=======
+    console.log(this.props.countyDetails.candidates);
+>>>>>>> f96d156eb6d2280e2b494f7987ec1ec55a407996
 		return (
 						<div className="panel panel-default">
 				          <div className="panel-heading">
 				            <h3>{this.props.countyDetails.name} rinkimų apygarda</h3>
+										<button type="button" className="btn btn-outline btn-primary btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Kandidatai</button>
+										 &nbsp;
+										<button data-toggle="collapse" type="button" data-parent="#accordion" className="btn btn-outline btn-primary btn-sm" href="#collapse1">Apylinkės</button>
 				          </div>
 					      <div className="panel-group" id="accordion">
 					        <div className="panel panel-default">
 					          <div className="panel-heading">
 					            <h4 className="panel-title">
-					              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Apylinkės</a>
 					            </h4>
 					          </div>
 					          <div id="collapse1" className="panel-collapse collapse in">
@@ -58,14 +56,17 @@ var CountyDetailViewComponent = React.createClass({
 						          </table>
 					            </div>
 					          </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> f96d156eb6d2280e2b494f7987ec1ec55a407996
 					          <div className="panel panel-default">
 					            <div className="panel-heading">
 					              <h4 className="panel-title">
-					                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Kandidatai</a>
 					              </h4>
 					            </div>
 					            <div id="collapse2" className="panel-collapse collapse">
+<<<<<<< HEAD
 						            <table className="table table-striped">
 						              <thead>
 						                <tr>
@@ -87,6 +88,11 @@ var CountyDetailViewComponent = React.createClass({
 						              	cand
 						              </tbody>
 						            </table>
+=======
+												<ul className="list-group">
+												{cand}
+												</ul>
+>>>>>>> f96d156eb6d2280e2b494f7987ec1ec55a407996
 					              </div>
 					            </div>
 					          </div>
