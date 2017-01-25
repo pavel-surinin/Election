@@ -12,7 +12,7 @@ var CountyDetailViewComponent = React.createClass({
 	        />
 	      );
 	    });
-		
+
 		  var cand = [];
 		  this.props.countyDetails.candidates.map(function(candidates,index) {
 			  cand.push(
@@ -27,7 +27,7 @@ var CountyDetailViewComponent = React.createClass({
 		      />
 		    );
 		  });
-    
+
 		return (
 						<div className="panel panel-default">
 				          <div className="panel-heading">
@@ -53,12 +53,12 @@ var CountyDetailViewComponent = React.createClass({
 						              </tr>
 						            </thead>
 						            <tbody>
-						              {dist}
+						              dist
 						            </tbody>
 						          </table>
 					            </div>
 					          </div>
-	
+
 					          <div className="panel panel-default">
 					            <div className="panel-heading">
 					              <h4 className="panel-title">
@@ -84,7 +84,7 @@ var CountyDetailViewComponent = React.createClass({
 						                </tr>
 						              </thead>
 						              <tbody>
-						              	{cand}
+						              	cand
 						              </tbody>
 						            </table>
 					              </div>
