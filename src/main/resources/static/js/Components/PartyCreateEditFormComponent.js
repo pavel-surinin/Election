@@ -1,6 +1,17 @@
 var PartyCreateEditFormComponent = React.createClass({
 
   render: function() {
+    console.log(this.props);
+    var message = '';
+    if (this.props.nameClone) {
+      message = (
+          <div className="alert alert-danger" role="alert">
+          <strong>Dėmesio!</strong> Tokia partija jau užregistruota.
+          </div>
+        );
+    } else {
+      message = '';
+    }
     return (
 		      <div className="container vertical-center">
 		        <div className="row">
@@ -28,6 +39,7 @@ var PartyCreateEditFormComponent = React.createClass({
 		                    {this.props.action}
 		                  </button>
 		                </form>
+                    {message}
 		                  <div>
 		                    <a className="btn btn-danger btn-block" href="#/admin/party" role="button">Atšaukti</a>
 		                  </div>

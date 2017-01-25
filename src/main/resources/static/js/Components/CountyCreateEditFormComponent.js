@@ -3,10 +3,7 @@
     var message = '';
     if (this.props.nameClone) {
       message = (
-        <div className="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Dėmesio!</strong> Apygarda su tokiu pavadinimu jau užregistruota.
-        </div>
+        <div className="alert alert-danger">Apygarda su tokiu pavadinimu jau užregistruota.</div>
       );
     } else {
       message = '';
@@ -31,7 +28,9 @@
                     id="inputError"
                     required
                   />
-                </div><br/>
+                </div>
+                <br/>
+                {message}
                 <button className='btn btn-success btn-block'>
                   {this.props.action}
                 </button>
@@ -40,7 +39,6 @@
                   <a className="btn btn-danger btn-block" href="#/admin/county" role="button">Atšaukti</a>
                 </div>
                 <br/>
-                {message}
               </div>
             </div>
           </div>

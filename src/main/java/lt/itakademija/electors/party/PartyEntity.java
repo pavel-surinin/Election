@@ -16,6 +16,7 @@ public class PartyEntity {
     @Column(name = "PARTY_ID")
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy="partyDependencies", cascade = CascadeType.ALL)
