@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -44,7 +45,9 @@ public class DistrictRepresentativeService {
 
     @Transactional
     public DistrictRepresentativeEntity save(DistrictRepresentativeEntity representative) {
-        String username = representative.getName().toLowerCase() + "-" + representative.getSurname().toLowerCase();
+    	Random rand = new Random();
+		int usrNumber = rand.nextInt(9000000)+1000000;
+        String username = representative.getName().toLowerCase() + "-" + representative.getSurname().toLowerCase()+usrNumber;
         String password = UUID.randomUUID().toString();
         UsersEntity user = new UsersEntity();
         user.setPassword(password);
