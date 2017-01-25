@@ -19,11 +19,7 @@ var CountyDetailViewComponent = React.createClass({
 					<li className="list-group-item text-primary" key={index}>{candidate.name} {candidate.surname} - {candidate.partijosPavadinimas}</li>
 		    );
 		  });
-<<<<<<< HEAD
-
-=======
     console.log(this.props.countyDetails.candidates);
->>>>>>> f96d156eb6d2280e2b494f7987ec1ec55a407996
 		return (
 						<div className="panel panel-default">
 				          <div className="panel-heading">
@@ -51,48 +47,20 @@ var CountyDetailViewComponent = React.createClass({
 						              </tr>
 						            </thead>
 						            <tbody>
-						              dist
+						              {dist}
 						            </tbody>
 						          </table>
 					            </div>
 					          </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> f96d156eb6d2280e2b494f7987ec1ec55a407996
 					          <div className="panel panel-default">
 					            <div className="panel-heading">
 					              <h4 className="panel-title">
 					              </h4>
 					            </div>
 					            <div id="collapse2" className="panel-collapse collapse">
-<<<<<<< HEAD
-						            <table className="table table-striped">
-						              <thead>
-						                <tr>
-						                  <th>
-						                    Vardas
-						                  </th>
-						                  <th>
-						                    Pavardė
-						                  </th>
-						                  <th>
-						                    Gimimo data
-						                  </th>
-						                  <th>
-						                    Partija
-						                  </th>
-						                </tr>
-						              </thead>
-						              <tbody>
-						              	cand
-						              </tbody>
-						            </table>
-=======
 												<ul className="list-group">
 												{cand}
 												</ul>
->>>>>>> f96d156eb6d2280e2b494f7987ec1ec55a407996
 					              </div>
 					            </div>
 					          </div>
