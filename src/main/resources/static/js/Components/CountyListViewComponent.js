@@ -2,6 +2,7 @@
 var CountyListViewComponent = React.createClass({
   render: function() {
     var array = [];
+    var self= this.props;
     this.props.countyList.map(function(county,index) {
       array.push(
         <CountyListRowViewComponent
@@ -11,6 +12,7 @@ var CountyListViewComponent = React.createClass({
           districts={county.districts}
           candidates={county.candidates}
           parties={county.parties}
+          onHandleDelete={self.onHandleDelete}
         />
       );
     });
@@ -19,7 +21,7 @@ var CountyListViewComponent = React.createClass({
 		      <div className="panel panel-default">
 		        <div className="panel-heading">
 		          <h3>Rinkimų apygardų sąrašas
-		
+
 		          </h3>
 		        </div>
 		          <div className="panel-body">
