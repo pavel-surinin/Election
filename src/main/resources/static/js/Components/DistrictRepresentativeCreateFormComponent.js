@@ -1,9 +1,5 @@
 var DistrictRepresentativeCreateFormComponent = React.createClass({
 	  render: function() {
-
-				//this.props.nameErrorMesages
-
-				//this.props.surnameErrorMesages
 		    var districts = [];
 		    this.props.districtList.map(function(district,index) {
 		    	districts.push(

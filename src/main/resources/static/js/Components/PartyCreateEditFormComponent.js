@@ -1,7 +1,6 @@
 var PartyCreateEditFormComponent = React.createClass({
-
   render: function() {
-    console.log(this.props);
+    var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
     var message = '';
     if (this.props.nameClone) {
       message = (
@@ -29,6 +28,7 @@ var PartyCreateEditFormComponent = React.createClass({
 		                      required
 		                    />
 		                </div><br/>
+                      {nameErrorMesages}
 		                    <div className="form-group">
 		                      <label>Pasirinkite failą</label>
 		                      <input type="file" id="exampleInputFile" />

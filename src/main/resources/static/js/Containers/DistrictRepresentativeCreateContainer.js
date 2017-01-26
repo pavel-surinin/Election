@@ -71,13 +71,10 @@ var DistrictRepresentativeCreateContainer = React.createClass({
     this.setState({district : districtId});
   },
   onHandleNameChange : function(event){
-    this.setState({name : event.target.value});
-    console.log('Check regex - ', validation.checkName(event.target.value));
-    console.log('Check max - ', validation.checkMax(event.target.value, 50));
-    console.log('Check min - ', validation.checkMin(event.target.value, 3));
+    this.setState({name : event.target.value.trim()});
   },
   onHandleSurnameChange : function(event){
-    this.setState({surname : event.target.value});
+    this.setState({surname : event.target.value.trim()});
   },
 
   render: function() {
