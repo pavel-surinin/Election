@@ -2,7 +2,6 @@ package lt.itakademija.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -22,6 +21,15 @@ public class UsersService {
         return auth.getUserLogged();
     }
 
+    public UsersEntity findUserByUsername(UsersEntity user){
+        List<UsersEntity> userToFind = rep.findByUsername(user);
+        if (userToFind == null) {
+            return null;
+        } else {
+            return userToFind.iterator().next();
+        }
+    }
+
     public boolean login(UsersEntity user) {
         List<UsersEntity> resp = rep.checkUserLoginPassword(user);
         if (resp.size() == 0) {
@@ -38,6 +46,8 @@ public class UsersService {
 
     @Transactional
     public void saveUser(UsersEntity user){
+        String hashword = Md5.generate(user.getPassword());
+        user.setPassword(hashword);
         rep.save(user);
     }
 }

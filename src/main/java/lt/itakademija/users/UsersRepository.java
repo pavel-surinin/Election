@@ -29,4 +29,11 @@ public class UsersRepository {
     public void save(UsersEntity user) {
         em.persist(user);
     }
+
+    public List<UsersEntity> findByUsername(UsersEntity user) {
+        return
+                em.createQuery("SELECT u FROM UsersEntity u WHERE u.username = :lg")
+                        .setParameter("lg", user.getUsername())
+                        .getResultList();
+    }
 }

@@ -54,7 +54,7 @@ var AdminComponent = React.createClass({
 
               <ul className="nav navbar-top-links navbar-right">
                 <li>
-                    <a onClick={this.onHandleLogout}>
+                    <a href='#a' onClick={this.onHandleLogout}>
                       Atsijungti &nbsp;<i className="fa fa-sign-out"></i>
                     </a>
                   </li>

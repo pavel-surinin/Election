@@ -1,5 +1,4 @@
 var DistrictListContainer = React.createClass({
-
   getInitialState: function() {
     return {
       districtList : [],
@@ -32,7 +31,10 @@ var DistrictListContainer = React.createClass({
     } else {
       console.log(this.state.districtList);
       return (
-        <DistrictListViewComponent districtList={this.state.districtList}/>
+        <DistrictListViewComponent
+          districtList={this.state.districtList}
+          onHandleDelete={this.onHandleDelete}
+          />
       );
     }
 
