@@ -14,7 +14,7 @@
 				countyName={dist.countyName}
 				representativeId={dist.representativeId}
 				representativeName={dist.representativeName}
-        onHandleDeleteClick={self.onHandleDeleteClick}
+        onHandleDelete={self.onHandleDelete}
 				/>
 			);
     });

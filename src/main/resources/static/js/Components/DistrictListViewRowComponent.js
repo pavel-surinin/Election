@@ -1,4 +1,7 @@
 ﻿var DistrictListViewRowComponent = React.createClass({
+  onHandleDeleteClick: function () {
+    this.props.onHandleDelete(this.props.id);
+  },
   render: function() {
     return (
             <tr>
@@ -24,7 +27,7 @@
                       Redaguoti
                     </button>
                     &nbsp;
-                    <a className="btn btn-danger" onClick={this.props.onHandleDeleteClick}>  <i className="fa fa-trash-o fa-lg"></i> Ištrinti</a>
+                    <a className="btn btn-danger" onClick={this.onHandleDeleteClick}>  <i className="fa fa-trash-o fa-lg"></i> Ištrinti</a>
 
                </div>
               </td>

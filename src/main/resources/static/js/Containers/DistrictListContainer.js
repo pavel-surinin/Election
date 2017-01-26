@@ -23,18 +23,18 @@ var DistrictListContainer = React.createClass({
     getDistrict(this);
   },
 
-  onHandleDeleteClick: function(districtId) {
-    var self1= this;
-    var self2= this.props;
-    var self3= this.props.params;
-    console.log("0"+id);
-    console.log("1"+this.id);
-    console.log("2"+this.props.id);
-    console.log("3"+this.props.params.id);
-    console.log("4"+self1.id);
-    console.log("5"+self2.id);
-    console.log("6"+<DistrictListViewRowComponent id={this.props.id} />);
-  },
+  onHandleDelete: function(i) {
+    var self = this;
+    event.preventDefault();
+    axios
+      .delete('/district/'+ i)
+      .then(function(response){
+        getDistrict(self);
+      })
+      .catch(function(err){
+        console.error('DistrictListContainer.onHandleDelete.axios', err);
+      });
+    },
 
   render: function() {
     if (this.state.isLoading) {
@@ -46,16 +46,11 @@ var DistrictListContainer = React.createClass({
     } else {
       console.log(this.state.districtList);
       return (
-<<<<<<< HEAD
-        <DistrictListViewComponent districtList={this.state.districtList}
-          onHandleDeleteClick={this.onHandleDeleteClick}
-        />
-=======
+
         <DistrictListViewComponent
           districtList={this.state.districtList}
           onHandleDelete={this.onHandleDelete}
           />
->>>>>>> d530673c786ec1d06cc74d161486ef901500424e
       );
     }
 
