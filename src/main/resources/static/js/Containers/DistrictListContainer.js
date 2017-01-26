@@ -6,6 +6,9 @@ var DistrictListContainer = React.createClass({
     };
   },
 
+  onHandleDelete : function(i){
+  },
+
   componentWillMount: function() {
     var self = this;
     axios
