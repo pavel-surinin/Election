@@ -2,6 +2,7 @@
   render: function() {
     var self = this.props;
     var array = [];
+    var self= this.props;
     this.props.districtList.map(function(dist,index) {
       array.push(
 				<DistrictListViewRowComponent
