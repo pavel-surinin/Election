@@ -1,7 +1,8 @@
 var DistrictCreateEditComponent = React.createClass({
 
   render: function() {
-
+    var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
+    var adressErrorMesages = validation.showMsg(this.props.adressErrorMesages);
     var counties = [];
     this.props.countyList.map(function(county,index) {
       counties.push(
@@ -29,6 +30,7 @@ var DistrictCreateEditComponent = React.createClass({
 			                    required
 			                  />
 			                </div><br/>
+                      {nameErrorMesages}
 			                <div className="input-group">
 			                <label>Apylinkės Adresas</label>
 			                  <input
@@ -40,6 +42,7 @@ var DistrictCreateEditComponent = React.createClass({
 			                    required
 			                  />
 			                </div><br/>
+                      {adressErrorMesages}
 			                <div className="form-group">
 			                  <label>Atstovaujama Apygarda:</label>
 			                  <select value={this.props.county} onChange={this.props.onHandleCountyChange} className="form-control"required>

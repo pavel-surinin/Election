@@ -3,13 +3,20 @@ var DistrictCreateContainer = React.createClass({
     event.preventDefault();
     var countyId = {id : this.state.county};
     var postRequest = {
-      name : this.state.name,
-      adress : this.state.adress,
+      name : this.state.name.trim(),
+      adress : this.state.adress.trim(),
       county : countyId,
     };
-    console.log(postRequest);
-    var self = this;
-    axios
+    //validation
+    var nameErrorMesages = [];
+    if(!validation.checkMax(this.state.name,35)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 35 simbolių');}
+    if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
+    var adressErrorMesages = [];
+    if(!validation.checkMax(this.state.name,50)) {adressErrorMesages.push('Adresas negali būti ilgesnis, nei 50 simbolių');}
+    if(!validation.checkMin(this.state.name,4)) {adressErrorMesages.push('Adresas negali būti trumpesnis, nei 4 simboliai');}
+    if (nameErrorMesages.length == 0 && adressErrorMesages.length == 0) {
+      var self = this;
+      axios
       .post('/district', postRequest)
       .then(function(response){
         console.log(response);
@@ -18,6 +25,12 @@ var DistrictCreateContainer = React.createClass({
       .catch(function(err){
         console.error('DistrictCreateContainer.onHandleSubmit.axios', err);
       });
+    } else {
+      this.setState({
+        nameErrorMesages : nameErrorMesages,
+        adressErrorMesages : adressErrorMesages,
+      });
+    }
 
   },
 
@@ -27,6 +40,8 @@ var DistrictCreateContainer = React.createClass({
       adress : '',
       county : 1,
       countyList : [],
+      adressErrorMesages : [],
+      nameErrorMesages : [],
     };
   },
 
@@ -67,7 +82,8 @@ var DistrictCreateContainer = React.createClass({
        county={this.state.county}
        onHandleSubmit={this.onHandleSubmit}
        countyList={this.state.countyList}
-
+       nameErrorMesages={this.state.nameErrorMesages}
+       adressErrorMesages={this.state.adressErrorMesages}
        action='Sukurti'
        />
     );
