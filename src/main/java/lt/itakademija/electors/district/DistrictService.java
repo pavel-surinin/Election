@@ -1,5 +1,6 @@
 package lt.itakademija.electors.district;
 
+import lt.itakademija.exceptions.DistrictCloneException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,8 +48,11 @@ public class DistrictService {
     }
 
     @Transactional
-    public DistrictEntity save(DistrictEntity apylinke) {
-        return repository.save(apylinke);
+    public DistrictEntity save(DistrictEntity apylinke){
+        if (repository.findByNameAndAdress(apylinke).size() == 0) {
+            return repository.save(apylinke);
+        }
+        throw new DistrictCloneException("This district is already registered");
     }
 
     @Transactional

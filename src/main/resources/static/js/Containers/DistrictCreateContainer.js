@@ -23,7 +23,10 @@ var DistrictCreateContainer = React.createClass({
         self.context.router.push('/admin/district');
       })
       .catch(function(err){
-        console.error('DistrictCreateContainer.onHandleSubmit.axios', err);
+        var existsErrorMesages = [];
+        existsErrorMesages.push('Apylinkė su pavadinimu ' + self.state.name + ' jau priskirta šitai apygardai');
+        self.setState({existsErrorMesages : existsErrorMesages});
+        // console.error('DistrictCreateContainer.onHandleSubmit.axios', err);
       });
     } else {
       this.setState({
@@ -31,7 +34,6 @@ var DistrictCreateContainer = React.createClass({
         adressErrorMesages : adressErrorMesages,
       });
     }
-
   },
 
   getInitialState: function() {
@@ -42,6 +44,7 @@ var DistrictCreateContainer = React.createClass({
       countyList : [],
       adressErrorMesages : [],
       nameErrorMesages : [],
+      existsErrorMesages : [],
     };
   },
 
@@ -56,7 +59,9 @@ var DistrictCreateContainer = React.createClass({
         });
       })
       .catch(function(error){
-        console.error('DistrictCreateContainer.componentWillMount.axios', error);
+
+        console.log('lol', error.response);
+        console.error('DistrictCreateContainer.componentWillMount.axios', error.response.status);
       });
   },
   onHandleCountyChange : function(event){
@@ -84,6 +89,7 @@ var DistrictCreateContainer = React.createClass({
        countyList={this.state.countyList}
        nameErrorMesages={this.state.nameErrorMesages}
        adressErrorMesages={this.state.adressErrorMesages}
+       existsErrorMesages={this.state.existsErrorMesages}
        action='Sukurti'
        />
     );
