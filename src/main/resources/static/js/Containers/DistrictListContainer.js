@@ -12,7 +12,6 @@ function getDistrict(self) {
     });
 }
 var DistrictListContainer = React.createClass({
-
   getInitialState: function() {
     return {
       districtList : [],
@@ -34,7 +33,7 @@ var DistrictListContainer = React.createClass({
     console.log("3"+this.props.params.id);
     console.log("4"+self1.id);
     console.log("5"+self2.id);
-    console.log("6"+self3.id);
+    console.log("6"+<DistrictListViewRowComponent id={this.props.id} />);
   },
 
   render: function() {
@@ -47,9 +46,16 @@ var DistrictListContainer = React.createClass({
     } else {
       console.log(this.state.districtList);
       return (
+<<<<<<< HEAD
         <DistrictListViewComponent districtList={this.state.districtList}
           onHandleDeleteClick={this.onHandleDeleteClick}
         />
+=======
+        <DistrictListViewComponent
+          districtList={this.state.districtList}
+          onHandleDelete={this.onHandleDelete}
+          />
+>>>>>>> d530673c786ec1d06cc74d161486ef901500424e
       );
     }
 

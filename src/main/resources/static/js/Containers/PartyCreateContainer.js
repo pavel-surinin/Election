@@ -2,15 +2,19 @@ var PartyCreateContainer = React.createClass({
   getInitialState: function() {
     return {
       name : '',
+      nameClone : false,
     };
   },
+  componentWillMount: function() {
+    this.setState({nameClone : false});
+  },
   onHandleNameChange : function(event){
-  this.setState({name : event.target.value});
-},
+    this.setState({name : event.target.value});
+  },
   onHandleSubmit : function(event){
     var self = this;
     event.preventDefault();
-    var partyName = {name: this.state.name};
+    var partyName = {name: this.state.name.trim()};
     axios
       .post('/party', partyName)
       .then(function(response){
@@ -19,6 +23,7 @@ var PartyCreateContainer = React.createClass({
       })
       .catch(function(err){
         console.error('PartyCreateContainer.onHandleSubmit.axios', err);
+        self.setState({nameClone : true});
       });
   },
   render: function() {
@@ -27,7 +32,7 @@ var PartyCreateContainer = React.createClass({
        onHandleNameChange={this.onHandleNameChange}
        name={this.state.name}
        onHandleSubmit={this.onHandleSubmit}
-
+       nameClone={this.state.nameClone}
        action='Sukurti'
        />
     );

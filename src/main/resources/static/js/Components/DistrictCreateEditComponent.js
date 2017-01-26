@@ -10,7 +10,6 @@ var DistrictCreateEditComponent = React.createClass({
     });
 
     return (
-			      <div className="container vertical-center">
 			        <div className="row">
 			          <div className="col-md-6 col-md-offset-1">
 			            <div className="panel panel-default">
@@ -58,7 +57,6 @@ var DistrictCreateEditComponent = React.createClass({
 			            </div>
 			          </div>
 			        </div>
-			      </div>
     );
   }
 });

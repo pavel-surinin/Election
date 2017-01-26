@@ -10,7 +10,7 @@ var CountyCreateContainer = React.createClass({
     this.setState({name : event.target.value});
   },
   onHandleSubmit : function(event){
-    var countyName = {name: this.state.name};
+    var countyName = {name: this.state.name.trim()};
     var self = this;
     event.preventDefault();
       axios

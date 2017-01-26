@@ -25,6 +25,7 @@
                     </button>
                     &nbsp;
                     <a className="btn btn-danger" onClick={this.props.onHandleDeleteClick}>  <i className="fa fa-trash-o fa-lg"></i> Ištrinti</a>
+
                </div>
               </td>
             </tr>

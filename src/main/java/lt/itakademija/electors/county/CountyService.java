@@ -9,7 +9,7 @@ import lt.itakademija.electors.district.DistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -73,18 +73,26 @@ public class CountyService {
                 })
                 .collect(Collectors.toList());
         report.setCandidates(candidateReport);
-        List<DistrictReport> districtReports = county.getDistricts()
-                .stream()
-                .map(d -> {
-                    DistrictReport dr = new DistrictReport();
-                    dr.setId(d.getId());
-                    dr.setName(d.getName());
-                    dr.setAdress(d.getAdress());
-                    dr.setRepresentativeName(d.getRepresentative().getName() + " " + d.getRepresentative().getSurname());
-                    return dr;
-                })
-                .collect(Collectors.toList());
-        report.setDistricts(districtReports);
+        if (county.getDistricts() != null) {
+            List<DistrictReport> districtReports = county.getDistricts()
+                    .stream()
+                    .map(d -> {
+                        DistrictReport dr = new DistrictReport();
+                        dr.setId(d.getId());
+                        dr.setName(d.getName());
+                        dr.setAdress(d.getAdress());
+                        if (d.getRepresentative() == null) {
+                            dr.setRepresentativeName(null);
+                        } else {
+                            dr.setRepresentativeName(d.getRepresentative().getName() + " " + d.getRepresentative().getSurname());
+                        }
+                        return dr;
+                    })
+                    .collect(Collectors.toList());
+            report.setDistricts(districtReports);
+        } else {
+            report.setDistricts(null);
+        }
 
         return report;
     }

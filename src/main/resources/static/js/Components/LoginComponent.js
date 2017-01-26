@@ -12,8 +12,7 @@ var LoginComponent = React.createClass({
       var message = '';
       if (this.props.wrongAuth) {
         message = (
-          <div className="alert alert-warning alert-dismissible" role="alert">
-          <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div className="alert alert-danger" role="alert">
           <strong>Dėmesio!</strong> Blogai įvestas prisijungimo vardas arba slaptažodis.
           </div>
         );
