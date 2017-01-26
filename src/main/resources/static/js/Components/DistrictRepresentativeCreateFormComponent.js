@@ -13,16 +13,18 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 				};
 
 		    return (
-					      <div className="container vertical-center">
 					        <div className="row">
-					          <div className="col-md-6 col-md-offset-1">
-					            <div className="panel panel-default">
+					          <div className="col-md-6 col-md-offset-3 col-xs-12">
+					            <div className="panel panel-primary">
+											<div className="panel-heading text-center">
+											<h4><b>Registruoti apylinkės atstovą</b></h4>
+											</div>
 					              <div className="panel-body">
 					              	<div className="form-heading">
-					              		<h4> Registruoti apylinkės atstovą </h4>
+
 					              	</div>
 					              	<form onSubmit={this.props.onHandleSubmit} role="form">
-					                <div className="input-group">
+					                <div className="input-group col-xs-12 text-primary">
 					                <label>Atstovo vardas</label>
 					                  <input
 					                    type="text"
@@ -33,7 +35,7 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					                    required
 					                  />
 					                </div><br/>
-					                <div className="input-group">
+					                <div className="input-group col-xs-12 text-primary">
 					                <label>Atstovo pavardė</label>
 					                  <input
 					                    type="text"
@@ -44,24 +46,24 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					                    required
 					                  />
 					                </div><br/>
-					                <div className="form-group">
+					                <div className="form-group text-primary">
 					                  <label>Atstovaujama apylinkė:</label>
 					                  <select value={this.props.district} onChange={this.props.onHandleDistrictChange} className="form-control" required>
 					                    {districts}
 					                  </select>
 					                </div><br/>
-					                <button className='btn btn-success btn-block'>
+													<div className='text-center'>
+					                <button className='btn btn-success btn-outline col-xs-5'>
 					                  {this.props.action}
 					                </button>
+													<a className="btn btn-danger btn-outline col-xs-5 col-xs-offset-2" href="#/admin/representative" role="button">Atšaukti</a>
+													</div>
 					                </form>
-					                <div>
-					                  <a className="btn btn-danger btn-block" href="#/admin/representative" role="button">Atšaukti</a>
-					                </div>
+
 					              </div>
 					            </div>
 					          </div>
 					        </div>
-					      </div>
 		    );
 		  }
 		});

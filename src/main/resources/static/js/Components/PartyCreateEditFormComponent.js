@@ -13,7 +13,6 @@ var PartyCreateEditFormComponent = React.createClass({
       message = '';
     }
     return (
-		      <div className="container vertical-center">
 		        <div className="row">
 		          <div className="col-md-6 col-md-offset-1">
 		            <div className="panel panel-default">
@@ -47,7 +46,6 @@ var PartyCreateEditFormComponent = React.createClass({
 		            </div>
 		          </div>
 		        </div>
-		      </div>
     );
   }
 });
