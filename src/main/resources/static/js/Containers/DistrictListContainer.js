@@ -1,3 +1,16 @@
+function getDistrict(self) {
+  axios
+    .get('/district')
+    .then(function(response){
+      self.setState({
+        districtList :  response.data,
+        isLoading : false,
+      });
+    })
+    .catch(function(err){
+      console.error('DistrictListContainer.getDistrict.axios.get.district', err);
+    });
+}
 var DistrictListContainer = React.createClass({
 
   getInitialState: function() {
@@ -8,18 +21,20 @@ var DistrictListContainer = React.createClass({
   },
 
   componentWillMount: function() {
-    var self = this;
-    axios
-      .get('/district')
-      .then(function(response){
-        self.setState({
-          districtList :  response.data,
-          isLoading : false,
-        });
-      })
-      .catch(function(err){
-        console.error('DistrictListContainer.componentWillMount.axios.get.district', err);
-      });
+    getDistrict(this);
+  },
+
+  onHandleDeleteClick: function(districtId) {
+    var self1= this;
+    var self2= this.props;
+    var self3= this.props.params;
+    console.log("0"+id);
+    console.log("1"+this.id);
+    console.log("2"+this.props.id);
+    console.log("3"+this.props.params.id);
+    console.log("4"+self1.id);
+    console.log("5"+self2.id);
+    console.log("6"+self3.id);
   },
 
   render: function() {
@@ -32,7 +47,9 @@ var DistrictListContainer = React.createClass({
     } else {
       console.log(this.state.districtList);
       return (
-        <DistrictListViewComponent districtList={this.state.districtList}/>
+        <DistrictListViewComponent districtList={this.state.districtList}
+          onHandleDeleteClick={this.onHandleDeleteClick}
+        />
       );
     }
 

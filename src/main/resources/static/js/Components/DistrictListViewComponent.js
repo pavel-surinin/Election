@@ -2,6 +2,8 @@
 
   render: function() {
     var array = [];
+    var self= this.props;
+    var districtId = this.props.id;
     this.props.districtList.map(function(dist,index) {
       array.push(
 				<DistrictListViewRowComponent
@@ -13,6 +15,7 @@
 				countyName={dist.countyName}
 				representativeId={dist.representativeId}
 				representativeName={dist.representativeName}
+        onHandleDeleteClick={self.onHandleDeleteClick}
 				/>
 			);
     });
