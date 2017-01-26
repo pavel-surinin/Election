@@ -6,9 +6,22 @@ var DistrictRepresentativeCreateContainer = React.createClass({
       name : this.state.name,
       surname : this.state.surname,
       district : districtId,
+      surnameErrorMesages : [],
+      nameErrorMesages : [],
     };
-    var self = this;
-    axios
+    //validation Surname
+    var surnameErrorMesages = [];
+    var nameErrorMesages = [];
+    if(!validation.checkSurname(this.state.surname)) {surnameErrorMesages.push('Pavardė gali atrodyti: Pavardenis arba Pavardenis-Kavardenis');}
+    if(!validation.checkMax(this.state.surname,50)) {surnameErrorMesages.push('Pavardė negali būti ilgesne, nei 50 simbolių');}
+    if(!validation.checkMin(this.state.surname,3)) {surnameErrorMesages.push('Pavardė negali būti trumpesnė, nei 3 simboliai');}
+    //validation Name
+    if(!validation.checkName(this.state.name)) {nameErrorMesages.push('Vardas gali tureti tik raides');}
+    if(!validation.checkMax(this.state.name,20)) {nameErrorMesages.push('Vardas negali būti ilgesnis, nei 50 simbolių');}
+    if(!validation.checkMin(this.state.name,3)) {nameErrorMesages.push('Vardas negali būti trumpesnis, nei 3 simboliai');}
+    if (surnameErrorMesages.length == 0 && nameErrorMesages.length == 0) {
+      var self = this;
+      axios
       .post('/representative', postRequest)
       .then(function(response){
         self.context.router.push('/admin/representative');
@@ -16,6 +29,12 @@ var DistrictRepresentativeCreateContainer = React.createClass({
       .catch(function(err){
         console.error('DistrictRepresentativeCreateContainer.onHandleSubmit.axios', err);
       });
+    } else {
+      this.setState({
+        surnameErrorMesages : surnameErrorMesages,
+        nameErrorMesages : nameErrorMesages,
+      });
+    }
 
   },
 
@@ -35,7 +54,7 @@ var DistrictRepresentativeCreateContainer = React.createClass({
       .then(function(response){
         console.log(response.data);
         if (response.data.length == 0) {
-          console.log(response.data);
+          var a = '';
         } else {
           self.setState({
             districtList : response.data,
@@ -52,13 +71,12 @@ var DistrictRepresentativeCreateContainer = React.createClass({
     this.setState({district : districtId});
   },
   onHandleNameChange : function(event){
-    console.log('Check min - ', checkMin(event.target.value, 3));
     this.setState({name : event.target.value});
-  },
-  onHandleSurnameChange : function(event){
-    console.log('Check regex - ', validation.checkSurname(event.target.value));
+    console.log('Check regex - ', validation.checkName(event.target.value));
     console.log('Check max - ', validation.checkMax(event.target.value, 50));
     console.log('Check min - ', validation.checkMin(event.target.value, 3));
+  },
+  onHandleSurnameChange : function(event){
     this.setState({surname : event.target.value});
   },
 
@@ -73,6 +91,8 @@ var DistrictRepresentativeCreateContainer = React.createClass({
        district={this.state.district}
        onHandleSubmit={this.onHandleSubmit}
        districtList={this.state.districtList}
+       nameErrorMesages={this.state.nameErrorMesages}
+       surnameErrorMesages={this.state.surnameErrorMesages}
        action='Sukurti'
        />
     );
