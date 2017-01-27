@@ -24,7 +24,7 @@ var CountyCreateContainer = React.createClass({
       .post('/county', countyName)
       .then(function(response){
         console.log(response);
-        self.context.router.push('/admin/county');
+        self.context.router.push('/admin/county?succesCreateText=Apygarda ' + self.state.name + ' sukurta');
       })
       .catch(function(err){
         console.error('CountyCreateContainer.onHandleSubmit.axios', err);

@@ -23,6 +23,10 @@ var DistrictListContainer = React.createClass({
   },
 
   componentWillMount: function() {
+    console.log(this.props);
+    if (this.props.location.query.succesCreateText != null) {
+      this.setState({succesCreateText : this.props.location.query.succesCreateText});
+    }
     getDistrict(this);
   },
 
@@ -53,6 +57,7 @@ var DistrictListContainer = React.createClass({
         <DistrictListViewComponent
           districtList={this.state.districtList}
           onHandleDelete={this.onHandleDelete}
+          succesCreateText={this.state.succesCreateText}
           />
       );
     }

@@ -20,7 +20,7 @@ var DistrictCreateContainer = React.createClass({
       .post('/district', postRequest)
       .then(function(response){
         console.log(response);
-        self.context.router.push('/admin/district');
+        self.context.router.push('/admin/district?succesCreateText=Apylinkė ' + self.state.name + ' sukurta');
       })
       .catch(function(err){
         var existsErrorMesages = [];

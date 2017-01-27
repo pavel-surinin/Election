@@ -1,6 +1,7 @@
 ﻿
 var CountyListViewComponent = React.createClass({
   render: function() {
+    var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
     var array = [];
     var self= this.props;
     this.props.countyList.map(function(county,index) {
@@ -25,6 +26,7 @@ var CountyListViewComponent = React.createClass({
 		          </h3>
 		        </div>
 		          <div className="panel-body">
+                {succesCreateMessage}
 		            <h5>
 		              <a href="#/admin/county/create">
 		                <button type="button" className="btn btn-success btn-sm">

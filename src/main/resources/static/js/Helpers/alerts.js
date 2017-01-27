@@ -5,8 +5,8 @@ var alerts = {
     } else {
       return (
         <div className="alert alert-success fade in alert-dismissable" style={{marginTop : '18px'}}>
-        <a href="#" className="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-        {text}
+          <a href="#" className="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+          {text}
         </div>
       );
     }
