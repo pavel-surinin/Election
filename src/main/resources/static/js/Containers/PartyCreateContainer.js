@@ -5,7 +5,7 @@ var PartyCreateContainer = React.createClass({
       name : '',
       nameClone : false,
       nameErrorMesages : [],
-      number : 0,
+      number : '',
     };
   },
   componentWillMount: function() {
@@ -20,6 +20,7 @@ var PartyCreateContainer = React.createClass({
   },
   onHandleSubmit : function(event){
     event.preventDefault();
+    console.log(this);
     var self = this;
     //validation
     var nameErrorMesages = [];
@@ -27,21 +28,26 @@ var PartyCreateContainer = React.createClass({
     if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
     if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
     if (nameErrorMesages.length == 0) {
+      var number = null;
+      if (this.state.number != '') {
+        number = parseInt(this.state.number);
+      }
       var partyInfo = {
         name: this.state.name.trim(),
-        partyNumber: this.state.number.trim(),
+        partyNumber: number,
       };
+      console.log(partyInfo);
       axios
       .post('/party', partyInfo)
       .then(function(response){
-        self.context.router.push('/admin/party');
+        self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' sukurta');
       })
       .catch(function(err){
         console.error('PartyCreateContainer.onHandleSubmit.axios', err);
         self.setState({nameClone : true});
       });
     } else {
-      this.setState({nameErrorMesages : nameErrorMesages});
+      self.setState({nameErrorMesages : nameErrorMesages});
     }
   },
   render: function() {
@@ -55,6 +61,7 @@ var PartyCreateContainer = React.createClass({
        nameClone={this.state.nameClone}
        action='Sukurti'
        nameErrorMesages={this.state.nameErrorMesages}
+
        />
     );
   }

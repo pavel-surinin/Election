@@ -1,5 +1,6 @@
 var PartyListViewComponent = React.createClass({
   render: function() {
+    var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
     var array = [];
     this.props.partyList.map(function(party,index) {
       array.push(
@@ -19,6 +20,7 @@ var PartyListViewComponent = React.createClass({
 		          <h3>Partijų sąrašas</h3>
 		        </div>
 		          <div className="panel-body">
+                {succesCreateMessage}
 		            <a href="#/admin/party/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
 		            <span>
 		              <h5>Registruoti naują partiją </h5>

@@ -35,8 +35,7 @@ var PartyCreateEditFormComponent = React.createClass({
 		                      onChange={this.props.onHandleNumberChange}
 		                      value={this.props.number}
 		                      className="form-control"
-		                      placeholder="Pavadinimas"
-		                      required
+		                      placeholder="Partijos Sąrašo Numeris"
 		                    />
 		                </div><br/>
                       {nameErrorMesages}
