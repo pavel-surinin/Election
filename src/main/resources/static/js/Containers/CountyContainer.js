@@ -17,9 +17,14 @@ var CountyContainer = React.createClass({
     return {
       countyList : [],
       isLoading : true,
+      succesCreateText : '',
     };
   },
   componentWillMount: function() {
+    console.log(this.props);
+    if (this.props.location.query.succesCreateText != null) {
+      this.setState({succesCreateText : this.props.location.query.succesCreateText});
+    }
     getCounty (this);
   },
     onHandleDelete: function(i) {
@@ -48,6 +53,7 @@ var CountyContainer = React.createClass({
         <CountyListViewComponent
           countyList={this.state.countyList}
           onHandleDelete={this.onHandleDelete}
+          succesCreateText={this.state.succesCreateText}
         />
       );
     }

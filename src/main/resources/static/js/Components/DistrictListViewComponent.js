@@ -1,5 +1,6 @@
 ﻿var DistrictListViewComponent = React.createClass({
   render: function() {
+    var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
     var self = this.props;
     var array = [];
     var self= this.props;
@@ -24,6 +25,7 @@
 		      <div className="panel panel-default">
 		        <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
 		          <div className="panel-body">
+                {succesCreateMessage}
 		            <span>
 		              <h5>Registruoti naują apylinkę </h5>
 		            </span>
