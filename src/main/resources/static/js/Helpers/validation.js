@@ -17,7 +17,7 @@ var validation = {
   },
   checkSurname :
   function checkSurname(name) {
-    var doubleSurnameRegex = new RegExp('^[A-Za-z]*-[A-Za-z]*$');
+    var doubleSurnameRegex = new RegExp('^[A-Za-zĄČĘĖĮŠŲŪŽąčęėįšųūž]*-[A-Za-zČĘĖĮŠŲŪŽąčęėįšųūž]*$');
     var surnameRegex = new RegExp('^[A-Za-z]*$');
     var isMatchingDouble = doubleSurnameRegex.test(name);
     var isMatching = surnameRegex.test(name);
@@ -29,17 +29,17 @@ var validation = {
   },
   checkName :
   function checkName(name) {
-    var surnameRegex = new RegExp('^[A-Za-z]*$');
+    var surnameRegex = new RegExp('^[A-Za-zČĘĖĮŠŲŪŽąčęėįšųūž]*$');
     return surnameRegex.test(name);
   },
   checkPartyName :
   function checkPartyName(name) {
-    var surnameRegex = new RegExp('^[A-Za-z\\s]+$');
+    var surnameRegex = new RegExp('^[ČĘĖĮŠŲŪŽąčęėįšųūžA-Za-z\\s]+$');
     return surnameRegex.test(name);
   },
   checkCountyName :
   function checkPartyName(name) {
-    var surnameRegex = new RegExp('^[A-Za-z-\\s]+$');
+    var surnameRegex = new RegExp('^[ČĘĖĮŠŲŪŽąčęėįšųūžA-Za-z-\\s]+$');
     return surnameRegex.test(name);
   },
   showMsg :
