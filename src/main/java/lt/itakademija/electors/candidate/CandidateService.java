@@ -1,11 +1,9 @@
 package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.party.PartyEntity;
-import lt.itakademija.electors.party.PartyReport;
 import lt.itakademija.electors.party.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +34,7 @@ public class CandidateService {
             kr.setSurname(candidateEntity.getSurname());
             kr.setDescription(candidateEntity.getDescription());
             kr.setBirthDate(candidateEntity.getBirthDate());
+            kr.setNumberInParty(candidateEntity.getNumberInParty());
             if (candidateEntity.getPartyDependencies() == null) {
                 kr.setPartijosId(null);
                 kr.setPartijosPavadinimas(null);

@@ -1,6 +1,6 @@
 ﻿var DistrictListViewComponent = React.createClass({
-
   render: function() {
+    var self = this.props;
     var array = [];
     var self= this.props;
     this.props.districtList.map(function(dist,index) {
@@ -8,6 +8,7 @@
 				<DistrictListViewRowComponent
 				id={dist.id}
 				key={index}
+        index={index}
 				name={dist.name}
 				adress={dist.adress}
 				countyId={dist.countyId}

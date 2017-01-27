@@ -1,17 +1,13 @@
 var DistrictRepresentativeCreateFormComponent = React.createClass({
 	  render: function() {
-
 		    var districts = [];
 		    this.props.districtList.map(function(district,index) {
 		    	districts.push(
 		        <option key={index} value={district.id}>{district.name}</option>
 		      );
 		    });
-				var disabled = '';
-				if (this.props.districtDropdownDisabled) {
-					disabled = 'disabled';
-				};
-
+				var nameErr = validation.showMsg(this.props.nameErrorMesages);
+				var surnameErr = validation.showMsg(this.props.surnameErrorMesages);
 		    return (
 					        <div className="row">
 					          <div className="col-md-6 col-md-offset-3 col-xs-12">
@@ -21,7 +17,6 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 											</div>
 					              <div className="panel-body">
 					              	<div className="form-heading">
-
 					              	</div>
 					              	<form onSubmit={this.props.onHandleSubmit} role="form">
 					                <div className="input-group col-xs-12 text-primary">
@@ -34,7 +29,9 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					                    placeholder="Vardas"
 					                    required
 					                  />
-					                </div><br/>
+					                </div>
+													<br/>
+													{nameErr}
 					                <div className="input-group col-xs-12 text-primary">
 					                <label>Atstovo pavardė</label>
 					                  <input
@@ -46,12 +43,14 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					                    required
 					                  />
 					                </div><br/>
+													{surnameErr}
 					                <div className="form-group text-primary">
 					                  <label>Atstovaujama apylinkė:</label>
 					                  <select value={this.props.district} onChange={this.props.onHandleDistrictChange} className="form-control" required>
 					                    {districts}
 					                  </select>
-					                </div><br/>
+					                </div>
+													<br/>
 													<div className='text-center'>
 					                <button className='btn btn-success btn-outline col-xs-5'>
 					                  {this.props.action}

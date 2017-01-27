@@ -20,6 +20,16 @@ public class CandidateReport {
 
     private String description;
 
+    private Integer numberInParty;
+
+    public Integer getNumberInParty() {
+        return numberInParty;
+    }
+
+    public void setNumberInParty(Integer numberInParty) {
+        this.numberInParty = numberInParty;
+    }
+
     public Long getId() {
         return id;
     }

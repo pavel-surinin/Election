@@ -50,7 +50,7 @@ var EmptyComponent = React.createClass({
 });
 
 window.EmptyComponent = EmptyComponent;
-    
+
 var NoMatch = React.createClass({
   render: function() {
     return <div>Route did not match</div>;
@@ -66,7 +66,6 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/admin" component={AdminComponent}>
       <IndexRoute component={EmptyComponent} />
-
       <Route path="/admin/district" component={DistrictListContainer} />
       <Route path="/admin/district/create" component={DistrictCreateContainer} />
       <Route path="/admin/candidate" component={CandidateContainer} />
@@ -81,15 +80,12 @@ ReactDOM.render((
       <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
+
+
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
-    <Route path="/" component={App}>
-        <IndexRoute component={HomeComponent} />
-        <Route path="/login" component={LoginContainer} />
-        <Route path="*" component={NoMatch}/>
-      </Route>
   </Router>
 ), document.getElementById('root'));

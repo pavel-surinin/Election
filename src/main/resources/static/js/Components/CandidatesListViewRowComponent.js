@@ -8,7 +8,7 @@ var CandidatesListViewRowComponent = React.createClass({
     return (
             <tr>
               <td className='small'>
-              {this.props.id}
+              {this.props.numberInParty}
               </td>
               <td className='small'>
                 {this.props.name}

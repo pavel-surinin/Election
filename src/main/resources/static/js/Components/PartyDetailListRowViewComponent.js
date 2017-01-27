@@ -4,7 +4,7 @@ var PartyDetailListRowViewComponent = React.createClass({
     return (
       <tr>
         <td>
-          {this.props.id}
+          {this.props.numberInParty}
         </td>
         <td>
           {this.props.name}

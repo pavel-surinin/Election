@@ -10,6 +10,7 @@ var PartyDetailViewComponent = React.createClass({
             surname={member.surname}
             birthDate={member.birthDate}
             description={member.description}
+            numberInParty={member.numberInParty}
           />
         );
       });

@@ -31,6 +31,9 @@ public class CandidateEntity {
     @JoinColumn(nullable = true, name= "PARTY_ID")
     private PartyEntity partyDependencies;
 
+    @Column(name = "NUMBER_IN_PARTY")
+    private Integer numberInParty;
+
     private String description;
 
     @ManyToOne
@@ -51,6 +54,14 @@ public class CandidateEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getNumberInParty() {
+        return numberInParty;
+    }
+
+    public void setNumberInParty(Integer numberInParty) {
+        this.numberInParty = numberInParty;
     }
 
     public PartyEntity getPartyDependencies() {
