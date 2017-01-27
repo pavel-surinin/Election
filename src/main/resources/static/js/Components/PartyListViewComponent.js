@@ -7,6 +7,7 @@ var PartyListViewComponent = React.createClass({
           id={party.id}
           key={index}
           name={party.name}
+          partyNumber={party.partyNumber}
         />
       );
     });
