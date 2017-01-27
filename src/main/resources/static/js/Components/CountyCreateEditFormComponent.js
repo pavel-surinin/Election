@@ -1,5 +1,6 @@
 ﻿var CountyCreateEditFormComponent = React.createClass({
   render: function() {
+    var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
     var message = '';
     if (this.props.nameClone) {
       message = (
@@ -9,7 +10,6 @@
       message = '';
     }
     return (
-
         <div className="row">
           <div className="col-md-6 col-md-offset-1 col-xs-6">
             <div className="panel panel-default">
@@ -29,6 +29,7 @@
                   />
                 </div>
                 <br/>
+                {nameErrorMesages}
                 {message}
                 <button className='btn btn-success btn-block'>
                   {this.props.action}

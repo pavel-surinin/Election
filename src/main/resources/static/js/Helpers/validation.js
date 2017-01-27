@@ -26,6 +26,31 @@ var validation = {
     } else {
       return false;
     }
+  },
+  checkName :
+  function checkName(name) {
+    var surnameRegex = new RegExp('^[A-Za-z]*$');
+    return surnameRegex.test(name);
+  },
+  checkPartyName :
+  function checkPartyName(name) {
+    var surnameRegex = new RegExp('^[A-Za-z\\s]+$');
+    return surnameRegex.test(name);
+  },
+  checkCountyName :
+  function checkPartyName(name) {
+    var surnameRegex = new RegExp('^[A-Za-z-\\s]+$');
+    return surnameRegex.test(name);
+  },
+  showMsg :
+  function checkMin(obj) {
+    if (obj !== undefined) {
+      var arr = [];
+      obj.forEach(function(entry) {
+        arr.push(<div className='alert alert-danger'> <strong>Dėmėsio! </strong>{entry}</div>);
+      });
+      return arr;
+    }
   }
 };
 

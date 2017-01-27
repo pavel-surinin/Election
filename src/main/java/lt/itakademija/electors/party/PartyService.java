@@ -48,6 +48,7 @@ public class PartyService {
 				cr.setSurname(c.getSurname());
 				cr.setBirthDate(c.getBirthDate());
 				cr.setDescription(c.getDescription());
+				cr.setNumberInParty(c.getNumberInParty());
 				return cr;
 			})
 			.collect(Collectors.toList());

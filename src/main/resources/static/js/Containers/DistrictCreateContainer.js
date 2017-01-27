@@ -3,22 +3,37 @@ var DistrictCreateContainer = React.createClass({
     event.preventDefault();
     var countyId = {id : this.state.county};
     var postRequest = {
-      name : this.state.name,
-      adress : this.state.adress,
+      name : this.state.name.trim(),
+      adress : this.state.adress.trim(),
       county : countyId,
     };
-    console.log(postRequest);
-    var self = this;
-    axios
+    //validation
+    var nameErrorMesages = [];
+    if(!validation.checkMax(this.state.name,35)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 35 simbolių');}
+    if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
+    var adressErrorMesages = [];
+    if(!validation.checkMax(this.state.adress,50)) {adressErrorMesages.push('Adresas negali būti ilgesnis, nei 50 simbolių');}
+    if(!validation.checkMin(this.state.adress,4)) {adressErrorMesages.push('Adresas negali būti trumpesnis, nei 4 simboliai');}
+    if (nameErrorMesages.length == 0 && adressErrorMesages.length == 0) {
+      var self = this;
+      axios
       .post('/district', postRequest)
       .then(function(response){
         console.log(response);
         self.context.router.push('/admin/district');
       })
       .catch(function(err){
-        console.error('DistrictCreateContainer.onHandleSubmit.axios', err);
+        var existsErrorMesages = [];
+        existsErrorMesages.push('Apylinkė su pavadinimu ' + self.state.name + ' jau priskirta šitai apygardai');
+        self.setState({existsErrorMesages : existsErrorMesages});
+        // console.error('DistrictCreateContainer.onHandleSubmit.axios', err);
       });
-
+    } else {
+      this.setState({
+        nameErrorMesages : nameErrorMesages,
+        adressErrorMesages : adressErrorMesages,
+      });
+    }
   },
 
   getInitialState: function() {
@@ -27,6 +42,9 @@ var DistrictCreateContainer = React.createClass({
       adress : '',
       county : 1,
       countyList : [],
+      adressErrorMesages : [],
+      nameErrorMesages : [],
+      existsErrorMesages : [],
     };
   },
 
@@ -41,7 +59,9 @@ var DistrictCreateContainer = React.createClass({
         });
       })
       .catch(function(error){
-        console.error('DistrictCreateContainer.componentWillMount.axios', error);
+
+        console.log('lol', error.response);
+        console.error('DistrictCreateContainer.componentWillMount.axios', error.response.status);
       });
   },
   onHandleCountyChange : function(event){
@@ -67,7 +87,9 @@ var DistrictCreateContainer = React.createClass({
        county={this.state.county}
        onHandleSubmit={this.onHandleSubmit}
        countyList={this.state.countyList}
-
+       nameErrorMesages={this.state.nameErrorMesages}
+       adressErrorMesages={this.state.adressErrorMesages}
+       existsErrorMesages={this.state.existsErrorMesages}
        action='Sukurti'
        />
     );
