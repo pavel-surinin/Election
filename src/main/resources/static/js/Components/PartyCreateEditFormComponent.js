@@ -17,7 +17,7 @@ var PartyCreateEditFormComponent = React.createClass({
 		            <div className="panel panel-default">
 		              <div className="panel-body">
 		                <form onSubmit={this.props.onHandleSubmit} role="form">
-		                <div className="input-group">
+		                <div className="input-group col-xs-12">
 		                  <label>Partijos Pavadinimas</label>
 		                    <input
 		                      type="text"
@@ -27,11 +27,22 @@ var PartyCreateEditFormComponent = React.createClass({
 		                      placeholder="Pavadinimas"
 		                      required
 		                    />
+		                </div>
+                    <div className="input-group col-xs-12">
+		                  <label>Partijos numeris</label>
+		                    <input
+		                      type="text"
+		                      onChange={this.props.onHandleNumberChange}
+		                      value={this.props.number}
+		                      className="form-control"
+		                      placeholder="Pavadinimas"
+		                      required
+		                    />
 		                </div><br/>
                       {nameErrorMesages}
 		                    <div className="form-group">
 		                      <label>Pasirinkite failą</label>
-		                      <input type="file" id="exampleInputFile" />
+		                      <input className="form-control" type="file" id="exampleInputFile" />
 		                      <p className="help-block">Pasirinkite ir įkelkite partijos sąrašo failą CSV formatu </p>
 		                  </div><br/>
 		                  <button className='btn btn-success btn-block'>
