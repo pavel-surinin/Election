@@ -6,12 +6,15 @@ var PartyCreateContainer = React.createClass({
       nameClone : false,
       nameErrorMesages : [],
       number : '',
+      file : null,
     };
   },
   componentWillMount: function() {
     this.setState({nameClone : false});
   },
-
+  onHandleFileChange : function(file){
+    this.setState({file : file});
+  },
   onHandleNumberChange : function(event){
     this.setState({number : event.target.value});
   },
@@ -20,8 +23,21 @@ var PartyCreateContainer = React.createClass({
   },
   onHandleSubmit : function(event){
     event.preventDefault();
-    console.log(this);
     var self = this;
+    //uploadfile
+    var file = this.state.file;
+    var data = new FormData();
+    var header = { headers: { 'Content-Type': 'multipart/form-data' } };
+    data.append('file', file);
+    axios
+      .post('/upload/candidates', data, header)
+      .then(function(response){
+        console.log(response);
+      })
+      .catch(function(err){
+        console.error('PartyCreateContainer.onHandleSubmit.axios ', err);
+      });
+
     //validation
     var nameErrorMesages = [];
     if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
@@ -61,11 +77,12 @@ var PartyCreateContainer = React.createClass({
        nameClone={this.state.nameClone}
        action='Sukurti'
        nameErrorMesages={this.state.nameErrorMesages}
-
+       onHandleFileChange={this.onHandleFileChange}
        />
     );
   }
 });
+
 PartyCreateContainer.contextTypes = {
   router: React.PropTypes.object.isRequired,
 };

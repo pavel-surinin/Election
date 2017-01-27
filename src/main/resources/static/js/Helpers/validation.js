@@ -18,7 +18,7 @@ var validation = {
   checkSurname :
   function checkSurname(name) {
     var doubleSurnameRegex = new RegExp('^[A-Za-zĄČĘĖĮŠŲŪŽąčęėįšųūž]*-[A-Za-zČĘĖĮŠŲŪŽąčęėįšųūž]*$');
-    var surnameRegex = new RegExp('^[A-Za-z]*$');
+    var surnameRegex = new RegExp('^[A-Za-zČĘĖĮŠŲŪŽąčęėįšųūž]*$');
     var isMatchingDouble = doubleSurnameRegex.test(name);
     var isMatching = surnameRegex.test(name);
     if (isMatchingDouble || isMatching) {
