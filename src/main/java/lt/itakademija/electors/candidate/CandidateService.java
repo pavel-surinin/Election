@@ -1,12 +1,10 @@
 package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.party.PartyEntity;
-import lt.itakademija.electors.party.PartyReport;
 import lt.itakademija.electors.party.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,11 +34,21 @@ public class CandidateService {
             kr.setSurname(candidateEntity.getSurname());
             kr.setDescription(candidateEntity.getDescription());
             kr.setBirthDate(candidateEntity.getBirthDate());
-            kr.setPartijosId(candidateEntity.getPartyDependencies().getId());
-            kr.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
+            kr.setNumberInParty(candidateEntity.getNumberInParty());
+            if (candidateEntity.getPartyDependencies() == null) {
+                kr.setPartijosId(null);
+                kr.setPartijosPavadinimas(null);
+            } else {
+                kr.setPartijosId(candidateEntity.getPartyDependencies().getId());
+                kr.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
+            }
             list.add(kr);
         }
         return list;
+    }
+
+    public CandidateEntity findByIdEntity(Long id){
+        return repository.finById(id);
     }
 
     @Transactional

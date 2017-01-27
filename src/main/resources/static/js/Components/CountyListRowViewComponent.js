@@ -1,12 +1,16 @@
 var CountyListRowViewComponent = React.createClass({
 
+	onHandleDeleteClick: function () {
+		this.props.onHandleDelete(this.props.id);
+	},
+
 	handleDetailsClick: function(id){
 	    var self = this;
 	    return function() {
 	      self.context.router.push('/admin/county/' + id);
 	    };
 	  },
-	  
+
 	render: function() {
       return (
             <tr>
@@ -21,7 +25,7 @@ var CountyListRowViewComponent = React.createClass({
               </td>
               <td>
                 <button type="button" className="btn btn-primary btn-sm">Naujinti</button>
-                <button type="button" className="btn btn-danger btn-sm">Trinti</button>
+                <a className="btn btn-danger" onClick={this.onHandleDeleteClick}><i className="fa fa-trash-o fa-lg"></i>Trinti</a>
               </td>
             </tr>
     );

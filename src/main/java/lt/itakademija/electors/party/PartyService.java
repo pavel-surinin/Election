@@ -1,11 +1,8 @@
 package lt.itakademija.electors.party;
 
 import lt.itakademija.electors.candidate.CandidateReport;
-import lt.itakademija.electors.candidate.CandidateService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +48,7 @@ public class PartyService {
 				cr.setSurname(c.getSurname());
 				cr.setBirthDate(c.getBirthDate());
 				cr.setDescription(c.getDescription());
+				cr.setNumberInParty(c.getNumberInParty());
 				return cr;
 			})
 			.collect(Collectors.toList());

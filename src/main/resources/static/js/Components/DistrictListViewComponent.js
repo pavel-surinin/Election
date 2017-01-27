@@ -1,18 +1,21 @@
 ﻿var DistrictListViewComponent = React.createClass({
-
   render: function() {
+    var self = this.props;
     var array = [];
+    var self= this.props;
     this.props.districtList.map(function(dist,index) {
       array.push(
 				<DistrictListViewRowComponent
 				id={dist.id}
 				key={index}
+        index={index}
 				name={dist.name}
 				adress={dist.adress}
 				countyId={dist.countyId}
 				countyName={dist.countyName}
 				representativeId={dist.representativeId}
 				representativeName={dist.representativeName}
+        onHandleDelete={self.onHandleDelete}
 				/>
 			);
     });

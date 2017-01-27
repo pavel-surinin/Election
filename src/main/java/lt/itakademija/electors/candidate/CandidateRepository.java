@@ -35,4 +35,8 @@ public class CandidateRepository {
         em.remove(candidate);
         return true;
     }
+
+    public CandidateEntity finById(Long id){
+        return em.find(CandidateEntity.class, id);
+    }
 }

@@ -20,8 +20,11 @@ var DistrictCreateEditContainer = React.createClass({
   },
 
   onHandleSubmit: function(event){
-    var self = this;
     event.preventDefault();
+    //validation
+    var nameErrorMesages = [];
+  
+    var self = this;
     axios.post('/api/districts', this.state)
     .then(function(response){
       console.log(response);

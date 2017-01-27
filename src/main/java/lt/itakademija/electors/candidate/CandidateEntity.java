@@ -17,6 +17,7 @@ public class CandidateEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
     @NotNull
     private String name;
 
@@ -29,6 +30,9 @@ public class CandidateEntity {
     @ManyToOne
     @JoinColumn(nullable = true, name= "PARTY_ID")
     private PartyEntity partyDependencies;
+
+    @Column(name = "NUMBER_IN_PARTY")
+    private Integer numberInParty;
 
     private String description;
 
@@ -50,6 +54,14 @@ public class CandidateEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getNumberInParty() {
+        return numberInParty;
+    }
+
+    public void setNumberInParty(Integer numberInParty) {
+        this.numberInParty = numberInParty;
     }
 
     public PartyEntity getPartyDependencies() {

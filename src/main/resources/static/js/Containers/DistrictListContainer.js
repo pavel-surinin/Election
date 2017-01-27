@@ -1,5 +1,17 @@
+function getDistrict(self) {
+  axios
+    .get('/district')
+    .then(function(response){
+      self.setState({
+        districtList :  response.data,
+        isLoading : false,
+      });
+    })
+    .catch(function(err){
+      console.error('DistrictListContainer.getDistrict.axios.get.district', err);
+    });
+}
 var DistrictListContainer = React.createClass({
-
   getInitialState: function() {
     return {
       districtList : [],
@@ -7,20 +19,25 @@ var DistrictListContainer = React.createClass({
     };
   },
 
+  onHandleDelete : function(i){
+  },
+
   componentWillMount: function() {
+    getDistrict(this);
+  },
+
+  onHandleDelete: function(i) {
     var self = this;
+    event.preventDefault();
     axios
-      .get('/district')
+      .delete('/district/'+ i)
       .then(function(response){
-        self.setState({
-          districtList :  response.data,
-          isLoading : false,
-        });
+        getDistrict(self);
       })
       .catch(function(err){
-        console.error('DistrictListContainer.componentWillMount.axios.get.district', err);
+        console.error('DistrictListContainer.onHandleDelete.axios', err);
       });
-  },
+    },
 
   render: function() {
     if (this.state.isLoading) {
@@ -32,7 +49,11 @@ var DistrictListContainer = React.createClass({
     } else {
       console.log(this.state.districtList);
       return (
-        <DistrictListViewComponent districtList={this.state.districtList}/>
+
+        <DistrictListViewComponent
+          districtList={this.state.districtList}
+          onHandleDelete={this.onHandleDelete}
+          />
       );
     }
 

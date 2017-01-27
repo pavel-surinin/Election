@@ -1,9 +1,9 @@
 package lt.itakademija.electors.district;
 
+import lt.itakademija.exceptions.DistrictCloneException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,14 +42,17 @@ public class DistrictService {
                 .collect(Collectors.toList());
     }
 
-    public List getDistrictsList() {
+    public List<DistrictReport> getDistrictsList() {
         List<DistrictEntity> list = repository.findAll();
         return mappingToReport(list);
     }
 
     @Transactional
-    public DistrictEntity save(DistrictEntity apylinke) {
-        return repository.save(apylinke);
+    public DistrictEntity save(DistrictEntity apylinke){
+        if (repository.findByNameAndAdress(apylinke).size() == 0) {
+            return repository.save(apylinke);
+        }
+        throw new DistrictCloneException("This district is already registered");
     }
 
     @Transactional
@@ -65,4 +68,5 @@ public class DistrictService {
                 .collect(Collectors.toList());
         return mappingToReport(list);
     }
+
 }

@@ -1,10 +1,14 @@
 var CandidatesListViewRowComponent = React.createClass({
-
+  componentDidMount: function () {
+    $(this.refs.delete).tooltip();
+    $(this.refs.edit).tooltip();
+    $(this.refs.info).tooltip();
+  },
   render: function() {
     return (
             <tr>
               <td className='small'>
-              {this.props.id}
+              {this.props.numberInParty}
               </td>
               <td className='small'>
                 {this.props.name}
@@ -19,8 +23,8 @@ var CandidatesListViewRowComponent = React.createClass({
                 {this.props.partijosPavadinimas}
               </td>
               <td>
-                <button type="button" className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target="#myModal"></button>
-                <div id="myModal" className="modal fade" role="dialog">
+                <button ref="info" title="Aprašymas" type="button"  className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}></button>
+                <div id={this.props.id} className="modal fade" role="dialog">
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
@@ -37,9 +41,9 @@ var CandidatesListViewRowComponent = React.createClass({
                   </div>
                 </div>
                 &nbsp;
-                <button type="button" className="btn btn-primary btn-sm fa fa-pencil"></button>
+                <button ref="edit" data-toggle="tooltip2" title="Redaguoti" type="button" className="btn btn-primary btn-sm fa fa-pencil"></button>
                 &nbsp;
-                <button type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
+                <button ref="delete" data-toggle="tooltip1" title="Ištrinti" type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
               </td>
             </tr>
     );

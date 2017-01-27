@@ -3,6 +3,7 @@ var CountyCreateContainer = React.createClass({
     return {
       name : '',
       nameClone : false,
+      nameErrorMesages : [],
     };
   },
 
@@ -10,9 +11,15 @@ var CountyCreateContainer = React.createClass({
     this.setState({name : event.target.value});
   },
   onHandleSubmit : function(event){
-    var countyName = {name: this.state.name};
-    var self = this;
     event.preventDefault();
+    var countyName = {name: this.state.name.trim()};
+    var self = this;
+    //validation
+    var nameErrorMesages = [];
+    if(!validation.checkCountyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės, - , ir tarpai');}
+    if(!validation.checkMax(this.state.name,35)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 35 simbolių');}
+    if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
+    if (nameErrorMesages.length == 0) {
       axios
       .post('/county', countyName)
       .then(function(response){
@@ -23,6 +30,9 @@ var CountyCreateContainer = React.createClass({
         console.error('CountyCreateContainer.onHandleSubmit.axios', err);
         self.setState({nameClone : true});
       });
+    } else {
+      this.setState({nameErrorMesages : nameErrorMesages});
+    }
   },
   render: function() {
     return (
@@ -32,6 +42,7 @@ var CountyCreateContainer = React.createClass({
        onHandleSubmit={this.onHandleSubmit}
        nameClone={this.state.nameClone}
        action='Sukurti'
+       nameErrorMesages={this.state.nameErrorMesages}
        />
     );
   }

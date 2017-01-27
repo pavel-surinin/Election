@@ -49,12 +49,12 @@ var AdminComponent = React.createClass({
                       <span className="icon-bar"></span>
                       <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="index.html">Rinkimų Sistema [BytecodeReaders]v1.0</a>
+                  <a className="navbar-brand">Rinkimų Sistema [BytecodeReaders]v1.0</a>
               </div>
 
               <ul className="nav navbar-top-links navbar-right">
                 <li>
-                    <a onClick={this.onHandleLogout}>
+                    <a href='#a' onClick={this.onHandleLogout}>
                       Atsijungti &nbsp;<i className="fa fa-sign-out"></i>
                     </a>
                   </li>

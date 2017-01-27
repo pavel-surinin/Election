@@ -1,7 +1,9 @@
 var DistrictCreateEditComponent = React.createClass({
 
   render: function() {
-
+    var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
+    var adressErrorMesages = validation.showMsg(this.props.adressErrorMesages);
+    var existsErrorMesages = validation.showMsg(this.props.existsErrorMesages);
     var counties = [];
     this.props.countyList.map(function(county,index) {
       counties.push(
@@ -10,7 +12,6 @@ var DistrictCreateEditComponent = React.createClass({
     });
 
     return (
-			      <div className="container vertical-center">
 			        <div className="row">
 			          <div className="col-md-6 col-md-offset-1">
 			            <div className="panel panel-default">
@@ -30,6 +31,7 @@ var DistrictCreateEditComponent = React.createClass({
 			                    required
 			                  />
 			                </div><br/>
+                      {nameErrorMesages}
 			                <div className="input-group">
 			                <label>Apylinkės Adresas</label>
 			                  <input
@@ -41,12 +43,14 @@ var DistrictCreateEditComponent = React.createClass({
 			                    required
 			                  />
 			                </div><br/>
+                      {adressErrorMesages}
 			                <div className="form-group">
 			                  <label>Atstovaujama Apygarda:</label>
 			                  <select value={this.props.county} onChange={this.props.onHandleCountyChange} className="form-control"required>
 			                    {counties}
 			                  </select>
 			                </div><br/>
+                      {existsErrorMesages}
 			                <button className='btn btn-success btn-block'>
 			                  {this.props.action}
 			                </button>
@@ -58,7 +62,6 @@ var DistrictCreateEditComponent = React.createClass({
 			            </div>
 			          </div>
 			        </div>
-			      </div>
     );
   }
 });

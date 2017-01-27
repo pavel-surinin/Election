@@ -36,4 +36,16 @@ public class DistrictRepository {
         DistrictEntity district = em.find(DistrictEntity.class, id);
         em.remove(district);
     }
+
+    public DistrictEntity findById(Long id){
+        return em.find(DistrictEntity.class, id);
+    }
+
+    public List<DistrictEntity> findByNameAndAdress(DistrictEntity apylinke) {
+        return
+                em.createQuery("SELECT a FROM DistrictEntity a WHERE a.name = :an AND a.county =:ac")
+                        .setParameter("an", apylinke.getName())
+                        .setParameter("ac", apylinke.getCounty())
+                        .getResultList();
+    }
 }
