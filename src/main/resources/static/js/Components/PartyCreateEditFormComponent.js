@@ -1,4 +1,8 @@
 var PartyCreateEditFormComponent = React.createClass({
+  onFileChange : function(){
+    this.props.onHandleFileChange(this.refs.file.files[0]);
+  },
+
   render: function() {
     var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
     var message = '';
@@ -41,7 +45,9 @@ var PartyCreateEditFormComponent = React.createClass({
                       {nameErrorMesages}
 		                    <div className="form-group">
 		                      <label>Pasirinkite failą</label>
-		                      <input className="form-control" type="file" id="exampleInputFile" />
+
+		                      <input onChange={this.onFileChange} ref="file" type="file" name="file" className="form-control-file"/>
+
 		                      <p className="help-block">Pasirinkite ir įkelkite partijos sąrašo failą CSV formatu </p>
 		                  </div><br/>
 		                  <button className='btn btn-success btn-block'>

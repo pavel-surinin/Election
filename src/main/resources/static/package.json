@@ -11,5 +11,8 @@
   "devDependencies": {
     "eslint": "^3.5.0",
     "eslint-plugin-react": "^6.3.0"
+  },
+  "dependencies": {
+    "react-file-uploader": "^0.3.3"
   }
 }
