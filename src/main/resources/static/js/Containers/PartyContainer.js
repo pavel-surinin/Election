@@ -3,9 +3,14 @@ var PartyContainer = React.createClass({
     return {
       partyList : [],
       isLoading : true,
+      succesCreateText : '',
     };
   },
   componentWillMount: function() {
+    console.log(this.props);
+    if (this.props.location.query.succesCreateText != null) {
+      this.setState({succesCreateText : this.props.location.query.succesCreateText});
+    }
     var self = this;
     axios
       .get('/party')
@@ -29,7 +34,10 @@ var PartyContainer = React.createClass({
     } else {
       console.log(this.state.partyList);
       return (
-        <PartyListViewComponent partyList={this.state.partyList} />
+        <PartyListViewComponent
+          partyList={this.state.partyList}
+          succesCreateText={this.state.succesCreateText}
+        />
       );
     }
   }
