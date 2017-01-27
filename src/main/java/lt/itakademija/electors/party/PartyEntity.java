@@ -22,12 +22,22 @@ public class PartyEntity {
     @OneToMany(mappedBy="partyDependencies", cascade = CascadeType.ALL)
     private List<CandidateEntity> members;
 
+    private Integer partyNumber;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getPartyNumber() {
+        return partyNumber;
+    }
+
+    public void setPartyNumber(Integer partyNumber) {
+        this.partyNumber = partyNumber;
     }
 
     public String getName() {

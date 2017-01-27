@@ -9,8 +9,8 @@ insert into district_representative_entity (id, district_id, name, surname) valu
 insert into district_representative_entity (id, district_id, name, surname) values (null, 2, 'Ponas', 'Binas');
 insert into district_representative_entity (id, district_id, name, surname) values (null, 3, 'Aliukas', 'Brolis');
 insert into district_representative_entity (id, district_id, name, surname) values (null, 4, 'Kaimo', 'Jurgis');
-insert into party_entity (party_id, name) values (null, 'Darbo Partija');
-insert into party_entity (party_id, name) values (null, 'Valstiečių Partija');
+insert into party_entity (party_id, name, party_number) values (null, 'Darbo Partija', 5);
+insert into party_entity (party_id, name, party_number) values (null, 'Valstiečių Partija', 7);
 insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 1, 'Protingas', 'Juozas', 1, 'Petkelis', 1);
 insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 2, 'Balvanas', 'Petras', 1, 'Petravičius', 2);
 insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 1, 'Kietas', 'Antanas', 2, 'Guoga', 1);

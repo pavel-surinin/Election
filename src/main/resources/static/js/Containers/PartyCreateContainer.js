@@ -5,10 +5,15 @@ var PartyCreateContainer = React.createClass({
       name : '',
       nameClone : false,
       nameErrorMesages : [],
+      number : 0,
     };
   },
   componentWillMount: function() {
     this.setState({nameClone : false});
+  },
+
+  onHandleNumberChange : function(event){
+    this.setState({number : event.target.value});
   },
   onHandleNameChange : function(event){
     this.setState({name : event.target.value});
@@ -22,9 +27,12 @@ var PartyCreateContainer = React.createClass({
     if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
     if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
     if (nameErrorMesages.length == 0) {
-      var partyName = {name: this.state.name.trim()};
+      var partyInfo = {
+        name: this.state.name.trim(),
+        partyNumber: this.state.number.trim(),
+      };
       axios
-      .post('/party', partyName)
+      .post('/party', partyInfo)
       .then(function(response){
         self.context.router.push('/admin/party');
       })
@@ -40,7 +48,9 @@ var PartyCreateContainer = React.createClass({
     return (
       <PartyCreateEditFormComponent
        onHandleNameChange={this.onHandleNameChange}
+       onHandleNumberChange={this.onHandleNumberChange}
        name={this.state.name}
+       number={this.state.number}
        onHandleSubmit={this.onHandleSubmit}
        nameClone={this.state.nameClone}
        action='Sukurti'

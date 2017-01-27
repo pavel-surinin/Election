@@ -28,6 +28,7 @@ public class PartyService {
             PartyReport report = new PartyReport();
             report.setId(party.getId());
             report.setName(party.getName());
+            report.setPartyNumber(party.getPartyNumber());
             List<PartyEntity> narysIdList = new ArrayList<>();
             list.add(report);
         }
@@ -39,6 +40,7 @@ public class PartyService {
 		PartyReport pr =new PartyReport();
 		pr.setId(party.getId());
 		pr.setName(party.getName());
+		pr.setPartyNumber(party.getPartyNumber());
 		List<CandidateReport> members = party.getMembers()
 			.stream()	
 			.map(c -> {
