@@ -1,3 +1,4 @@
+
 var PartyCreateContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -18,17 +19,14 @@ var PartyCreateContainer = React.createClass({
     this.setState({name : event.target.value});
   },
   onHandleSubmit : function(event){
-    var self = this;
-<<<<<<< HEAD
     event.preventDefault();
-    var partyName = {name: this.state.name.trim()};
-    var successAlertText = ('Partija sukurta');
-    axios
-      var nameErrorMesages = [];
-      if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
-      if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
-      if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
-      if (nameErrorMesages.length == 0) {
+    var self = this;
+    //validation
+    var nameErrorMesages = [];
+    if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
+    if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
+    if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
+    if (nameErrorMesages.length == 0) {
       var partyInfo = {
         name: this.state.name.trim(),
         partyNumber: this.state.number.trim(),
@@ -36,13 +34,15 @@ var PartyCreateContainer = React.createClass({
       axios
       .post('/party', partyInfo)
       .then(function(response){
-        console.log(response);
         self.context.router.push('/admin/party');
       })
       .catch(function(err){
         console.error('PartyCreateContainer.onHandleSubmit.axios', err);
         self.setState({nameClone : true});
       });
+    } else {
+      this.setState({nameErrorMesages : nameErrorMesages});
+    }
   },
   render: function() {
     return (
@@ -54,6 +54,7 @@ var PartyCreateContainer = React.createClass({
        onHandleSubmit={this.onHandleSubmit}
        nameClone={this.state.nameClone}
        action='Sukurti'
+       nameErrorMesages={this.state.nameErrorMesages}
        />
     );
   }
