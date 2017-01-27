@@ -3,6 +3,7 @@ var PartyCreateContainer = React.createClass({
     return {
       name : '',
       nameClone : false,
+      successAlertText : '',
     };
   },
   componentWillMount: function() {
