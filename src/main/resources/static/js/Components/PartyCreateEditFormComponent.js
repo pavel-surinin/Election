@@ -5,6 +5,8 @@ var PartyCreateEditFormComponent = React.createClass({
 
   render: function() {
     var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
+    var numberErrorMesages = validation.showMsg(this.props.numberErrorMesages);
+    var fileErrorMesages = validation.showMsg(this.props.fileErrorMesages);
     var message = '';
     if (this.props.nameClone) {
       message = (
@@ -32,6 +34,8 @@ var PartyCreateEditFormComponent = React.createClass({
 		                      required
 		                    />
 		                </div>
+                    <br/>
+                    {nameErrorMesages}
                     <div className="input-group col-xs-12">
 		                  <label>Partijos numeris</label>
 		                    <input
@@ -42,14 +46,13 @@ var PartyCreateEditFormComponent = React.createClass({
 		                      placeholder="Partijos Sąrašo Numeris"
 		                    />
 		                </div><br/>
-                      {nameErrorMesages}
+                        {numberErrorMesages}
 		                    <div className="form-group">
 		                      <label>Pasirinkite failą</label>
-
 		                      <input onChange={this.onFileChange} ref="file" type="file" name="file" className="form-control-file"/>
-
 		                      <p className="help-block">Pasirinkite ir įkelkite partijos sąrašo failą CSV formatu </p>
 		                  </div><br/>
+                      {fileErrorMesages}
 		                  <button className='btn btn-success btn-block'>
 		                    {this.props.action}
 		                  </button>

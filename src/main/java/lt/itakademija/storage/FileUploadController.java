@@ -1,7 +1,5 @@
-package lt.itakademija;
+package lt.itakademija.storage;
 
-import lt.itakademija.storage.StorageFileNotFoundException;
-import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,6 @@ public class FileUploadController {
         storageService.store(file);
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
-
         return "redirect:/";
     }
 

@@ -42,6 +42,27 @@ var validation = {
     var surnameRegex = new RegExp('^[ČĘĖĮŠŲŪŽąčęėįšųūžA-Za-z-\\s]+$');
     return surnameRegex.test(name);
   },
+  checkForCsv :
+  function checkForCsv(name) {
+    if (name == undefined) {
+      return false;
+    }
+    var lastFour = name.substr(name.length - 4); // => "Tabs1"
+    if (lastFour == '.csv') {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  checkNumber :
+  function checkNumber(number) {
+    var num = Number.isInteger(number);
+    if (!isNaN(number) || num || number == null) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   showMsg :
   function checkMin(obj) {
     if (obj !== undefined) {
