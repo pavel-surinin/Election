@@ -104,6 +104,9 @@ var DistrictEditContainer = React.createClass({
           county= {this.state.county}
           countyList={this.state.countyList}
           action='Atnaujinti'
+          adressErrorMesages={this.state.adressErrorMesages}
+          nameErrorMesages={this.state.nameErrorMesages}
+          existsErrorMesages={this.state.existsErrorMesages}
           />
       );
     }
