@@ -35,8 +35,6 @@ public class FileUploadController {
                                    @RequestHeader("Party-name") String partyName,
                                    @RequestHeader("Party-number") Integer partyNumber,
                                    RedirectAttributes redirectAttributes) {
-        System.out.println(partyName);
-        System.out.println(partyNumber);
         List<CandidateEntity> candidatesFromCsv = storageService.store(file);
         PartyEntity party = new PartyEntity();
         party.setName(partyName);

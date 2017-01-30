@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/uploaded-files/data1.csv" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileSystemStorageService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileSystemStorageService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileUploadController.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileUploadController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/StorageService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/StorageService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Containers/PartyCreateContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Containers/PartyCreateContainer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -43,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileUploadController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileUploadController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileUploadController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="32" column="31" lean-forward="true" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+            <state relative-caret-position="238">
+              <caret line="43" column="29" lean-forward="true" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -132,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CandidateEntity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CandidateEntity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state relative-caret-position="271">
+              <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -1070,7 +1065,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1093,7 +1088,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3438486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43375394" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43375394" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24670571" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1419,14 +1414,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/storage/CsvFileReader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
@@ -1502,11 +1489,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileUploadController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="32" column="31" lean-forward="true" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
+        <state relative-caret-position="238">
+          <caret line="43" column="29" lean-forward="true" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>

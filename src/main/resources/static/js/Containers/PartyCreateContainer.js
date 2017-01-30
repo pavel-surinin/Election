@@ -3,9 +3,12 @@ function filePost(obj, data, header) {
   .post('/upload/candidates', data, header)
   .then(function(response){
     console.log(response);
+    self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' sukurta');
   })
-  .catch(function(err){
-    console.error('PartyCreateContainer.onHandleSubmit.axios ', err);
+  .catch(function(error){
+    // console.error('PartyCreateContainer.onHandleSubmit.axios ', err);
+    console.log(error.response.status);
+    console.log(error.response.data);
   });
 }
 
@@ -49,6 +52,13 @@ var PartyCreateContainer = React.createClass({
   onHandleSubmit : function(event){
     event.preventDefault();
     var self = this;
+    //party info constructing data
+    var number = null;
+    if (this.state.number != '') {
+      number = parseInt(this.state.number);
+    } else {
+      number = null;
+    }
     //uploadfile constructing data
     var file = 'nofile.aaa';
     if (this.state.file != null) {
@@ -57,15 +67,8 @@ var PartyCreateContainer = React.createClass({
     var header = { headers: {
       'Content-Type': 'multipart/form-data',
       'Party-name': this.state.name.trim(),
-      'Party-number': this.state.number} };
+      'Party-number': number} };
     data.append('file', file);
-    //party info constructing data
-    var number = null;
-    if (this.state.number != '') {
-      number = parseInt(this.state.number);
-    } else {
-      number = null;
-    }
     var partyInfo = {
       name: this.state.name.trim(),
       partyNumber: number,
