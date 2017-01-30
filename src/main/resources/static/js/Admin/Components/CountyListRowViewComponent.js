@@ -25,7 +25,7 @@ var CountyListRowViewComponent = React.createClass({
               </td>
               <td>
 								&nbsp;
-								<button ref="edit" data-toggle="tooltip2" title="Pridėti Kandidatų sąrašą" type="button" className="btn btn-success btn-sm fa fa-plus"></button>
+								<button data-toggle="tooltip2" title="Pridėti Kandidatų sąrašą" type="button" className="btn btn-success btn-sm fa fa-plus"></button>
 								&nbsp;
                 <a href={'#/admin/county/edit/' + this.props.id} data-toggle="tooltip2" title="Redaguoti" type="button " className="btn btn-primary btn-sm fa fa-pencil"></a>
                 &nbsp;

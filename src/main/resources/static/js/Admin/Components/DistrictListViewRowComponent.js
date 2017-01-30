@@ -22,12 +22,10 @@
               </td>
               <td>
                 <div>
-                    &nbsp;
-                    <button type="button" className="btn btn-primary" aria-label="Left Align">
-                      Redaguoti
-                    </button>
-                    &nbsp;
-                    <a className="btn btn-danger" onClick={this.onHandleDeleteClick}>  <i className="fa fa-trash-o fa-lg"></i> Ištrinti</a>
+                &nbsp;
+                <a href={'#/admin/district/edit/' + this.props.id} data-toggle="tooltip2" title="Redaguoti" type="button " className="btn btn-primary btn-sm fa fa-pencil"></a>
+                &nbsp;
+                <button onClick={this.onHandleDeleteClick} data-toggle="tooltip1" title="Ištrinti" type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
                </div>
               </td>
             </tr>

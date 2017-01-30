@@ -12,56 +12,59 @@ var DistrictCreateEditComponent = React.createClass({
     });
 
     return (
-			        <div className="row">
-			          <div className="col-md-6 col-md-offset-1">
-			            <div className="panel panel-default">
-			              <div className="panel-body">
-			              	<div className="form-heading">
-			              	  <h4> Registruoti apylinkę </h4>
-			              	</div>
-			              	<form onSubmit={this.props.onHandleSubmit} role="form">
-			                <div className="input-group">
-			                <label>Apylinkės Pavadinimas</label>
-			                  <input
-			                    type="text"
-			                    onChange={this.props.onHandleNameChange}
-			                    value={this.props.name}
-			                    className="form-control"
-			                    placeholder="Pavadinimas"
-			                    required
-			                  />
-			                </div><br/>
-                      {nameErrorMesages}
-			                <div className="input-group">
-			                <label>Apylinkės Adresas</label>
-			                  <input
-			                    type="text"
-			                    onChange={this.props.onHandleAdressChange}
-			                    value={this.props.Adress}
-			                    className="form-control"
-			                    placeholder="Adresas"
-			                    required
-			                  />
-			                </div><br/>
-                      {adressErrorMesages}
-			                <div className="form-group">
-			                  <label>Atstovaujama Apygarda:</label>
-			                  <select value={this.props.county} onChange={this.props.onHandleCountyChange} className="form-control"required>
-			                    {counties}
-			                  </select>
-			                </div><br/>
-                      {existsErrorMesages}
-			                <button className='btn btn-success btn-block'>
-			                  {this.props.action}
-			                </button>
-			                </form>
-			                <div>
-			                  <a className="btn btn-danger btn-block" href="#/admin/district" role="button">Atšaukti</a>
-			                </div>
-			              </div>
-			            </div>
-			          </div>
-			        </div>
+              <div className="row">
+                <div className="col-md-6 col-md-offset-3 col-xs-12">
+                  <div className="panel panel-primary">
+                    <div className="panel-heading text-center">
+                      <h4><b> Registruoti apylinkę </b></h4>
+                    </div>
+                        <div className="panel-body">
+                          <div className="form-heading">
+                          </div>
+                          <form onSubmit={this.props.onHandleSubmit} role="form">
+                          <div className="input-group col-xs-12 text-primary">
+                          <label> Apylinkės pavadinimas </label>
+                            <input
+                              type="text"
+                              onChange={this.props.onHandleNameChange}
+                              value={this.props.name}
+                              className="form-control"
+                              placeholder="Apylinkės pavadinimas"
+                              required
+                            />
+                          </div>
+                          <br/>
+                          {nameErrorMesages}
+                          <div className="input-group col-xs-12 text-primary">
+                          <label>Apylinkės Adresas</label>
+                            <input
+                              type="text"
+                              onChange={this.props.onHandleAdressChange}
+                              value={this.props.adress}
+                              className="form-control"
+                              placeholder="Apylinkės Adresas"
+                              required
+                            />
+                          </div><br/>
+                          {adressErrorMesages}
+                          <div className="form-group text-primary">
+                            <label>Apygarda, kuriai priklauso apylinkė:</label>
+                            <select value={this.props.county} onChange={this.props.onHandleCountyChange} className="form-control" required>
+                              {counties}
+                            </select>
+                          </div><br/>
+                          {existsErrorMesages}
+                          <div className='text-center'>
+                            <button className='btn btn-success btn-outline col-xs-5'>
+                              {this.props.action}
+                            </button>
+                          <a className="btn btn-danger btn-outline col-xs-5 col-xs-offset-2" href="#/admin/district" role="button">Atšaukti</a>
+                          </div>
+                          </form>
+                      </div>
+                    </div>
+                </div>
+              </div>
     );
   }
 });
