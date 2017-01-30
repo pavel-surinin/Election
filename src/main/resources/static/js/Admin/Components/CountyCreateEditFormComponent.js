@@ -11,19 +11,23 @@
     }
     return (
         <div className="row">
-          <div className="col-md-6 col-md-offset-1 col-xs-6">
-            <div className="panel panel-default">
+          <div className="col-md-6 col-md-offset-3 col-xs-12">
+            <div className="panel panel-primary">
+            <div className="panel-heading text-center">
+            <h4><b>Registruoti Apygardą</b></h4>
+            </div>
               <div className="panel-body">
                 <div className="form-heading">
+                </div>
                 <form onSubmit={this.props.onHandleSubmit} role="form">
-                <div className="input-group">
+                <div className="input-group col-xs-12 text-primary">
                 <label>Apygardos Pavadinimas</label>
                   <input
                     type="text"
                     onChange={this.props.onHandleNameChange}
                     value={this.props.name}
                     className="form-control"
-                    placeholder="Pavadinimas"
+                    placeholder="Apygardos pavadinimas"
                     id="inputError"
                     required
                   />
@@ -31,19 +35,18 @@
                 <br/>
                 {nameErrorMesages}
                 {message}
-                <button className='btn btn-success btn-block'>
+                <br/>
+                <div className='text-center'>
+                <button className='btn btn-success btn-outline col-xs-5'>
                   {this.props.action}
                 </button>
-                </form>
-                <div>
-                  <a className="btn btn-danger btn-block" href="#/admin/county" role="button">Atšaukti</a>
+                <a className="btn btn-danger btn-outline col-xs-5 col-xs-offset-2" href="#/admin/county" role="button">Atšaukti</a>
                 </div>
-                <br/>
+                </form>
               </div>
             </div>
           </div>
         </div>
-      </div>
     );
   }
 
