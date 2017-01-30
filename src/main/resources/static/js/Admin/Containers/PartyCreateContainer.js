@@ -1,44 +1,50 @@
-function filePost(obj, data, header) {
-  axios
-  .post('/upload/candidates', data, header)
-  .then(function(response){
-    console.log(response);
-    self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' sukurta');
-  })
-  .catch(function(error){
-    // console.error('PartyCreateContainer.onHandleSubmit.axios ', err);
-    console.log(error.response.status);
-    console.log(error.response.data);
+var fileErrorMesages = [];
+var nameErrorMesages = [];
+var numberErrorMesages = [];
+
+function validate(self, code){
+  if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas');}
+  if (code == 417) {numberErrorMesages.push('Partija su tokiu numeriu jau užregistruota');}
+  if (code == 418) {nameErrorMesages.push('Partija su tokiu pavadinimu jau užregistruota');}
+  self.setState({
+    fileErrorMesages : fileErrorMesages,
+    numberErrorMesages :numberErrorMesages,
+    nameErrorMesages :nameErrorMesages,
   });
 }
-
-function partyPost(self, partyInfo){
+function filePost(obj, data, header) {
   axios
-  .post('/party', partyInfo)
+  .post('/party', data, header)
   .then(function(response){
-    self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' sukurta');
+    obj.setState({postErrCode : response.status});
+    obj.context.router.push('/admin/party?succesCreateText=Partija ' + obj.state.name + ' sukurta');
   })
-  .catch(function(err){
-    console.error('PartyCreateContainer.onHandleSubmit.axios', err);
-    self.setState({nameClone : true});
+  .catch(function (error) {
+    if (error.response) {
+      console.error(error.response.data.message);
+      obj.setState({postErrCode : error.response.status});
+      // console.log(error.response.headers);
+    } else {
+      console.error('Error', error.message);
+    }
+    // console.log(error.config);
   });
-
 }
 
 var PartyCreateContainer = React.createClass({
   getInitialState: function() {
     return {
       name : '',
-      nameClone : false,
       number : '',
       file : null,
       nameErrorMesages : [],
       numberErrorMesages : [],
       fileErrorMesages : [],
+      postErrCode : 199,
     };
   },
   componentWillMount: function() {
-    this.setState({nameClone : false});
+
   },
   onHandleFileChange : function(file){
     this.setState({file : file});
@@ -50,6 +56,9 @@ var PartyCreateContainer = React.createClass({
     this.setState({name : event.target.value});
   },
   onHandleSubmit : function(event){
+    nameErrorMesages = [],
+    numberErrorMesages = [],
+    fileErrorMesages = [],
     event.preventDefault();
     var self = this;
     //party info constructing data
@@ -74,20 +83,30 @@ var PartyCreateContainer = React.createClass({
       partyNumber: number,
     };
     //validation
-    var fileErrorMesages = [];
     if(!validation.checkForCsv(file.name)) {fileErrorMesages.push('Būtina prisegti *.csv formato failą');}
-    var nameErrorMesages = [];
     if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
     if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
     if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
-    var numberErrorMesages = [];
     if(!validation.checkNumber(number)) {numberErrorMesages.push('Partijos numerio laukas priima tik skačius arba lieka tuščias');}
     if (nameErrorMesages.length == 0 &&
         fileErrorMesages.length == 0 &&
         numberErrorMesages.length == 0
       ) {
-      filePost(this, data, header);
-      // partyPost(self, partyInfo);
+
+      // Writing file to java
+      axios
+      .post('/party', data, header)
+      .then(function(response){
+        console.log(response.status);
+        self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' sukurta');
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.error(error.response.data.message);
+          console.log(error.response.status);
+          validate(self, error.response.status);
+        }
+      });
     } else {
       self.setState({
         nameErrorMesages : nameErrorMesages,
@@ -105,12 +124,10 @@ var PartyCreateContainer = React.createClass({
        onHandleSubmit={this.onHandleSubmit}
        name={this.state.name}
        number={this.state.number}
-       nameClone={this.state.nameClone}
        nameErrorMesages={this.state.nameErrorMesages}
        numberErrorMesages={this.state.numberErrorMesages}
        fileErrorMesages={this.state.fileErrorMesages}
        action='Sukurti'
-
        />
     );
   }

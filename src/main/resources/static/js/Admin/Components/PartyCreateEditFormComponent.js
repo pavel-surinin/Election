@@ -7,16 +7,7 @@ var PartyCreateEditFormComponent = React.createClass({
     var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
     var numberErrorMesages = validation.showMsg(this.props.numberErrorMesages);
     var fileErrorMesages = validation.showMsg(this.props.fileErrorMesages);
-    var message = '';
-    if (this.props.nameClone) {
-      message = (
-          <div className="alert alert-danger" role="alert">
-          <strong>Dėmesio!</strong> Tokia partija jau užregistruota.
-          </div>
-        );
-    } else {
-      message = '';
-    }
+
     return (
 		        <div className="row">
 		          <div className="col-md-6 col-md-offset-1">
@@ -57,7 +48,6 @@ var PartyCreateEditFormComponent = React.createClass({
 		                    {this.props.action}
 		                  </button>
 		                </form>
-                    {message}
 		                  <div>
 		                    <a className="btn btn-danger btn-block" href="#/admin/party" role="button">Atšaukti</a>
 		                  </div>
