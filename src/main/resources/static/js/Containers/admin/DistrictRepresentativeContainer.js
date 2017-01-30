@@ -1,11 +1,12 @@
-var PartyContainer = React.createClass({
+var DistrictRepresentativeContainer = React.createClass({
+
   getInitialState: function() {
     return {
-      partyList : [],
+      representativesList : [],
       isLoading : true,
-      succesCreateText : '',
     };
   },
+
   componentWillMount: function() {
     console.log(this.props);
     if (this.props.location.query.succesCreateText != null) {
@@ -13,34 +14,36 @@ var PartyContainer = React.createClass({
     }
     var self = this;
     axios
-      .get('/party')
+      .get('/representative')
       .then(function(response){
         self.setState({
-          partyList :  response.data,
+          representativesList :  response.data,
           isLoading : false,
         });
       })
       .catch(function(err){
-        console.error('PartyContainer.componentWillMount.axios.get.party', err);
+        console.error('DistrictRepresentativeContainer.componentWillMount.axios.get.representative', err);
       });
   },
+
   render: function() {
     if (this.state.isLoading) {
       return (
         <div>
-          <img src='https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'/>
+          <img src='./Images/loading.gif'/>
         </div>
       );
     } else {
-      console.log(this.state.partyList);
+      console.log(this.state.representativesList);
       return (
-        <PartyListViewComponent
-          partyList={this.state.partyList}
-          succesCreateText={this.state.succesCreateText}
-        />
+        <DistrictRepresentativeComponent
+          representativesList={this.state.representativesList}
+          succesCreateText={this.state.succesCreateText}/>
       );
     }
+
   }
+
 });
 
-window.PartyContainer = PartyContainer;
+window.DistrictRepresentativeContainer = DistrictRepresentativeContainer;

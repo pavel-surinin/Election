@@ -47,7 +47,7 @@ var DistrictListContainer = React.createClass({
     if (this.state.isLoading) {
       return (
         <div>
-          <img src='https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'/>
+          <img src='./Images/loading.gif'/>
         </div>
       );
     } else {
