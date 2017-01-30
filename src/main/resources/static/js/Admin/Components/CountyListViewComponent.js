@@ -21,9 +21,7 @@ var CountyListViewComponent = React.createClass({
     return (
 		      <div className="panel panel-default">
 		        <div className="panel-heading">
-		          <h3>Rinkimų apygardų sąrašas
-
-		          </h3>
+		          <h3> Rinkimų apygardų sąrašas </h3>
 		        </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
@@ -35,21 +33,13 @@ var CountyListViewComponent = React.createClass({
 		              </a>
 		            </h5>
 		          </div>
-		            <table className="table table-striped">
+		            <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
 		              <thead>
 		                <tr>
-		                  <th>
-		                    Nr
-		                  </th>
-		                  <th>
-		                    Apygarda
-		                  </th>
-		                  <th>
-		                    Detali informacija
-		                  </th>
-		                  <th>
-		                    Redaguoti
-		                  </th>
+		                  <th> Nr </th>
+		                  <th> Apygarda </th>
+		                  <th> Detali informacija </th>
+		                  <th> &nbsp; Redaguoti &nbsp; </th>
 		                </tr>
 		              </thead>
 		              <tbody>

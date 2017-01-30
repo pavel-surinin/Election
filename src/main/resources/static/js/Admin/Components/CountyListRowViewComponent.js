@@ -24,8 +24,12 @@ var CountyListRowViewComponent = React.createClass({
                 <button onClick={this.handleDetailsClick(this.props.id)} className='btn btn-primary btn-sm' role='button'>Detaliau</button>
               </td>
               <td>
-                <button type="button" className="btn btn-primary btn-sm">Naujinti</button>
-                <a className="btn btn-danger" onClick={this.onHandleDeleteClick}><i className="fa fa-trash-o fa-lg"></i>Trinti</a>
+								&nbsp;
+								<button ref="edit" data-toggle="tooltip2" title="Pridėti Kandidatų sąrašą" type="button" className="btn btn-success btn-sm fa fa-plus"></button>
+								&nbsp;
+                <a href={'#/admin/county/edit/' + this.props.id} data-toggle="tooltip2" title="Redaguoti" type="button " className="btn btn-primary btn-sm fa fa-pencil"></a>
+                &nbsp;
+                <button onClick={this.onHandleDeleteClick} data-toggle="tooltip1" title="Ištrinti" type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
               </td>
             </tr>
     );
