@@ -71,6 +71,7 @@ var AdminComponent = React.createClass({
                           <li><a href="#/admin/representative"><i className="fa fa-address-book-o " aria-hidden="true"></i> Apylinkių atstovai</a></li>
                           <li><a href="#/admin/candidate"><i className="fa fa-user" aria-hidden="true"></i> Kandidatai</a></li>
                           <li><a href="#/admin/party"> <i className="fa fa-users" aria-hidden="true"></i> Partijos</a></li>
+                          <li><a href="#/admin/results"> <i className="fa fa-line-chart" aria-hidden="true"></i> Rezultatai</a></li>
                       </ul>
                   </div>
               </div>
