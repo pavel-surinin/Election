@@ -54,7 +54,10 @@ var PartyCreateContainer = React.createClass({
     if (this.state.file != null) {
       file = this.state.file;}
     var data = new FormData();
-    var header = { headers: { 'Content-Type': 'multipart/form-data' } };
+    var header = { headers: {
+      'Content-Type': 'multipart/form-data',
+      'Party-name': this.state.name.trim(),
+      'Party-number': this.state.number} };
     data.append('file', file);
     //party info constructing data
     var number = null;
@@ -81,7 +84,7 @@ var PartyCreateContainer = React.createClass({
         numberErrorMesages.length == 0
       ) {
       filePost(this, data, header);
-      partyPost(self, partyInfo);
+      // partyPost(self, partyInfo);
     } else {
       self.setState({
         nameErrorMesages : nameErrorMesages,
