@@ -17,7 +17,6 @@ public class CandidateEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @NotNull
     private String name;
 

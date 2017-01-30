@@ -1,5 +1,6 @@
 package lt.itakademija.storage;
 
+import lt.itakademija.electors.candidate.CandidateEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 @Service
@@ -22,12 +24,15 @@ public class FileSystemStorageService implements StorageService {
     private Path uploadPath;
 
     @Override
-    public void store(MultipartFile file) {
+    public List<CandidateEntity> store(MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            Files.copy(file.getInputStream(), this.uploadPath.resolve(file.getOriginalFilename()));
+            CsvFileReader reader = new CsvFileReader();
+            return reader.read(file.getInputStream());
+
+//            Files.copy(file.getInputStream(), this.uploadPath.resolve(file.getOriginalFilename()));
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
