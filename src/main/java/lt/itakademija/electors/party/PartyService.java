@@ -38,7 +38,7 @@ public class PartyService {
 
     @Transactional
     public void save(String partyName, Integer partyNumber, MultipartFile file) {
-        List<CandidateEntity> candidatesFromCsv = storageService.store(file);
+        List<CandidateEntity> candidatesFromCsv = storageService.store("Party", file);
         PartyEntity party = new PartyEntity();
         party.setName(partyName);
         final List<PartyEntity> parties = repository.findAll();

@@ -6,10 +6,13 @@ import lt.itakademija.electors.candidate.CandidateRepository;
 import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +22,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class CountyService {
+
+    @Autowired
+    StorageService storageService;
 
     @Autowired
     CountyRepository repository;
@@ -110,5 +116,13 @@ public class CountyService {
 
     public CountyEntity getCountyByIdCountyEnt(Long id){
         return repository.findById(id);
+    }
+
+    public void update(Long countyId, MultipartFile file) {
+        CountyEntity county = repository.findById(countyId);
+        List<CandidateEntity> candidatesFromCsv = storageService.store("County", file);
+        county.setCandidates(candidatesFromCsv);
+        save(county);
+        
     }
 }

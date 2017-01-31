@@ -24,12 +24,12 @@ public class FileSystemStorageService implements StorageService {
     private Path uploadPath;
 
     @Override
-    public List<CandidateEntity> store(MultipartFile file) {
+    public List<CandidateEntity> store(String partyOrCounty, MultipartFile file) {
         try {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            CsvFileReader reader = new CsvFileReader();
+            CsvFileReader reader = new CsvFileReader(partyOrCounty);
             return reader.read(file.getInputStream());
 
 //            Files.copy(file.getInputStream(), this.uploadPath.resolve(file.getOriginalFilename()));

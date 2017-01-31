@@ -40,7 +40,7 @@ var PartyCreateEditFormComponent = React.createClass({
                         {numberErrorMesages}
 		                    <div className="form-group">
 		                      <label>Pasirinkite failą</label>
-		                      <input onChange={this.onFileChange} ref="file" type="file" name="file" className="form-control-file"/>
+		                      <input onChange={this.onFileChange} ref="file" type="file" name="file" className="btn btn-outline"/>
 		                      <p className="help-block">Pasirinkite ir įkelkite partijos sąrašo failą CSV formatu </p>
 		                  </div><br/>
                       {fileErrorMesages}

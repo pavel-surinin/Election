@@ -4,13 +4,13 @@ import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
+import lt.itakademija.exceptions.BadCSVFileExceprion;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 @Service
 public class CsvFileReader {
 
+    private String partyOrCounty;
+
     private PartyService partyService;
 
     @Autowired
@@ -29,37 +31,50 @@ public class CsvFileReader {
     @Autowired
     private PartyRepository partyRepository;
 
+    public CsvFileReader() {
+        super();
+    }
+
+    public CsvFileReader(String partyOrCounty) {
+        this.partyOrCounty = partyOrCounty;
+    }
+
     public List<CandidateEntity> read(InputStream file) {
         List<String> lines = getStringList(file);
         List<String[]> linesSeparatedValues = splitLinesToValues(lines);
-        if (checkForEqualColumnSize(linesSeparatedValues)) {
-            throw new NotEqualColumnsCountCsv("Not Equal Columns Count *.csv - " + file.toString());
-        }
-        List<CandidateEntity> candidatesList = getCandidatesList(linesSeparatedValues);
-        return candidatesList;
+        checkForEqualColumnSize(linesSeparatedValues);
+        linesSeparatedValues.remove(0);
+        return getCandidates(partyOrCounty, linesSeparatedValues);
     }
 
-    private List<CandidateEntity> getCandidatesList(List<String[]> linesSeparatedValues) {
-        List<CandidateEntity> candidates = linesSeparatedValues
-                .stream().map(line -> {
-                    CandidateEntity can = new CandidateEntity();
-                    can.setName(line[0]);
-                    can.setSurname(line[1]);
-                    String dateFromCSV = line[2];
-                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-                    Date date = null;
-                    try {
+    private List<CandidateEntity> getCandidates(String partyOrCounty, List<String[]> linesSeparatedValues) {
+        return getCandidatesListForParty(linesSeparatedValues);
+    }
+
+    private List<CandidateEntity> getCandidatesListForParty(List<String[]> linesSeparatedValues) {
+        List<CandidateEntity> candidates = new ArrayList<>();
+            candidates = linesSeparatedValues
+                    .stream()
+                    .map(line -> {
+                        try {
+                        CandidateEntity can = new CandidateEntity();
+                        can.setName(line[0]);
+                        can.setSurname(line[1]);
+                        String dateFromCSV = line[2];
+                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                        Date date = null;
                         date = format.parse(dateFromCSV);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    can.setBirthDate(date);
-                    can.setNumberInParty(Integer.parseInt(line[3]));
-                    can.setDescription(line[4]);
-                    return can;
-                }).collect(Collectors.toList());
+                        can.setBirthDate(date);
+                        can.setNumberInParty(Integer.parseInt(line[3]));
+                        can.setDescription(line[4]);
+                        return can;
+                        } catch (Throwable pe) {
+                            throw new BadCSVFileExceprion("Bad CSV data exception");
+                        }
+                    }).collect(Collectors.toList());
         return candidates;
     }
+
 
     private List<String> getStringList(InputStream file) {
         Scanner sc = new Scanner(file);
@@ -73,6 +88,9 @@ public class CsvFileReader {
     private boolean checkForEqualColumnSize(List<String[]> list) {
         int columnsCount = list.get(0).length;
         boolean isMissmatch = list.stream().anyMatch(row -> row.length != columnsCount);
+        if (isMissmatch){
+            throw new NotEqualColumnsCountCsv("Not equal columns count *.csv");
+        }
         return isMissmatch;
     }
 
