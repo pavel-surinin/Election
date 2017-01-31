@@ -6,6 +6,7 @@ import lt.itakademija.electors.candidate.CandidateRepository;
 import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class CountyService {
 
     @Autowired
     CandidateService candidateService;
+
+    @Autowired
+    PartyService partyService;
 
     public List<CountyEntity> getAllEntities(){
         return repository.findAll();
@@ -121,8 +125,38 @@ public class CountyService {
     public void update(Long countyId, MultipartFile file) {
         CountyEntity county = repository.findById(countyId);
         List<CandidateEntity> candidatesFromCsv = storageService.store("County", file);
-        county.setCandidates(candidatesFromCsv);
-        save(county);
-        
+        List<CandidateEntity> candWithNoParty = candidatesFromCsv
+                .stream()
+                .filter(can -> can.getPartyDependencies() == null)
+                .collect(Collectors.toList());
+        List<CandidateEntity> candExististing = candidatesFromCsv
+                .stream()
+                .filter(can -> can.getPartyDependencies() != null)
+                .filter(can ->
+                        partyService.getPartyEntityById(can
+                                .getPartyDependencies()
+                                .getId())
+                                .getMembers()
+                                .stream()
+                                .anyMatch(mem -> mem.getNumberInParty() == can.getNumberInParty()))
+                .collect(Collectors.toList());
+        List<CandidateEntity> candInPartyNotInMulti = candidatesFromCsv
+                .stream()
+                .filter(can -> can.getPartyDependencies() != null)
+                .filter(can ->
+                        partyService.getPartyEntityById(can
+                                .getPartyDependencies()
+                                .getId())
+                                .getMembers()
+                                .stream()
+                                .anyMatch(mem -> mem.getNumberInParty() != can.getNumberInParty()))
+                .collect(Collectors.toList());
+        System.out.println(
+                " exist " + candExististing.size() + " not in multi "
+                + candInPartyNotInMulti.size() + " withnoparty "
+                + candWithNoParty.size() + " all "
+                + candidatesFromCsv.size());
     }
 }
+
+
