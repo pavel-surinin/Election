@@ -17,6 +17,7 @@ var PartyCreateEditFormComponent = React.createClass({
 		                <div className="input-group col-xs-12">
 		                  <label>Partijos Pavadinimas</label>
 		                    <input
+                          id="name-input"
 		                      type="text"
 		                      onChange={this.props.onHandleNameChange}
 		                      value={this.props.name}
@@ -30,6 +31,7 @@ var PartyCreateEditFormComponent = React.createClass({
                     <div className="input-group col-xs-12">
 		                  <label>Partijos numeris</label>
 		                    <input
+                          id="number-input"
 		                      type="text"
 		                      onChange={this.props.onHandleNumberChange}
 		                      value={this.props.number}
@@ -40,16 +42,16 @@ var PartyCreateEditFormComponent = React.createClass({
                         {numberErrorMesages}
 		                    <div className="form-group">
 		                      <label>Pasirinkite failą</label>
-		                      <input onChange={this.onFileChange} ref="file" type="file" name="file" className="form-control-file"/>
+		                      <input onChange={this.onFileChange} ref="file" type="file" name="file" id="file-select" className="form-control-file"/>
 		                      <p className="help-block">Pasirinkite ir įkelkite partijos sąrašo failą CSV formatu </p>
 		                  </div><br/>
                       {fileErrorMesages}
-		                  <button className='btn btn-success btn-block'>
+		                  <button id="create-button" className='btn btn-success btn-block'>
 		                    {this.props.action}
 		                  </button>
 		                </form>
 		                  <div>
-		                    <a className="btn btn-danger btn-block" href="#/admin/party" role="button">Atšaukti</a>
+		                    <a id="cancel-button" className="btn btn-danger btn-block" href="#/admin/party" role="button">Atšaukti</a>
 		                  </div>
 		              </div>
 		            </div>

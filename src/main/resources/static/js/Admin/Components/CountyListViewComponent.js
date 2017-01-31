@@ -27,8 +27,8 @@ var CountyListViewComponent = React.createClass({
                 {succesCreateMessage}
 		            <h5>
 		              <a href="#/admin/county/create">
-		                <button type="button" className="btn btn-success btn-sm">
-		                  Registruoti naują Apygarda
+		                <button type="button" id="register-button" className="btn btn-success btn-sm">
+		                  Registruoti
 		                </button>
 		              </a>
 		            </h5>

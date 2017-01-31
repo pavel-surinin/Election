@@ -15,7 +15,7 @@ var  PartyListViewRowComponent= React.createClass({
                 {this.props.name}
               </td>
               <td>
-                <button onClick={this.handleDetailsClick(this.props.id)} className='btn btn-primary btn-sm' role='button'>Detaliau</button>
+                <button onClick={this.handleDetailsClick(this.props.id)} id={'details-button-' + this.props.id} className='btn btn-primary btn-sm' role='button'>Detaliau</button>
                 &nbsp;
               </td>
             </tr>
