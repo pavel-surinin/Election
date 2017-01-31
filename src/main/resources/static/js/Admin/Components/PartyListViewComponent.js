@@ -21,7 +21,7 @@ var PartyListViewComponent = React.createClass({
 		        </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
-		            <a href="#/admin/party/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+		            <a href="#/admin/party/create"><button type="button" id="register-button" className="btn btn-success btn-sm">Registruoti</button></a>
 		            <span>
 		              <h5>Registruoti naują partiją </h5>
 		            </span>

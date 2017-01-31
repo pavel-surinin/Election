@@ -29,7 +29,7 @@
 		            <span>
 		              <h5>Registruoti naują apylinkę </h5>
 		            </span>
-		            <a href="#/admin/district/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+		            <a href="#/admin/district/create"><button type="button" id="register-button" className="btn btn-success btn-sm">Registruoti</button></a>
 		          </div>
 		            <table className="table table-striped">
 		            <thead>

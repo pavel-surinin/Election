@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CandidatesListViewRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CandidatesListViewRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyCreateEditFormComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyCreateEditFormComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyDetailViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyDetailViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictCreateEditComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictCreateEditComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictListViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictListViewRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictListViewRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRepresentativeComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRepresentativeComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRepresentativeCreateFormComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRepresentativeCreateFormComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRespesentativeListViewRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRespesentativeListViewRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyCreateEditFormComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyCreateEditFormComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyDetailListRowViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyDetailListRowViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyDetailViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyDetailViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/DistrictEditContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/DistrictEditContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/HomeComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/HomeComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/LoginComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/LoginComponent.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1020,7 +1038,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1043,7 +1061,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3438486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30441642" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30441642" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24670571" sideWeight="0.49369085" order="9" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />

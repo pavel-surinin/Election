@@ -24,9 +24,9 @@ var CountyDetailViewComponent = React.createClass({
 						<div className="panel panel-default">
 				          <div className="panel-heading">
 				            <h3>{this.props.countyDetails.name} rinkimų apygarda</h3>
-										<button type="button" className="btn btn-outline btn-primary btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Kandidatai</button>
+										<button type="button" id="candidate-button" className="btn btn-outline btn-primary btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Kandidatai</button>
 										 &nbsp;
-										<button data-toggle="collapse" type="button" data-parent="#accordion" className="btn btn-outline btn-primary btn-sm" href="#collapse1">Apylinkės</button>
+										<button data-toggle="collapse" id="district-button" type="button" data-parent="#accordion" className="btn btn-outline btn-primary btn-sm" href="#collapse1">Apylinkės</button>
 				          </div>
 					      <div className="panel-group" id="accordion">
 					        <div className="panel panel-default">

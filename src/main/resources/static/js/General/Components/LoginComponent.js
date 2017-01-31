@@ -28,13 +28,13 @@ var LoginComponent = React.createClass({
                   <form onSubmit={this.props.onHandleSubmit}>
                     <div className="form-group">
                       <label>Prisijungimo vardas:</label>
-                      <input onChange={this.props.onHandleUsernameChange} className="form-control"/>
+                      <input onChange={this.props.onHandleUsernameChange} id="login-input" className="form-control"/>
                     </div>
                     <div className="form-group">
                       <label>Slaptažodis:</label>
-                      <input onChange={this.props.onHandlePasswordChange} type="password" className="form-control" id="pwd"/>
+                      <input onChange={this.props.onHandlePasswordChange} type="password" id="password-input" className="form-control"/>
                       </div>
-                    <button type="submit" className="btn btn-default">Prisijungti</button>
+                    <button type="submit" id="login-button" className="btn btn-default">Prisijungti</button>
                   </form>
                   {message}
                 </div>
