@@ -48,7 +48,37 @@ public class CsvFileReader {
     }
 
     private List<CandidateEntity> getCandidates(String partyOrCounty, List<String[]> linesSeparatedValues) {
-        return getCandidatesListForParty(linesSeparatedValues);
+        if(partyOrCounty.equals("Party")){
+            return getCandidatesListForParty(linesSeparatedValues);
+        } else {
+            return getCandidatesListForCounty(linesSeparatedValues);
+        }
+    }
+
+    private List<CandidateEntity> getCandidatesListForCounty(List<String[]> linesSeparatedValues) {
+        return linesSeparatedValues
+                .stream()
+                .map(line -> {
+                    try{
+                        System.out.println("-------------------------county-------------------------");
+                        CandidateEntity can = new CandidateEntity();
+                        can.setName(line[0]);
+                        can.setSurname(line[1]);
+                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                        Date date = null;
+                        date = format.parse(line[2]);
+                        can.setBirthDate(date);
+                        can.setDescription(line[5]);
+                        can.setPartyDependencies(partyRepository.getById(Long.parseLong(line[3])));
+                        can.setNumberInParty(Integer.parseInt(line[4]));
+                        return can;
+                    }
+                    catch(Throwable t){
+                        throw new BadCSVFileExceprion("Bad csv data");
+                    }
+
+                })
+                .collect(Collectors.toList());
     }
 
     private List<CandidateEntity> getCandidatesListForParty(List<String[]> linesSeparatedValues) {
