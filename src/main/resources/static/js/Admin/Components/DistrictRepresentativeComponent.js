@@ -29,7 +29,8 @@ var DistrictRepresentativeComponent = React.createClass({
 		              <h5>Registruoti naują apylinkės atstovą </h5>
 		            </span>
 		          </div>
-		            <table className="table table-striped">
+              <div className="panel-body">
+		            <table className="table table-striped table-bordered table-hover">
 		              <thead>
 		                <tr>
 		                  <th>
@@ -44,15 +45,13 @@ var DistrictRepresentativeComponent = React.createClass({
 		                  <th>
 		                    Atstovaujama Apylinkė
 		                  </th>
-		                  <th>
-		                    Redaguoti
-		                  </th>
 		                </tr>
 		              </thead>
 		              <tbody>
 		              {array}
 		              </tbody>
 		            </table>
+              </div>
 		        </div>
     );
   }

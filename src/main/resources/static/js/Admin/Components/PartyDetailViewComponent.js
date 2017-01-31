@@ -21,7 +21,8 @@ var PartyDetailViewComponent = React.createClass({
             <a id="delete-button" className="btn btn-danger" onClick={this.props.onHandleDeleteClick}>  <i className="fa fa-trash-o fa-lg"></i> Ištrinti sąrašą</a>
             <a id="back-button" className="btn btn-success" href="#/admin/party" role="button">Atgal</a>
           </div>
-            <table className="table table-striped">
+          <div className="panel-body">
+            <table className="table table-striped table-bordered table-hover">
              <thead>
               <tr>
                 <th>
@@ -45,6 +46,7 @@ var PartyDetailViewComponent = React.createClass({
                 {array}
             </tbody>
           </table>
+        </div>
         </div>
     );
   }
