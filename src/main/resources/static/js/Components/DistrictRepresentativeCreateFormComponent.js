@@ -56,7 +56,7 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					                </button>
 					                </form>
 					                <div>
-					                  <a className="btn btn-danger btn-block" href="#//admin/representative" role="button">Atšaukti</a>
+					                  <a className="btn btn-danger btn-block" href="#/admin/representative" role="button">Atšaukti</a>
 					                </div>
 					              </div>
 					            </div>

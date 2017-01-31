@@ -1,5 +1,11 @@
 var CandidatesListViewRowComponent = React.createClass({
-
+	handleEditClick: function(id){
+		  var self = this;
+		  return function () {
+			self.context.router.push('/admin/candidate/edit/' + id);  
+		  };
+		},
+  
   render: function() {
     return (
             <tr>
@@ -37,9 +43,11 @@ var CandidatesListViewRowComponent = React.createClass({
                   </div>
                 </div>
                 &nbsp;
-                <button type="button" className="btn btn-primary btn-sm fa fa-pencil"></button>
-                &nbsp;
-                <button type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
+                <button onClick={this.handleEditClick(this.props.id)} type="button" className="btn btn-primary btn-sm fa fa-pencil"></button>
+	              &nbsp;
+	              <a href="#/admin/candidate">
+	                <button type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
+	              </a>
               </td>
             </tr>
     );

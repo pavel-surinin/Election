@@ -1,17 +1,15 @@
-  var CandidateEditContainer = React.createClass({
+  var DistrictEditContainer = React.createClass({
 	  getInitialState: function() {
 		    return {
-		      candidateDetails : [],
+		      districtDetails : [],
 		      name : '',
-		      surname : '',
-		      birthdate : '',
 		    };
 		  },
 
 		  componentWillMount: function() {
 		    var self = this;
 		    axios
-		    .get('/candidate/' + this.props.params.id)
+		    .get('/district/' + this.props.params.id)
 		    .then(function(response){
 		      self.setState({
 		        id : response.data.id,
@@ -19,7 +17,7 @@
 		      });
 		    })
 		    .catch(function(err){
-		      console.error('CandidateEditContainer.componentWillMount.axios.get/admin/candidate/:id', err);
+		      console.error('DistrictEditContainer.componentWillMount.axios.get/admin/district/:id', err);
 		    });
 		  },
 
@@ -30,26 +28,26 @@
 		  onHandleUpdate: function(event) {
 		    var self = this;
 		    axios
-		    .put('/admin/candidate/' + self.state.id,
+		    .put('/admin/district/' + self.state.id,
 		      {
 		        id : self.state.id,
 		        name: self.state.name,})
 		    .then(function(response){
 		      console.log(response.data);
-		      self.context.router.push('/admin/candidate');
+		      self.context.router.push('/admin/district');
 		    })
 		    .catch(function(err){
-		      console.error('Update failed at CandidateEditContainer - ', err);
+		      console.error('Update failed at DistrictEditContainer - ', err);
 		    });
 		    event.preventDefault();
 		  },
 		  onHandleCancel:function(){
-		    this.context.router.push('/admin/candidate');
+		    this.context.router.push('/admin/district');
 		  },
 
 		  render: function() {
 		    return (
-		      <CandidateEditFormComponent
+		      <DistrictEditFormComponent
 		      submitButtonName='Išsaugoti'
 		      
 		      onHandleChangeName={this.onHandleChangeName}
@@ -64,8 +62,8 @@
 		  }
 		});
 
-    CandidateEditContainer.contextTypes = {
+  DistrictEditContainer.contextTypes = {
 	  router: React.PropTypes.object.isRequired,
 	};
 	
-	window.CandidateEditContainer = CandidateEditContainer ;
+	window.DistrictEditContainer = DistrictEditContainer ;

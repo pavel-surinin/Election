@@ -1,17 +1,15 @@
-  var CandidateEditContainer = React.createClass({
+  var CountyEditContainer = React.createClass({
 	  getInitialState: function() {
 		    return {
-		      candidateDetails : [],
+		      countyDetails : [],
 		      name : '',
-		      surname : '',
-		      birthdate : '',
 		    };
 		  },
 
 		  componentWillMount: function() {
 		    var self = this;
 		    axios
-		    .get('/candidate/' + this.props.params.id)
+		    .get('/county/' + this.props.params.id)
 		    .then(function(response){
 		      self.setState({
 		        id : response.data.id,
@@ -19,7 +17,7 @@
 		      });
 		    })
 		    .catch(function(err){
-		      console.error('CandidateEditContainer.componentWillMount.axios.get/admin/candidate/:id', err);
+		      console.error('CountyEditContainer.componentWillMount.axios.get/admin/county/:id', err);
 		    });
 		  },
 
@@ -30,26 +28,26 @@
 		  onHandleUpdate: function(event) {
 		    var self = this;
 		    axios
-		    .put('/admin/candidate/' + self.state.id,
+		    .put('/admin/county/' + self.state.id,
 		      {
 		        id : self.state.id,
 		        name: self.state.name,})
 		    .then(function(response){
 		      console.log(response.data);
-		      self.context.router.push('/admin/candidate');
+		      self.context.router.push('/admin/county');
 		    })
 		    .catch(function(err){
-		      console.error('Update failed at CandidateEditContainer - ', err);
+		      console.error('Update failed at CountyEditContainer - ', err);
 		    });
 		    event.preventDefault();
 		  },
 		  onHandleCancel:function(){
-		    this.context.router.push('/admin/candidate');
+		    this.context.router.push('/admin/county');
 		  },
 
 		  render: function() {
 		    return (
-		      <CandidateEditFormComponent
+		      <CountyEditFormComponent
 		      submitButtonName='Išsaugoti'
 		      
 		      onHandleChangeName={this.onHandleChangeName}
@@ -64,8 +62,8 @@
 		  }
 		});
 
-    CandidateEditContainer.contextTypes = {
+	CountyEditContainer.contextTypes = {
 	  router: React.PropTypes.object.isRequired,
 	};
 	
-	window.CandidateEditContainer = CandidateEditContainer ;
+	window.CountyEditContainer = CountyEditContainer ;

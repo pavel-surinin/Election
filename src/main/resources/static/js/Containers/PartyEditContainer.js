@@ -1,17 +1,15 @@
-  var CandidateEditContainer = React.createClass({
+  var PartyEditContainer = React.createClass({
 	  getInitialState: function() {
 		    return {
-		      candidateDetails : [],
+		      countyDetails : [],
 		      name : '',
-		      surname : '',
-		      birthdate : '',
 		    };
 		  },
 
 		  componentWillMount: function() {
 		    var self = this;
 		    axios
-		    .get('/candidate/' + this.props.params.id)
+		    .get('/party/' + this.props.params.id)
 		    .then(function(response){
 		      self.setState({
 		        id : response.data.id,
@@ -19,7 +17,7 @@
 		      });
 		    })
 		    .catch(function(err){
-		      console.error('CandidateEditContainer.componentWillMount.axios.get/admin/candidate/:id', err);
+		      console.error('PartyEditContainer.componentWillMount.axios.get/admin/party/:id', err);
 		    });
 		  },
 
@@ -30,26 +28,26 @@
 		  onHandleUpdate: function(event) {
 		    var self = this;
 		    axios
-		    .put('/admin/candidate/' + self.state.id,
+		    .put('/admin/party/' + self.state.id,
 		      {
 		        id : self.state.id,
 		        name: self.state.name,})
 		    .then(function(response){
 		      console.log(response.data);
-		      self.context.router.push('/admin/candidate');
+		      self.context.router.push('/admin/party');
 		    })
 		    .catch(function(err){
-		      console.error('Update failed at CandidateEditContainer - ', err);
+		      console.error('Update failed at PartyEditContainer - ', err);
 		    });
 		    event.preventDefault();
 		  },
 		  onHandleCancel:function(){
-		    this.context.router.push('/admin/candidate');
+		    this.context.router.push('/admin/party');
 		  },
 
 		  render: function() {
 		    return (
-		      <CandidateEditFormComponent
+		      <PartyEditFormComponent
 		      submitButtonName='Išsaugoti'
 		      
 		      onHandleChangeName={this.onHandleChangeName}
@@ -64,8 +62,8 @@
 		  }
 		});
 
-    CandidateEditContainer.contextTypes = {
+    PartyEditContainer.contextTypes = {
 	  router: React.PropTypes.object.isRequired,
 	};
 	
-	window.CandidateEditContainer = CandidateEditContainer ;
+	window.PartyEditContainer = PartyEditContainer ;

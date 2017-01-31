@@ -21,10 +21,9 @@
 		      <div className="panel panel-default">
 		        <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
 		          <div className="panel-body">
-		            <span>
-		              <h5>Registruoti naują apylinkę </h5>
-		            </span>
-		            <a href="#/admin/district/create"><button type="button" className="btn btn-success btn-sm">Registruoti</button></a>
+		            <a href="#/admin/district/create">
+		              <button type="button" className="btn btn-success btn-sm">Registruoti naują apylinkę</button>
+		            </a>
 		          </div>
 		            <table className="table table-striped">
 		            <thead>
