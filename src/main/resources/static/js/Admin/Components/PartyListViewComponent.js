@@ -26,7 +26,8 @@ var PartyListViewComponent = React.createClass({
 		              <h5>Registruoti naują partiją </h5>
 		            </span>
 		          </div>
-		            <table className="table table-striped">
+              <div className="panel-body">
+		            <table className="table table-striped table-bordered table-hover">
 		              <thead>
 		                <tr>
 		                  <th>
@@ -44,6 +45,7 @@ var PartyListViewComponent = React.createClass({
 		                {array}
 		              </tbody>
 		            </table>
+              </div>
 		        </div>
     );
   }

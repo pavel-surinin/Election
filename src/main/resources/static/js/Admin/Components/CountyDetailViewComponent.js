@@ -35,21 +35,23 @@ var CountyDetailViewComponent = React.createClass({
 					            </h4>
 					          </div>
 					          <div id="collapse1" className="panel-collapse collapse in">
-						        <table className="table table-striped">
-						          <thead>
-						            <tr>
-						              <th>
-						                Pavadinimas
-						              </th>
-						              <th>
-						                Atstovas
-						              </th>
-						              </tr>
-						            </thead>
-						            <tbody>
-						              {dist}
-						            </tbody>
-						          </table>
+											<div className="panel-body">
+								        <table className="table table-striped table-bordered table-hover">
+								          <thead>
+								            <tr>
+								              <th>
+								                Pavadinimas
+								              </th>
+								              <th>
+								                Atstovas
+								              </th>
+								              </tr>
+								            </thead>
+								            <tbody>
+								              {dist}
+								            </tbody>
+								          </table>
+												</div>
 					            </div>
 					          </div>
 					          <div className="panel panel-default">
@@ -57,7 +59,7 @@ var CountyDetailViewComponent = React.createClass({
 					              <h4 className="panel-title">
 					              </h4>
 					            </div>
-					            <div id="collapse2" className="panel-collapse collapse">
+					            <div id="collapse2" className="panel-collapse collapse panel-body">
 												<ul className="list-group">
 												{cand}
 												</ul>

@@ -31,7 +31,8 @@
 		            </span>
 		            <a href="#/admin/district/create"><button type="button" id="register-button" className="btn btn-success btn-sm">Registruoti</button></a>
 		          </div>
-		            <table className="table table-striped">
+              <div className="panel-body">
+		            <table className="table table-striped table-bordered table-hover">
 		            <thead>
 		            <tr>
 		              <th>
@@ -58,6 +59,7 @@
 									{array}
 		            </tbody>
 		          </table>
+            </div>
 		        </div>
     );
   }

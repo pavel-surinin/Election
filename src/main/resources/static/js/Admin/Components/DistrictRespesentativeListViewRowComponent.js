@@ -14,10 +14,6 @@ var DistrictRespesentativeListViewRowComponent = React.createClass({
               <td>
                 {this.props.districtName}
               </td>
-              <td>
-                <button type="button" id={'edit-button-' + this.props.id} className="btn btn-primary btn-sm">Naujinti</button>
-                <button type="button" id={'delete-button-' + this.props.id} className="btn btn-danger btn-sm">Trinti</button>
-              </td>
             </tr>
     );
   }

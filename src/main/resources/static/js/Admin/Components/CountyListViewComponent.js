@@ -33,12 +33,12 @@ var CountyListViewComponent = React.createClass({
 		              </a>
 		            </h5>
 		          </div>
+              <div className="panel-body">
 		            <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
 		              <thead>
 		                <tr>
 		                  <th> Nr </th>
 		                  <th> Apygarda </th>
-		                  <th> Detali informacija </th>
 		                  <th> &nbsp; Redaguoti &nbsp; </th>
 		                </tr>
 		              </thead>
@@ -46,6 +46,7 @@ var CountyListViewComponent = React.createClass({
 		               {array}
 		              </tbody>
 		            </table>
+              </div>
 		        </div>
     );
   }

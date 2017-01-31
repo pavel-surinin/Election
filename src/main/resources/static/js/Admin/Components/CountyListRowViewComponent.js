@@ -1,4 +1,10 @@
 var CountyListRowViewComponent = React.createClass({
+	componentDidMount: function () {
+		$(this.refs.delete).tooltip();
+		$(this.refs.edit).tooltip();
+		$(this.refs.info).tooltip();
+		$(this.refs.add).tooltip();
+	},
 
 	onHandleDeleteClick: function () {
 		this.props.onHandleDelete(this.props.id);
@@ -42,7 +48,9 @@ var CountyListRowViewComponent = React.createClass({
                   data-target={'#' + this.props.id}>
 								</button>
 								&nbsp;
-                <a href={'#/admin/county/edit/' + this.props.id} data-toggle="tooltip2" title="Redaguoti" type="button " id={'edit-button-' + this.props.id} className="btn btn-primary btn-sm fa fa-pencil"></a>
+								<button onClick={this.handleDetailsClick(this.props.id)} ref="info" title="Detali informacija" id={'details-button-' + this.props.id} className='btn btn-info btn-sm fa fa-info' role='button'></button>
+								&nbsp;
+                <a href={'#/admin/county/edit/' + this.props.id} data-toggle="tooltip2" ref="edit" title="Redaguoti" type="button " id={'edit-button-' + this.props.id} className="btn btn-primary btn-sm fa fa-pencil"></a>
                 &nbsp;
                 <button onClick={this.onHandleDeleteClick} data-toggle="tooltip1" title="Ištrinti" type="button" id={'delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash"></button>
                 <div id={this.props.id} className="modal fade" role="dialog">
@@ -61,11 +69,11 @@ var CountyListRowViewComponent = React.createClass({
                     </div>
                   </div>
                 </div>
-
+								<button onClick={this.onHandleDeleteClick} data-toggle="tooltip1" ref="delete" title="Ištrinti" type="button" id={'delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash"></button>
 							</td>
             </tr>
-    );
-  }
+    	);
+  	}
 
 });
 
