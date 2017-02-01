@@ -1,3 +1,4 @@
+var fileErrorMesages = [];
 function getCounty(self) {
   axios
     .get('/county')
@@ -13,14 +14,13 @@ function getCounty(self) {
 }
 
 function validate(self, code){
-  if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas');}
-  if (code == 417) {numberErrorMesages.push('Partija su tokiu numeriu jau užregistruota');}
-  if (code == 418) {nameErrorMesages.push('Partija su tokiu pavadinimu jau užregistruota');}
+  console.log(self);
+  if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas, stulpelių skaičius skiriasi');}
   if (code == 422) {fileErrorMesages.push('Blogi CSV duomenys');}
+  if (code == 424) {fileErrorMesages.push('Blogi CSV duomenys, yra kandidatu, kurie jau užregistruoti');}
+  if (code == 424) {fileErrorMesages.push('Duomenų klaida');}
   self.setState({
     fileErrorMesages : fileErrorMesages,
-    numberErrorMesages :numberErrorMesages,
-    nameErrorMesages :nameErrorMesages,
   });
 }
 
@@ -33,6 +33,7 @@ var CountyContainer = React.createClass({
       countyId : null,
       file : null,
       fileErrorMesages : [],
+      succesMessage : '',
     };
   },
   componentWillMount: function() {
@@ -45,9 +46,9 @@ var CountyContainer = React.createClass({
   },
 
   onHandleFormAddSingleCandSubmit : function(event){
-    this.setState({fileErrorMesages : []});
     event.preventDefault();
-    console.log('submit');
+    this.setState({fileErrorMesages : [], succesMessage : ''});
+    fileErrorMesages = [];
     var self = this;
     //uploadfile constructing data
     var file = 'nofile.aaa';
@@ -59,23 +60,19 @@ var CountyContainer = React.createClass({
       'County-Id': this.state.countyId} };
     data.append('file', file);
     //validation
-    var fileErrorMesages = [];
     if(!validation.checkForCsv(file.name)) {fileErrorMesages.push('Būtina prisegti *.csv formato failą');}
     if (fileErrorMesages.length == 0) {
-      //TODO axios
       axios
       .put('/county', data, header)
       .then(function(response){
-        self.context.router.push('/admin/county?succesCreateText=Partija ' + self.state.name + ' atnaujnta');
+        getCounty(self);
+        self.setState({succesMessage : 'Apygardai sėkmingai įkeltas vienmandaties apygardos sąrašas'});
       })
       .catch(function (error) {
         if (error.response) {
-          console.error(error.response.data.message);
           validate(self, error.response.status);
         }
       });
-    } else {
-      this.setState({fileErrorMesages : fileErrorMesages});
     }
   },
   onHandleDelete: function(i) {
@@ -108,7 +105,6 @@ var CountyContainer = React.createClass({
         </div>
       );
     } else {
-      console.log(this.state.countyList);
       return (
         <CountyListViewComponent
           countyList={this.state.countyList}
@@ -118,10 +114,15 @@ var CountyContainer = React.createClass({
           fileErrorMesages={this.state.fileErrorMesages}
           onHandleFormAddSingleCandSubmit={this.onHandleFormAddSingleCandSubmit}
           onHandleAddClick={this.onHandleAddClick}
+          succesMessage={this.state.succesMessage}
         />
       );
     }
   }
 });
+
+CountyContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
 
 window.CountyContainer = CountyContainer;

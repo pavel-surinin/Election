@@ -10,6 +10,7 @@ var CountyListViewComponent = React.createClass({
           id={county.id}
           key={index}
           name={county.name}
+          members={county.candidatesCount}
           districts={county.districts}
           candidates={county.candidates}
           parties={county.parties}
@@ -18,6 +19,7 @@ var CountyListViewComponent = React.createClass({
           onHandleFormAddSingleCandSubmit={self.onHandleFormAddSingleCandSubmit}
           fileErrorMesages={self.fileErrorMesages}
           onHandleAddClick={self.onHandleAddClick}
+          succesMessage={self.succesMessage}
         />
       );
     });
