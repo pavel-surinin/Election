@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class FileUploadController {
@@ -35,7 +34,7 @@ public class FileUploadController {
                                    @RequestHeader("Party-name") String partyName,
                                    @RequestHeader("Party-number") Integer partyNumber,
                                    RedirectAttributes redirectAttributes) {
-        List<CandidateEntity> candidatesFromCsv = storageService.store(file);
+        List<CandidateEntity> candidatesFromCsv = storageService.store("Party", file);
         PartyEntity party = new PartyEntity();
         party.setName(partyName);
         party.setPartyNumber(partyNumber);
