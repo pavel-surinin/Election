@@ -12,7 +12,7 @@ public interface StorageService {
 
     void init();
 
-    List<CandidateEntity> store(MultipartFile file);
+    List<CandidateEntity> store(String partyOrCounty, MultipartFile file);
 
     Stream<Path> loadAll();
 

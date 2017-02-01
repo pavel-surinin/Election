@@ -1,5 +1,6 @@
 package lt.itakademija.electors.party;
 
+import lt.itakademija.electors.candidate.CandidateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +22,6 @@ public class PartyRepository {
         }
         em.merge(party);
         return party;
-
-
     }
 
     public List<PartyEntity> findAll() {
@@ -38,5 +37,16 @@ public class PartyRepository {
 
 	public void detach(PartyEntity partyEntity) {
         em.detach(partyEntity);
+    }
+
+    public PartyEntity getPartyByNumber(Integer number) {
+        List<PartyEntity> list = em.createQuery("SELECT p FROM PartyEntity p WHERE p.partyNumber = :pNum")
+                .setParameter("pNum", number)
+                .getResultList();
+        if (list.size() != 0) {
+            list.stream().forEach(partyEntity -> System.out.println("------------" + partyEntity.getName()));
+            return list.get(0);
+        }
+        return null;
     }
 }

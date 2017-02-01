@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by Pavel on 2017-01-26.
  */
-@ResponseStatus(value= HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-public class NotEqualColumnsCountCsv extends RuntimeException {
+@ResponseStatus(value= HttpStatus.UNPROCESSABLE_ENTITY)
+public class BadCSVFileExceprion extends RuntimeException {
 
-    public NotEqualColumnsCountCsv(String message) {
+    public BadCSVFileExceprion(String message) {
         super(message);
     }
 
-    public NotEqualColumnsCountCsv(String message, Throwable cause) {
+    public BadCSVFileExceprion(String message, Throwable cause) {
         super(message, cause);
     }
 }

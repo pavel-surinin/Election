@@ -1,6 +1,7 @@
 var CandidatesListViewComponent = React.createClass({
 
 	render: function() {
+			var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
 	    var array = [];
 	    this.props.candidateList.map(function(cand,index) {
 	      array.push(
@@ -53,6 +54,7 @@ var CandidatesListViewComponent = React.createClass({
 			    <script src="../dist/js/sb-admin-2.js"></script>
 
 			</div>
+						
 
     );
 }

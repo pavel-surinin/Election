@@ -1,4 +1,3 @@
-﻿
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -64,15 +63,13 @@ var hashHistory = ReactRouter.hashHistory;
 
 ReactDOM.render((
   <Router history={hashHistory}>
-
-
     <Route path="/admin" component={AdminComponent}>
       <IndexRoute component={EmptyComponent} />
       <Route path="/admin/district" component={DistrictListContainer} />
       <Route path="/admin/district/create" component={DistrictCreateContainer} />
       <Route path="/admin/district/edit/:id" component={DistrictEditContainer} />
       <Route path="/admin/candidate" component={CandidateContainer} />
-      <Route path="/admin/candidate/edit" component={CandidateEditContainer} />
+      <Route path="/admin/candidate/edit/:id" component={CandidateEditContainer} />
       <Route path="/admin/representative" component={DistrictRepresentativeContainer} />
       <Route path="/admin/representative/create" component={DistrictRepresentativeCreateContainer} />
       <Route path="/admin/county" component={CountyContainer} />
@@ -85,8 +82,6 @@ ReactDOM.render((
       <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
-
-    
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
