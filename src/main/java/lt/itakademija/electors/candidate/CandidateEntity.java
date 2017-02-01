@@ -114,22 +114,4 @@ public class CandidateEntity {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "CandidateEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", birthDate=" + birthDate +
-                ", partyDependencies=" + partyDependencies +
-                ", numberInParty=" + numberInParty +
-                ", description='" + description + '\'' +
-                ", county=" + county +
-                ", isMultiList=" + isMultiList +
-                '}';
-    }
-    
-    public void findById(Long id) {
-		this.id = id;	
-	}
 }

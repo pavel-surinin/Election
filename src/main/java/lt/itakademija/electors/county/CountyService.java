@@ -43,7 +43,7 @@ public class CountyService {
         return repository.findAll()
                 .stream()
                 .map(ent -> {
-                    CountyReport rep = new CountyReport(ent.getId(), ent.getName());
+                    CountyReport rep = new CountyReport(ent);
                     return rep;
                 })
                 .collect(Collectors.toList());
@@ -151,8 +151,10 @@ public class CountyService {
     private void validateCandidateIsInCounty(List<CandidateEntity> cans) {
         cans.stream().forEach(can -> {
             CandidateEntity canFromDb = candidateService.getCandidateByNameSurnameNumberParty(can);
-            if (canFromDb.getCounty() != null) {
-                throw new CandidateIsInCountyException("Candidate " + can.getName() + " is in County " + can.getCounty());
+            if(canFromDb != null){
+                if (canFromDb.getCounty() != null) {
+                    throw new CandidateIsInCountyException("Candidate " + can.getName() + " is in County " + can.getCounty());
+                }
             }
         });
     }

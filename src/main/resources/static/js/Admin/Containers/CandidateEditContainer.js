@@ -10,6 +10,7 @@ var CandidateEditContainer = React.createClass({
       partijosId: '',
       candidateInfo : [],
       isloading: false,
+      countyId : '',
     };
   },
   componentWillMount: function(){
@@ -24,6 +25,7 @@ var CandidateEditContainer = React.createClass({
           description : response.data.description,
           numberInParty : response.data.numberInParty,
           partijosId : response.data.partijosId,
+          countyId : response.data.countyId,
         });
       })
       .catch(function(err){
@@ -55,6 +57,7 @@ var CandidateEditContainer = React.createClass({
       description : this.state.description,
       numberInParty : this.state.numberInParty,
       partyDependencies : {id : this.state.partijosId},
+      county : {id : this.state.countyId},
     };
     event.preventDefault();
     axios.post('/candidate', postCandidateObject)
@@ -85,6 +88,7 @@ var CandidateEditContainer = React.createClass({
                 numberInParty={this.state.numberInParty}
                 partyDependencies={this.state.partyDependencies}
                 partijosId={this.state.partijosId}
+                countyId={this.state.countyId}
                 onHandleNameChange={this.onHandleNameChange}
                 onHandleSurnameChange={this.onHandleSurnameChange}
                 onHandleBirthDateChange={this.onHandleBirthDateChange}
