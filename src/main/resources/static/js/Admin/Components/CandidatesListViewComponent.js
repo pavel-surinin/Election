@@ -1,6 +1,7 @@
 var CandidatesListViewComponent = React.createClass({
 
 	render: function() {
+			var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
 	    var array = [];
 	    this.props.candidateList.map(function(cand,index) {
 	      array.push(
@@ -21,9 +22,11 @@ var CandidatesListViewComponent = React.createClass({
     return (
 			    <div className="panel panel-default">
 					<div className="panel-heading">
+							{succesCreateMessage}
 							<h4><i className="fa fa-table"></i> Kandidatu sąrašas</h4>
 					</div>
 					<div className="panel-body">
+
             <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
              <thead>
               <tr>

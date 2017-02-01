@@ -21,8 +21,8 @@ public class CandidateReport {
     private String description;
 
     private Integer numberInParty;
-
-    public Integer getNumberInParty() {
+ 
+	public Integer getNumberInParty() {
         return numberInParty;
     }
 
@@ -85,4 +85,5 @@ public class CandidateReport {
     public void setDescription(String description) {
         this.description = description;
     }
+   
 }

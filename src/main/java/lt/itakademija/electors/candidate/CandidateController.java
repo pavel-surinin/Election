@@ -3,6 +3,8 @@ package lt.itakademija.electors.candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import lt.itakademija.electors.district.DistrictReport;
+
 import java.util.List;
 
 /**
@@ -22,6 +24,11 @@ public class CandidateController {
     @GetMapping("/candidate")
     public List<CandidateReport> getKandidatasList(){
         return service.getAllCandidates();
+    }
+    
+    @GetMapping("/candidate/{id}")
+    public CandidateReport getCandidateDetails(@PathVariable Long id){
+        return service.getCandidateById(id);
     }
 
     @DeleteMapping("/candidate/{id}")

@@ -102,4 +102,10 @@ public class CandidateEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	public void findById(Long id) {
+		this.id = id;
+		
+	}
+
 }
