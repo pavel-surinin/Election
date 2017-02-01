@@ -10,7 +10,7 @@ var CandidateEditContainer = React.createClass({
       partijosId: '',
       candidateInfo : [],
       isloading: false,
-      countyId : '',
+      countyId : null,
     };
   },
   componentWillMount: function(){

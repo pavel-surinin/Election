@@ -4,7 +4,9 @@ import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,18 +30,12 @@ public class CandidateService {
 
     @Transactional
     public CandidateEntity save(CandidateEntity can) {
-//      TODO if Candidate has no county just save, else set Candidate County
-        if (can.getCounty() != null) {
-            can.setCounty(countyService.getCountyByIdCountyEnt(can.getCounty().getId()));
-        }
-        return repository.save(can);
+        return repository.save(mapCounty(can));
     }
 
     public List<CandidateReport> getAllCandidates() {
         return repository.getCandidatesList().stream().map(can -> new CandidateReport(can)).collect(Collectors.toList());
     }
-
-
 
     public CandidateEntity findByIdEntity(Long id){
         return repository.finById(id);
@@ -61,14 +57,28 @@ public class CandidateService {
         }
     return true;
     }
-    
+
     public CandidateEntity getCandidateByNameSurnameNumberParty(CandidateEntity can){
         return repository.findByNumberInPartyNameSurnameParty(can);
     }
-    
+
 	public CandidateReport getCandidateById(Long id) {
 		CandidateEntity candidate = repository.finById(id);
 		CandidateReport report = new CandidateReport(candidate);
 		return report;
 	}
+
+    private CandidateEntity mapCounty(CandidateEntity can) {
+        if (can.getCounty() != null) {
+            if(can.getCounty().getId() != null){
+                CountyEntity county = countyService.getCountyByIdCountyEnt(can.getCounty().getId());
+                can.setCounty(county);
+            } else {
+                can.setCounty(null);
+            }
+            return can;
+        } else {
+            return can;
+        }
+    }
 }
