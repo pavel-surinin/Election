@@ -2,10 +2,8 @@ package lt.itakademija.electors.county;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateReport;
-import lt.itakademija.electors.candidate.CandidateRepository;
 import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.district.DistrictReport;
-import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +33,7 @@ public class CountyService {
     @Autowired
     PartyService partyService;
 
-    public List<CountyEntity> getAllEntities(){
+    public List<CountyEntity> getAllEntities() {
         return repository.findAll();
     }
 
@@ -44,7 +41,7 @@ public class CountyService {
         return repository.findAll()
                 .stream()
                 .map(ent -> {
-                    CountyReport rep = new CountyReport(ent.getId(),ent.getName());
+                    CountyReport rep = new CountyReport(ent.getId(), ent.getName());
                     return rep;
                 })
                 .collect(Collectors.toList());
@@ -71,16 +68,7 @@ public class CountyService {
         report.setName(county.getName());
         List<CandidateReport> candidateReport = county.getCandidates()
                 .stream()
-                .map(can -> {
-                    CandidateReport cr = new CandidateReport();
-                    cr.setId(can.getId());
-                    cr.setName(can.getName());
-                    cr.setSurname(can.getSurname());
-                    cr.setBirthDate(can.getBirthDate());
-                    cr.setPartijosId(can.getPartyDependencies().getId());
-                    cr.setPartijosPavadinimas(can.getPartyDependencies().getName());
-                    return cr;
-                })
+                .map(can -> new CandidateReport(can))
                 .collect(Collectors.toList());
         report.setCandidates(candidateReport);
         if (county.getDistricts() != null) {
@@ -118,44 +106,52 @@ public class CountyService {
         return true;
     }
 
-    public CountyEntity getCountyByIdCountyEnt(Long id){
+    public CountyEntity getCountyByIdCountyEnt(Long id) {
         return repository.findById(id);
     }
 
     public void update(Long countyId, MultipartFile file) {
         CountyEntity county = repository.findById(countyId);
-        List<CandidateEntity> candidatesFromCsv = storageService.store("County", file);
-        List<CandidateEntity> candWithNoParty = candidatesFromCsv
+        List<CandidateEntity> candidatesFromFile = storageService.store("County", file);
+        //TODO validate all with 3 lists
+        filterNoPartyCandidates(candidatesFromFile).stream().forEach(can -> {
+            can.setCounty(county);
+            candidateService.save(can);
+        });
+
+        filterExistingCandidates(candidatesFromFile).stream().forEach(can -> {
+            CandidateEntity existingCan = candidateService.getCandidateByNameSurnameNumberParty(can);
+            existingCan.setCounty(county);
+            candidateService.save(existingCan);
+        });
+
+        filterCandidatesNotInMultiList(candidatesFromFile).stream().forEach(can -> {
+            
+            //TODO set flag;
+        });
+    }
+
+    private List<CandidateEntity> filterCandidatesNotInMultiList(List<CandidateEntity> candidatesFromCsv) {
+        return candidatesFromCsv
+                .stream()
+                .filter(can -> can.getPartyDependencies() != null)
+                .filter(can -> candidateService.getCandidateByNameSurnameNumberParty(can) == null)
+                .collect(Collectors.toList());
+    }
+
+    private List<CandidateEntity> filterExistingCandidates(List<CandidateEntity> candidatesFromCsv) {
+        return candidatesFromCsv
+                .stream()
+                .filter(can -> can.getPartyDependencies() != null)
+                .filter(can -> candidateService.getCandidateByNameSurnameNumberParty(can) != null)
+                .collect(Collectors.toList());
+    }
+
+    private List<CandidateEntity> filterNoPartyCandidates(List<CandidateEntity> candidatesFromCsv) {
+        return candidatesFromCsv
                 .stream()
                 .filter(can -> can.getPartyDependencies() == null)
                 .collect(Collectors.toList());
-        List<CandidateEntity> candExististing = candidatesFromCsv
-                .stream()
-                .filter(can -> can.getPartyDependencies() != null)
-                .filter(can ->
-                        partyService.getPartyEntityById(can
-                                .getPartyDependencies()
-                                .getId())
-                                .getMembers()
-                                .stream()
-                                .anyMatch(mem -> mem.getNumberInParty() == can.getNumberInParty()))
-                .collect(Collectors.toList());
-        List<CandidateEntity> candInPartyNotInMulti = candidatesFromCsv
-                .stream()
-                .filter(can -> can.getPartyDependencies() != null)
-                .filter(can ->
-                        partyService.getPartyEntityById(can
-                                .getPartyDependencies()
-                                .getId())
-                                .getMembers()
-                                .stream()
-                                .anyMatch(mem -> mem.getNumberInParty() != can.getNumberInParty()))
-                .collect(Collectors.toList());
-        System.out.println(
-                " exist " + candExististing.size() + " not in multi "
-                + candInPartyNotInMulti.size() + " withnoparty "
-                + candWithNoParty.size() + " all "
-                + candidatesFromCsv.size());
     }
 }
 

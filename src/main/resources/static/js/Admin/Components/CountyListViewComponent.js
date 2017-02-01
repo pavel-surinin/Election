@@ -14,6 +14,10 @@ var CountyListViewComponent = React.createClass({
           candidates={county.candidates}
           parties={county.parties}
           onHandleDelete={self.onHandleDelete}
+          onFileChange={self.onFileChange}
+          onHandleFormAddSingleCandSubmit={self.onHandleFormAddSingleCandSubmit}
+          fileErrorMesages={self.fileErrorMesages}
+          onHandleAddClick={self.onHandleAddClick}
         />
       );
     });

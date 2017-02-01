@@ -16,28 +16,24 @@ var CountyListRowViewComponent = React.createClass({
 	      self.context.router.push('/admin/county/' + id);
 	    };
 	  },
-
-	render: function() {
-      return (
+	onFileChange : function(){
+		this.props.onFileChange(this.refs.file.files[0], this.props.id);
+	},
+render: function() {
+	var fileErrorMesagesShow = validation.showMsg(this.props.fileErrorMesages);
+  return (
             <tr>
               <td>
                 {this.props.id}
               </td>
+
               <td>
                 {this.props.name}
               </td>
+
               <td>
                 <button
-									onClick={this.handleDetailsClick(this.props.id)}
-									id={'details-button-' + this.props.id}
-									className='btn btn-primary btn-sm'
-									role='button'>
-									Detaliau
-								</button>
-              </td>
-              <td>
-								&nbsp;
-								<button
+									onClick={this.props.onHandleAddClick}
 									ref="add"
 									data-toggle="tooltip2"
 									title="Pridėti Kandidatų sąrašą"
@@ -58,18 +54,22 @@ var CountyListRowViewComponent = React.createClass({
                     <div className="modal-content">
                       <div className="modal-header">
                         <button type="button" id="modal-close-button" className="close" data-dismiss="modal">&times;</button>
-                        <h3 className="modal-title text-center">Prisegti kandidatų sąrašą: {this.props.name} apygarda</h3>
+                        <h5 className="modal-title">Prisegti kandidatų sąrašą: {this.props.name} apygarda</h5>
                       </div>
                       <div className="modal-body">
-                        // TODO input form here
-                      </div>
-                      <div className="modal-footer">
-                        <button type="button" id="close-button"  className="btn btn-default" data-dismiss="modal">Uždaryti</button>
+												<form onSubmit={this.props.onHandleFormAddSingleCandSubmit} role="form">
+
+														<input className="col-xs-10 btn-bs-file btn btn-sm btn-primary btn-outline" onChange={this.onFileChange} ref="file" type="file" name="file" id="file-select"/>
+														<button id={'add-county-single-list-' + this.props.id} className='btn btn-success btn-outline col-xs-1 col-xs-offset-1'>
+														<i className="fa fa-check" aria-hidden="true"></i>
+														</button><br/>
+														<br/><br/>
+														{fileErrorMesagesShow}
+												</form>
                       </div>
                     </div>
                   </div>
                 </div>
-								<button onClick={this.onHandleDeleteClick} data-toggle="tooltip1" ref="delete" title="Ištrinti" type="button" id={'delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash"></button>
 							</td>
             </tr>
     	);

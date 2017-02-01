@@ -5,8 +5,9 @@ import lt.itakademija.electors.party.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -26,25 +27,7 @@ public class CandidateService {
     }
 
     public List<CandidateReport> getAllCandidates() {
-        List<CandidateReport> list = new ArrayList<>();
-        for (CandidateEntity candidateEntity : repository.getCandidatesList()) {
-            CandidateReport kr = new CandidateReport();
-            kr.setId(candidateEntity.getId());
-            kr.setName(candidateEntity.getName());
-            kr.setSurname(candidateEntity.getSurname());
-            kr.setDescription(candidateEntity.getDescription());
-            kr.setBirthDate(candidateEntity.getBirthDate());
-            kr.setNumberInParty(candidateEntity.getNumberInParty());
-            if (candidateEntity.getPartyDependencies() == null) {
-                kr.setPartijosId(null);
-                kr.setPartijosPavadinimas(null);
-            } else {
-                kr.setPartijosId(candidateEntity.getPartyDependencies().getId());
-                kr.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
-            }
-            list.add(kr);
-        }
-        return list;
+        return repository.getCandidatesList().stream().map(can -> new CandidateReport(can)).collect(Collectors.toList());
     }
 
     public CandidateEntity findByIdEntity(Long id){
@@ -67,4 +50,9 @@ public class CandidateService {
         }
     return true;
     }
+
+    public CandidateEntity getCandidateByNameSurnameNumberParty(CandidateEntity can){
+        return repository.findByNumberInPartyNameSurnameParty(can);
+    }
+
 }

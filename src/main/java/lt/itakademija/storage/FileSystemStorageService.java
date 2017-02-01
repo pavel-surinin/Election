@@ -1,6 +1,7 @@
 package lt.itakademija.storage;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
@@ -19,6 +20,8 @@ import java.util.stream.Stream;
 @Service
 public class FileSystemStorageService implements StorageService {
 
+    @Autowired
+    CSVParser reader;
 
     @Value("${storage.uploadPath}")
     private Path uploadPath;
@@ -29,8 +32,8 @@ public class FileSystemStorageService implements StorageService {
             if (file.isEmpty()) {
                 throw new StorageException("Failed to store empty file " + file.getOriginalFilename());
             }
-            CsvFileReader reader = new CsvFileReader(partyOrCounty);
-            return reader.read(file.getInputStream());
+            reader.setPartyOrCounty(partyOrCounty);
+            return reader.extractCandidates(file.getInputStream());
 
 //            Files.copy(file.getInputStream(), this.uploadPath.resolve(file.getOriginalFilename()));
         } catch (IOException e) {
@@ -45,7 +48,7 @@ public class FileSystemStorageService implements StorageService {
                     .filter(path -> !path.equals(this.uploadPath))
                     .map(path -> this.uploadPath.relativize(path));
         } catch (IOException e) {
-            throw new StorageException("Failed to read stored files", e);
+            throw new StorageException("Failed to extractCandidates stored files", e);
         }
 
     }
@@ -64,11 +67,11 @@ public class FileSystemStorageService implements StorageService {
                 return resource;
             }
             else {
-                throw new StorageFileNotFoundException("Could not read file: " + filename);
+                throw new StorageFileNotFoundException("Could not extractCandidates file: " + filename);
 
             }
         } catch (MalformedURLException e) {
-            throw new StorageFileNotFoundException("Could not read file: " + filename, e);
+            throw new StorageFileNotFoundException("Could not extractCandidates file: " + filename, e);
         }
     }
 
