@@ -2,10 +2,10 @@ var CountyDetailViewDistrictRowComponent = React.createClass({
 	render: function(){
 		return (
 				<tr>
-	              <td>
+	              <td className='small'>
 	                {this.props.name}
 	              </td>
-	              <td>
+	              <td className='small'>
 	                {this.props.representativeName}
 	              </td>
 	            </tr>

@@ -64,6 +64,8 @@ var hashHistory = ReactRouter.hashHistory;
 
 ReactDOM.render((
   <Router history={hashHistory}>
+
+
     <Route path="/admin" component={AdminComponent}>
       <IndexRoute component={EmptyComponent} />
       <Route path="/admin/district" component={DistrictListContainer} />
@@ -84,7 +86,7 @@ ReactDOM.render((
       <Route path="*" component={NoMatch}/>
     </Route>
 
-
+    
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />

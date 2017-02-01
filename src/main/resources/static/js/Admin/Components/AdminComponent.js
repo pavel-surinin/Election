@@ -65,7 +65,9 @@ var AdminComponent = React.createClass({
                       <ul className="nav" id="side-menu">
                           <li className="sidebar-search">
                           </li>
-                          <li><a href="#/admin"><i className="fa fa-dashboard fa-fw"></i>Administratoriaus panele</a></li>
+                          <li><a href="#/admin"><i className="fa fa-dashboard fa-fw"></i> Administratoriaus panele</a>
+
+                          </li>
                           <li><a href="#/admin/county"><i className="fa fa-expand" aria-hidden="true"></i> Apygardos</a></li>
                           <li><a href="#/admin/district"><i className="fa fa-compress" aria-hidden="true"></i> Apylinkės</a></li>
                           <li><a href="#/admin/representative"><i className="fa fa-address-book-o " aria-hidden="true"></i> Apylinkių atstovai</a></li>
@@ -84,101 +86,14 @@ var AdminComponent = React.createClass({
                   </div>
               </div>
               <div className="row">
-                  <div className="col-lg-3 col-md-6">
-                      <div className="panel panel-primary">
-                          <div className="panel-heading">
-                              <div className="row">
-                                  <div className="col-xs-3">
-                                      <i className="fa fa-expand fa-4x"></i>
-                                  </div>
-                                  <div className="col-xs-9 text-right">
-                                      <div className="huge">26</div>
-                                      <div>Apygardos</div>
-                                  </div>
-                              </div>
-                          </div>
-                          <a href="/#/admin/county/create">
-                              <div className="panel-footer">
-                                  <span className="pull-left">Pridėti naują</span>
-                                  <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
-                                  <div className="clearfix"></div>
-                              </div>
-                          </a>
-                      </div>
-                  </div>
-                  <div className="col-lg-3 col-md-6">
-                      <div className="panel panel-green">
-                          <div className="panel-heading">
-                              <div className="row">
-                                  <div className="col-xs-3">
-                                      <i className="fa fa-compress fa-4x"></i>
-                                  </div>
-                                  <div className="col-xs-9 text-right">
-                                      <div className="huge">12</div>
-                                      <div>Apylinkių</div>
-                                  </div>
-                              </div>
-                          </div>
-                          <a href="/#/admin/district/create">
-                              <div className="panel-footer">
-                                  <span className="pull-left">Pridėti naują</span>
-                                  <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
-                                  <div className="clearfix"></div>
-                              </div>
-                          </a>
-                      </div>
-                  </div>
-                  <div className="col-lg-3 col-md-6">
-                      <div className="panel panel-yellow">
-                          <div className="panel-heading">
-                              <div className="row">
-                                  <div className="col-xs-3">
-                                      <i className="fa fa-user fa-4x"></i>
-                                  </div>
-                                  <div className="col-xs-9 text-right">
-                                      <div className="huge">124</div>
-                                      <div>Kandidatų</div>
-                                  </div>
-                              </div>
-                          </div>
-                          <a href="#/admin/candidate">
-                              <div className="panel-footer">
-                                  <span className="pull-left">Peržiūrėti kandidatus</span>
-                                  <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
-                                  <div className="clearfix"></div>
-                              </div>
-                          </a>
-                      </div>
-                  </div>
-                  <div className="col-lg-3 col-md-6">
-                      <div className="panel panel-red">
-                          <div className="panel-heading">
-                              <div className="row">
-                                  <div className="col-xs-3">
-                                      <i className="fa fa-users fa-4x"></i>
-                                  </div>
-                                  <div className="col-xs-9 text-right">
-                                      <div className="huge">13</div>
-                                      <div>Partijų</div>
-                                  </div>
-                              </div>
-                          </div>
-                          <a href="#/admin/party/create">
-                              <div className="panel-footer">
-                                  <span className="pull-left">Pridėti Naują</span>
-                                  <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
-                                  <div className="clearfix"></div>
-                              </div>
-                          </a>
-                      </div>
-                  </div>
-              </div>
-              <div className="row">
                   <div className="col-lg-12">
                       {this.props.children}
                       <div className="panel panel-default">
-                          <div className="panel-heading">
-                              <i className="fa fa-clock-o fa-fw"></i> Rinkimų sistemos registravimo tvarka
+                          <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
+                              <h4 style={{display:'inline'}}>
+                                <i className="fa fa-clock-o fa-fw"></i>
+                                Rinkimų sistemos registravimo tvarka
+                              </h4>
                           </div>
                           <div className="panel-body">
                               1. Registruojama <mark>APYGARDA</mark><br/>

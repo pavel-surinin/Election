@@ -6,28 +6,11 @@ function validate(self, code){
   if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas');}
   if (code == 417) {numberErrorMesages.push('Partija su tokiu numeriu jau užregistruota');}
   if (code == 418) {nameErrorMesages.push('Partija su tokiu pavadinimu jau užregistruota');}
+  if (code == 422) {fileErrorMesages.push('Blogi CSV duomenys');}
   self.setState({
     fileErrorMesages : fileErrorMesages,
     numberErrorMesages :numberErrorMesages,
     nameErrorMesages :nameErrorMesages,
-  });
-}
-function filePost(obj, data, header) {
-  axios
-  .post('/party', data, header)
-  .then(function(response){
-    obj.setState({postErrCode : response.status});
-    obj.context.router.push('/admin/party?succesCreateText=Partija ' + obj.state.name + ' sukurta');
-  })
-  .catch(function (error) {
-    if (error.response) {
-      console.error(error.response.data.message);
-      obj.setState({postErrCode : error.response.status});
-      // console.log(error.response.headers);
-    } else {
-      console.error('Error', error.message);
-    }
-    // console.log(error.config);
   });
 }
 
@@ -42,9 +25,6 @@ var PartyCreateContainer = React.createClass({
       fileErrorMesages : [],
       postErrCode : 199,
     };
-  },
-  componentWillMount: function() {
-
   },
   onHandleFileChange : function(file){
     this.setState({file : file});
@@ -78,10 +58,6 @@ var PartyCreateContainer = React.createClass({
       'Party-name': this.state.name.trim(),
       'Party-number': number} };
     data.append('file', file);
-    var partyInfo = {
-      name: this.state.name.trim(),
-      partyNumber: number,
-    };
     //validation
     if(!validation.checkForCsv(file.name)) {fileErrorMesages.push('Būtina prisegti *.csv formato failą');}
     if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
@@ -92,18 +68,15 @@ var PartyCreateContainer = React.createClass({
         fileErrorMesages.length == 0 &&
         numberErrorMesages.length == 0
       ) {
-
       // Writing file to java
       axios
       .post('/party', data, header)
       .then(function(response){
-        console.log(response.status);
         self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' sukurta');
       })
       .catch(function (error) {
         if (error.response) {
           console.error(error.response.data.message);
-          console.log(error.response.status);
           validate(self, error.response.status);
         }
       });

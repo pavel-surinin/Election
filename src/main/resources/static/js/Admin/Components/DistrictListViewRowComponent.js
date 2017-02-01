@@ -6,22 +6,27 @@
   onHandleDeleteClick : function(){
     this.props.onHandleDelete(this.props.id);
   } ,
+  onHandleUploadCanClick : function(){
+    this.props.onHandleDelete({
+
+    });
+  } ,
   render: function() {
     return (
             <tr>
-              <td>
+              <td className="small">
                 {this.props.id}
               </td>
-              <td>
+              <td className="small">
                 {this.props.name}
               </td>
-              <td>
+              <td className="small">
                 {this.props.adress}
               </td>
-              <td>
+              <td className="small">
                 {this.props.countyName}
               </td>
-              <td>
+              <td className="small">
                 {this.props.representativeName}
               </td>
               <td>

@@ -2,16 +2,16 @@ var DistrictRespesentativeListViewRowComponent = React.createClass({
   render: function() {
     return (
             <tr>
-              <td>
+              <td className="small">
                 {this.props.id}
               </td>
-              <td>
+              <td className="small">
                 {this.props.name}
               </td>
-              <td>
+              <td className="small">
                 {this.props.surname}
               </td>
-              <td>
+              <td className="small">
                 {this.props.districtName}
               </td>
             </tr>

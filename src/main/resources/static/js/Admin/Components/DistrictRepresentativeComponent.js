@@ -19,18 +19,18 @@ var DistrictRepresentativeComponent = React.createClass({
     return (
 
 		      <div className="panel panel-default">
-		        <div className="panel-heading">
-		          <h3>Apylinkės Atstovų sarašas</h3>
+		        <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
+		          <h4 style={{display:'inline'}}><i className="fa fa-table"></i>&nbsp; Apylinkės Atstovų sarašas</h4>
+              <div className="text-success pull-right">
+                <a href="#/admin/representative/create"  id="register-button"><i className="fa fa-plus"></i>
+                &nbsp; Registruoti
+                </a>
+              </div>
 		        </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
-		            <a href="#/admin/representative/create"><button type="button" id="register-button" className="btn btn-success btn-sm">Registruoti</button></a>
-		            <span>
-		              <h5>Registruoti naują apylinkės atstovą </h5>
-		            </span>
 		          </div>
-              <div className="panel-body">
-		            <table className="table table-striped table-bordered table-hover">
+		            <table className="table table-striped table-hover">
 		              <thead>
 		                <tr>
 		                  <th>
@@ -52,7 +52,6 @@ var DistrictRepresentativeComponent = React.createClass({
 		              </tbody>
 		            </table>
               </div>
-		        </div>
     );
   }
 });
