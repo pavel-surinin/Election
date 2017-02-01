@@ -58,7 +58,7 @@ public class CandidateService {
     }
     
 	public CandidateReport getCandidateById(Long id) {
-		CandidateEntity candidate = new CandidateEntity();
+		CandidateEntity candidate = repository.finById(id);
 		CandidateReport report = new CandidateReport(candidate);
 		report.setId(id);
 		report.setName(candidate.getName());

@@ -3,6 +3,7 @@ package lt.itakademija.electors.candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import lt.itakademija.electors.county.CountyDetailsReport;
 import lt.itakademija.electors.district.DistrictReport;
 
 import java.util.List;
