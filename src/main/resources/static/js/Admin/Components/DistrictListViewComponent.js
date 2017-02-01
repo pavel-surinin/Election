@@ -23,16 +23,22 @@
 
     return (
 		      <div className="panel panel-default">
-		        <div className="panel-heading"><h2>Apylinkių sąrašas</h2></div>
+		        <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
+              <h4 style={{display:'inline'}}><i className="fa fa-table"></i>
+                &nbsp; Apylinkių sąrašas
+              </h4>
+              <div className="text-success pull-right">
+                <a href="#/admin/district/create" id="register-button"><i className="fa fa-plus"></i>
+                &nbsp; Registruoti
+                </a>
+              </div>
+            </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
-		            <span>
-		              <h5>Registruoti naują apylinkę </h5>
-		            </span>
-		            <a href="#/admin/district/create"><button type="button" id="register-button" className="btn btn-success btn-sm">Registruoti</button></a>
+
 		          </div>
-              <div className="panel-body">
-		            <table className="table table-striped table-bordered table-hover">
+
+		            <table className="table table-striped table-hover">
 		            <thead>
 		            <tr>
 		              <th>
@@ -59,7 +65,7 @@
 									{array}
 		            </tbody>
 		          </table>
-            </div>
+
 		        </div>
     );
   }

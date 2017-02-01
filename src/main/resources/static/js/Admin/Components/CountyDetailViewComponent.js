@@ -22,20 +22,22 @@ var CountyDetailViewComponent = React.createClass({
     console.log(this.props.countyDetails.candidates);
 		return (
 						<div className="panel panel-default">
-				          <div className="panel-heading">
-				            <h3>{this.props.countyDetails.name} rinkimų apygarda</h3>
+				          <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
+				            <h3>
+											{this.props.countyDetails.name} rinkimų apygarda
+										</h3>
+				          </div>
+									<div className="panel-body">
 										<button type="button" id="candidate-button" className="btn btn-outline btn-primary btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Kandidatai</button>
 										 &nbsp;
 										<button data-toggle="collapse" id="district-button" type="button" data-parent="#accordion" className="btn btn-outline btn-primary btn-sm" href="#collapse1">Apylinkės</button>
-				          </div>
+									</div>
 					      <div className="panel-group" id="accordion">
-					        <div className="panel panel-default">
 					          <div className="panel-heading">
 					            <h4 className="panel-title">
 					            </h4>
 					          </div>
 					          <div id="collapse1" className="panel-collapse collapse in">
-											<div className="panel-body">
 								        <table className="table table-striped table-bordered table-hover">
 								          <thead>
 								            <tr>
@@ -51,9 +53,8 @@ var CountyDetailViewComponent = React.createClass({
 								              {dist}
 								            </tbody>
 								          </table>
-												</div>
 					            </div>
-					          </div>
+
 					          <div className="panel panel-default">
 					            <div className="panel-heading">
 					              <h4 className="panel-title">

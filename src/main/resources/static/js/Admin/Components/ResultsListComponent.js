@@ -3,8 +3,8 @@ var ResultsListComponent = React.createClass({
   render: function() {
     return (
       <div className="panel panel-default">
-        <div className="panel-heading">
-          <h3>Rezultatai</h3>
+        <div className="panel-heading" style={{paddingLeft:15, paddingBottom:10,paddingTop:10}}>
+          <h4>Rezultatai</h4>
         </div>
         <div className="panel-body">
           <div className="tab-content">
@@ -20,7 +20,7 @@ var ResultsListComponent = React.createClass({
                 </div>
                 <div id="results1" className="tab-pane fade">
                   <h3>Vienmandatės Rezultatai</h3>
-                  <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
+                  <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                     <thead>
                       <tr>
                         <th> Apylinkės Numeris </th>
@@ -36,7 +36,7 @@ var ResultsListComponent = React.createClass({
                 </div>
                 <div id="results2" className="tab-pane fade">
                   <h3>Daugiamandatės Rezultatai</h3>
-                  <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
+                  <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                     <thead>
                       <tr>
                         <th> Apylinkės Numeris </th>
