@@ -23,27 +23,27 @@ var CandidatesListViewRowComponent = React.createClass({
                 {this.props.partijosPavadinimas}
               </td>
               <td>
-                <button ref="info" title="Aprašymas" type="button"  className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}></button>
+                <button ref="info" title="Aprašymas" id={'description-button-' + this.props.id} type="button"  className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}></button>
                 <div id={this.props.id} className="modal fade" role="dialog">
                   <div className="modal-dialog">
                     <div className="modal-content">
                       <div className="modal-header">
-                        <button type="button" className="close" data-dismiss="modal">&times;</button>
+                        <button type="button" id="modal-close-button" className="close" data-dismiss="modal">&times;</button>
                         <h4 className="modal-title">{this.props.name} {this.props.surname}</h4>
                       </div>
                       <div className="modal-body">
                         {this.props.description}
                       </div>
                       <div className="modal-footer">
-                        <button type="button" className="btn btn-default" data-dismiss="modal">Uždaryti</button>
+                        <button type="button" id="close-button"  className="btn btn-default" data-dismiss="modal">Uždaryti</button>
                       </div>
                     </div>
                   </div>
                 </div>
                 &nbsp;
-                <a href={'#/admin/candidate/edit/' + this.props.id} data-toggle="tooltip2" title="Atnaujinti Kandidato informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
+                <a href={'#/admin/candidate/edit/' + this.props.id} data-toggle="tooltip2" id={'edit-button-' + this.props.id} title="Atnaujinti Kandidato informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
                 &nbsp;
-                <button ref="delete" data-toggle="tooltip1" title="Ištrinti" type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
+                <button ref="delete" data-toggle="tooltip1" id={'delete-button-' + this.props.id} title="Ištrinti" type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
               </td>
             </tr>
     );

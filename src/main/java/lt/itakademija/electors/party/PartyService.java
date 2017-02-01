@@ -5,6 +5,7 @@ import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.exceptions.PartyNameCloneException;
 import lt.itakademija.exceptions.PartyNumberCloneException;
+import lt.itakademija.storage.CSVParser;
 import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,15 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Created by Pavel on 2017-01-12.
  */
 @Service
 public class PartyService {
+
+    @Autowired
+    CSVParser reader;
 
     @Autowired
     PartyRepository repository;
@@ -38,7 +41,7 @@ public class PartyService {
 
     @Transactional
     public void save(String partyName, Integer partyNumber, MultipartFile file) {
-        List<CandidateEntity> candidatesFromCsv = storageService.store(file);
+        List<CandidateEntity> candidatesFromCsv = storageService.store("Party", file);
         PartyEntity party = new PartyEntity();
         party.setName(partyName);
         final List<PartyEntity> parties = repository.findAll();
@@ -77,16 +80,7 @@ public class PartyService {
         pr.setPartyNumber(party.getPartyNumber());
         List<CandidateReport> members = party.getMembers()
                 .stream()
-                .map(c -> {
-                    CandidateReport cr = new CandidateReport();
-                    cr.setId(c.getId());
-                    cr.setName(c.getName());
-                    cr.setSurname(c.getSurname());
-                    cr.setBirthDate(c.getBirthDate());
-                    cr.setDescription(c.getDescription());
-                    cr.setNumberInParty(c.getNumberInParty());
-                    return cr;
-                })
+                .map(c -> new CandidateReport(c))
                 .collect(Collectors.toList());
         pr.setMembers(members);
         return pr;
@@ -104,5 +98,9 @@ public class PartyService {
         if (condition) {
             throw exception;
         }
+    }
+
+    public PartyEntity getPartyByNumber(Integer number) {
+        return repository.getPartyByNumber(number);
     }
 }

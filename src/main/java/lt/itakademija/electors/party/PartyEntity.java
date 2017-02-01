@@ -61,7 +61,7 @@ public class PartyEntity {
         return "PartyEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", members=" + members +
+                ",num of members=" + members.size() +
                 '}';
     }
 }

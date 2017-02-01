@@ -11,13 +11,3 @@ insert into district_representative_entity (id, district_id, name, surname) valu
 insert into district_representative_entity (id, district_id, name, surname) values (null, 4, 'Kaimo', 'Jurgis');
 insert into party_entity (party_id, name, party_number) values (null, 'Darbo Partija', 5);
 insert into party_entity (party_id, name, party_number) values (null, 'Valstiečių Partija', 7);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 1, 'Protingas', 'Juozas', 1, 'Petkelis', 1);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 2, 'Balvanas', 'Petras', 1, 'Petravičius', 2);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 1, 'Kietas', 'Antanas', 2, 'Guoga', 1);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 2, 'Minkstas', 'Dainius', 2, 'Zubrus', 2);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 1, 'Mobilus', 'Sonis', 1, 'Eriksonas', 3);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 2, 'Balvanas', 'Eglė', 1, 'Pušaitė', 4);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 1, 'Kietas', 'Goshas', 2, 'Žaibas', 3);
-insert into candidate_entity (id, birth_date, county_id, description, name, party_id, surname, NUMBER_IN_PARTY) values (null, '1969-06-09', 2, 'Minkstas', 'Algis', 2, 'Ramanauskas', 4);
-
-

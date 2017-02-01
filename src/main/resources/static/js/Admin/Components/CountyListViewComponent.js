@@ -14,6 +14,10 @@ var CountyListViewComponent = React.createClass({
           candidates={county.candidates}
           parties={county.parties}
           onHandleDelete={self.onHandleDelete}
+          onFileChange={self.onFileChange}
+          onHandleFormAddSingleCandSubmit={self.onHandleFormAddSingleCandSubmit}
+          fileErrorMesages={self.fileErrorMesages}
+          onHandleAddClick={self.onHandleAddClick}
         />
       );
     });
@@ -27,18 +31,18 @@ var CountyListViewComponent = React.createClass({
                 {succesCreateMessage}
 		            <h5>
 		              <a href="#/admin/county/create">
-		                <button type="button" className="btn btn-success btn-sm">
-		                  Registruoti naują Apygarda
+		                <button type="button" id="register-button" className="btn btn-success btn-sm">
+		                  Registruoti
 		                </button>
 		              </a>
 		            </h5>
 		          </div>
+              <div className="panel-body">
 		            <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
 		              <thead>
 		                <tr>
 		                  <th> Nr </th>
 		                  <th> Apygarda </th>
-		                  <th> Detali informacija </th>
 		                  <th> &nbsp; Redaguoti &nbsp; </th>
 		                </tr>
 		              </thead>
@@ -46,6 +50,7 @@ var CountyListViewComponent = React.createClass({
 		               {array}
 		              </tbody>
 		            </table>
+              </div>
 		        </div>
     );
   }

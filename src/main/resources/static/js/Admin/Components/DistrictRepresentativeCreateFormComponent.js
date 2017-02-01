@@ -22,6 +22,7 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					                <div className="input-group col-xs-12 text-primary">
 					                <label>Atstovo vardas</label>
 					                  <input
+															id="name-input"
 					                    type="text"
 					                    onChange={this.props.onHandleNameChange}
 					                    value={this.props.name}
@@ -35,6 +36,7 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 					                <div className="input-group col-xs-12 text-primary">
 					                <label>Atstovo pavardė</label>
 					                  <input
+															id="surname-input"
 					                    type="text"
 					                    onChange={this.props.onHandleSurnameChange}
 					                    value={this.props.surname}
@@ -46,16 +48,16 @@ var DistrictRepresentativeCreateFormComponent = React.createClass({
 													{surnameErr}
 					                <div className="form-group text-primary">
 					                  <label>Atstovaujama apylinkė:</label>
-					                  <select value={this.props.district} onChange={this.props.onHandleDistrictChange} className="form-control" required>
+					                  <select value={this.props.district} onChange={this.props.onHandleDistrictChange} id="district-select" className="form-control" required>
 					                    {districts}
 					                  </select>
 					                </div>
 													<br/>
 													<div className='text-center'>
-					                <button className='btn btn-success btn-outline col-xs-5'>
+					                <button id="create-button" className='btn btn-success btn-outline col-xs-5'>
 					                  {this.props.action}
 					                </button>
-													<a className="btn btn-danger btn-outline col-xs-5 col-xs-offset-2" href="#/admin/representative" role="button">Atšaukti</a>
+													<a id="cancel-button" className="btn btn-danger btn-outline col-xs-5 col-xs-offset-2" href="#/admin/representative" role="button">Atšaukti</a>
 													</div>
 					                </form>
 

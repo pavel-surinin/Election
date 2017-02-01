@@ -26,7 +26,6 @@ var CandidatesListViewComponent = React.createClass({
 							<h4><i className="fa fa-table"></i> Kandidatu sąrašas</h4>
 					</div>
 					<div className="panel-body">
-
             <table width="100%" className="table table-striped table-bordered table-hover" id="dataTables-example">
              <thead>
               <tr>
@@ -42,7 +41,6 @@ var CandidatesListViewComponent = React.createClass({
 			  {array}
             </tbody>
           </table>
-			</div>
 				<script src="../vendor/jquery/jquery.min.js"></script>
 
 			    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

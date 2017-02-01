@@ -1,9 +1,5 @@
 package lt.itakademija.electors.county;
 
-import lt.itakademija.Application;
-import lt.itakademija.electors.candidate.CandidateControllerTest;
-import lt.itakademija.electors.candidate.CandidateService;
-import lt.itakademija.electors.party.PartyReport;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -11,19 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Pavel on 2017-01-24.
