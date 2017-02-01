@@ -70,7 +70,7 @@ ReactDOM.render((
       <Route path="/admin/district/create" component={DistrictCreateContainer} />
       <Route path="/admin/district/edit/:id" component={DistrictEditContainer} />
       <Route path="/admin/candidate" component={CandidateContainer} />
-      <Route path="/admin/candidate/edit" component={CandidateEditContainer} />
+      <Route path="/admin/candidate/edit/:id" component={CandidateEditContainer} />
       <Route path="/admin/representative" component={DistrictRepresentativeContainer} />
       <Route path="/admin/representative/create" component={DistrictRepresentativeCreateContainer} />
       <Route path="/admin/county" component={CountyContainer} />

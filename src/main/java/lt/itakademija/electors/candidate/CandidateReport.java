@@ -112,4 +112,5 @@ public class CandidateReport {
     public void setDescription(String description) {
         this.description = description;
     }
+   
 }

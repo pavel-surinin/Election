@@ -1,5 +1,6 @@
 package lt.itakademija.electors.candidate;
 
+import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,8 @@ public class CandidateService {
     
     @Transactional
     public CandidateEntity save(CandidateEntity candidateEntity) {
-        return repository.save(candidateEntity);
+//      To do if Candidate has no county just save, else set Candidate County
+    	return repository.save(candidateEntity);  
     }
 
     public List<CandidateReport> getAllCandidates() {
@@ -50,9 +52,24 @@ public class CandidateService {
         }
     return true;
     }
-
+    
     public CandidateEntity getCandidateByNameSurnameNumberParty(CandidateEntity can){
         return repository.findByNumberInPartyNameSurnameParty(can);
     }
-
+    
+	public CandidateReport getCandidateById(Long id) {
+		CandidateEntity candidate = repository.finById(id);
+		CandidateReport report = new CandidateReport(candidate);
+		report.setId(id);
+		report.setName(candidate.getName());
+		report.setSurname(candidate.getSurname());
+		report.setBirthDate(candidate.getBirthDate());
+		if(candidate.getPartyDependencies() != null){
+			report.setPartijosId(candidate.getPartyDependencies().getId());
+			report.setPartijosPavadinimas(candidate.getPartyDependencies().getName());
+			report.setNumberInParty(candidate.getNumberInParty());	
+		}
+		report.setDescription(candidate.getDescription());
+		return report;
+	}
 }

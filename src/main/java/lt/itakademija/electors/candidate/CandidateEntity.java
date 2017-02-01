@@ -128,4 +128,8 @@ public class CandidateEntity {
                 ", isMultiList=" + isMultiList +
                 '}';
     }
+    
+    public void findById(Long id) {
+		this.id = id;	
+	}
 }
