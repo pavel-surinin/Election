@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by Pavel on 2017-01-26.
  */
-@ResponseStatus(value= HttpStatus.UNSUPPORTED_MEDIA_TYPE, reason="Not Equal Columns Count Csv")
+@ResponseStatus(value= HttpStatus.UNSUPPORTED_MEDIA_TYPE)
 public class NotEqualColumnsCountCsv extends RuntimeException {
 
     public NotEqualColumnsCountCsv(String message) {

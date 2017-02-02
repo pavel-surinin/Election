@@ -1,23 +1,28 @@
 var PartyDetailListRowViewComponent = React.createClass({
+  componentDidMount: function () {
+    $(this.refs.delete).tooltip();
+    $(this.refs.edit).tooltip();
+    $(this.refs.info).tooltip();
+  },
 
   render: function() {
     return (
       <tr>
-        <td>
+        <td className="small">
           {this.props.numberInParty}
         </td>
-        <td>
+        <td className="small">
           {this.props.name}
         </td>
-        <td>
+        <td className="small">
           {this.props.surname}
         </td>
-        <td>
+        <td className="small">
           {this.props.birthDate}
         </td>
         <td>
-          <button type="button" id={'description-button-' + this.props.id} className="btn btn-primary btn-sm" data-toggle="modal" data-target={'#' + this.props.id}>
-            Aprašymas
+          <button type="button" ref="info" title="Aprašymas" id={'description-button-' + this.props.id} className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}>
+
           </button>
             <div className="modal fade" id={this.props.id} tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div className="modal-dialog" role="document">

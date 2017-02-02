@@ -5,6 +5,8 @@ import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.party.PartyService;
+import lt.itakademija.exceptions.BadCSVFileExceprion;
+import lt.itakademija.exceptions.CandidateIsInCountyException;
 import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,7 @@ public class CountyService {
         return repository.findAll()
                 .stream()
                 .map(ent -> {
-                    CountyReport rep = new CountyReport(ent.getId(), ent.getName());
+                    CountyReport rep = new CountyReport(ent);
                     return rep;
                 })
                 .collect(Collectors.toList());
@@ -113,21 +115,47 @@ public class CountyService {
     public void update(Long countyId, MultipartFile file) {
         CountyEntity county = repository.findById(countyId);
         List<CandidateEntity> candidatesFromFile = storageService.store("County", file);
-        //TODO validate all with 3 lists
-        filterNoPartyCandidates(candidatesFromFile).stream().forEach(can -> {
+        validateCandidateIsInCounty(candidatesFromFile);
+        final List<CandidateEntity> noPartyCandidates = filterNoPartyCandidates(candidatesFromFile);
+        final List<CandidateEntity> existingCandidates = filterExistingCandidates(candidatesFromFile);
+        final List<CandidateEntity> candidatesNotInMultiList = filterCandidatesNotInMultiList(candidatesFromFile);
+        validateSplitListsAreEqualSizeWithOriginal(noPartyCandidates,existingCandidates,candidatesNotInMultiList,candidatesFromFile);
+
+        noPartyCandidates.stream().forEach(can -> {
             can.setCounty(county);
             candidateService.save(can);
         });
 
-        filterExistingCandidates(candidatesFromFile).stream().forEach(can -> {
+        existingCandidates.stream().forEach(can -> {
             CandidateEntity existingCan = candidateService.getCandidateByNameSurnameNumberParty(can);
             existingCan.setCounty(county);
             candidateService.save(existingCan);
         });
 
-        filterCandidatesNotInMultiList(candidatesFromFile).stream().forEach(can -> {
-            
-            //TODO set flag;
+        candidatesNotInMultiList.stream().forEach(can -> {
+            can.setCounty(county);
+            can.setMultiList(false);
+            candidateService.save(can);
+        });
+    }
+
+    private void validateSplitListsAreEqualSizeWithOriginal(List<CandidateEntity> noPartyCandidates,
+                                                            List<CandidateEntity> existingCandidates,
+                                                            List<CandidateEntity> candidatesNotInMultiList,
+                                                            List<CandidateEntity> candidatesFromFile) {
+        if(noPartyCandidates.size() + existingCandidates.size() + candidatesNotInMultiList.size() != candidatesFromFile.size()){
+            throw new BadCSVFileExceprion("Bad Candidates data in CSV, not all acndidates are passing bussines logic");
+        }
+    }
+
+    private void validateCandidateIsInCounty(List<CandidateEntity> cans) {
+        cans.stream().forEach(can -> {
+            CandidateEntity canFromDb = candidateService.getCandidateByNameSurnameNumberParty(can);
+            if(canFromDb != null){
+                if (canFromDb.getCounty() != null) {
+                    throw new CandidateIsInCountyException("Candidate " + can.getName() + " is in County " + can.getCounty());
+                }
+            }
         });
     }
 

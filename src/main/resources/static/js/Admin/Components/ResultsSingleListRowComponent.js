@@ -3,13 +3,13 @@ var ResultsSingleListRowComponent = React.createClass({
   render: function() {
     return (
       <tr>
-        <td>
+        <td className="small">
           Numeris 1
         </td>
-        <td>
+        <td className="small">
           Vilniaus
         </td>
-        <td>
+        <td className="small">
           Rezultatai
         </td>
         <td>

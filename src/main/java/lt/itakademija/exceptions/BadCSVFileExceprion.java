@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by Pavel on 2017-01-26.
  */
-@ResponseStatus(value= HttpStatus.UNPROCESSABLE_ENTITY, reason="Bad CSV file data.")
+@ResponseStatus(value= HttpStatus.UNPROCESSABLE_ENTITY)
 public class BadCSVFileExceprion extends RuntimeException {
 
     public BadCSVFileExceprion(String message) {
