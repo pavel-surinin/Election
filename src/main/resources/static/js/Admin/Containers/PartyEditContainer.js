@@ -10,6 +10,20 @@ var PartyEditContainer = React.createClass({
       postErrCode : 199,
     };
   },
+  componentWillMount: function() {
+      var self = this;
+      axios
+        .get('/party/' + this.props.params.id)
+        .then(function(response){
+          self.setState({
+            name : response.data.name.trim(),
+            number : response.data.partyNumber,
+          });
+        })
+        .catch(function(err){
+          console.error('DistrictEditContainer.componentWillMount.axios.getCouty', err);
+        });
+    },
   render: function() {
     return (
       <PartyCreateEditFormComponent
@@ -25,7 +39,7 @@ var PartyEditContainer = React.createClass({
        action='Atnaujinti'
        />
     );
-  }
+  },
 
 });
 
