@@ -5,19 +5,38 @@ package lt.itakademija.electors.district;
  */
 public class DistrictReport {
 
+    private DistrictEntity ent;
     private Long id;
-
     private String name;
-
     private String adress;
-
     private Long representativeId;
-
     private String representativeName;
-
     private Long countyId;
-
     private String countyName;
+    private Long numberOfElectors;
+
+    public DistrictReport(DistrictEntity ent) {
+        this.id = ent.getId();
+        this.name = ent.getName();
+        this.adress = ent.getAdress();
+        if (ent.getRepresentative() != null) {
+            this.representativeId = ent.getRepresentative().getId();
+            this.representativeName = ent.getRepresentative().getName();
+        }
+        if (ent.getCounty() != null) {
+            this.countyId = ent.getCounty().getId();
+            this.countyName = ent.getCounty().getName();
+        }
+        this.numberOfElectors = ent.getNumberOfElectors();
+    }
+
+    public Long getNumberOfElectors() {
+        return numberOfElectors;
+    }
+
+    public void setNumberOfElectors(Long numberOfElectors) {
+        this.numberOfElectors = numberOfElectors;
+    }
 
     public Long getCountyId() {
         return countyId;

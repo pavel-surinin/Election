@@ -23,12 +23,23 @@ public class DistrictEntity {
     @NotNull
     private String adress;
 
+    @NotNull
+    private Long numberOfElectors;
+
     @ManyToOne
     @JoinColumn(nullable = true, name= "COUNTY_ID")
     private CountyEntity county;
 
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
     private DistrictRepresentativeEntity representative;
+
+    public Long getNumberOfElectors() {
+        return numberOfElectors;
+    }
+
+    public void setNumberOfElectors(Long numberOfElectors) {
+        this.numberOfElectors = numberOfElectors;
+    }
 
     public DistrictRepresentativeEntity getRepresentative() {
         return representative;

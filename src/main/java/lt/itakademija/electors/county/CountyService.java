@@ -76,18 +76,7 @@ public class CountyService {
         if (county.getDistricts() != null) {
             List<DistrictReport> districtReports = county.getDistricts()
                     .stream()
-                    .map(d -> {
-                        DistrictReport dr = new DistrictReport();
-                        dr.setId(d.getId());
-                        dr.setName(d.getName());
-                        dr.setAdress(d.getAdress());
-                        if (d.getRepresentative() == null) {
-                            dr.setRepresentativeName(null);
-                        } else {
-                            dr.setRepresentativeName(d.getRepresentative().getName() + " " + d.getRepresentative().getSurname());
-                        }
-                        return dr;
-                    })
+                    .map(d -> new DistrictReport(d))
                     .collect(Collectors.toList());
             report.setDistricts(districtReports);
         } else {

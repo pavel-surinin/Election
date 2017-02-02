@@ -18,7 +18,7 @@ function validate(self, code){
   if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas, stulpelių skaičius skiriasi');}
   if (code == 422) {fileErrorMesages.push('Blogi CSV duomenys');}
   if (code == 424) {fileErrorMesages.push('Blogi CSV duomenys, yra kandidatu, kurie jau užregistruoti');}
-  if (code == 424) {fileErrorMesages.push('Duomenų klaida');}
+  if (code == 451) {fileErrorMesages.push('Kandidatas priskiriamas partijai, kuri neregistruota');}
   self.setState({
     fileErrorMesages : fileErrorMesages,
   });

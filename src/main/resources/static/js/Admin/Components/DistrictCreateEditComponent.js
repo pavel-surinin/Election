@@ -4,6 +4,7 @@ var DistrictCreateEditComponent = React.createClass({
     var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
     var adressErrorMesages = validation.showMsg(this.props.adressErrorMesages);
     var existsErrorMesages = validation.showMsg(this.props.existsErrorMesages);
+    var numberErrorMesages = validation.showMsg(this.props.numberErrorMesages);
     var counties = [];
     this.props.countyList.map(function(county,index) {
       counties.push(
@@ -49,6 +50,20 @@ var DistrictCreateEditComponent = React.createClass({
                             />
                           </div><br/>
                           {adressErrorMesages}
+
+                          <div className="input-group col-xs-12 text-primary">
+                          <label>Apylinkės rinkėjų Skaičius</label>
+                            <input
+                              id="adress-input"
+                              type="text"
+                              onChange={this.props.onHandleNumberChange}
+                              value={this.props.numberOfElectors}
+                              className="form-control"
+                              placeholder="Rinkėjų skačius"
+                              required
+                            />
+                          </div><br/>
+                          {numberErrorMesages}
                           <div className="form-group text-primary">
                             <label>Apygarda, kuriai priklauso apylinkė:</label>
                             <select value={this.props.county} onChange={this.props.onHandleCountyChange} id="county-district-select" className="form-control" required>

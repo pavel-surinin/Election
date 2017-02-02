@@ -7,6 +7,7 @@ import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
+import lt.itakademija.exceptions.PartyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +79,9 @@ public class CSVParser {
             return null;
         }
         PartyEntity party = partyService.getPartyByNumber(parseNullOrInteger(partyId));
+        if (party == null) {
+            throw new PartyDoesNotExistException("Party with number " + partyId + " does not exist");
+        }
         return party;
     }
 
