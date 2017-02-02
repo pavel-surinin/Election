@@ -2,6 +2,7 @@ package lt.itakademija.electors.district;
 
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
+import lt.itakademija.electors.results.ResultSingleEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,6 +33,9 @@ public class DistrictEntity {
 
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
     private DistrictRepresentativeEntity representative;
+
+    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
+    private ResultSingleEntity resultSingleEntity;
 
     public Long getNumberOfElectors() {
         return numberOfElectors;
