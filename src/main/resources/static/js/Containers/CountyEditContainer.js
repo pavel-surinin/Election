@@ -41,6 +41,7 @@
 		    });
 		    event.preventDefault();
 		  },
+		  
 		  onHandleCancel:function(){
 		    this.context.router.push('/admin/county');
 		  },

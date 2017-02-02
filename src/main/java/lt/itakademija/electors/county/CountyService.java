@@ -6,6 +6,7 @@ import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -83,5 +84,15 @@ public class CountyService {
         });
         repository.delete(id);
         return true;
+    }
+    
+    @Transactional CountyEntity updateById(CountyEntity county, Long id){
+    	repository.findById(id).getCandidates()
+        .stream().forEach(c -> {
+            c.setCounty(county);
+            candidateService.save(c);
+        });
+  
+    	return repository.update(county, id);
     }
 }

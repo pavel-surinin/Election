@@ -1,8 +1,13 @@
   var DistrictEditContainer = React.createClass({
 	  getInitialState: function() {
 		    return {
-		      districtDetails : [],
+		      details : [],
 		      name : '',
+		      adress : '',
+		      representativeId : '',
+		      representativeName : '',
+		      countyId : '',
+		      countyName : '',
 		    };
 		  },
 
@@ -14,6 +19,11 @@
 		      self.setState({
 		        id : response.data.id,
 		        name: response.data.name,
+		        adress: response.data.adress,
+		        representativeId: response.data.representativeId,
+			    representativeName: response.data.representativeName,
+			    countyId: response.data.countyId,
+			    countyName: response.data.countyName,
 		      });
 		    })
 		    .catch(function(err){

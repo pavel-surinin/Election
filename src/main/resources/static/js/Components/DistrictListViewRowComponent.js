@@ -26,7 +26,7 @@
                 {this.props.representativeName}
               </td>
               <td>
-              	<button onClick={this.handleEditClick(this.props.id)} type="button" className="btn btn-primary btn-sm fa fa-pencil"></button>
+              <button onClick={this.handleEditClick(this.props.id)} type="button" className="btn btn-primary btn-sm fa fa-pencil"></button>
                 &nbsp;
                 <button type="button" onClick={this.delete} className="btn btn-danger btn-sm fa fa-trash"></button>  
               </td>
