@@ -22,8 +22,8 @@ var CountyListViewComponent = React.createClass({
 		      <div className="panel panel-default">
 		        <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
 		          <h4 style={{display:'inline'}}><i className="fa fa-table"></i>&nbsp; Rinkimų apygardų sąrašas </h4>
-              <div className="text-success pull-right">
-                <a href="#/admin/county/create" id="register-button"><i className="fa fa-plus"></i>
+              <div className=" pull-right">
+                <a href="#/admin/county/create" id="register-button" className="text-success"><i className="fa fa-plus"></i>
                   &nbsp;
                   Registruoti
                 </a>

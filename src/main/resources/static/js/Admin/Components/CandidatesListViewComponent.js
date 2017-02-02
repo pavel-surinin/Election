@@ -37,7 +37,7 @@ var CandidatesListViewComponent = React.createClass({
               </tr>
             </thead>
             <tbody>
-			  {array}
+			  			{array}
             </tbody>
           </table>
 				<script src="../vendor/jquery/jquery.min.js"></script>

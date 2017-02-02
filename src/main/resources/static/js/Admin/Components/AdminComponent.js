@@ -54,7 +54,7 @@ var AdminComponent = React.createClass({
 
               <ul className="nav navbar-top-links navbar-right">
                 <li>
-                    <a href='#a' onClick={this.onHandleLogout}>
+                    <a href='#a' id="logout-button"  onClick={this.onHandleLogout}>
                       Atsijungti &nbsp;<i className="fa fa-sign-out"></i>
                     </a>
                   </li>
@@ -68,12 +68,12 @@ var AdminComponent = React.createClass({
                           <li><a href="#/admin"><i className="fa fa-dashboard fa-fw"></i> Administratoriaus panele</a>
 
                           </li>
-                          <li><a href="#/admin/county"><i className="fa fa-expand" aria-hidden="true"></i> Apygardos</a></li>
-                          <li><a href="#/admin/district"><i className="fa fa-compress" aria-hidden="true"></i> Apylinkės</a></li>
-                          <li><a href="#/admin/representative"><i className="fa fa-address-book-o " aria-hidden="true"></i> Apylinkių atstovai</a></li>
-                          <li><a href="#/admin/candidate"><i className="fa fa-user" aria-hidden="true"></i> Kandidatai</a></li>
-                          <li><a href="#/admin/party"> <i className="fa fa-users" aria-hidden="true"></i> Partijos</a></li>
-                          <li><a href="#/admin/results"> <i className="fa fa-line-chart" aria-hidden="true"></i> Rezultatai</a></li>
+                          <li><a href="#/admin/county" id="county-button"><i className="fa fa-expand" aria-hidden="true"></i> Apygardos</a></li>
+                          <li><a href="#/admin/district" id="district-button"><i className="fa fa-compress" aria-hidden="true"></i> Apylinkės</a></li>
+                          <li><a href="#/admin/representative" id="representative-button"><i className="fa fa-address-book-o " aria-hidden="true"></i> Apylinkių atstovai</a></li>
+                          <li><a href="#/admin/candidate" id="candidates-button"><i className="fa fa-user" aria-hidden="true"></i> Kandidatai</a></li>
+                          <li><a href="#/admin/party" id="party-button"> <i className="fa fa-users" aria-hidden="true"></i> Partijos</a></li>
+                          <li><a href="#/admin/results" id="results-button"> <i className="fa fa-line-chart" aria-hidden="true"></i> Rezultatai</a></li>
                       </ul>
                   </div>
               </div>
