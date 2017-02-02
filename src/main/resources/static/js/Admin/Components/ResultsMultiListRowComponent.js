@@ -4,16 +4,16 @@ var ResultsMultiListRowComponent = React.createClass({
   render: function() {
     return (
       <tr>
-        <td>
+        <td className="small">
           Numeris 1
         </td>
-        <td>
+        <td className="small">
           Vilniaus
         </td>
-        <td>
+        <td className="small">
           Rezultatai
         </td>
-        <td>
+        <td className="small">
           <div>
             &nbsp;
               <button data-toggle="tooltip1" title="Patvirtinti" type="button" className="btn btn-success btn-sm fa fa-check"></button>

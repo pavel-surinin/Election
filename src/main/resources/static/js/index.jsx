@@ -1,4 +1,3 @@
-﻿
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -84,7 +83,6 @@ ReactDOM.render((
       <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
-
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />

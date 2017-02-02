@@ -17,12 +17,15 @@ var PartyDetailViewComponent = React.createClass({
 
     return (
       <div className="panel panel-default">
-          <div className="panel-heading"><h2>{this.props.partyDetails.name}</h2>
-            <a id="delete-button" className="btn btn-danger" onClick={this.props.onHandleDeleteClick}>  <i className="fa fa-trash-o fa-lg"></i> Ištrinti sąrašą</a>
-            <a id="back-button" className="btn btn-success" href="#/admin/party" role="button">Atgal</a>
+          <div className="panel-heading">
+            <h4 style={{display:'inline', padding:'10, 15'}}><i className="fa fa-table"></i>
+              &nbsp; {this.props.partyDetails.name}
+            </h4>
+            <div className="text-success pull-right">
+            <a id="delete-button" onClick={this.props.onHandleDeleteClick}> <i className="fa fa-trash-o fa-lg"></i> Ištrinti sąrašą</a>
+            </div>
           </div>
-          <div className="panel-body">
-            <table className="table table-striped table-bordered table-hover">
+           <table className="table table-striped table-hover">
              <thead>
               <tr>
                 <th>
@@ -46,7 +49,6 @@ var PartyDetailViewComponent = React.createClass({
                 {array}
             </tbody>
           </table>
-        </div>
         </div>
     );
   }

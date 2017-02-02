@@ -89,8 +89,11 @@ var AdminComponent = React.createClass({
                   <div className="col-lg-12">
                       {this.props.children}
                       <div className="panel panel-default">
-                          <div className="panel-heading">
-                              <i className="fa fa-clock-o fa-fw"></i> Rinkimų sistemos registravimo tvarka
+                          <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
+                              <h4 style={{display:'inline'}}>
+                                <i className="fa fa-clock-o fa-fw"></i>
+                                Rinkimų sistemos registravimo tvarka
+                              </h4>
                           </div>
                           <div className="panel-body">
                               1. Registruojama <mark>APYGARDA</mark><br/>

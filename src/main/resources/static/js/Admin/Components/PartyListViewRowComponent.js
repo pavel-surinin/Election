@@ -13,13 +13,13 @@ var  PartyListViewRowComponent= React.createClass({
   render: function() {
     return (
             <tr>
-              <td>
+              <td className="small">
                 {this.props.partyNumber}
               </td>
-              <td>
+              <td className="small">
                 {this.props.name}
               </td>
-              <td>
+              <td className="small">
                 <button onClick={this.handleDetailsClick(this.props.id)} ref="info" title="Detaliau" id={'details-button-' + this.props.id} className='btn btn-info btn-sm fa fa-info' role='button'></button>
                 &nbsp;
                 &nbsp;

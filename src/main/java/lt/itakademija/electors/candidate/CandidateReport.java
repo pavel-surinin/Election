@@ -24,6 +24,8 @@ public class CandidateReport {
 
     private Integer numberInParty;
 
+    private Long countyId;
+
     private boolean isMultiList;
 
     public CandidateReport(CandidateEntity candidateEntity) {
@@ -38,6 +40,17 @@ public class CandidateReport {
             this.setPartijosId(candidateEntity.getPartyDependencies().getId());
             this.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
         }
+        if (candidateEntity.getCounty() != null) {
+            this.setCountyId(candidateEntity.getCounty().getId());
+        }
+    }
+
+    public Long getCountyId() {
+        return countyId;
+    }
+
+    public void setCountyId(Long countyId) {
+        this.countyId = countyId;
     }
 
     public boolean isMultiList() {

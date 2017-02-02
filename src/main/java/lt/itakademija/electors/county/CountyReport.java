@@ -14,16 +14,35 @@ import java.util.List;
  */
 public class CountyReport {
 
+    private CountyEntity countyEntity;
+
     private Long id;
 
     private String name;
+
+    private Integer candidatesCount;
 
     public CountyReport(Long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public CountyReport() {
+    public CountyReport(CountyEntity ent) {
+        this.id = ent.getId();
+        this.name = ent.getName();
+        if (ent.getCandidates() != null){
+            this.candidatesCount = ent.getCandidates().size();
+        } else {
+            this.candidatesCount = 0;
+        }
+    }
+
+    public Integer getCandidatesCount() {
+        return candidatesCount;
+    }
+
+    public void setCandidatesCount(Integer candidatesCount) {
+        this.candidatesCount = candidatesCount;
     }
 
     public Long getId() {
