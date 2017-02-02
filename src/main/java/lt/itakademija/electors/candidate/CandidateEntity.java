@@ -39,6 +39,17 @@ public class CandidateEntity {
     @JoinColumn(nullable = true, name= "COUNTY_ID")
     private CountyEntity county;
 
+    @Column(nullable=false)
+    private boolean isMultiList = true;
+
+    public boolean isMultiList() {
+        return isMultiList;
+    }
+
+    public void setMultiList(boolean multiList) {
+        isMultiList = multiList;
+    }
+
     public Long getId() {
         return id;
     }
@@ -102,4 +113,23 @@ public class CandidateEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "CandidateEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", birthDate=" + birthDate +
+                ", partyDependencies=" + partyDependencies +
+                ", numberInParty=" + numberInParty +
+                ", description='" + description + '\'' +
+                ", county=" + county +
+                ", isMultiList=" + isMultiList +
+                '}';
+    }
+    
+    public void findById(Long id) {
+		this.id = id;	
+	}
 }

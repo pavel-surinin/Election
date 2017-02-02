@@ -6,6 +6,8 @@ import java.util.Date;
  * Created by Pavel on 2017-01-12.
  */
 public class CandidateReport {
+    private CandidateEntity can;
+
     private Long id;
 
     private String name;
@@ -22,9 +24,34 @@ public class CandidateReport {
 
     private Integer numberInParty;
 
+    private boolean isMultiList;
+
+    public CandidateReport(CandidateEntity candidateEntity) {
+        this.setId(candidateEntity.getId());
+        this.setName(candidateEntity.getName());
+        this.setSurname(candidateEntity.getSurname());
+        this.setDescription(candidateEntity.getDescription());
+        this.setBirthDate(candidateEntity.getBirthDate());
+        this.setNumberInParty(candidateEntity.getNumberInParty());
+        this.setMultiList(candidateEntity.isMultiList());
+        if (candidateEntity.getPartyDependencies() != null) {
+            this.setPartijosId(candidateEntity.getPartyDependencies().getId());
+            this.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
+        }
+    }
+
+    public boolean isMultiList() {
+        return isMultiList;
+    }
+
+    public void setMultiList(boolean multiList) {
+        isMultiList = multiList;
+    }
+
     public Integer getNumberInParty() {
         return numberInParty;
     }
+
 
     public void setNumberInParty(Integer numberInParty) {
         this.numberInParty = numberInParty;
@@ -85,4 +112,5 @@ public class CandidateReport {
     public void setDescription(String description) {
         this.description = description;
     }
+   
 }

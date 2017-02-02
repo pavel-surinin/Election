@@ -31,7 +31,9 @@ var CandidateContainer = React.createClass({
       );
     } else {
       return (
-        <CandidatesListViewComponent candidateList={this.state.candidateList}/>
+        <CandidatesListViewComponent
+          candidateList={this.state.candidateList}
+        />
       );
     }
 

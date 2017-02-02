@@ -36,7 +36,7 @@ var AdminComponent = React.createClass({
 
   render: function() {
     if (this.state.adminIsLogged == false) {
-      return <div><img src='https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'/></div>;
+      return <div><img src='./Images/loading.gif'/></div>;
     }
     return (
       <div>

@@ -19,9 +19,6 @@ var DistrictListContainer = React.createClass({
     };
   },
 
-  onHandleDelete : function(i){
-  },
-
   componentWillMount: function() {
     console.log(this.props);
     if (this.props.location.query.succesCreateText != null) {
