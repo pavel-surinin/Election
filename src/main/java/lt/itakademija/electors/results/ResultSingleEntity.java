@@ -22,7 +22,8 @@ public class ResultSingleEntity {
     private CandidateEntity candidate;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "DISTRICT_ID")
     private DistrictEntity district;
 
     @NotNull

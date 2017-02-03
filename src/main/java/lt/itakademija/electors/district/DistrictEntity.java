@@ -6,6 +6,7 @@ import lt.itakademija.electors.results.ResultSingleEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -34,8 +35,16 @@ public class DistrictEntity {
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
     private DistrictRepresentativeEntity representative;
 
-    @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
-    private ResultSingleEntity resultSingleEntity;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "district")
+    private List<ResultSingleEntity> resultSingleEntity;
+
+    public List<ResultSingleEntity> getResultSingleEntity() {
+        return resultSingleEntity;
+    }
+
+    public void setResultSingleEntity(List<ResultSingleEntity> resultSingleEntity) {
+        this.resultSingleEntity = resultSingleEntity;
+    }
 
     public Long getNumberOfElectors() {
         return numberOfElectors;

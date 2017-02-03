@@ -1,5 +1,6 @@
 package lt.itakademija.electors.results;
 
+import lt.itakademija.electors.district.DistrictEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
@@ -30,8 +31,15 @@ public class ResultSingleRepository {
         return list;
     }
 
-    public void deleteById(Long id){
-        ResultSingleEntity result = em.find(ResultSingleEntity.class, id);
-        em.remove(result);
+    public void delete(ResultSingleEntity res){
+        em.remove(res);
+    }
+
+    public List<ResultSingleEntity> getByDistrictId(DistrictEntity district) {
+        List<ResultSingleEntity> list = em
+                .createQuery("SELECT r FROM ResultSingleEntity r WHERE r.district = :rDistrict")
+                .setParameter("rDistrict", district)
+                .getResultList();
+        return list;
     }
 }

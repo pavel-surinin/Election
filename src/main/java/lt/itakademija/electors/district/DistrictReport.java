@@ -1,5 +1,9 @@
 package lt.itakademija.electors.district;
 
+import lt.itakademija.electors.results.ResultSingleEntity;
+
+import java.util.List;
+
 /**
  * Created by Pavel on 2017-01-16.
  */
@@ -14,6 +18,10 @@ public class DistrictReport {
     private Long countyId;
     private String countyName;
     private Long numberOfElectors;
+    private boolean isResultSingleRegistered = false;
+    private boolean isResultMultiRegistered = false;
+    private boolean isResultSingleApproved = false;
+    private boolean isResultMultiApproved = false;
 
     public DistrictReport(DistrictEntity ent) {
         this.id = ent.getId();
@@ -21,13 +29,53 @@ public class DistrictReport {
         this.adress = ent.getAdress();
         if (ent.getRepresentative() != null) {
             this.representativeId = ent.getRepresentative().getId();
-            this.representativeName = ent.getRepresentative().getName();
+            this.representativeName = ent.getRepresentative().getName() + " " + ent.getRepresentative().getSurname();
         }
         if (ent.getCounty() != null) {
             this.countyId = ent.getCounty().getId();
             this.countyName = ent.getCounty().getName();
         }
         this.numberOfElectors = ent.getNumberOfElectors();
+        if (ent.getResultSingleEntity() != null) {
+            this.isResultSingleRegistered = ent.getResultSingleEntity().size() != 0;
+            this.isResultSingleApproved = ent.getResultSingleEntity()
+                    .stream()
+                    .filter(res -> res.isApproved() == true)
+                    .toArray().length != 0;
+        }
+
+    }
+
+    public boolean isResultSingleApproved() {
+        return isResultSingleApproved;
+    }
+
+    public void setResultSingleApproved(boolean resultSingleApproved) {
+        isResultSingleApproved = resultSingleApproved;
+    }
+
+    public boolean isResultMultiApproved() {
+        return isResultMultiApproved;
+    }
+
+    public void setResultMultiApproved(boolean resultMultiApproved) {
+        isResultMultiApproved = resultMultiApproved;
+    }
+
+    public boolean isResultSingleRegistered() {
+        return isResultSingleRegistered;
+    }
+
+    public void setResultSingleRegistered(boolean resultSingleRegistered) {
+        isResultSingleRegistered = resultSingleRegistered;
+    }
+
+    public boolean isResultMultiRegistered() {
+        return isResultMultiRegistered;
+    }
+
+    public void setResultMultiRegistered(boolean resultMultiRegistered) {
+        isResultMultiRegistered = resultMultiRegistered;
     }
 
     public Long getNumberOfElectors() {
