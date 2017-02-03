@@ -19,7 +19,7 @@ var PartyListViewComponent = React.createClass({
 		        <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
 		          <h4 style={{display:'inline'}}><i className="fa fa-table"></i>&nbsp; Partijų sąrašas</h4>
               <div className="text-success pull-right">
-                <a href="#/admin/party/create"  id="register-button"><i className="fa fa-plus"></i>
+                <a href="#/admin/party/create"  id="register-button" className="text-success"><i className="fa fa-plus"></i>
                   &nbsp; Registruoti
                 </a>
               </div>

@@ -23,6 +23,7 @@ var App = React.createClass({
               <ul className="nav navbar-nav">
                 <li><a href="#/">Pradinis</a></li>
                 <li><a href="#/login">Prisijungti</a></li>
+                <li><a href="#/representative">Atstovas</a></li>
 
               </ul>
               <ul className="nav navbar-nav navbar-right">
@@ -63,6 +64,15 @@ var hashHistory = ReactRouter.hashHistory;
 
 ReactDOM.render((
   <Router history={hashHistory}>
+
+    <Route path="/representative" component={RepresentativeContainer}>
+      <IndexRoute component={SingleResultComponent} />
+      <Route path="/representative/single" component={SingleResultComponent} />
+      <Route path="/representative/multi" component={MultiResultComponent} />
+      <Route path="*" component={NoMatch}/>
+    </Route>
+
+
     <Route path="/admin" component={AdminComponent}>
       <IndexRoute component={EmptyComponent} />
       <Route path="/admin/district" component={DistrictListContainer} />
@@ -79,9 +89,11 @@ ReactDOM.render((
       <Route path="/admin/party" component={PartyContainer} />
       <Route path="/admin/party/create" component={PartyCreateContainer} />
       <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
+      <Route path="/admin/party/edit/:id" component={PartyEditContainer} />
       <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
+
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />

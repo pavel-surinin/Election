@@ -28,7 +28,7 @@
                 &nbsp; Apylinkių sąrašas
               </h4>
               <div className="text-success pull-right">
-                <a href="#/admin/district/create" id="register-button"><i className="fa fa-plus"></i>
+                <a href="#/admin/district/create" id="register-button" className="text-success"><i className="fa fa-plus"></i>
                 &nbsp; Registruoti
                 </a>
               </div>
