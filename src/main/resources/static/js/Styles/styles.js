@@ -7,6 +7,7 @@ var styles = {
       return {display : 'none'};
     }
   }
+
 };
 
 window.styles = styles;
