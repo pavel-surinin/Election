@@ -1,9 +1,9 @@
 ﻿var DistrictListViewComponent = React.createClass({
   render: function() {
     var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
+
     var self = this.props;
     var array = [];
-    var self= this.props;
     this.props.districtList.map(function(dist,index) {
       array.push(
 				<DistrictListViewRowComponent

@@ -24,7 +24,7 @@ var DistrictRepresentativeCreateContainer = React.createClass({
       axios
       .post('/representative', postRequest)
       .then(function(response){
-        self.context.router.push('/admin/representative?succesCreateText=Apylinkės atstovas ' + self.state.name+' '+ self.state.surname + ' sukurtas');
+        self.context.router.push('/admin/representative?succesCreateText=Apylinkės atstovas ' + self.state.name+' '+ self.state.surname + ' sukurtas.&credentials=Vartotojo prisijungimo vardas: ' + response.data.username + ' slaptažodis: ' + response.data.password);
       })
       .catch(function(err){
         console.error('DistrictRepresentativeCreateContainer.onHandleSubmit.axios', err);
