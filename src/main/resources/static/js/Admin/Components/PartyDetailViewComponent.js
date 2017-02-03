@@ -22,7 +22,7 @@ var PartyDetailViewComponent = React.createClass({
               &nbsp; {this.props.partyDetails.name}
             </h4>
             <div className="text-success pull-right">
-            <a id="delete-button" onClick={this.props.onHandleDeleteClick}> <i className="fa fa-trash-o fa-lg"></i> Ištrinti sąrašą</a>
+            <a id="delete-button" className="text-danger" onClick={this.props.onHandleDeleteClick}> <i className="fa fa-trash-o fa-lg"></i> Ištrinti sąrašą</a>
             </div>
           </div>
            <table className="table table-striped table-hover">
