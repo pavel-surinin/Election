@@ -1,5 +1,6 @@
 package lt.itakademija.electors.county;
 
+import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.district.DistrictReport;
 
@@ -10,6 +11,8 @@ import java.util.List;
  */
 public class CountyDetailsReport {
 
+    private CandidateEntity ent;
+
     private Long id;
 
     private String name;
@@ -17,6 +20,14 @@ public class CountyDetailsReport {
     private List<DistrictReport> districts;
 
     private List<CandidateReport> candidates;
+
+    public CandidateEntity getEnt() {
+        return ent;
+    }
+
+    public void setEnt(CandidateEntity ent) {
+        this.ent = ent;
+    }
 
     public Long getId() {
         return id;

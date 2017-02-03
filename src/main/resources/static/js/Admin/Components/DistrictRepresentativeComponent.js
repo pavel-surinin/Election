@@ -1,8 +1,7 @@
-var gs = window.generalStyles;
-
 var DistrictRepresentativeComponent = React.createClass({
   render: function() {
     var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
+    var credentialsMessage = alerts.showInfo(this.props.credentials);
     var array = [];
     this.props.representativesList.map(function(rep,index) {
       array.push(
@@ -29,6 +28,7 @@ var DistrictRepresentativeComponent = React.createClass({
 		        </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
+                {credentialsMessage}
 		          </div>
 		            <table className="table table-striped table-hover">
 		              <thead>

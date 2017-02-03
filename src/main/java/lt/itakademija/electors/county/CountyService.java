@@ -5,8 +5,7 @@ import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.party.PartyService;
-import lt.itakademija.exceptions.BadCSVFileExceprion;
-import lt.itakademija.exceptions.CandidateIsInCountyException;
+import lt.itakademija.exceptions.*;
 import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +42,7 @@ public class CountyService {
         return repository.findAll()
                 .stream()
                 .map(ent -> {
-                    CountyReport rep = new CountyReport(ent.getId(), ent.getName());
+                    CountyReport rep = new CountyReport(ent);
                     return rep;
                 })
                 .collect(Collectors.toList());
@@ -76,18 +75,7 @@ public class CountyService {
         if (county.getDistricts() != null) {
             List<DistrictReport> districtReports = county.getDistricts()
                     .stream()
-                    .map(d -> {
-                        DistrictReport dr = new DistrictReport();
-                        dr.setId(d.getId());
-                        dr.setName(d.getName());
-                        dr.setAdress(d.getAdress());
-                        if (d.getRepresentative() == null) {
-                            dr.setRepresentativeName(null);
-                        } else {
-                            dr.setRepresentativeName(d.getRepresentative().getName() + " " + d.getRepresentative().getSurname());
-                        }
-                        return dr;
-                    })
+                    .map(d -> new DistrictReport(d))
                     .collect(Collectors.toList());
             report.setDistricts(districtReports);
         } else {
@@ -151,8 +139,10 @@ public class CountyService {
     private void validateCandidateIsInCounty(List<CandidateEntity> cans) {
         cans.stream().forEach(can -> {
             CandidateEntity canFromDb = candidateService.getCandidateByNameSurnameNumberParty(can);
-            if (canFromDb.getCounty() != null) {
-                throw new CandidateIsInCountyException("Candidate " + can.getName() + " is in County " + can.getCounty());
+            if(canFromDb != null){
+                if (canFromDb.getCounty() != null) {
+                    throw new CandidateIsInCountyException("Candidate " + can.getName() + " is in County " + can.getCounty());
+                }
             }
         });
     }

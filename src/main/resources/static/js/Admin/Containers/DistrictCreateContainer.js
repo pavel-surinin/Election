@@ -6,6 +6,7 @@ var DistrictCreateContainer = React.createClass({
       name : this.state.name.trim(),
       adress : this.state.adress.trim(),
       county : countyId,
+      numberOfElectors : this.state.numberOfElectors,
     };
     //validation
     var nameErrorMesages = [];
@@ -14,7 +15,9 @@ var DistrictCreateContainer = React.createClass({
     var adressErrorMesages = [];
     if(!validation.checkMax(this.state.adress,50)) {adressErrorMesages.push('Adresas negali būti ilgesnis, nei 50 simbolių');}
     if(!validation.checkMin(this.state.adress,4)) {adressErrorMesages.push('Adresas negali būti trumpesnis, nei 4 simboliai');}
-    if (nameErrorMesages.length == 0 && adressErrorMesages.length == 0) {
+    var numberErrorMesages = [];
+    if(!validation.checkNumber(this.state.numberOfElectors)) {numberErrorMesages.push('Rinkejų skaičiaus laukas priima tik skačius');}
+    if (nameErrorMesages.length == 0 && adressErrorMesages.length == 0 && numberErrorMesages.length == 0) {
       var self = this;
       axios
       .post('/district', postRequest)
@@ -32,6 +35,7 @@ var DistrictCreateContainer = React.createClass({
       this.setState({
         nameErrorMesages : nameErrorMesages,
         adressErrorMesages : adressErrorMesages,
+        numberErrorMesages : numberErrorMesages,
       });
     }
   },
@@ -42,9 +46,11 @@ var DistrictCreateContainer = React.createClass({
       adress : '',
       county : 1,
       countyList : [],
+      numberOfElectors : '',
       adressErrorMesages : [],
       nameErrorMesages : [],
       existsErrorMesages : [],
+      numberErrorMesages : [],
     };
   },
 
@@ -75,6 +81,9 @@ var DistrictCreateContainer = React.createClass({
   onHandleAdressChange : function(event){
     this.setState({adress : event.target.value});
   },
+  onHandleNumberChange : function(event){
+    this.setState({numberOfElectors : event.target.value});
+  },
 
   render: function() {
     return (
@@ -87,9 +96,12 @@ var DistrictCreateContainer = React.createClass({
        county={this.state.county}
        onHandleSubmit={this.onHandleSubmit}
        countyList={this.state.countyList}
+       numberOfElectors={this.state.numberOfElectors}
+       onHandleNumberChange={this.onHandleNumberChange}
        nameErrorMesages={this.state.nameErrorMesages}
        adressErrorMesages={this.state.adressErrorMesages}
        existsErrorMesages={this.state.existsErrorMesages}
+       numberErrorMesages={this.state.numberErrorMesages}
        action='Sukurti'
        />
     );

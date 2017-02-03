@@ -2,9 +2,12 @@ package lt.itakademija.electors.district;
 
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
+import lt.itakademija.electors.results.multi.ResultMultiEntity;
+import lt.itakademija.electors.results.single.ResultSingleEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -23,12 +26,45 @@ public class DistrictEntity {
     @NotNull
     private String adress;
 
+    @NotNull
+    private Long numberOfElectors;
+
     @ManyToOne
     @JoinColumn(nullable = true, name= "COUNTY_ID")
     private CountyEntity county;
 
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
     private DistrictRepresentativeEntity representative;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "district")
+    private List<ResultSingleEntity> resultSingleEntity;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "district")
+    private List<ResultMultiEntity> resultMultiEntity;
+
+    public List<ResultSingleEntity> getResultSingleEntity() {
+        return resultSingleEntity;
+    }
+
+    public void setResultSingleEntity(List<ResultSingleEntity> resultSingleEntity) {
+        this.resultSingleEntity = resultSingleEntity;
+    }
+
+    public List<ResultMultiEntity> getResultMultiEntity() {
+        return resultMultiEntity;
+    }
+
+    public void setResultMultiEntity(List<ResultMultiEntity> resultMultiEntity) {
+        this.resultMultiEntity = resultMultiEntity;
+    }
+
+    public Long getNumberOfElectors() {
+        return numberOfElectors;
+    }
+
+    public void setNumberOfElectors(Long numberOfElectors) {
+        this.numberOfElectors = numberOfElectors;
+    }
 
     public DistrictRepresentativeEntity getRepresentative() {
         return representative;

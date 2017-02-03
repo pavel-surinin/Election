@@ -8,9 +8,11 @@ var DistrictRepresentativeContainer = React.createClass({
   },
 
   componentWillMount: function() {
-    console.log(this.props);
     if (this.props.location.query.succesCreateText != null) {
       this.setState({succesCreateText : this.props.location.query.succesCreateText});
+    }
+    if (this.props.location.query.credentials != null) {
+      this.setState({credentials : this.props.location.query.credentials});
     }
     var self = this;
     axios
@@ -34,11 +36,11 @@ var DistrictRepresentativeContainer = React.createClass({
         </div>
       );
     } else {
-      console.log(this.state.representativesList);
       return (
         <DistrictRepresentativeComponent
           representativesList={this.state.representativesList}
-          succesCreateText={this.state.succesCreateText}/>
+          succesCreateText={this.state.succesCreateText}
+          credentials={this.state.credentials}/>
       );
     }
 

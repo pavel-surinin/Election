@@ -23,7 +23,7 @@ public class DistrictRepresentativeController {
     }
 
     @PostMapping("/representative")
-    public DistrictRepresentativeEntity save(@RequestBody DistrictRepresentativeEntity representative){
+    public DistrictRepresentativeCredentialsReport save(@RequestBody DistrictRepresentativeEntity representative){
         return service.save(representative);
     }
 

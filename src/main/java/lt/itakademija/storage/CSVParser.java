@@ -7,6 +7,7 @@ import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
+import lt.itakademija.exceptions.PartyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,14 +40,18 @@ public class CSVParser {
         return linesSeparatedValues
                 .stream()
                 .map(line -> {
-                    CandidateEntity can = new CandidateEntity();
-                    can.setName(line[0]);
-                    can.setSurname(line[1]);
-                    can.setBirthDate(parseDate(line[2]));
-                    can.setDescription(line[5]);
-                    can.setPartyDependencies(parseParty(line[3]));
-                    can.setNumberInParty(parseNullOrInteger(line[4]));
-                    return can;
+                    try{
+                        CandidateEntity can = new CandidateEntity();
+                        can.setName(line[0]);
+                        can.setSurname(line[1]);
+                        can.setBirthDate(parseDate(line[2]));
+                        can.setDescription(line[5]);
+                        can.setPartyDependencies(parseParty(line[3]));
+                        can.setNumberInParty(parseNullOrInteger(line[4]));
+                        return can;
+                    } catch (Throwable t){
+                        throw new BadCSVFileExceprion("Not acceptable CSV data for county single-list");
+                    }
                 })
                 .collect(Collectors.toList());
     }
@@ -64,7 +69,7 @@ public class CSVParser {
                         can.setDescription(line[4]);
                         return can;
                     } catch (Throwable pe) {
-                        throw new BadCSVFileExceprion("Bad CSV data exception");
+                        throw new BadCSVFileExceprion("Not acceptable csv data for party-list");
                     }
                 }).collect(Collectors.toList());
     }
@@ -74,6 +79,9 @@ public class CSVParser {
             return null;
         }
         PartyEntity party = partyService.getPartyByNumber(parseNullOrInteger(partyId));
+        if (party == null) {
+            throw new PartyDoesNotExistException("Party with number " + partyId + " does not exist");
+        }
         return party;
     }
 

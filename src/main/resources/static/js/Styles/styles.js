@@ -1,6 +1,12 @@
 var styles = {
-  marginTable: {margin : 0},
-	marginButton: {marginBottom: 15}
+  toggle :
+  function(numbera){
+    if (numbera == 0) {
+      return {display : 'inherit'};
+    } else {
+      return {display : 'none'};
+    }
+  }
 
 };
 
