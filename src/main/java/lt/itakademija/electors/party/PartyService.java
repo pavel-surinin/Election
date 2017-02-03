@@ -36,7 +36,7 @@ public class PartyService {
 
     @Transactional
     public PartyEntity save(PartyEntity party) {
-        return repository.save(party);
+    	return repository.save(party);
     }
 
     @Transactional

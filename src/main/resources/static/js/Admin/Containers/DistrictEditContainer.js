@@ -4,16 +4,18 @@ var DistrictEditContainer = React.createClass({
       name : '',
       adress : '',
       county : 1,
+      numberOfElectors : '',
       countyList : [],
       adressErrorMesages : [],
       nameErrorMesages : [],
+      numberErrorMesages : [],
       existsErrorMesages : [],
       isLoading: true,
     };
   },
   componentWillMount: function() {
-      var self = this;
-      axios
+    var self = this;
+    axios
         .get('/county')
         .then(function(response){
           self.setState({
@@ -30,6 +32,7 @@ var DistrictEditContainer = React.createClass({
           name: response.data.name,
           adress: response.data.adress,
           county: response.data.countyId,
+          numberOfElectors : response.data.numberOfElectors,
           isLoading : false,
         });
       })
@@ -46,6 +49,9 @@ var DistrictEditContainer = React.createClass({
     onHandleCountyChange : function(event){
         this.setState({county : event.target.value});
       },
+    onHandleNumberChange : function(event) {
+      this.setState({numberOfElectors : event.target.value});
+    },
     onHandleSubmit : function(event){
         event.preventDefault();
         var countyId = {id : this.state.county};
@@ -54,6 +60,7 @@ var DistrictEditContainer = React.createClass({
           name : this.state.name.trim(),
           adress : this.state.adress.trim(),
           county : countyId,
+          numberOfElectors : this.state.numberOfElectors,
         };
         //validation
         var nameErrorMesages = [];
@@ -62,7 +69,9 @@ var DistrictEditContainer = React.createClass({
         var adressErrorMesages = [];
         if(!validation.checkMax(this.state.adress,50)) {adressErrorMesages.push('Adresas negali būti ilgesnis, nei 50 simbolių');}
         if(!validation.checkMin(this.state.adress,4)) {adressErrorMesages.push('Adresas negali būti trumpesnis, nei 4 simboliai');}
-        if (nameErrorMesages.length == 0 && adressErrorMesages.length == 0) {
+        var numberErrorMesages = [];
+        if(!validation.checkNumber(this.state.numberOfElectors)) {numberErrorMesages.push('Rinkejų skaičiaus laukas priima tik skačius');}
+        if (nameErrorMesages.length == 0 && adressErrorMesages.length == 0 && numberErrorMesages.length == 0) {
           var self = this;
           axios
           .post('/district', postRequest)
@@ -98,15 +107,18 @@ var DistrictEditContainer = React.createClass({
           onHandleNameChange={this.onHandleNameChange}
           onHandleCountyChange={this.onHandleCountyChange}
           onHandleAdressChange={this.onHandleAdressChange}
+          onHandleNumberChange={this.onHandleNumberChange}
           id={this.state.id}
           name= {this.state.name}
           adress= {this.state.adress}
           county= {this.state.county}
           countyList={this.state.countyList}
+          numberOfElectors={this.state.numberOfElectors}
           action='Atnaujinti'
           adressErrorMesages={this.state.adressErrorMesages}
           nameErrorMesages={this.state.nameErrorMesages}
           existsErrorMesages={this.state.existsErrorMesages}
+          numberErrorMesages={this.state.numberErrorMesages}
           />
       );
     }
