@@ -2,7 +2,6 @@ package lt.itakademija.electors.county;
 
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.candidate.CandidateEntity;
-import lt.itakademija.electors.party.PartyEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -28,23 +27,12 @@ public class CountyEntity {
     @OneToMany(mappedBy="county", cascade = CascadeType.MERGE)
     private List<CandidateEntity> candidates;
 
-    @OneToMany
-    private List<PartyEntity> parties;
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<PartyEntity> getParties() {
-        return parties;
-    }
-
-    public void setParties(List<PartyEntity> parties) {
-        this.parties = parties;
     }
 
     public String getName() {
