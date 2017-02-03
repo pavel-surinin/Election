@@ -42,8 +42,14 @@ var PartyCreateEditFormComponent = React.createClass({
   		                      placeholder="Partijos Sąrašo Numeris"
   		                    />
 		                  </div><br/>
+                      <div className="input-group col-xs-12 text-primary">
+                        <div className="text-success pull-right">
+                          <button id="delete-button" onClick={this.props.onHandleDeleteClick} className='btn btn-block btn-danger btn-outline '> Ištrinti sąrašą
+                          </button>
+                        </div>
+		                  </div><br/>
                         {numberErrorMesages}
-	                    <div className="form-group text-primary">
+	                    <div className="form-group col-xs-12 text-primary">
 		                      <label>Pasirinkite failą</label>
                             <label>
                                 <input className="btn-bs-file btn btn-lg btn-primary btn-outline" onChange={this.onFileChange} ref="file" type="file" name="file" id="file-select"/>

@@ -43,5 +43,9 @@ public class PartyController {
     public PartyReport getPartyById(@PathVariable Long id){
     	return service.getPartyById(id);
     }
+    @PutMapping("/party")
+    public PartyEntity save(@RequestBody PartyEntity partyEntity){
+      return  service.save(partyEntity); 
+    }
 }
 
