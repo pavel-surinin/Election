@@ -1,4 +1,4 @@
-package lt.itakademija.electors.results;
+package lt.itakademija.electors.results.single;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.district.DistrictEntity;

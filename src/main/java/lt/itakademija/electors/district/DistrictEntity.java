@@ -2,7 +2,7 @@ package lt.itakademija.electors.district;
 
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
-import lt.itakademija.electors.results.ResultSingleEntity;
+import lt.itakademija.electors.results.single.ResultSingleEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

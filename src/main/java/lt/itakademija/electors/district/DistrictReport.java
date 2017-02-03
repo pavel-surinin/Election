@@ -1,9 +1,5 @@
 package lt.itakademija.electors.district;
 
-import lt.itakademija.electors.results.ResultSingleEntity;
-
-import java.util.List;
-
 /**
  * Created by Pavel on 2017-01-16.
  */

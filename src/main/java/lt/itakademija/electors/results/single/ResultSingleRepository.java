@@ -1,4 +1,4 @@
-package lt.itakademija.electors.results;
+package lt.itakademija.electors.results.single;
 
 import lt.itakademija.electors.district.DistrictEntity;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package lt.itakademija.electors.results;
+package lt.itakademija.electors.results.single;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
