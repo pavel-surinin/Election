@@ -64,7 +64,6 @@ var hashHistory = ReactRouter.hashHistory;
 
 ReactDOM.render((
   <Router history={hashHistory}>
-<<<<<<< HEAD
 
     <Route path="/representative" component={RepresentativeContainer}>
       <IndexRoute component={SingleResultComponent} />
@@ -74,8 +73,6 @@ ReactDOM.render((
     </Route>
 
 
-=======
->>>>>>> 14729007f85b1fab2f8b161a0dc7b05ec90948e4
     <Route path="/admin" component={AdminComponent}>
       <IndexRoute component={EmptyComponent} />
       <Route path="/admin/district" component={DistrictListContainer} />
@@ -95,11 +92,7 @@ ReactDOM.render((
       <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 14729007f85b1fab2f8b161a0dc7b05ec90948e4
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
