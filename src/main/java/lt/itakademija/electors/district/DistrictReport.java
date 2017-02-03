@@ -39,7 +39,13 @@ public class DistrictReport {
                     .filter(res -> res.isApproved() == true)
                     .toArray().length != 0;
         }
-
+        if (ent.getResultMultiEntity() != null) {
+            this.isResultMultiRegistered = ent.getResultMultiEntity().size() != 0;
+            this.isResultMultiApproved = ent.getResultMultiEntity()
+                    .stream()
+                    .filter(res -> res.isApproved() == true)
+                    .toArray().length != 0;
+        }
     }
 
     public boolean isResultSingleApproved() {
