@@ -29,6 +29,9 @@ public class CountyDetailsReport {
         this.candidates = ent.getCandidates().stream().map(c -> new CandidateReport(c)).collect(Collectors.toList());
     }
 
+    public CountyDetailsReport() {
+    }
+
     public Long getId() {
         return id;
     }

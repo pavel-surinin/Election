@@ -32,6 +32,15 @@ public class ResultSingleEntity {
     @NotNull
     private boolean isApproved = false;
 
+    public ResultSingleEntity() {
+    }
+
+    public ResultSingleEntity(CandidateEntity candidate, DistrictEntity district, Long votes) {
+        this.candidate = candidate;
+        this.district = district;
+        this.votes = votes;
+    }
+
     public Long getId() {
         return id;
     }
