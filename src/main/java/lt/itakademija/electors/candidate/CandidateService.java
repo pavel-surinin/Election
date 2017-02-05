@@ -1,14 +1,15 @@
 package lt.itakademija.electors.candidate;
 
+import lt.itakademija.electors.county.CountyEntity;
+import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.party.PartyEntity;
-import lt.itakademija.electors.party.PartyReport;
 import lt.itakademija.electors.party.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -21,26 +22,21 @@ public class CandidateService {
 
     @Autowired
     PartyService partyService;
-    
+
+    @Autowired
+    CountyService countyService;
+
     @Transactional
-    public CandidateEntity save(CandidateEntity candidateEntity) {
-        return repository.save(candidateEntity);
+    public CandidateEntity save(CandidateEntity can) {
+        return repository.save(mapCounty(can));
     }
 
     public List<CandidateReport> getAllCandidates() {
-        List<CandidateReport> list = new ArrayList<>();
-        for (CandidateEntity candidateEntity : repository.getCandidatesList()) {
-            CandidateReport kr = new CandidateReport();
-            kr.setId(candidateEntity.getId());
-            kr.setName(candidateEntity.getName());
-            kr.setSurname(candidateEntity.getSurname());
-            kr.setDescription(candidateEntity.getDescription());
-            kr.setBirthDate(candidateEntity.getBirthDate());
-            kr.setPartijosId(candidateEntity.getPartyDependencies().getId());
-            kr.setPartijosPavadinimas(candidateEntity.getPartyDependencies().getName());
-            list.add(kr);
-        }
-        return list;
+        return repository.getCandidatesList().stream().map(can -> new CandidateReport(can)).collect(Collectors.toList());
+    }
+
+    public CandidateEntity findByIdEntity(Long id){
+        return repository.finById(id);
     }
 
     @Transactional
@@ -58,5 +54,29 @@ public class CandidateService {
             repository.delete(candidate.getId());
         }
     return true;
+    }
+
+    public CandidateEntity getCandidateByNameSurnameNumberParty(CandidateEntity can){
+        return repository.findByNumberInPartyNameSurnameParty(can);
+    }
+
+	public CandidateReport getCandidateById(Long id) {
+		CandidateEntity candidate = repository.finById(id);
+		CandidateReport report = new CandidateReport(candidate);
+		return report;
+	}
+
+    private CandidateEntity mapCounty(CandidateEntity can) {
+        if (can.getCounty() != null) {
+            if(can.getCounty().getId() != null){
+                CountyEntity county = countyService.getCountyByIdCountyEnt(can.getCounty().getId());
+                can.setCounty(county);
+            } else {
+                can.setCounty(null);
+            }
+            return can;
+        } else {
+            return can;
+        }
     }
 }

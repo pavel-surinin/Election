@@ -29,13 +29,12 @@ public class CountyRepository {
         return county;
     }
 
-
-    public CountyEntity findById(Long id) {
-       return em.find(CountyEntity.class, id);
-    }
-    
     public void delete(Long id) {
         CountyEntity county = em.find(CountyEntity.class, id);
         em.remove(county);
+    }
+
+    public CountyEntity findById(Long id) {
+        return em.find(CountyEntity.class, id);
     }
 }

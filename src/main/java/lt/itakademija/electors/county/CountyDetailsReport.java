@@ -1,14 +1,18 @@
 package lt.itakademija.electors.county;
 
+import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.district.DistrictReport;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Pavel on 2017-01-19.
  */
 public class CountyDetailsReport {
+
+    private CountyEntity ent;
 
     private Long id;
 
@@ -17,6 +21,16 @@ public class CountyDetailsReport {
     private List<DistrictReport> districts;
 
     private List<CandidateReport> candidates;
+
+    public CountyDetailsReport(CountyEntity ent) {
+        this.id = ent.getId();
+        this.name = ent.getName();
+        this.districts = ent.getDistricts().stream().map(d -> new DistrictReport(d)).collect(Collectors.toList());
+        this.candidates = ent.getCandidates().stream().map(c -> new CandidateReport(c)).collect(Collectors.toList());
+    }
+
+    public CountyDetailsReport() {
+    }
 
     public Long getId() {
         return id;

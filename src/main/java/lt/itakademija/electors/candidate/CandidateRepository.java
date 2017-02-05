@@ -35,4 +35,20 @@ public class CandidateRepository {
         em.remove(candidate);
         return true;
     }
+
+    public CandidateEntity finById(Long id){
+        return em.find(CandidateEntity.class, id);
+    }
+
+    public CandidateEntity findByNumberInPartyNameSurnameParty(CandidateEntity can) {
+        List<CandidateEntity> list = em.createQuery("SELECT c FROM CandidateEntity c WHERE c.name = :cName AND c.surname" +
+                " =:cSurname AND c.numberInParty =:cNum AND c.partyDependencies =:cPar")
+                .setParameter("cName", can.getName())
+                .setParameter("cSurname", can.getSurname())
+                .setParameter("cNum", can.getNumberInParty())
+                .setParameter("cPar", can.getPartyDependencies())
+                .getResultList();
+        if (list.size() != 0) {return list.get(0);}
+        return null;
+    }
 }

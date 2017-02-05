@@ -1,7 +1,10 @@
 package lt.itakademija.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  * Created by Pavel on 2017-01-10.
@@ -11,16 +14,20 @@ import javax.validation.constraints.NotNull;
 public class UsersEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(unique = true)
     @NotNull
     private String username;
 
-    @Column(unique = true)
     @NotNull
     private String password;
+
+    @ManyToMany
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<UserRoles> roles;
 
     public Long getId() {
         return id;

@@ -14,6 +14,7 @@ import java.util.Date;
 public class CandidateEntity {
 
     @Id
+    @Column(name = "CANDIDATE_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -30,11 +31,25 @@ public class CandidateEntity {
     @JoinColumn(nullable = true, name= "PARTY_ID")
     private PartyEntity partyDependencies;
 
+    @Column(name = "NUMBER_IN_PARTY")
+    private Integer numberInParty;
+
     private String description;
 
     @ManyToOne
     @JoinColumn(nullable = true, name= "COUNTY_ID")
     private CountyEntity county;
+
+    @Column(nullable=false)
+    private boolean isMultiList = true;
+
+    public boolean isMultiList() {
+        return isMultiList;
+    }
+
+    public void setMultiList(boolean multiList) {
+        isMultiList = multiList;
+    }
 
     public Long getId() {
         return id;
@@ -50,6 +65,14 @@ public class CandidateEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getNumberInParty() {
+        return numberInParty;
+    }
+
+    public void setNumberInParty(Integer numberInParty) {
+        this.numberInParty = numberInParty;
     }
 
     public PartyEntity getPartyDependencies() {
@@ -92,3 +115,4 @@ public class CandidateEntity {
         this.description = description;
     }
 }
+

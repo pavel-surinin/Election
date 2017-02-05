@@ -5,19 +5,91 @@ package lt.itakademija.electors.district;
  */
 public class DistrictReport {
 
+    private DistrictEntity ent;
     private Long id;
-
     private String name;
-
     private String adress;
-
     private Long representativeId;
-
     private String representativeName;
-
     private Long countyId;
-
     private String countyName;
+    private Long numberOfElectors;
+    private boolean isResultSingleRegistered = false;
+    private boolean isResultMultiRegistered = false;
+    private boolean isResultSingleApproved = false;
+    private boolean isResultMultiApproved = false;
+
+    public DistrictReport() {
+    }
+
+    public DistrictReport(DistrictEntity ent) {
+        this.id = ent.getId();
+        this.name = ent.getName();
+        this.adress = ent.getAdress();
+        if (ent.getRepresentative() != null) {
+            this.representativeId = ent.getRepresentative().getId();
+            this.representativeName = ent.getRepresentative().getName() + " " + ent.getRepresentative().getSurname();
+        }
+        if (ent.getCounty() != null) {
+            this.countyId = ent.getCounty().getId();
+            this.countyName = ent.getCounty().getName();
+        }
+        this.numberOfElectors = ent.getNumberOfElectors();
+        if (ent.getResultSingleEntity() != null) {
+            this.isResultSingleRegistered = ent.getResultSingleEntity().size() != 0;
+            this.isResultSingleApproved = ent.getResultSingleEntity()
+                    .stream()
+                    .filter(res -> res.isApproved() == true)
+                    .toArray().length != 0;
+        }
+        if (ent.getResultMultiEntity() != null) {
+            this.isResultMultiRegistered = ent.getResultMultiEntity().size() != 0;
+            this.isResultMultiApproved = ent.getResultMultiEntity()
+                    .stream()
+                    .filter(res -> res.isApproved() == true)
+                    .toArray().length != 0;
+        }
+    }
+
+    public boolean isResultSingleApproved() {
+        return isResultSingleApproved;
+    }
+
+    public void setResultSingleApproved(boolean resultSingleApproved) {
+        isResultSingleApproved = resultSingleApproved;
+    }
+
+    public boolean isResultMultiApproved() {
+        return isResultMultiApproved;
+    }
+
+    public void setResultMultiApproved(boolean resultMultiApproved) {
+        isResultMultiApproved = resultMultiApproved;
+    }
+
+    public boolean isResultSingleRegistered() {
+        return isResultSingleRegistered;
+    }
+
+    public void setResultSingleRegistered(boolean resultSingleRegistered) {
+        isResultSingleRegistered = resultSingleRegistered;
+    }
+
+    public boolean isResultMultiRegistered() {
+        return isResultMultiRegistered;
+    }
+
+    public void setResultMultiRegistered(boolean resultMultiRegistered) {
+        isResultMultiRegistered = resultMultiRegistered;
+    }
+
+    public Long getNumberOfElectors() {
+        return numberOfElectors;
+    }
+
+    public void setNumberOfElectors(Long numberOfElectors) {
+        this.numberOfElectors = numberOfElectors;
+    }
 
     public Long getCountyId() {
         return countyId;
