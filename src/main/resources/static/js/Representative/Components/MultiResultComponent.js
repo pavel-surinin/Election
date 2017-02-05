@@ -23,7 +23,7 @@ var MultiResultComponent = React.createClass({
 						</div>
 					</div>
 					<form>
-						<div className="form-group panel-body" style={styles.marginTable}>
+						<div className="form-group panel-body">
 							<div className="col-md-2 small">
 								<h5>1.</h5>
 							</div>
@@ -35,7 +35,7 @@ var MultiResultComponent = React.createClass({
 								<span className="input-group-addon" id="basic-addon2">vnt.</span>
 							</div>
 						</div>
-						<div className="form-group panel-body" style={styles.marginTable}>
+						<div className="form-group panel-body">
 							<div className="col-md-2 small">
 								<h5>1.</h5>
 							</div>
@@ -47,7 +47,7 @@ var MultiResultComponent = React.createClass({
 								<span className="input-group-addon" id="basic-addon2">vnt.</span>
 							</div>
 						</div>
-						<div className="form-group panel-body" style={styles.marginTable}>
+						<div className="form-group panel-body">
 							<div className="col-md-2 small">
 								<h5>1.</h5>
 							</div>
@@ -59,7 +59,7 @@ var MultiResultComponent = React.createClass({
 								<span className="input-group-addon" id="basic-addon2">vnt.</span>
 							</div>
 						</div>
-						<div className="form-group panel-footer" style={styles.marginTable}>
+						<div className="form-group panel-footer">
 							<div className="col-md-2 small">
 								<h5> </h5>
 							</div>

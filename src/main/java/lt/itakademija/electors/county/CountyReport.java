@@ -37,6 +37,9 @@ public class CountyReport {
         }
     }
 
+    public CountyReport() {
+    }
+
     public Integer getCandidatesCount() {
         return candidatesCount;
     }

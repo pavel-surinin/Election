@@ -35,17 +35,18 @@ public class PartyController {
     }
 
     @GetMapping("/party")
-    public List<PartyReport> getPartijaList(){
+    public List<PartyReport> getPartijaList() {
         return service.getPartyList();
     }
- 
+
     @GetMapping("/party/{id}")
-    public PartyReport getPartyById(@PathVariable Long id){
-    	return service.getPartyById(id);
+    public PartyReport getPartyById(@PathVariable Long id) {
+        return service.getPartyById(id);
     }
+
     @PutMapping("/party")
-    public PartyEntity save(@RequestBody PartyEntity partyEntity){
-      return  service.save(partyEntity); 
+    public PartyEntity save(@RequestBody PartyEntity partyEntity) {
+        return service.save(partyEntity);
     }
 }
 
