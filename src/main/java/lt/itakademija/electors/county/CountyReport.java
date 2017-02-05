@@ -22,11 +22,6 @@ public class CountyReport {
 
     private Integer candidatesCount;
 
-    public CountyReport(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public CountyReport(CountyEntity ent) {
         this.id = ent.getId();
         this.name = ent.getName();
@@ -35,6 +30,9 @@ public class CountyReport {
         } else {
             this.candidatesCount = 0;
         }
+    }
+
+    public CountyReport() {
     }
 
     public Integer getCandidatesCount() {
