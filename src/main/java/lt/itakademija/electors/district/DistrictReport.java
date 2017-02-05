@@ -19,6 +19,9 @@ public class DistrictReport {
     private boolean isResultSingleApproved = false;
     private boolean isResultMultiApproved = false;
 
+    public DistrictReport() {
+    }
+
     public DistrictReport(DistrictEntity ent) {
         this.id = ent.getId();
         this.name = ent.getName();
