@@ -28,6 +28,9 @@ public class CandidateReport {
 
     private boolean isMultiList;
 
+    public CandidateReport() {
+    }
+
     public CandidateReport(CandidateEntity candidateEntity) {
         this.setId(candidateEntity.getId());
         this.setName(candidateEntity.getName());
