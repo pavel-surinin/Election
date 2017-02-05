@@ -36,7 +36,9 @@ public class CountyReport {
             this.candidatesCount = 0;
         }
     }
+    public CountyReport(){
 
+    }
     public Integer getCandidatesCount() {
         return candidatesCount;
     }
