@@ -41,10 +41,7 @@ public class CountyService {
     public List getAll() {
         return repository.findAll()
                 .stream()
-                .map(ent -> {
-                    CountyReport rep = new CountyReport(ent);
-                    return rep;
-                })
+                .map(ent -> new CountyReport(ent))
                 .collect(Collectors.toList());
     }
 
@@ -64,25 +61,7 @@ public class CountyService {
 
     public CountyDetailsReport getCountyById(Long id) {
         CountyEntity county = repository.findById(id);
-        CountyDetailsReport report = new CountyDetailsReport();
-        report.setId(county.getId());
-        report.setName(county.getName());
-        List<CandidateReport> candidateReport = county.getCandidates()
-                .stream()
-                .map(can -> new CandidateReport(can))
-                .collect(Collectors.toList());
-        report.setCandidates(candidateReport);
-        if (county.getDistricts() != null) {
-            List<DistrictReport> districtReports = county.getDistricts()
-                    .stream()
-                    .map(d -> new DistrictReport(d))
-                    .collect(Collectors.toList());
-            report.setDistricts(districtReports);
-        } else {
-            report.setDistricts(null);
-        }
-
-        return report;
+        return new CountyDetailsReport(county);
     }
 
     @Transactional
