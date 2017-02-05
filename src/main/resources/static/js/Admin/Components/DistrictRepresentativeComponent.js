@@ -27,14 +27,8 @@ var DistrictRepresentativeComponent = React.createClass({
               </div>
 		        </div>
 		          <div className="panel-body">
-<<<<<<< HEAD:src/main/resources/static/js/Components/DistrictRepresentativeComponent.js
-		            <a href="#/admin/representative/create">
-		              <button type="button" className="btn btn-success btn-sm">Registruoti naują apylinkės atstovą</button>
-		            </a>
-=======
                 {succesCreateMessage}
                 {credentialsMessage}
->>>>>>> pavel-surinin-master:src/main/resources/static/js/Admin/Components/DistrictRepresentativeComponent.js
 		          </div>
 		            <table className="table table-striped table-hover">
 		              <thead>
