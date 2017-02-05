@@ -69,20 +69,15 @@ ReactDOM.render((
 
       <Route path="/admin/district" component={DistrictListContainer} />
       <Route path="/admin/district/create" component={DistrictCreateContainer} />
-      <Route path="/admin/district/edit/:id" component={DistrictEditContainer} />
       <Route path="/admin/candidate" component={CandidateContainer} />
-      <Route path="/admin/candidate/edit/:id" component={CandidateEditContainer} />
       <Route path="/admin/representative" component={DistrictRepresentativeContainer} />
       <Route path="/admin/representative/create" component={DistrictRepresentativeCreateContainer} />
-      <Route path="/admin/representative/edit/:id" component={DistrictRepresentativeEditContainer} />
       <Route path="/admin/county" component={CountyContainer} />
       <Route path="/admin/county/create" component={CountyCreateContainer} />
       <Route path="/admin/county/:id" component={CountyDetailViewContainer} />
-      <Route path="/admin/county/edit/:id" component={CountyEditContainer} /> 
       <Route path="/admin/party" component={PartyContainer} />
       <Route path="/admin/party/create" component={PartyCreateContainer} />
       <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
-      <Route path="/admin/party/edit/:id" component={PartyEditContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
     <Route path="/" component={App}>

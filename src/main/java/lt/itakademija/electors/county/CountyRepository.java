@@ -33,11 +33,6 @@ public class CountyRepository {
     public CountyEntity findById(Long id) {
        return em.find(CountyEntity.class, id);
     }
-
-    public CountyEntity update (CountyEntity county, Long id){
-      em.refresh(county);
-      return county;
-    }
     
     public void delete(Long id) {
         CountyEntity county = em.find(CountyEntity.class, id);

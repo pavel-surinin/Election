@@ -33,11 +33,5 @@ public class CountyController {
     public boolean deletecounty(@PathVariable Long id){
         return service.delete(id);
     }
-
-    @PutMapping("/county/{id}")
-    public CountyEntity updateCounty (@RequestBody CountyEntity county,
-    								  @PathVariable Long id){
-    	return service.updateById(county, id);
-    }
     
 }

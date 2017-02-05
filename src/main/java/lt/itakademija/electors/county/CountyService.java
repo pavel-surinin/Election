@@ -86,13 +86,4 @@ public class CountyService {
         return true;
     }
     
-    @Transactional CountyEntity updateById(CountyEntity county, Long id){
-    	repository.findById(id).getCandidates()
-        .stream().forEach(c -> {
-            c.setCounty(county);
-            candidateService.save(c);
-        });
-  
-    	return repository.update(county, id);
-    }
 }
