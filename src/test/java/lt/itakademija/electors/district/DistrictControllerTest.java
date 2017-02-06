@@ -1,7 +1,10 @@
 package lt.itakademija.electors.district;
 
 import lt.itakademija.Application;
-import lt.itakademija.electors.MyJsonParser;
+import lt.itakademija.electors.MyUtils;
+import lt.itakademija.electors.county.CountyEntity;
+import lt.itakademija.electors.county.CountyRepository;
+import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
 import org.hamcrest.CoreMatchers;
 
@@ -45,35 +48,36 @@ public class DistrictControllerTest {
     CountyService countyService;
 
     String URI = "/district";
-    public String getDistrictJsonString (Long districtId, String districtName, String districtAdress, int numberOfElectors, Long countyId){
-        String districtString = "{\"id\" : \"" + districtId + "\",\"name\" : \"" + districtName + "\", \"adress\" : \"" + districtAdress + "\",\"numberOfElectors\" : " + numberOfElectors + ",\"county\" : {\"id\" : " + countyId + "}}";
-        return districtString;
-    }
-    public String getCountyJsonString(Long countyId, String countyName){
-        String countyString =  "{\"id\" : \"" + countyId + "\",\"name\" : \"" + countyName + "\"}";
-        return countyString;
-    }
-    public String getDistrictRepresentativeJsonString (String name, String surname, Long representingDistrict){
-        String representativeString = "{\"name\" : \"" + name + "\", \"surname\" : \"" + surname + "\", \"district\" : {\"id\" : " + representingDistrict + "}}";
-        return representativeString;
-    }
+
+//    public String getDistrictJsonString (Long districtId, String districtName, String districtAdress, int numberOfElectors, Long countyId){
+//        String districtString = "{\"id\" : \"" + districtId + "\",\"name\" : \"" + districtName + "\", \"adress\" : \"" + districtAdress + "\",\"numberOfElectors\" : " + numberOfElectors + ",\"county\" : {\"id\" : " + countyId + "}}";
+//        return districtString;
+//    }
+//    public String getCountyJsonString(Long countyId, String countyName){
+//        String countyString =  "{\"id\" : \"" + countyId + "\",\"name\" : \"" + countyName + "\"}";
+//        return countyString;
+//    }
+//    public String getDistrictRepresentativeJsonString (String name, String surname, Long representingDistrict){
+//        String representativeString = "{\"name\" : \"" + name + "\", \"surname\" : \"" + surname + "\", \"district\" : {\"id\" : " + representingDistrict + "}}";
+//        return representativeString;
+//    }
 
     @Before
     public void setUp() throws Exception {
-        String vilniusString = getCountyJsonString(null,"Vilniaus");
-        rest.postForEntity("/county", MyJsonParser.parse(vilniusString), CountyEntity.class);
+        String vilniusString = MyUtils.getCountyJsonString(null,"Vilniaus");
+        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
 
-        String centerDistrictString = getDistrictJsonString(null,"CenterTest", "Centro g. 1-1", 1000, (long) 1);
-        rest.postForEntity(URI, MyJsonParser.parse(centerDistrictString), DistrictEntity.class);
+        String centerDistrictString = MyUtils.getDistrictJsonString(null,"CenterTest", "Centro g. 1-1", 1000, (long) 1);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(centerDistrictString), DistrictEntity.class);
 
-        String newTownDistrictString = getDistrictJsonString(null, "newTownTest", "Naujamiestčio g 1-2", 2000, (long) 1);
-        rest.postForEntity(URI, MyJsonParser.parse(newTownDistrictString), DistrictEntity.class);
+        String newTownDistrictString = MyUtils.getDistrictJsonString(null, "newTownTest", "Naujamiestčio g 1-2", 2000, (long) 1);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(newTownDistrictString), DistrictEntity.class);
 
-        String centerDistrictRepresentative =  getDistrictRepresentativeJsonString("CenterTest", "Representative", (long)1);
-        rest.postForEntity("/representative", MyJsonParser.parse(centerDistrictRepresentative), DistrictRepresentativeEntity.class);
+        String centerDistrictRepresentative =  MyUtils.getDistrictRepresentativeJsonString("CenterTest", "Representative", (long)1);
+        rest.postForEntity("/representative", MyUtils.parseStringToJson(centerDistrictRepresentative), DistrictRepresentativeEntity.class);
 
-        String newTowDistrictRepresentative =  getDistrictRepresentativeJsonString("NewTownTest", "Representative", (long) 2);
-        rest.postForEntity("/representative", MyJsonParser.parse(newTowDistrictRepresentative), DistrictRepresentativeEntity.class);
+        String newTowDistrictRepresentative =  MyUtils.getDistrictRepresentativeJsonString("NewTownTest", "Representative", (long) 2);
+        rest.postForEntity("/representative", MyUtils.parseStringToJson(newTowDistrictRepresentative), DistrictRepresentativeEntity.class);
     }
 
 
@@ -86,14 +90,14 @@ public class DistrictControllerTest {
     @Test
     public void save() throws Exception {
         //setup
-        String kaunoString = getCountyJsonString(null ,"kaunoTest");
-        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(kaunoString), CountyEntity.class);
+        String kaunoString = MyUtils.getCountyJsonString(null ,"kaunoTest");
+        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(kaunoString), CountyEntity.class);
         Long id = respCountyCreate.getBody().getId();
-        String centerDistrictString = getDistrictJsonString(null, "CenterTest", "Centro g. 1-1", 1000, id);
-        ResponseEntity<DistrictEntity> respDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(centerDistrictString), DistrictEntity.class);
+        String centerDistrictString = MyUtils.getDistrictJsonString(null, "CenterTest", "Centro g. 1-1", 1000, id);
+        ResponseEntity<DistrictEntity> respDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(centerDistrictString), DistrictEntity.class);
         Long districtId = respDistrictCreate.getBody().getId();
-        String centerDistrictRepresentative =  getDistrictRepresentativeJsonString("CenterTest", "Representative",districtId);
-        ResponseEntity<DistrictRepresentativeEntity> respDistrictRepresentativeCreate = rest.postForEntity("/representative", MyJsonParser.parse(centerDistrictRepresentative), DistrictRepresentativeEntity.class);
+        String centerDistrictRepresentative =  MyUtils.getDistrictRepresentativeJsonString("CenterTest", "Representative",districtId);
+        ResponseEntity<DistrictRepresentativeEntity> respDistrictRepresentativeCreate = rest.postForEntity("/representative", MyUtils.parseStringToJson(centerDistrictRepresentative), DistrictRepresentativeEntity.class);
         //verify
         assertThat(respCountyCreate.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
@@ -112,15 +116,15 @@ public class DistrictControllerTest {
     @Test
     public void updateName() throws Exception {
         //setup
-            String vilniusString = getCountyJsonString(null,"VilniausTest");
-            ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(vilniusString), CountyEntity.class);
+            String vilniusString = MyUtils.getCountyJsonString(null,"VilniausTest");
+            ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
             Long countyId = respCountyCreate.getBody().getId();
-            String pylimoDistrictString = getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
-            ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(pylimoDistrictString), DistrictEntity.class);
+            String pylimoDistrictString = MyUtils.getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
+            ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoDistrictString), DistrictEntity.class);
         //exercise
         Long districtId = respDistrictCreate.getBody().getId();
-        String pylimoUpdateDistrictString = getDistrictJsonString(districtId,"PylimoUpdateTest","Pylimo g. 22-33", 450, countyId);
-        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyJsonParser.parse(pylimoUpdateDistrictString), DistrictEntity.class);
+        String pylimoUpdateDistrictString = MyUtils.getDistrictJsonString(districtId,"PylimoUpdateTest","Pylimo g. 22-33", 450, countyId);
+        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoUpdateDistrictString), DistrictEntity.class);
         //verify
         assertThat(respCountyCreate.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
@@ -131,15 +135,15 @@ public class DistrictControllerTest {
     @Test
     public void updateAdress() throws Exception {
         //setup
-        String vilniusString = getCountyJsonString(null,"VilniausTest");
-        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(vilniusString), CountyEntity.class);
+        String vilniusString = MyUtils.getCountyJsonString(null,"VilniausTest");
+        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
         Long countyId = respCountyCreate.getBody().getId();
-        String pylimoDistrictString = getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
-        ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(pylimoDistrictString), DistrictEntity.class);
+        String pylimoDistrictString = MyUtils.getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
+        ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoDistrictString), DistrictEntity.class);
         //exercise
         Long districtId = respDistrictCreate.getBody().getId();
-        String pylimoUpdateAdressDistrictString = getDistrictJsonString(districtId,"PylimoTest","PylimoTest g. 33-22", 450, countyId);
-        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyJsonParser.parse(pylimoUpdateAdressDistrictString), DistrictEntity.class);
+        String pylimoUpdateAdressDistrictString = MyUtils.getDistrictJsonString(districtId,"PylimoTest","PylimoTest g. 33-22", 450, countyId);
+        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoUpdateAdressDistrictString), DistrictEntity.class);
         //verify
         assertThat(respCountyCreate.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
@@ -149,15 +153,15 @@ public class DistrictControllerTest {
     @Test
     public void updateNumberOfElectors() throws Exception {
         //setup
-        String vilniusString = getCountyJsonString(null,"VilniausTest");
-        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(vilniusString), CountyEntity.class);
+        String vilniusString = MyUtils.getCountyJsonString(null,"VilniausTest");
+        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
         Long countyId = respCountyCreate.getBody().getId();
-        String pylimoDistrictString = getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
-        ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(pylimoDistrictString), DistrictEntity.class);
+        String pylimoDistrictString = MyUtils.getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
+        ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoDistrictString), DistrictEntity.class);
         //exercise
         Long districtId = respDistrictCreate.getBody().getId();
-        String pylimoUpdateElectorsDistrictString = getDistrictJsonString(districtId,"PylimoTest","Pylimo g. 22-33", 1450, countyId);
-        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyJsonParser.parse(pylimoUpdateElectorsDistrictString), DistrictEntity.class);
+        String pylimoUpdateElectorsDistrictString = MyUtils.getDistrictJsonString(districtId,"PylimoTest","Pylimo g. 22-33", 1450, countyId);
+        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoUpdateElectorsDistrictString), DistrictEntity.class);
         //verify
         assertThat(respCountyCreate.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
@@ -167,18 +171,18 @@ public class DistrictControllerTest {
     @Test
     public void updateCounty() throws Exception {
         //setup
-        String vilniusString = getCountyJsonString(null,"VilniausTest");
-        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(vilniusString), CountyEntity.class);
-        String kaunoString = getCountyJsonString(null ,"kaunoTest");
-        ResponseEntity<CountyEntity> respKaunoCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(kaunoString), CountyEntity.class);
+        String vilniusString = MyUtils.getCountyJsonString(null,"VilniausTest");
+        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
+        String kaunoString = MyUtils.getCountyJsonString(null ,"kaunoTest");
+        ResponseEntity<CountyEntity> respKaunoCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(kaunoString), CountyEntity.class);
         Long countyId = respCountyCreate.getBody().getId();
         Long kaunoCountyId = respKaunoCountyCreate.getBody().getId();
-        String pylimoDistrictString = getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
-        ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(pylimoDistrictString), DistrictEntity.class);
+        String pylimoDistrictString = MyUtils.getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
+        ResponseEntity<DistrictEntity>  respDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoDistrictString), DistrictEntity.class);
         //exercise
         Long districtId = respDistrictCreate.getBody().getId();
-        String pylimoUpdateCountyDistrictString = getDistrictJsonString(districtId,"PylimoTest","Pylimo g. 22-33", 450, kaunoCountyId);
-        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyJsonParser.parse(pylimoUpdateCountyDistrictString), DistrictEntity.class);
+        String pylimoUpdateCountyDistrictString = MyUtils.getDistrictJsonString(districtId,"PylimoTest","Pylimo g. 22-33", 450, kaunoCountyId);
+        ResponseEntity<DistrictEntity>  respDistrictUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoUpdateCountyDistrictString), DistrictEntity.class);
         //verify
         assertThat(respCountyCreate.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
@@ -188,13 +192,13 @@ public class DistrictControllerTest {
     @Test
     public void deleteDistricts() throws Exception {
         //setup
-        String vilniusString = getCountyJsonString(null,"VilniausTest");
-        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(vilniusString), CountyEntity.class);
+        String vilniusString = MyUtils.getCountyJsonString(null,"VilniausTest");
+        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
         Long countyId = respCountyCreate.getBody().getId();
-        String pylimoDistrictString = getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
-        ResponseEntity<DistrictEntity>  respPylimoDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(pylimoDistrictString), DistrictEntity.class);
-        String centroDistrictString = getDistrictJsonString(null,"CentroTest","Centro g. 1-2", 1450, countyId);
-        ResponseEntity<DistrictEntity>  respCentroDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(centroDistrictString), DistrictEntity.class);
+        String pylimoDistrictString = MyUtils.getDistrictJsonString(null,"PylimoTest","Pylimo g. 22-33", 450, countyId);
+        ResponseEntity<DistrictEntity>  respPylimoDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoDistrictString), DistrictEntity.class);
+        String centroDistrictString = MyUtils.getDistrictJsonString(null,"CentroTest","Centro g. 1-2", 1450, countyId);
+        ResponseEntity<DistrictEntity>  respCentroDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(centroDistrictString), DistrictEntity.class);
         //exercise
         districtService.delete(respCentroDistrictCreate.getBody().getId());
         districtService.delete(respPylimoDistrictCreate.getBody().getId());
@@ -205,26 +209,26 @@ public class DistrictControllerTest {
         assertThat(respCountyCreate.getBody().getDistricts(), CoreMatchers.nullValue());
     }
 
-//    @Test
-//    public void deleteDistrictById() throws Exception {
-//        //setup
-//        String vilniusString = getCountyJsonString(null,"VilniausTest");
-//        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyJsonParser.parse(vilniusString), CountyEntity.class);
-//        Long countyId = respCountyCreate.getBody().getId();
-//        String pylimoDistrictString = getDistrictJsonString(null,"PylimoTest","Pylimo g. 1-1", 450, countyId);
-//        ResponseEntity<DistrictEntity>  respPylimoDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(pylimoDistrictString), DistrictEntity.class);
-//        String centroDistrictString = getDistrictJsonString(null,"CentroTest","Centro g. 1-2", 1450, countyId);
-//        ResponseEntity<DistrictEntity>  respCentroDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(centroDistrictString), DistrictEntity.class);
-//        String newTowDistrictString = getDistrictJsonString(null,"NewTownTest","Naujamiesčio g. 1-3", 2450, countyId);
-//        ResponseEntity<DistrictEntity>  respNewTowDistrictCreate = rest.postForEntity(URI, MyJsonParser.parse(newTowDistrictString), DistrictEntity.class);
-//        //exercise
-//        districtService.delete(respPylimoDistrictCreate.getBody().getId());
-//        //verify
-//        assertThat(respCountyCreate.getStatusCodeValue(), CoreMatchers.is(200));
-//        assertThat(respCentroDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
-//        assertThat(respNewTowDistrictCreate.getStatusCodeValue(),);
-//        assertThat(respCountyCreate.getBody().getDistricts().size(), CoreMatchers.is(2));
-//    }
+    @Test
+    public void deleteDistrictById() throws Exception {
+        //setup
+        String vilniusString = MyUtils.getCountyJsonString(null,"VilniausTest");
+        ResponseEntity<CountyEntity> respCountyCreate = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
+        Long countyId = respCountyCreate.getBody().getId();
+        String pylimoDistrictString = MyUtils.getDistrictJsonString(null,"PylimoTest","Pylimo g. 1-1", 450, countyId);
+        ResponseEntity<DistrictEntity>  respPylimoDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(pylimoDistrictString), DistrictEntity.class);
+        String centroDistrictString = MyUtils.getDistrictJsonString(null,"CentroTest","Centro g. 1-2", 1450, countyId);
+        ResponseEntity<DistrictEntity>  respCentroDistrictCreate = rest.postForEntity(URI,MyUtils.parseStringToJson(centroDistrictString), DistrictEntity.class);
+        String newTowDistrictString = MyUtils.getDistrictJsonString(null,"NewTownTest","Naujamiesčio g. 1-3", 2450, countyId);
+        ResponseEntity<DistrictEntity>  respNewTowDistrictCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(newTowDistrictString), DistrictEntity.class);
+        //exercise
+       // districtService.delete(respPylimoDistrictCreate.getBody().getId());
+        //verify
+        assertThat(respCountyCreate.getStatusCodeValue(), CoreMatchers.is(200));
+        assertThat(respCentroDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
+        assertThat(respNewTowDistrictCreate.getStatusCodeValue(), CoreMatchers.is(200));
+        assertThat(respCountyCreate.getBody().getDistricts().size(), CoreMatchers.is(2));
+    }
 
 
     @TestConfiguration

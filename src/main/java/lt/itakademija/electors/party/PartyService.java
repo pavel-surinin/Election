@@ -43,38 +43,22 @@ public class PartyService {
     }
 
     public void save(Long partyId, String partyName, Integer partyNumber, MultipartFile file) {
+        List<CandidateEntity> candidatesFromCsv = storageService.store("Party", file);
         PartyEntity party = repository.getById(partyId);
         final List<PartyEntity> allParties = repository.findAll();
-        final boolean isNameExists = isName(partyName, party, allParties);
-        throwIf(isNameExists,new PartyNameCloneException("Party exists with name " + partyName));
-        final boolean isNumberExists = isNumber(partyNumber, party, allParties);
-        throwIf(isNumberExists,new PartyNumberCloneException("Party exists with number " + partyNumber));
-        //TODO refactor exceprions
+        throwIfNameExists(partyName, party, allParties);
+        throwIfNumberExists(partyNumber, party, allParties);
         //TODO save party
-    }
+        party.setName(partyName);
+        party.setPartyNumber(partyNumber);
+        final PartyEntity saveParty = repository.save(party);
+        candidatesFromCsv
+                .stream()
+                .map(c -> {
+                    c.setPartyDependencies(saveParty);
+                    return c;
+                }).forEach(c -> candidateService.save(c));
 
-    private boolean isNumber(Integer partyNumber, PartyEntity party, List<PartyEntity> allParties) {
-        for (PartyEntity par : allParties) {
-            System.out.println((par.getPartyNumber() == partyNumber));
-            if (par.getPartyNumber() == partyNumber) {
-                System.out.println(((party.getId() != par.getId())));
-                if ((party.getId() != par.getId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isName(String partyName, PartyEntity party, List<PartyEntity> allParties) {
-        for (PartyEntity par : allParties) {
-            if (par.getName().equals(partyName)) {
-                if ((party.getId() != par.getId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @Transactional
@@ -94,6 +78,10 @@ public class PartyService {
                     can.setPartyDependencies(createPartyResponse);
                     return can;
                 }).forEach(can -> candidateService.save(can));
+    }
+
+    public PartyEntity getPartyByNumber(Integer number) {
+        return repository.getPartyByNumber(number);
     }
 
 
@@ -138,7 +126,25 @@ public class PartyService {
         }
     }
 
-    public PartyEntity getPartyByNumber(Integer number) {
-        return repository.getPartyByNumber(number);
+    private boolean throwIfNumberExists(Integer partyNumber, PartyEntity party, List<PartyEntity> allParties) {
+        for (PartyEntity par : allParties) {
+            if (par.getPartyNumber() == partyNumber) {
+                if ((party.getId() != par.getId())) {
+                    throw new PartyNumberCloneException("Party exists with number " + partyNumber);
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean throwIfNameExists(String partyName, PartyEntity party, List<PartyEntity> allParties) {
+        for (PartyEntity par : allParties) {
+            if (par.getName().equals(partyName)) {
+                if ((party.getId() != par.getId())) {
+                    throw new PartyNameCloneException("Party exists with name " + partyName);
+                }
+            }
+        }
+        return false;
     }
 }
