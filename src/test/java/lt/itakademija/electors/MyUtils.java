@@ -16,7 +16,7 @@ import java.nio.file.Paths;
  */
 public class MyUtils {
 
-    public static JSONObject parseStringToJson(String string){
+    public static JSONObject parseStringToJson(String string) {
         JSONParser parser = new JSONParser(0);
         JSONObject parsedJson = null;
         try {
@@ -78,3 +78,4 @@ public class MyUtils {
         return representativeString;
     }
 }
+
