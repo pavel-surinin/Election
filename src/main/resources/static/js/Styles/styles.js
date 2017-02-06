@@ -1,12 +1,21 @@
 var styles = {
   toggle :
-  function(numbera){
-    if (numbera == 0) {
+  function(number){
+    if (number == 0) {
+      return {display : 'inherit'};
+    } else {
+      return {display : 'none'};
+    }
+  },
+  toggleTF :
+  function(bln){
+    if (bln) {
       return {display : 'inherit'};
     } else {
       return {display : 'none'};
     }
   }
+
 
 };
 
