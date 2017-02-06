@@ -71,11 +71,12 @@ public class PartyControllerTest {
 
     @Test
     public void saveExistingNumberParty() throws Exception {
-
+        //setpu
         final int sizeBeforeSave = partyRepository.findAll().size();
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
         String name = "Testeriu Partija";
         Integer number = 45;
+        //verify
         try {
             partyService.save(name, number, file);
             final int sizeAfterSave = partyRepository.findAll().size();
@@ -83,7 +84,6 @@ public class PartyControllerTest {
         } catch (PartyNumberCloneException e) {
             assertThat(e.getMessage(), CoreMatchers.is("Party exists with number " + number));
         }
-
     }
 
     @TestConfiguration
