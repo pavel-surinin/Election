@@ -43,16 +43,8 @@ var CandidatesListViewRowComponent = React.createClass({
                   </div>
                 </div>
                 &nbsp;
-<<<<<<< HEAD:src/main/resources/static/js/Components/CandidatesListViewRowComponent.js
-                <button onClick={this.handleEditClick(this.props.id)} type="button" className="btn btn-primary btn-sm fa fa-pencil"></button>
-	              &nbsp;
-	              <a href="#/admin/candidate">
-	                <button type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
-	              </a>
-=======
                 <a href={'#/admin/candidate/edit/' + this.props.id} data-toggle="tooltip2" id={'edit-button-' + this.props.id} title="Atnaujinti Kandidato informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
                 &nbsp;
->>>>>>> pavel-surinin-master:src/main/resources/static/js/Admin/Components/CandidatesListViewRowComponent.js
               </td>
             </tr>
     );
