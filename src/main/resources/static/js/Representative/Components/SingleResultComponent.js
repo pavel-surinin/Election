@@ -42,7 +42,7 @@ var SingleResultComponent = React.createClass({
 								<span className="input-group-addon" id="basic-addon2">vnt.</span>
 							</div>
 						</div>
-						<div className="form-group panel-footer" style={styles.marginTable}>
+						<div className="form-group panel-footer">
 							<div className="col-md-6">
 								<h4><b>Sugadinti balsai:</b></h4>
 							</div>

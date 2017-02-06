@@ -135,11 +135,8 @@ public class CountyControllerTest {
     @Test
     public void uploadSingleCandidates() throws Exception {
         //setup
-<<<<<<< HEAD
-        MultipartFile result = MyUtils.parseToMultipart("test-csv/data-county-non-party.csv");
-=======
+
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
->>>>>>> e370c4bf16225f6e2501cf3384dd11d79e7a4a56
         //execute
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
@@ -200,11 +197,8 @@ public class CountyControllerTest {
     @Test
     public void deleteCountyWithResultsTest() {
         //setup adding candidates
-<<<<<<< HEAD
-        MultipartFile result = MyUtils.parseToMultipart("test-csv/data-county-non-party.csv");
-=======
+
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
->>>>>>> e370c4bf16225f6e2501cf3384dd11d79e7a4a56
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
         countyService.update(id, result);

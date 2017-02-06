@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +42,7 @@ public class PartyService {
         return repository.save(partyBeforeUpdate);
     }
 
+    @Transactional
     public void save(Long partyId, String partyName, Integer partyNumber, MultipartFile file) {
         List<CandidateEntity> candidatesFromCsv = storageService.store("Party", file);
         PartyEntity party = repository.getById(partyId);
