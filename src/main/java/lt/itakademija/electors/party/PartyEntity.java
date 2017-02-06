@@ -26,6 +26,7 @@ public class PartyEntity {
     private List<CandidateEntity> members;
 
     @NotNull
+    @Column(unique = true)
     private Integer partyNumber;
 
     @OneToMany(mappedBy="party", cascade = CascadeType.REMOVE)

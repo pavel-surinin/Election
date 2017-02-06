@@ -36,7 +36,45 @@ public class PartyService {
 
     @Transactional
     public PartyEntity save(PartyEntity party) {
-    	return repository.save(party);
+        final PartyEntity partyBeforeUpdate = repository.getById(party.getId());
+        partyBeforeUpdate.setName(party.getName());
+        partyBeforeUpdate.setPartyNumber(party.getPartyNumber());
+        return repository.save(partyBeforeUpdate);
+    }
+
+    public void save(Long partyId, String partyName, Integer partyNumber, MultipartFile file) {
+        PartyEntity party = repository.getById(partyId);
+        final List<PartyEntity> allParties = repository.findAll();
+        final boolean isNameExists = isName(partyName, party, allParties);
+        throwIf(isNameExists,new PartyNameCloneException("Party exists with name " + partyName));
+        final boolean isNumberExists = isNumber(partyNumber, party, allParties);
+        throwIf(isNumberExists,new PartyNumberCloneException("Party exists with number " + partyNumber));
+        //TODO refactor exceprions
+        //TODO save party
+    }
+
+    private boolean isNumber(Integer partyNumber, PartyEntity party, List<PartyEntity> allParties) {
+        for (PartyEntity par : allParties) {
+            System.out.println((par.getPartyNumber() == partyNumber));
+            if (par.getPartyNumber() == partyNumber) {
+                System.out.println(((party.getId() != par.getId())));
+                if ((party.getId() != par.getId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isName(String partyName, PartyEntity party, List<PartyEntity> allParties) {
+        for (PartyEntity par : allParties) {
+            if (par.getName().equals(partyName)) {
+                if ((party.getId() != par.getId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Transactional
@@ -58,6 +96,7 @@ public class PartyService {
                 }).forEach(can -> candidateService.save(can));
     }
 
+
     public List<PartyReport> getPartyList() {
         List<PartyReport> list = new ArrayList<>();
         for (PartyEntity party : repository.findAll()) {
@@ -70,7 +109,6 @@ public class PartyService {
         }
         return list;
     }
-
 
     public PartyReport getPartyById(Long id) {
         PartyEntity party = repository.getById(id);
