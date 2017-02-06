@@ -25,7 +25,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,10 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +135,11 @@ public class CountyControllerTest {
     @Test
     public void uploadSingleCandidates() throws Exception {
         //setup
+<<<<<<< HEAD
         MultipartFile result = MyUtils.parseToMultipart("test-csv/data-county-non-party.csv");
+=======
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
+>>>>>>> e370c4bf16225f6e2501cf3384dd11d79e7a4a56
         //execute
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
@@ -201,7 +200,11 @@ public class CountyControllerTest {
     @Test
     public void deleteCountyWithResultsTest() {
         //setup adding candidates
+<<<<<<< HEAD
         MultipartFile result = MyUtils.parseToMultipart("test-csv/data-county-non-party.csv");
+=======
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
+>>>>>>> e370c4bf16225f6e2501cf3384dd11d79e7a4a56
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
         countyService.update(id, result);
@@ -252,17 +255,5 @@ public class CountyControllerTest {
         return csvParser.extractCandidates(fis);
     }
 
-    private MultipartFile getMultipartFile(String string) {
-        Path path = Paths.get(string);
-        String name = path.getFileName().toFile().getName();
-        String originalFileName = path.getFileName().toFile().getName();
-        String contentType = "multipart/form-data";
-        byte[] content = null;
-        try {
-            content = Files.readAllBytes(path);
-        } catch (final IOException e) {
-        }
-        return new MockMultipartFile(name, originalFileName, contentType, content);
-    }
 }
 
