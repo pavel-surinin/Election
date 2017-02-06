@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/data-party-1.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/data-party-2.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/data-party-3.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileSystemStorageService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileSystemStorageService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyJsonParser.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyJsonParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/adata.sql" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/district/DistrictControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/district/DistrictControllerTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -46,7 +38,7 @@
       <file leaf-file-name="CountyControllerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2771">
+            <state relative-caret-position="1194">
               <caret line="240" column="5" lean-forward="false" selection-start-line="231" selection-start-column="3" selection-end-line="240" selection-end-column="5" />
               <folding>
                 <element signature="method#setUp#0;class#CountyControllerTest#0" expanded="false" />
@@ -58,41 +50,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartyControllerTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java">
+      <file leaf-file-name="DistrictCloneException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/exceptions/DistrictCloneException.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="119">
+              <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java">
+      <file leaf-file-name="HttpStatus.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.5.RELEASE/spring-web-4.3.5.RELEASE-sources.jar!/org/springframework/http/HttpStatus.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="-631">
+              <caret line="213" column="4" lean-forward="false" selection-start-line="213" selection-start-column="4" selection-end-line="213" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartyController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java">
+      <file leaf-file-name="DistrictControllerTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/district/DistrictControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="55" />
-              <folding />
+            <state relative-caret-position="276">
+              <caret line="282" column="5" lean-forward="false" selection-start-line="282" selection-start-column="5" selection-end-line="282" selection-end-column="5" />
+              <folding>
+                <element signature="e#19413#19414#0" expanded="true" />
+                <element signature="e#19465#19466#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <file leaf-file-name="data.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/data.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -101,8 +96,8 @@
       <file leaf-file-name="MyUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="46" lean-forward="false" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+            <state relative-caret-position="313">
+              <caret line="77" column="160" lean-forward="false" selection-start-line="77" selection-start-column="156" selection-end-line="77" selection-end-column="160" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -143,7 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileUploadController.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyController.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/CsvFileReader.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyRepository.java" />
@@ -194,6 +188,7 @@
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/district/DistrictControllerTest.java" />
       </list>
     </option>
   </component>
@@ -281,6 +276,66 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="party" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="district" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="main" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -341,105 +396,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Election" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Election" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="itakademija" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="FileSystemStorageService.java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Election" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Election" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="itakademija" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Election" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Election" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="itakademija" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="electors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="party" />
+              <option name="myItemId" value="exceptions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -495,11 +452,63 @@
       <recent name="lt.itakademija.electors.representative" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager" selected="JUnit.DistrictControllerTest">
+    <configuration default="false" name="DistrictControllerTest.deleteDistricts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="lt.itakademija.electors.district.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Election" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="lt.itakademija.electors.district" />
+      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.district.DistrictControllerTest" />
+      <option name="METHOD_NAME" value="deleteDistricts" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="DistrictControllerTest.updateDistrictsCountyToCountyWhereIsSameNameDistrict" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="lt.itakademija.electors.district.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Election" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="lt.itakademija.electors.district" />
+      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.district.DistrictControllerTest" />
+      <option name="METHOD_NAME" value="updateDistrictsCountyToCountyWhereIsSameNameDistrict" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
     <configuration default="false" name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="lt.itakademija.storage.*" />
+          <option name="PATTERN" value="lt.itakademija.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -516,19 +525,19 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="CountyControllerTest.uploadSingleCandidates" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="lt.itakademija.electors.county.*" />
+          <option name="PATTERN" value="lt.itakademija.electors.district.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="Election" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="lt.itakademija.electors.county" />
-      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.county.CountyControllerTest" />
-      <option name="METHOD_NAME" value="uploadSingleCandidates" />
+      <option name="PACKAGE_NAME" value="lt.itakademija.electors.district" />
+      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.district.DistrictControllerTest" />
+      <option name="METHOD_NAME" value="deleteDistrictAndDistrictsRepresentativeAutoDelete" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -542,70 +551,18 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="CountyControllerTest.deleteCounty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="DistrictControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="lt.itakademija.electors.county.*" />
+          <option name="PATTERN" value="lt.itakademija.electors.district.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <module name="Election" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="lt.itakademija.electors.county" />
-      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.county.CountyControllerTest" />
-      <option name="METHOD_NAME" value="deleteCounty" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="CountyControllerTest.deleteCountyWithResultsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="lt.itakademija.electors.county.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Election" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="lt.itakademija.electors.county" />
-      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.county.CountyControllerTest" />
-      <option name="METHOD_NAME" value="deleteCountyWithResultsTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="PartyControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="lt.itakademija.electors.party.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Election" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="lt.itakademija.electors.party" />
-      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.party.PartyControllerTest" />
+      <option name="PACKAGE_NAME" value="lt.itakademija.electors.district" />
+      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.district.DistrictControllerTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -879,19 +836,19 @@
     <list size="7">
       <item index="0" class="java.lang.String" itemvalue="JUnit.lt.itakademija in Election" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.CountyControllerTest" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Application" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.uploadSingleCandidates" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.deleteCounty" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.deleteCountyWithResultsTest" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.PartyControllerTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest.deleteDistricts" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest.updateDistrictsCountyToCountyWhereIsSameNameDistrict" />
+      <item index="4" class="java.lang.String" itemvalue="Application.Application" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Application" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.PartyControllerTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.uploadSingleCandidates" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.deleteCountyWithResultsTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.deleteCounty" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest.updateDistrictsCountyToCountyWhereIsSameNameDistrict" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Application" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.DistrictControllerTest.deleteDistricts" />
       </list>
     </recent_temporary>
   </component>
@@ -955,35 +912,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CountyControllerTest - 2017.02.06 at 11h 44m 33s.xml">
-      <configuration name="CountyControllerTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest - 2017.02.06 at 14h 56m 47s.xml">
+      <configuration name="DistrictControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CountyControllerTest_deleteCountyWithResultsTest - 2017.02.04 at 11h 55m 17s.xml">
-      <configuration name="CountyControllerTest.deleteCountyWithResultsTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest - 2017.02.06 at 14h 59m 28s.xml">
+      <configuration name="DistrictControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CountyControllerTest_deleteCountyWithResultsTest - 2017.02.04 at 12h 10m 54s.xml">
-      <configuration name="CountyControllerTest.deleteCountyWithResultsTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest - 2017.02.06 at 15h 00m 37s.xml">
+      <configuration name="DistrictControllerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CountyControllerTest_deleteCountyWithResultsTest - 2017.02.04 at 12h 26m 44s.xml">
-      <configuration name="CountyControllerTest.deleteCountyWithResultsTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest_deleteDistrictAndDistrictsRepresentativeAutoDelete - 2017.02.06 at 14h 48m 17s.xml">
+      <configuration name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CountyControllerTest_deleteCountyWithResultsTest - 2017.02.04 at 12h 28m 41s.xml">
-      <configuration name="CountyControllerTest.deleteCountyWithResultsTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest_deleteDistrictAndDistrictsRepresentativeAutoDelete - 2017.02.06 at 14h 48m 50s.xml">
+      <configuration name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CountyControllerTest_deleteCountyWithResultsTest - 2017.02.04 at 12h 37m 30s.xml">
-      <configuration name="CountyControllerTest.deleteCountyWithResultsTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest_deleteDistrictAndDistrictsRepresentativeAutoDelete - 2017.02.06 at 14h 49m 45s.xml">
+      <configuration name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CountyControllerTest_uploadSingleCandidates - 2017.02.06 at 11h 40m 09s.xml">
-      <configuration name="CountyControllerTest.uploadSingleCandidates" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest_deleteDistrictAndDistrictsRepresentativeAutoDelete - 2017.02.06 at 14h 50m 38s.xml">
+      <configuration name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CountyControllerTest_uploadSingleCandidates - 2017.02.06 at 11h 42m 07s.xml">
-      <configuration name="CountyControllerTest.uploadSingleCandidates" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest_deleteDistrictAndDistrictsRepresentativeAutoDelete - 2017.02.06 at 14h 51m 11s.xml">
+      <configuration name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 05m 48s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest_deleteDistrictAndDistrictsRepresentativeAutoDelete - 2017.02.06 at 14h 53m 32s.xml">
+      <configuration name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 07m 20s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="DistrictControllerTest_deleteDistrictAndDistrictsRepresentativeAutoDelete - 2017.02.06 at 14h 54m 07s.xml">
+      <configuration name="DistrictControllerTest.deleteDistrictAndDistrictsRepresentativeAutoDelete" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -1009,12 +966,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3438486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3694517" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22454308" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.225625" sideWeight="0.49369085" order="9" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.225" sideWeight="0.49369085" order="9" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1033,7 +991,6 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329429" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Running Info" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Running Result" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
     </layout>
@@ -1071,7 +1028,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="9" />
+      <option name="time" value="10" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1080,27 +1037,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/users/PasswordGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/users/Md5.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="23" lean-forward="false" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/representative/DistrictRepresentativeController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -1198,13 +1134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="81" column="56" lean-forward="false" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyReport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -1298,7 +1227,6 @@
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_101/src.zip!/java/util/function/Consumer.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/data.sql" />
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/CorsEnableConfig.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyEntity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1327,8 +1255,8 @@
         <state relative-caret-position="204">
           <caret line="57" column="52" lean-forward="false" selection-start-line="57" selection-start-column="52" selection-end-line="57" selection-end-column="52" />
           <folding>
-            <element signature="e#3269#3270#0" expanded="true" />
-            <element signature="e#3327#3328#0" expanded="true" />
+            <element signature="e#3269#3270#0" expanded="false" />
+            <element signature="e#3327#3328#0" expanded="false" />
             <element signature="method#getPartyList#0;class#PartyService#0" expanded="false" />
             <element signature="method#getPartyById#0;class#PartyService#0" expanded="false" />
             <element signature="method#throwIf#0;class#PartyService#0" expanded="false" />
@@ -1338,10 +1266,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileSystemStorageService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="209">
+          <caret line="95" column="45" lean-forward="false" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1354,35 +1282,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileSystemStorageService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="95" column="45" lean-forward="false" selection-start-line="95" selection-start-column="45" selection-end-line="95" selection-end-column="45" />
+        <state relative-caret-position="327">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="46" lean-forward="false" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="260">
           <caret line="28" column="55" lean-forward="false" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1832">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/exceptions/DistrictCloneException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="8" column="36" lean-forward="true" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2771">
+        <state relative-caret-position="1194">
           <caret line="240" column="5" lean-forward="false" selection-start-line="231" selection-start-column="3" selection-end-line="240" selection-end-column="5" />
           <folding>
             <element signature="method#setUp#0;class#CountyControllerTest#0" expanded="false" />
@@ -1393,11 +1343,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.3.5.RELEASE/spring-web-4.3.5.RELEASE-sources.jar!/org/springframework/http/HttpStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="-631">
+          <caret line="213" column="4" lean-forward="false" selection-start-line="213" selection-start-column="4" selection-end-line="213" selection-end-column="4" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="77" column="160" lean-forward="false" selection-start-line="77" selection-start-column="156" selection-end-line="77" selection-end-column="160" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/district/DistrictControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="282" column="5" lean-forward="false" selection-start-line="282" selection-start-column="5" selection-end-line="282" selection-end-column="5" />
+          <folding>
+            <element signature="e#19413#19414#0" expanded="true" />
+            <element signature="e#19465#19466#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

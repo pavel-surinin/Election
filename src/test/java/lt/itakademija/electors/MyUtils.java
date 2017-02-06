@@ -50,7 +50,7 @@ public class MyUtils {
      * @param countyName String to assign county name, can be used just letters
      * @return JSON String to parse in parseStringToJson
      */
-    public static String getCountyJsonString(Long countyId, String countyName){
+    public static String getCountyJson(Long countyId, String countyName){
         String countyString =  "{\"id\" : \"" + countyId + "\",\"name\" : \"" + countyName + "\"}";
         return countyString;
     }
@@ -63,7 +63,7 @@ public class MyUtils {
      * @param countyId Long county ID. Before assign County ID, the County with that ID has to be created
      * @return JSON String to parse in parseStringToJson
      */
-    public static String getDistrictJsonString (Long districtId, String districtName, String districtAdress, int numberOfElectors, Long countyId){
+    public static String getDistrictJson(Long districtId, String districtName, String districtAdress, int numberOfElectors, Long countyId){
         String districtString = "{\"id\" : \"" + districtId + "\",\"name\" : \"" + districtName + "\", \"adress\" : \"" + districtAdress + "\",\"numberOfElectors\" : " + numberOfElectors + ",\"county\" : {\"id\" : " + countyId + "}}";
         return districtString;
     }
@@ -74,7 +74,7 @@ public class MyUtils {
      * @param representingDistrict Long district ID. Before assign district ID, the district with that ID has to be created
      * @return JSON String to parse in parseStringToJson
      */
-    public static String getDistrictRepresentativeJsonString (String name, String surname, Long representingDistrict){
+    public static String getDistrictRepresentativeJson(String name, String surname, Long representingDistrict){
         String representativeString = "{\"name\" : \"" + name + "\", \"surname\" : \"" + surname + "\", \"district\" : {\"id\" : " + representingDistrict + "}}";
         return representativeString;
     }
