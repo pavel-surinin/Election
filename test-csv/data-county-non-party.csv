@@ -1,9 +1,5 @@
 name,surname,birth-date,party,number-in-party,description
 Jonas,Pithuauskas,1976-04-30,null,null,Uz Lietuva Vyrai
-<<<<<<< HEAD
-Algirdas,Paleckis,1966-06-06,null,null,Kamunistas,
-Algis,Ðustauskas,1988-06-04,null,null,Taksistas,
-=======
 Algirdas,Paleckis,1966-06-06,null,null,Kamunistas
-Algis,Ðustauskas,1988-06-04,null,null,Taksistas
->>>>>>> 1cf26286718c9598d129259ac7f343a00cb3c19f
+Algis,ï¿½ustauskas,1988-06-04,null,null,Taksistas
+
