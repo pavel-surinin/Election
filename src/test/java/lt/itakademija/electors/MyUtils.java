@@ -16,7 +16,7 @@ import java.nio.file.Paths;
  */
 public class MyUtils {
 
-    public static JSONObject parseStringToJson(String string){
+    public static JSONObject parseStringToJson(String string) {
         JSONParser parser = new JSONParser(0);
         JSONObject parsedJson = null;
         try {
@@ -28,11 +28,10 @@ public class MyUtils {
     }
 
     /**
-     *
      * @param pathToFile apth to csv from root
      * @return
      */
-    public static MultipartFile parseToMultiPart(String pathToFile){
+    public static MultipartFile parseToMultiPart(String pathToFile) {
         Path path = Paths.get(pathToFile);
         String name = path.getFileName().toFile().getName();
         String originalFileName = path.getFileName().toFile().getName();
@@ -44,4 +43,5 @@ public class MyUtils {
         }
         return new MockMultipartFile(name, originalFileName, contentType, content);
     }
+
 }
