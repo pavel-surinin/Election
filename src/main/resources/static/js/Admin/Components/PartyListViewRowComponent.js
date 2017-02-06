@@ -22,7 +22,6 @@ var  PartyListViewRowComponent= React.createClass({
               <td className="small">
                 <button onClick={this.handleDetailsClick(this.props.id)} ref="info" title="Detaliau" id={'details-button-' + this.props.id} className='btn btn-info btn-sm fa fa-info' role='button'></button>
                 &nbsp;
-                &nbsp;
                 <a href={'#/admin/party/edit/' + this.props.id} data-toggle="tooltip2" id={'edit-button-' + this.props.id} title="Atnaujinti Partijos informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
               </td>
             </tr>
