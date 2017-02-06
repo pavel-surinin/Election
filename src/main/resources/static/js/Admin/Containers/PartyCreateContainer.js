@@ -24,6 +24,7 @@ var PartyCreateContainer = React.createClass({
       numberErrorMesages : [],
       fileErrorMesages : [],
       postErrCode : 199,
+      members : [],
     };
   },
   onHandleFileChange : function(file){
@@ -97,6 +98,7 @@ var PartyCreateContainer = React.createClass({
        onHandleSubmit={this.onHandleSubmit}
        name={this.state.name}
        number={this.state.number}
+       members={this.state.members}
        nameErrorMesages={this.state.nameErrorMesages}
        numberErrorMesages={this.state.numberErrorMesages}
        fileErrorMesages={this.state.fileErrorMesages}
