@@ -1,5 +1,7 @@
 package lt.itakademija.electors.candidate;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,8 +16,6 @@ public class CandidateReport {
 
     private String surname;
 
-    private Date birthDate;
-
     private String partijosPavadinimas;
 
     private Long partijosId;
@@ -28,6 +28,8 @@ public class CandidateReport {
 
     private boolean isMultiList;
 
+    private String birthDate;
+
     public CandidateReport() {
     }
 
@@ -36,7 +38,7 @@ public class CandidateReport {
         this.setName(candidateEntity.getName());
         this.setSurname(candidateEntity.getSurname());
         this.setDescription(candidateEntity.getDescription());
-        this.setBirthDate(candidateEntity.getBirthDate());
+        this.setBirthDate(formatDateToString(candidateEntity.getBirthDate()));
         this.setNumberInParty(candidateEntity.getNumberInParty());
         this.setMultiList(candidateEntity.isMultiList());
         if (candidateEntity.getPartyDependencies() != null) {
@@ -46,6 +48,14 @@ public class CandidateReport {
         if (candidateEntity.getCounty() != null) {
             this.setCountyId(candidateEntity.getCounty().getId());
         }
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Long getCountyId() {
@@ -97,14 +107,6 @@ public class CandidateReport {
         this.surname = surname;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public String getPartijosPavadinimas() {
         return partijosPavadinimas;
     }
@@ -128,5 +130,10 @@ public class CandidateReport {
     public void setDescription(String description) {
         this.description = description;
     }
-   
+
+    private String formatDateToString(Date date){
+        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+        return df.format(date);
+    }
+
 }
