@@ -1,9 +1,5 @@
 package lt.itakademija.electors;
 
-<<<<<<< HEAD
-import net.minidev.json.JSONArray;
-=======
->>>>>>> pavel-surinin-master
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
