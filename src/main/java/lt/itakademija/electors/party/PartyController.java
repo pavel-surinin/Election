@@ -21,10 +21,15 @@ public class PartyController {
 
     @PostMapping("/party")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
+                                   @RequestHeader(required = false, value = "Party-id") Long partyId,
                                    @RequestHeader("Party-name") String partyName,
                                    @RequestHeader("Party-number") Integer partyNumber,
                                    RedirectAttributes redirectAttributes) {
-        service.save(partyName, partyNumber, file);
+        if (partyId == null){
+            service.save(partyName, partyNumber, file);
+        } else {
+            service.save(partyId ,partyName, partyNumber, file);
+        }
         redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
         return "redirect:/";
     }

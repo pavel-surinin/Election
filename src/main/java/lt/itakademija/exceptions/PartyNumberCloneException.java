@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 /**
  * Created by Pavel on 2017-01-26.
  */
-@ResponseStatus(value= HttpStatus.EXPECTATION_FAILED, reason="Party number already exists")
+@ResponseStatus(value= HttpStatus.EXPECTATION_FAILED)
 public class PartyNumberCloneException extends RuntimeException {
 
     public PartyNumberCloneException(String message) {
