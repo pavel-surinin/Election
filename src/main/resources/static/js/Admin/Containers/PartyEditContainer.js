@@ -7,6 +7,7 @@ function validate(self, code){
   if (code == 417) {numberErrorMesages.push('Partija su tokiu numeriu jau užregistruota');}
   if (code == 418) {nameErrorMesages.push('Partija su tokiu pavadinimu jau užregistruota');}
   if (code == 422) {fileErrorMesages.push('Blogi CSV duomenys');}
+  if (code == 500) {numberErrorMesages.push('Pavadinimas arba Partijos numeris jau yra panaudoti');}
   self.setState({
     fileErrorMesages : fileErrorMesages,
     numberErrorMesages :numberErrorMesages,
@@ -14,7 +15,6 @@ function validate(self, code){
     numberOfMembers : 0
   });
 }
-
 function getPartyById(self,id) {
   axios
   .get('/party/' + id)
