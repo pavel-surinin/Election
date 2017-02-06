@@ -1,7 +1,7 @@
 package lt.itakademija.electors.county;
 
 import lt.itakademija.Application;
-import lt.itakademija.electors.MyJsonParser;
+import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateRepository;
 import lt.itakademija.electors.candidate.CandidateService;
@@ -16,7 +16,6 @@ import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +27,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,9 +39,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -98,11 +91,11 @@ public class CountyControllerTest {
     @Before
     public void setUp() throws Exception {
         String VilniusString = "{\"name\":\"VilniusTest\"}";
-        rest.postForEntity(URI, MyJsonParser.parse(VilniusString), CountyEntity.class);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(VilniusString), CountyEntity.class);
         String KaunasString = "{\"name\":\"KaunasTest\"}";
-        rest.postForEntity(URI, MyJsonParser.parse(KaunasString), CountyEntity.class);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(KaunasString), CountyEntity.class);
         String KlaipedaString = "{\"name\":\"KlaipedaTest\"}";
-        rest.postForEntity(URI, MyJsonParser.parse(KlaipedaString), CountyEntity.class);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(KlaipedaString), CountyEntity.class);
     }
 
     @After
@@ -124,7 +117,7 @@ public class CountyControllerTest {
     public void save() throws Exception {
         //setup
         String VilniusString = "{\"name\":\"KedainiaiTest\"}";
-        ResponseEntity<CountyEntity> respCreate = rest.postForEntity(URI, MyJsonParser.parse(VilniusString), CountyEntity.class);
+        ResponseEntity<CountyEntity> respCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(VilniusString), CountyEntity.class);
         //verify
         assertThat(respCreate.getStatusCodeValue(), CoreMatchers.is(200));
     }
@@ -133,11 +126,11 @@ public class CountyControllerTest {
     public void updateName() throws Exception {
         //setup
         String kedainiaiString = "{\"name\":\"KedainiaiTest\"}";
-        ResponseEntity<CountyEntity> respCreate = rest.postForEntity(URI, MyJsonParser.parse(kedainiaiString), CountyEntity.class);
+        ResponseEntity<CountyEntity> respCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(kedainiaiString), CountyEntity.class);
         //exercise
         Long id = respCreate.getBody().getId();
         String kedainiaiUpdateString = "{\"id\":" + id + ", \"name\" : \"KedainiaiUpdate\"}";
-        ResponseEntity<CountyEntity> respUpdate = rest.postForEntity(URI, MyJsonParser.parse(kedainiaiUpdateString), CountyEntity.class);
+        ResponseEntity<CountyEntity> respUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(kedainiaiUpdateString), CountyEntity.class);
         //verify
         assertThat(respCreate.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respUpdate.getStatusCodeValue(), CoreMatchers.is(200));
@@ -147,7 +140,7 @@ public class CountyControllerTest {
     @Test
     public void uploadSingleCandidates() throws Exception {
         //setup
-        MultipartFile result = getMultipartFile("test-csv/data-county-non-party.csv");
+        MultipartFile result = MyUtils.parseToMultipart("test-csv/data-county-non-party.csv");
         //execute
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
@@ -168,7 +161,7 @@ public class CountyControllerTest {
         ResponseEntity<CountyReport> respDetailsBefore = rest.getForEntity("/county/" + countyId, CountyReport.class);
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId.toString() + "}}";
         ResponseEntity<DistrictReport> respCreate = rest.postForEntity("/district",
-                MyJsonParser.parse(jsonDistrictCreate),
+                MyUtils.parseStringToJson(jsonDistrictCreate),
                 DistrictReport.class);
         uploadSingleCandidates();
         ResponseEntity<CountyDetailsReport> respDetailsAfter = rest.getForEntity("/county/" + countyId, CountyDetailsReport.class);
@@ -208,7 +201,7 @@ public class CountyControllerTest {
     @Test
     public void deleteCountyWithResultsTest() {
         //setup adding candidates
-        MultipartFile result = getMultipartFile("test-csv/data-county-non-party.csv");
+        MultipartFile result = MyUtils.parseToMultipart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
         countyService.update(id, result);
@@ -216,7 +209,7 @@ public class CountyControllerTest {
         final Long countyId = countyRepository.findAll().get(0).getId();
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
         ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyJsonParser.parse(jsonDistrictCreate), DistrictReport.class);
+        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
         //votes
         final DistrictEntity d1 = districtRepository.findAll().get(0);
 

@@ -1,8 +1,7 @@
 package lt.itakademija.electors.representative;
 
 import lt.itakademija.Application;
-import lt.itakademija.electors.MyJsonParser;
-import lt.itakademija.electors.county.CountyControllerTest;
+import lt.itakademija.electors.MyUtils;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
@@ -41,11 +40,11 @@ public class DistrictRepresentativeControllerTest {
     @Before
     public void setUp() throws Exception {
         String RepresentativeOne = "{\"name\": \"VilniusTest\", \"surname\": \"Preservative1\"}";
-        rest.postForEntity(URI, MyJsonParser.parse(RepresentativeOne), DistrictRepresentativeEntity.class);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(RepresentativeOne), DistrictRepresentativeEntity.class);
         String RepresentativeTwo = "{\"name\": \"KaunasTest\", \"surname\": \"Preservative2\"}";
-        rest.postForEntity(URI, MyJsonParser.parse(RepresentativeTwo), DistrictRepresentativeEntity.class);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(RepresentativeTwo), DistrictRepresentativeEntity.class);
         String RepresentativeThree = "{\"name\": \"KlaipedaTest\", \"surname\": \"Preservative3\"}";
-        rest.postForEntity(URI, MyJsonParser.parse(RepresentativeThree), DistrictRepresentativeEntity.class);
+        rest.postForEntity(URI, MyUtils.parseStringToJson(RepresentativeThree), DistrictRepresentativeEntity.class);
     }
 
     @After
@@ -72,7 +71,7 @@ public class DistrictRepresentativeControllerTest {
         String RepresentativeFour = "{\"name\": \"SiauliaiTest\", \"surname\": \"Preservative4\"}";
         //exercise
         ResponseEntity<DistrictRepresentativeEntity> responseCreate = rest.
-                postForEntity(URI, MyJsonParser.parse(RepresentativeFour), DistrictRepresentativeEntity.class);
+                postForEntity(URI, MyUtils.parseStringToJson(RepresentativeFour), DistrictRepresentativeEntity.class);
         ResponseEntity<DistrictRepresentativeReport[]> response = rest.getForEntity(URI, DistrictRepresentativeReport[].class);
         //verify
         assertThat(responseCreate.getStatusCodeValue(), CoreMatchers.is(200));
