@@ -44,4 +44,38 @@ public class MyUtils {
         return new MockMultipartFile(name, originalFileName, contentType, content);
     }
 
+    /**
+     * @param countyId  Long as default use null, because County ID is (@GeneratedValue(strategy = GenerationType.AUTO)) {CountyEntity}. Use Id when want to update
+     * @param countyName String to assign county name, can be used just letters
+     * @return JSON String to parse in parseStringToJson
+     */
+    public static String getCountyJson(Long countyId, String countyName){
+        String countyString =  "{\"id\" : \"" + countyId + "\",\"name\" : \"" + countyName + "\"}";
+        return countyString;
+    }
+
+    /**
+     * @param districtId Long as default use null, because district ID is (@GeneratedValue(strategy = GenerationType.AUTO)) {DistrictEntity}. Use Id when want to update districts other params
+     * @param districtName String to assign district name, can be used just letters
+     * @param districtAdress String to assign district address
+     * @param numberOfElectors Integer number of electors in this district
+     * @param countyId Long county ID. Before assign County ID, the County with that ID has to be created
+     * @return JSON String to parse in parseStringToJson
+     */
+    public static String getDistrictJson(Long districtId, String districtName, String districtAdress, int numberOfElectors, Long countyId){
+        String districtString = "{\"id\" : \"" + districtId + "\",\"name\" : \"" + districtName + "\", \"adress\" : \"" + districtAdress + "\",\"numberOfElectors\" : " + numberOfElectors + ",\"county\" : {\"id\" : " + countyId + "}}";
+        return districtString;
+    }
+
+    /**
+     * @param name String to assign district representatives name, can be used just letters
+     * @param surname String to assign district representatives surname, can be used just letters
+     * @param representingDistrict Long district ID. Before assign district ID, the district with that ID has to be created
+     * @return JSON String to parse in parseStringToJson
+     */
+    public static String getDistrictRepresentativeJson(String name, String surname, Long representingDistrict){
+        String representativeString = "{\"name\" : \"" + name + "\", \"surname\" : \"" + surname + "\", \"district\" : {\"id\" : " + representingDistrict + "}}";
+        return representativeString;
+    }
 }
+
