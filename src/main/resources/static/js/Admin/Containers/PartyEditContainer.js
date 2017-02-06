@@ -11,6 +11,7 @@ function validate(self, code){
     fileErrorMesages : fileErrorMesages,
     numberErrorMesages :numberErrorMesages,
     nameErrorMesages :nameErrorMesages,
+    numberOfMembers : 0
   });
 }
 
@@ -18,7 +19,7 @@ function getPartyById(self,id) {
   axios
   .get('/party/' + id)
   .then(function(response){
-    console.log(response.data);
+    console.log(response);
     self.setState({
       name : response.data.name.trim(),
       number : response.data.partyNumber,
@@ -44,9 +45,101 @@ var PartyEditContainer = React.createClass({
       postErrCode : 199,
     };
   },
+  submitWithFile : function(){
+    nameErrorMesages = [],
+    numberErrorMesages = [],
+    fileErrorMesages = [],
+    event.preventDefault();
+    var self = this;
+    //party info constructing data
+    var pid = parseInt(this.props.params.id);
+    //uploadfile constructing data
+    var file = 'nofile.aaa';
+    if (this.state.file != null) {
+      file = this.state.file;}
+    var data = new FormData();
+    var header = { headers: {
+      'Content-Type': 'multipart/form-data',
+      'Party-id' : pid,
+      'Party-name': this.state.name.trim(),
+      'Party-number': this.state.number} };
+    data.append('file', file);
+    //validation
+    if(!validation.checkForCsv(file.name)) {fileErrorMesages.push('Būtina prisegti *.csv formato failą');}
+    if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
+    if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
+    if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
+    if(!validation.checkNumber(this.state.number)) {numberErrorMesages.push('Partijos numerio laukas priima tik skačius arba lieka tuščias');}
+    if (nameErrorMesages.length == 0 &&
+        fileErrorMesages.length == 0 &&
+        numberErrorMesages.length == 0
+      ) {
+      // Writing file to java
+      axios
+      .post('/party', data, header)
+      .then(function(response){
+        self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' atnaujinta');
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.error(error.response.data.message);
+          validate(self, error.response.status);
+        }
+      });
+    } else {
+      self.setState({
+        nameErrorMesages : nameErrorMesages,
+        numberErrorMesages : numberErrorMesages,
+        fileErrorMesages : fileErrorMesages,
+      });
+    }
+
+
+  },
+  submitWithoutFile : function(){
+    nameErrorMesages = [];
+    numberErrorMesages = [];
+    fileErrorMesages = [];
+    var self = this;
+    var members = [];
+    this.state.members.map(function(c){
+      members.push({'id':c.id});
+    });
+    var putPartyInfo = {
+      id : this.props.params.id,
+      name : this.state.name.trim(),
+      members : this.state.members,
+      partyNumber : parseInt(this.state.number),
+    };
+    if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
+    if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
+    if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
+    if(!validation.checkNumber(this.state.number)) {numberErrorMesages.push('Partijos numerio laukas priima tik skačius arba lieka tuščias');}
+    if (nameErrorMesages.length == 0 &&
+        fileErrorMesages.length == 0 &&
+        numberErrorMesages.length == 0
+      ) {
+      axios
+        .put('/party', putPartyInfo)
+        .then(function(response){
+          self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' atnaujinta');
+        })
+        .catch(function (error) {
+          if (error.response) {
+            validate(self, error.response.status);
+          }
+        });
+    } else {
+      self.setState({
+        nameErrorMesages : nameErrorMesages,
+        numberErrorMesages : numberErrorMesages,
+        fileErrorMesages : fileErrorMesages,
+      });
+    }
+  },
   componentWillMount: function() {
-      getPartyById(this, this.props.params.id);
-    },
+    getPartyById(this, this.props.params.id);
+  },
   onHandleDeleteClick : function(event){
       var self = this;
       event.preventDefault();
@@ -69,45 +162,13 @@ var PartyEditContainer = React.createClass({
     this.setState({name : event.target.value});
   },
   onHandleSubmit : function(event){
-      nameErrorMesages = [],
-      numberErrorMesages = [],
-      fileErrorMesages = [],
-      event.preventDefault();
-      var self = this;
-      var partyNumber = parseInt(this.state.number);
-      var putPartyInfo = {
-          id : this.props.params.id,
-          name : this.state.name.trim(),
-          members : this.state.members,
-          partyNumber,
-        };
-        if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
-        if(!validation.checkMax(this.state.name,50)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 50 simbolių');}
-        if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
-        if(!validation.checkNumber(partyNumber)) {numberErrorMesages.push('Partijos numerio laukas priima tik skačius arba lieka tuščias');}
-        if (nameErrorMesages.length == 0 &&
-            fileErrorMesages.length == 0 &&
-            numberErrorMesages.length == 0
-          ) {
-        axios
-        .put('/party', putPartyInfo)
-        .then(function(response){
-          self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' atnaujinta');
-        })
-        .catch(function (error) {
-          if (error.response) {
-            validate(self, error.response.status);
-          }
-        });
-      } else {
-        self.setState({
-          nameErrorMesages : nameErrorMesages,
-          numberErrorMesages : numberErrorMesages,
-          fileErrorMesages : fileErrorMesages,
-        });
-      }
-    },
-
+    event.preventDefault();
+    if (this.state.file != null) {
+      this.submitWithFile();
+    } else {
+      this.submitWithoutFile();
+    }
+  },
   render: function() {
     return (
       <PartyCreateEditFormComponent
@@ -128,4 +189,8 @@ var PartyEditContainer = React.createClass({
   },
 });
 
+
+PartyEditContainer.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
 window.PartyEditContainer = PartyEditContainer;
