@@ -40,7 +40,7 @@ public class PartyController {
     }
 
     @GetMapping("/party")
-    public List<PartyReport> getPartijaList(){
+    public List<PartyReport> getParties(){
         return service.getPartyList();
     }
  
