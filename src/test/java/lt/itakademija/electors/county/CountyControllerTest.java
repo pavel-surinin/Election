@@ -9,9 +9,12 @@ import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
 import lt.itakademija.electors.results.single.ResultSingleService;
+import lt.itakademija.exceptions.BadCSVFileExceprion;
+import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
 import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
@@ -75,6 +78,9 @@ public class CountyControllerTest {
     DistrictRepository districtRepository;
 
     @Autowired
+    PartyService partyService;
+
+    @Autowired
     DistrictService districtService;
 
     @Autowired
@@ -118,7 +124,18 @@ public class CountyControllerTest {
     }
 
     @Test
-    public void updateName() throws Exception {
+    public void saveCountyWithSameName() throws Exception {
+        //setup
+        String VilniusString = MyUtils.getCountyJson(null,"VilniusTest");
+        String KaunasString = MyUtils.getCountyJson(null, "VilniusTest");
+        ResponseEntity<CountyEntity> respVilniusCountyCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(VilniusString), CountyEntity.class);
+        ResponseEntity<CountyEntity> respKaunasCountyCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(KaunasString), CountyEntity.class);
+        //verify
+        assertThat(respKaunasCountyCreate.getStatusCodeValue(), CoreMatchers.is(500));
+    }
+
+    @Test
+    public void updateCountyName() throws Exception {
         //setup
         String kedainiaiString = "{\"name\":\"KedainiaiTest\"}";
         ResponseEntity<CountyEntity> respCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(kedainiaiString), CountyEntity.class);
@@ -144,7 +161,122 @@ public class CountyControllerTest {
         //verify
         assertThat(resp1.getBody()[0].getCandidatesCount(), CoreMatchers.is(0));
         assertThat(resp.getBody()[0].getCandidatesCount(), CoreMatchers.is(3));
+    }
 
+    @Test
+    public void uploadSingleCandidates_NoSingleCandidatesExists() throws Exception {
+        //setup
+        final MultipartFile partyfile1 = MyUtils.parseToMultiPart("test-csv/Good__Skaidruoliu_Party_candidate_data.csv");
+        String partyName1 = "Darbo";
+        Integer partyNumber1 = 1;
+        partyService.save(partyName1, partyNumber1, partyfile1);
+
+        final MultipartFile partyfile2 = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String partyName2 = "Skaidruolių";
+        Integer partyNumber2 = 2;
+        partyService.save(partyName2, partyNumber2, partyfile2);
+        FileInputStream fis = new FileInputStream(new File("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv"));
+        List<CandidateEntity> candidateEntityList = csvParser.extractCandidates(fis);
+        //execute
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv");
+        ResponseEntity<CountyReport[]> respCountyReport = rest.getForEntity("/county", CountyReport[].class);
+        final Long id = respCountyReport.getBody()[0].getId();
+        countyService.update(id, result);
+        ResponseEntity<CountyReport[]> respCountyReportafterUpdate = rest.getForEntity("/county", CountyReport[].class);
+        //verify
+        assertThat(respCountyReport.getStatusCodeValue(), CoreMatchers.is(200));
+        assertThat(respCountyReport.getBody()[0].getCandidatesCount(), CoreMatchers.is(0));
+        assertThat(respCountyReportafterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
+    }
+
+    @Test
+    public void uploadSingleCandidatesWithBadCsvFile_DiferentColumn() throws Exception {
+        //setup
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_data_with_different_column_count.csv");
+        //execute
+        try {
+        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        } catch (NotEqualColumnsCountCsv e) {
+        //verify
+        assertThat(e.getMessage(), CoreMatchers.is("Not equal columns count *.csv"));
+        }
+    }
+
+    @Test
+    public void uploadSingleCandidatesWithBadCsvFile_NoNumberInParty() throws Exception {
+        //setup
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_noNumberInParty_data.csv");
+        //execute
+        try {
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        } catch (BadCSVFileExceprion e) {
+            //verify
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+        }
+    }
+
+    @Test
+    public void uploadSingleCandidatesWithBadCsvFile_NoPartyNumber() throws Exception {
+        //setup
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_noPartyNumber_data.csv");
+        //execute
+        try {
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        } catch (BadCSVFileExceprion e) {
+            //verify
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+        }
+    }
+
+    @Test
+    public void uploadSingleCandidatesWithBadCsvFile_NotExistingPartyNumber() throws Exception {
+        //setup
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_notExistingPartyNumber_data.csv");
+        //execute
+        try {
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        } catch (BadCSVFileExceprion e) {
+            //verify
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+        }
+    }
+
+    @Test
+    public void uploadSingleCandidatesWithBadCsvFile_badNameCharacters() throws Exception {
+        //setup
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badNameCharacters_data.csv");
+        //execute
+        try {
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        } catch (BadCSVFileExceprion e) {
+            //verify
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+        }
+    }
+
+    @Test
+    public void uploadSingleCandidatesWithBadCsvFile_badSurnameCharacters() throws Exception {
+        //setup
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badSurnameCharacters_data.csv");
+        //execute
+        try {
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        } catch (BadCSVFileExceprion e) {
+            //verify
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+        }
+    }
+    @Test
+    public void uploadSingleCandidatesWithBadCsvFile_badDateFormat() throws Exception {
+        //setup
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badDateFormat_data.csv");
+        //execute
+        try {
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        } catch (BadCSVFileExceprion e) {
+            //verify
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+        }
     }
 
     @Test
@@ -212,9 +344,9 @@ public class CountyControllerTest {
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(c1,d1,200L);
-        ResultSingleEntity res2 = new ResultSingleEntity(c2,d1,500L);
-        ResultSingleEntity res3 = new ResultSingleEntity(c3,d1,400L);
+        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L);
+        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L);
+        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L);
 
         List<ResultSingleEntity> rl = new ArrayList<>();
         rl.add(res1);
