@@ -33,7 +33,7 @@ var MultiResultContainer = React.createClass({
   getInitialState: function() {
     return {
       partyList: [],
-      districtId : 1,
+      districtId : 5,
       districtInfo : [],
       isVotesRegistered : false,
       isLoading : true,
@@ -60,6 +60,7 @@ var MultiResultContainer = React.createClass({
             'party' : {'id' : key},
             'district' : {'id' : this.state.districtId},
             'votes' : list[key],
+            'datePublished' : new Date(),
           }
         );
       }
