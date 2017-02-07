@@ -26,7 +26,20 @@ function getDistrict(self,id) {
       console.error('MultiResultContainer.componentWillMount.axios.get.district', err);
     });
 }
-
+function isCountEqualsOrLess(list,max){
+  var count = 0;
+  for (var key1 in list) {
+    if (list.hasOwnProperty(key1)) {
+      count = count + parseInt(list[key1]);
+    }
+  }
+  if (count > max) {
+    return false;
+  } else {
+    return true;
+  }
+}
+var errorMesages = [];
 var list = {};
 var postArray =[];
 var MultiResultContainer = React.createClass({
@@ -37,6 +50,7 @@ var MultiResultContainer = React.createClass({
       districtInfo : [],
       isVotesRegistered : false,
       isLoading : true,
+      errorMesages : [],
     };
   },
   componentWillMount: function() {
@@ -52,20 +66,26 @@ var MultiResultContainer = React.createClass({
   },
   onHandleSubmit : function(event) {
     event.preventDefault();
-    for (var key in list) {
-      if (list.hasOwnProperty(key)) {
-        var self = this;
-        postArray.push(
-          {
-            'party' : {'id' : key},
-            'district' : {'id' : this.state.districtId},
-            'votes' : list[key],
-            'datePublished' : new Date(),
-          }
-        );
+    errorMesages = [];
+    this.setState({errorMesages : []});
+    if (!isCountEqualsOrLess(list, this.state.districtInfo.numberOfElectors)) {
+      errorMesages.push('Apygarda ' + this.state.districtInfo.name + ' turi tik ' +  this.state.districtInfo.numberOfElectors + ' balsų.');
+      this.setState({errorMesages : errorMesages});
+    } else {
+      for (var key in list) {
+        if (list.hasOwnProperty(key)) {
+          var self = this;
+          postArray.push(
+            {
+              'party' : {'id' : key},
+              'district' : {'id' : this.state.districtId},
+              'votes' : list[key],
+              'datePublished' : new Date(),
+            }
+          );
+        }
       }
-    }
-    axios
+      axios
       .post('/result-multi', postArray)
       .then(function(response){
         self.setState({isVotesRegistered : true});
@@ -73,6 +93,7 @@ var MultiResultContainer = React.createClass({
       .catch(function(err){
         console.error('MultiResultContainer.onHandleSubmit.axios',err);
       });
+    }
   },
 
   render: function() {
@@ -93,6 +114,7 @@ var MultiResultContainer = React.createClass({
         registerVotes={this.registerVotes}
         onHandleSubmit={this.onHandleSubmit}
         onHandleSpoiledChange={this.onHandleSpoiledChange}
+        errorMesages={this.state.errorMesages}
         />
       );
     }

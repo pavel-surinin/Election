@@ -7,7 +7,7 @@ var MultiResultComponent = React.createClass({
       <MultiResultRowComponent registerVotes={self.props.registerVotes} key={index} party={p} />
     );
     });
-
+    var errorMesages = validation.showMsg(this.props.errorMesages);
     return (
       <div>
         <div className="panel panel-default col-md-12">
@@ -23,8 +23,9 @@ var MultiResultComponent = React.createClass({
             </div>
           </div>
           <form onSubmit={this.props.onHandleSubmit}>
+            <br/>
             {parties}
-
+            <br/>
             <div className="form-group panel-footer">
               <div className="col-md-7">
                 <h4><b>Sugadinti balsai:</b></h4>
@@ -36,6 +37,7 @@ var MultiResultComponent = React.createClass({
               <br/>
               <button type="submit" className="btn btn-primary">Submit</button>
             </div>
+            {errorMesages}
           </form>
         </div>
       </div>

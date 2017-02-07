@@ -39,10 +39,11 @@ public class ResultSingleEntity {
     public ResultSingleEntity() {
     }
 
-    public ResultSingleEntity(CandidateEntity candidate, DistrictEntity district, Long votes) {
+    public ResultSingleEntity(CandidateEntity candidate, DistrictEntity district, Long votes, Date date) {
         this.candidate = candidate;
         this.district = district;
         this.votes = votes;
+        this.datePublished = date;
     }
 
     public Long getId() {

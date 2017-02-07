@@ -64,10 +64,10 @@ var validation = {
     }
   },
   showMsg :
-  function checkMin(obj,index) {
+  function checkMin(obj) {
     if (obj !== undefined) {
       var arr = [];
-      obj.forEach(function(entry) {
+      obj.forEach(function(entry, index) {
         arr.push(<div key={index} className='alert alert-danger'> <strong>Dėmėsio! </strong>{entry}</div>);
       });
       return arr;

@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -344,9 +345,9 @@ public class CountyControllerTest {
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L);
-        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L);
-        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L);
+        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
 
         List<ResultSingleEntity> rl = new ArrayList<>();
         rl.add(res1);
