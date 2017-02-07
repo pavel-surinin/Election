@@ -1,20 +1,10 @@
 var MultiResultComponent = React.createClass({
   render: function() {
+    var self = this;
     var parties = [];
-    this.props.list.map(function(p){
+    this.props.list.map(function(p,index){
       parties.push(
-      <div className="form-group panel-body" style={styles.marginTable}>
-        <div className="col-md-2 small">
-          <h5>{p.partyNumber}</h5>
-        </div>
-        <div className="col-md-5 small">
-          <h5>{p.name}</h5>
-        </div>
-        <div className="input-group col-md-3 small">
-          <input type="number" className="form-control" placeholder="Balsų skaičius" aria-describedby="basic-addon2"/>
-          <span className="input-group-addon" id="basic-addon2">vnt.</span>
-        </div>
-      </div>
+      <MultiResultRowComponent registerVotes={self.props.registerVotes} key={index} party={p} />
     );
     });
 
@@ -32,23 +22,21 @@ var MultiResultComponent = React.createClass({
               <h4>Balsu skaicius</h4>
             </div>
           </div>
-          <form>
-						{parties}
+          <form onSubmit={this.props.onHandleSubmit}>
+            {parties}
 
-						<div className="form-group panel-footer">
-							<div className="col-md-6">
-								<h4><b>Sugadinti balsai:</b></h4>
-							</div>
-							<div className="input-group col-md-3 small">
-								<input type="number" className="form-control" placeholder="Balsų skaičius" aria-describedby="basic-addon2" required/>
-								<span className="input-group-addon" id="basic-addon2">vnt.</span>
-							</div>
-						</div>
-
+            <div className="form-group panel-footer">
+              <div className="col-md-7">
+                <h4><b>Sugadinti balsai:</b></h4>
+              </div>
+              <div className="input-group col-md-3 small">
+                <input onChange={this.props.onHandleSpoiledChange} type="number" className="form-control" placeholder="Balsų skaičius" aria-describedby="basic-addon2" required/>
+                <span className="input-group-addon" id="basic-addon2">vnt.</span>
+              </div>
+              <br/>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </div>
           </form>
-        </div>
-        <div className="col-md-2 pull-right">
-          <button type="submit" className="btn btn-primary">Submit</button>
         </div>
       </div>
     );

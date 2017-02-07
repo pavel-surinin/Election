@@ -2,10 +2,13 @@ package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.party.PartyEntity;
+import lt.itakademija.electors.results.multi.ResultMultiEntity;
+import lt.itakademija.electors.results.single.ResultSingleEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -42,6 +45,9 @@ public class CandidateEntity {
 
     @Column(nullable=false)
     private boolean isMultiList = true;
+
+    @OneToMany(mappedBy="candidate", cascade = CascadeType.REMOVE)
+    private List<ResultSingleEntity> results;
 
     public boolean isMultiList() {
         return isMultiList;
@@ -113,6 +119,14 @@ public class CandidateEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<ResultSingleEntity> getResults() {
+        return results;
+    }
+
+    public void setResults(List<ResultSingleEntity> results) {
+        this.results = results;
     }
 }
 
