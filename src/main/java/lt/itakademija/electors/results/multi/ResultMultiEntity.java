@@ -4,6 +4,7 @@ import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +32,9 @@ public class ResultMultiEntity {
 
     @NotNull
     private boolean isApproved = false;
+
+    @NotNull
+    private Date datePublished;
 
     public Long getId() {
         return id;
@@ -70,5 +74,13 @@ public class ResultMultiEntity {
 
     public void setApproved(boolean approved) {
         isApproved = approved;
+    }
+
+    public Date getDatePublished() {
+        return datePublished;
+    }
+
+    public void setDatePublished(Date datePublished) {
+        this.datePublished = datePublished;
     }
 }

@@ -2,6 +2,7 @@ package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.county.CountyService;
+import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class CandidateService {
 
     @Autowired
     CountyService countyService;
+
+    @Autowired
+    DistrictRepository districtRepository;
 
     @Transactional
     public CandidateEntity save(CandidateEntity can) {
@@ -78,5 +82,12 @@ public class CandidateService {
         } else {
             return can;
         }
+    }
+
+    public List<CandidateReport> getCandidateByDistrictId(Long id) {
+        return districtRepository.findById(id).getCounty().getCandidates()
+                .stream()
+                .map(c-> new CandidateReport(c))
+                .collect(Collectors.toList());
     }
 }
