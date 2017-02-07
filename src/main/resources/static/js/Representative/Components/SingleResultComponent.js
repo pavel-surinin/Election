@@ -8,10 +8,13 @@ var SingleResultComponent = React.createClass({
   },
   render: function() {
     var list = [];
-    this.props.list.map(function(c){
+    var self = this;
+    this.props.list.map(function(c, index){
       list.push(
         <SingleResultRowComponent
+          key={index}
           candidate={c}
+          registerVotes={self.props.registerVotes}
         />
       );
     });
@@ -46,7 +49,7 @@ var SingleResultComponent = React.createClass({
 
       </div>
     );
-}
+  }
 });
 
 window.SingleResultComponent = SingleResultComponent;

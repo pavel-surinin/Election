@@ -41,6 +41,9 @@ var SingleResultContainer = React.createClass({
     getCandidates(this,this.state.districtId);
     getDistrict(this,this.state.districtId);
   },
+  registerVotes :function(id,votes){
+    console.log(id,votes);
+  },
   render: function() {
     console.log(this.state);
     if (this.state.isLoading) {
@@ -56,11 +59,11 @@ var SingleResultContainer = React.createClass({
       return (
         <SingleResultComponent
           list={this.state.candidatesList}
+          registerVotes={this.registerVotes}
         />
       );
     }
   }
-
 });
 
 
