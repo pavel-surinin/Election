@@ -17,7 +17,7 @@ public class ResultSingleEntity {
     private Long id;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "CANDIDATE_ID")
     private CandidateEntity candidate;
 
