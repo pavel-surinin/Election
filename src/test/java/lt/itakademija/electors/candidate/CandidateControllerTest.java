@@ -37,7 +37,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * Created by Vartotojas on 2017-02-06.
+ * Created by Gabriele on 2017-02-06.
  */
 
 @RunWith(SpringRunner.class)
@@ -277,7 +277,6 @@ public class CandidateControllerTest {
     public void deleteCandidateAndTheirResults() throws Exception {
 
         //setup adding candidates
-
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();

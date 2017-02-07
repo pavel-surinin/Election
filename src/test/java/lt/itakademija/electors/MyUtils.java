@@ -109,5 +109,11 @@ public class MyUtils {
         String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber +"}";
         return partyString;
     }
+
+
+    public static String getResultsJson(Long resultId, Long countyId, Long candidateId, Long votes){
+        String resultString = "{\"id\": \"" + candidateId + "\",\"county\" : {\"id\" : " + countyId + "}, \"candidate\" : {\"id\": " + candidateId + "\", \"votes\": \"" + votes + "}}";
+        return resultString;
+    }
 }
 
