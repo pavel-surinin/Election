@@ -14,6 +14,8 @@ public class DistrictReport {
     private Long countyId;
     private String countyName;
     private Long numberOfElectors;
+    private Integer spoiledMulti;
+    private Integer spoiledSingle;
     private boolean isResultSingleRegistered = false;
     private boolean isResultMultiRegistered = false;
     private boolean isResultSingleApproved = false;
@@ -49,6 +51,24 @@ public class DistrictReport {
                     .filter(res -> res.isApproved() == true)
                     .toArray().length != 0;
         }
+        this.spoiledMulti = ent.getSpoiledMulti();
+        this.spoiledSingle = ent.getSpoiledSingle();
+    }
+
+    public Integer getSpoiledMulti() {
+        return spoiledMulti;
+    }
+
+    public void setSpoiledMulti(Integer spoiledMulti) {
+        this.spoiledMulti = spoiledMulti;
+    }
+
+    public Integer getSpoiledSingle() {
+        return spoiledSingle;
+    }
+
+    public void setSpoiledSingle(Integer spoiledSingle) {
+        this.spoiledSingle = spoiledSingle;
     }
 
     public boolean isResultSingleApproved() {

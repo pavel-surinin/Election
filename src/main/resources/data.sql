@@ -11,3 +11,7 @@ insert into district_representative_entity (id, district_id, name, surname) valu
 insert into district_representative_entity (id, district_id, name, surname) values (null, 4, 'Kaimo', 'Jurgis');
 insert into party_entity (party_id, name, party_number) values (null, 'Darbo Partija', 5);
 insert into party_entity (party_id, name, party_number) values (null, 'Valstiečių Partija', 7);
+insert into party_entity (party_id, name, party_number) values (null, 'Nakties Partija', 1001);
+insert into party_entity (party_id, name, party_number) values (null, 'Apokalipses Partija', 666);
+insert into party_entity (party_id, name, party_number) values (null, 'Valinsko Partija', 901);
+insert into party_entity (party_id, name, party_number) values (null, '69 Danguje Partija', 69);

@@ -2,6 +2,7 @@ package lt.itakademija.electors.results.multi;
 
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
+import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,17 @@ public class ResultMultiService {
     @Autowired
     DistrictRepository districtRepository;
 
+    @Autowired
+    DistrictService districtService;
+
     @Transactional
     public String save(List<ResultMultiEntity> results) {
+        final ResultMultiEntity spoiled = results.stream().filter(res -> res.getParty().getId() == -1991L).findAny().get();
+        DistrictEntity district = spoiled.getDistrict();
+        final DistrictEntity districtEnt = districtRepository.findById(district.getId());
+        districtEnt.setSpoiledMulti(spoiled.getVotes().intValue());
+        districtService.save(districtEnt);
+        results.remove(spoiled);
         results.stream().forEach(res -> repository.save(res));
         return "Votes registered";
     }
