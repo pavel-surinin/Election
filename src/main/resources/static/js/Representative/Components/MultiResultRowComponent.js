@@ -7,7 +7,7 @@ var MultiResultRowComponent = React.createClass({
   render: function() {
     var p = this.props.party;
     return (
-      <div className="form-group panel-body" style={styles.marginTable}>
+      <div className="row text-primary">
         <div className="col-md-2 small">
           <h5>{p.partyNumber}</h5>
         </div>

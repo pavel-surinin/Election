@@ -7,9 +7,9 @@ var SingleResultRowComponent = React.createClass({
   render: function() {
     var p = this.props.candidate;
     return (
-      <div className="form-group panel-body" style={styles.marginTable}>
+      <div className='row'>
         <div className="col-md-6 small">
-          <h5>{p.name} {p.surname}</h5>
+          <h5 className='text-primary'>{p.name} {p.surname}</h5>
         </div>
         <div className="input-group col-md-3 small">
           <input onChange={this.onInputChange} type="number" className="form-control" placeholder="Balsų skaičius" aria-describedby="basic-addon2" required/>
