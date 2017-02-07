@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 
 /**
  * Created by Pavel on 2017-02-03.
@@ -77,6 +78,28 @@ public class MyUtils {
     public static String getDistrictRepresentativeJson(String name, String surname, Long representingDistrict){
         String representativeString = "{\"name\" : \"" + name + "\", \"surname\" : \"" + surname + "\", \"district\" : {\"id\" : " + representingDistrict + "}}";
         return representativeString;
+    }
+
+    /**
+     * @param candidateId
+     * @param name
+     * @param surname
+     * @param birthDate
+     * @param description
+     * @param numberInParty
+     * @param countyId
+     * @param partyId
+     * @return JSON String to parse in parseStringToJson
+     */
+
+    public static String getCandidateJson(Long candidateId, String name, String surname, Date birthDate, String description, Integer numberInParty, Long countyId, Long partyId){
+        String candidateString = "{\"id\": \"" + candidateId + "\",\"name\": \"" + name + "\",\"surname\": \"" + surname + "\", \"description\": \"" + description + "\",\"numberInParty\": \"" + numberInParty + "\",\"countyId\": \"" + countyId + "\",\"birthDate\": \"" + birthDate + "\", \"party\" : {\"id\": " + partyId + "}}";
+        return candidateString;
+    }
+
+    public static String getPartyJson(Long partyId, String name, Integer partyNumber){
+        String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber +"}";
+        return partyString;
     }
 }
 
