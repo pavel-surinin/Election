@@ -42,6 +42,26 @@ public class DistrictEntity {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "district")
     private List<ResultMultiEntity> resultMultiEntity;
 
+    private Integer spoiledMulti;
+
+    private Integer spoiledSingle;
+
+    public Integer getSpoiledMulti() {
+        return spoiledMulti;
+    }
+
+    public void setSpoiledMulti(Integer spoiledMulti) {
+        this.spoiledMulti = spoiledMulti;
+    }
+
+    public Integer getSpoiledSingle() {
+        return spoiledSingle;
+    }
+
+    public void setSpoiledSingle(Integer spoiledSingle) {
+        this.spoiledSingle = spoiledSingle;
+    }
+
     public List<ResultSingleEntity> getResultSingleEntity() {
         return resultSingleEntity;
     }

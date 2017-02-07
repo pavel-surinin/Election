@@ -49,7 +49,6 @@ public class PartyService {
         final List<PartyEntity> allParties = repository.findAll();
         throwIfNameExists(partyName, party, allParties);
         throwIfNumberExists(partyNumber, party, allParties);
-        //TODO save party
         party.setName(partyName);
         party.setPartyNumber(partyNumber);
         final PartyEntity saveParty = repository.save(party);
@@ -84,7 +83,6 @@ public class PartyService {
     public PartyEntity getPartyByNumber(Integer number) {
         return repository.getPartyByNumber(number);
     }
-
 
     public List<PartyReport> getPartyList() {
         List<PartyReport> list = new ArrayList<>();

@@ -1,6 +1,5 @@
 package lt.itakademija.electors.party;
 
-import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,8 @@ public class PartyController {
     }
 
     @GetMapping("/party")
-    public List<PartyReport> getPartijaList() {
+
+    public List<PartyReport> getParties(){
         return service.getPartyList();
     }
 

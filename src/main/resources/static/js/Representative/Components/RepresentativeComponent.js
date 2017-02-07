@@ -29,11 +29,11 @@ var RepresentativeComponent = React.createClass({
                       <ul className="nav" id="side-menu">
                           <li className="sidebar-search">
                           </li>
-                          <li><a href="#/representative"><i className="fa fa-dashboard fa-fw"></i>Atstovo panele</a>
+                          <li><a href="#/representative"><i className="fa fa-dashboard fa-fw"></i> Atstovo panele</a>
 
                           </li>
-                          <li><a href="#/representative/single"><i className="fa fa-expand" aria-hidden="true"></i>Vienmandatės apygardos</a></li>
-                          <li><a href="#/representative/multi"><i className="fa fa-compress" aria-hidden="true"></i>Daugiamandatės apygardos</a></li>
+                          <li><a href="#/representative/single"><i className="fa fa-user" aria-hidden="true"></i> Vienmandatės apygardos</a></li>
+                          <li><a href="#/representative/multi"><i className="fa fa-users" aria-hidden="true"></i> Daugiamandatės apygardos</a></li>
 
                       </ul>
                   </div>
