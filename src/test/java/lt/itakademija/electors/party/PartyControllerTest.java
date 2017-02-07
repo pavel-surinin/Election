@@ -74,7 +74,7 @@ public class PartyControllerTest {
 
     @Test
     public void saveExistingNumberParty() throws Exception {
-        //setpu
+        //setup
         final int sizeBeforeSave = partyRepository.findAll().size();
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
         String name = "Testeriu Partija";

@@ -1,5 +1,6 @@
 package lt.itakademija.electors;
 
+import lt.itakademija.electors.candidate.CandidateEntity;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -11,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Pavel on 2017-02-03.
@@ -92,12 +94,18 @@ public class MyUtils {
      * @return JSON String to parse in parseStringToJson
      */
 
-    public static String getCandidateJson(Long candidateId, String name, String surname, Date birthDate, String description, Integer numberInParty, Long countyId, Long partyId){
-        String candidateString = "{\"id\": \"" + candidateId + "\",\"name\": \"" + name + "\",\"surname\": \"" + surname + "\", \"description\": \"" + description + "\",\"numberInParty\": \"" + numberInParty + "\",\"countyId\": \"" + countyId + "\",\"birthDate\": \"" + birthDate + "\", \"party\" : {\"id\": " + partyId + "}}";
+    public static String getCandidateJson(Long candidateId, String name, String surname, String birthDate, String description, Integer numberInParty, Long countyId, Long partyId){
+        String candidateString = "{\"id\": \"" + candidateId + "\",\"name\": \"" + name + "\",\"surname\": \"" + surname + "\", \"description\": \"" + description + "\",\"numberInParty\": \"" + numberInParty + "\",\"birthDate\": \"" + birthDate + "\", \"county\" : {\"id\" : " + countyId + "}, \"party\" : {\"id\": " + partyId + "}}";
         return candidateString;
     }
 
-    public static String getPartyJson(Long partyId, String name, Integer partyNumber){
+    /**
+     * @param partyId
+     * @param name
+     * @param partyNumber
+     * @return
+     */
+    public static String getPartyJson(Long partyId, String name, Integer partyNumber, List<CandidateEntity> members){
         String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber +"}";
         return partyString;
     }
