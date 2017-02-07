@@ -18,7 +18,7 @@ function getDistrict(self,id) {
         districtInfo :  response.data,
         isLoading : false,
       });
-      if (response.data.resultMultiRegistered) {
+      if (response.data.resultSingleRegistered) {
         self.setState({isVotesRegistered : true});
       }
     })
@@ -42,13 +42,26 @@ var SingleResultContainer = React.createClass({
     getDistrict(this,this.state.districtId);
   },
   render: function() {
-    return (
-      <div>
-        <SingleResultComponent />
-      </div>
-    );
+    console.log(this.state);
+    if (this.state.isLoading) {
+      return <div><img src='/images/loading.gif'/></div>;
+    }
+    if (this.state.isVotesRegistered) {
+      return(
+        <div>
+          {alerts.showSucces('Jūsų apylinkės balsai užregistruoti')}
+        </div>
+      );
+    } else {
+      return (
+        <SingleResultComponent
+          list={this.state.candidatesList}
+        />
+      );
+    }
   }
 
 });
+
 
 window.SingleResultContainer = SingleResultContainer;

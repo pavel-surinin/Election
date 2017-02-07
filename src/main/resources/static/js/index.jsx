@@ -66,7 +66,7 @@ ReactDOM.render((
   <Router history={hashHistory}>
 
     <Route path="/representative" component={RepresentativeContainer}>
-      <IndexRoute component={SingleResultComponent} />
+      <IndexRoute component={NoMatch} />
       <Route path="/representative/single" component={SingleResultContainer} />
       <Route path="/representative/multi" component={MultiResultContainer} />
       <Route path="*" component={NoMatch}/>
