@@ -14,13 +14,15 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * Created by Pavel on 2017-02-03.
  */
 public class MyUtils {
 
 
-    public static JSONObject parseStringToJson(String string) {
+    public static JSONObject parseStringToJson(String string){
+
         JSONParser parser = new JSONParser(0);
         JSONObject parsedJson = null;
         try {
@@ -30,6 +32,7 @@ public class MyUtils {
         }
         return parsedJson;
     }
+
 
     /**
      * @param pathToFile apth to csv from root
@@ -47,6 +50,7 @@ public class MyUtils {
         }
         return new MockMultipartFile(name, originalFileName, contentType, content);
     }
+
 
     /**
      * @param countyId  Long as default use null, because County ID is (@GeneratedValue(strategy = GenerationType.AUTO)) {CountyEntity}. Use Id when want to update
@@ -123,4 +127,5 @@ public class MyUtils {
         return resultString;
     }
 }
+
 

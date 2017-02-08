@@ -39,6 +39,18 @@ function isCountEqualsOrLess(list,max){
     return true;
   }
 }
+
+function isVotesNegativeValue(list) {
+  for (var key1 in list) {
+    if (list.hasOwnProperty(key1)) {
+      if (parseInt(list[key1]) < 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 var list = {};
 var postArray = [];
 var errorMesages = [];
@@ -64,11 +76,14 @@ var SingleResultContainer = React.createClass({
     list[-1991]=event.target.value;
   },
   onHandleSubmit : function(event) {
+    postArray = [];
     event.preventDefault();
     errorMesages = [];
     this.setState({errorMesages : []});
-    if (!isCountEqualsOrLess(list,this.state.districtInfo.numberOfElectors)) {
-      errorMesages.push('Apygarda ' + this.state.districtInfo.name + ' turi tik ' +  this.state.districtInfo.numberOfElectors + ' balsų.');
+    if (!isCountEqualsOrLess(list, this.state.districtInfo.numberOfElectors))
+      {errorMesages.push('Apygarda ' + this.state.districtInfo.name + ' turi tik ' +  this.state.districtInfo.numberOfElectors + ' balsų.');}
+    if (isVotesNegativeValue(list)) { errorMesages.push('Rezultatai negali turėti neigiamų reikšmių');}
+    if (errorMesages.length != 0) {
       this.setState({errorMesages : errorMesages});
     } else {
       for (var key in list) {

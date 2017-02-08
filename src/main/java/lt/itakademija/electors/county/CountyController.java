@@ -1,5 +1,6 @@
 package lt.itakademija.electors.county;
 
+import lt.itakademija.exceptions.CountyCandidatesAlreadyExistException;
 import lt.itakademija.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +33,9 @@ public class CountyController {
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    @RequestHeader("County-id") Long countyId,
                                    RedirectAttributes redirectAttributes) {
-        service.update(countyId, file);
-        redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
-        return "redirect:/";
+            service.update(countyId, file);
+            redirectAttributes.addFlashAttribute("message", "You successfully uploaded " + file.getOriginalFilename() + "!");
+            return "redirect:/";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)

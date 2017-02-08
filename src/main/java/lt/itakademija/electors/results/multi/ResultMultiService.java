@@ -47,6 +47,7 @@ public class ResultMultiService {
 
     @Transactional
     public String delete(Long id) {
+        districtRepository.findById(id).setSpoiledMulti(null);
         getDistrictResults(id).stream().forEach(res -> repository.delete(res));
         return "Votes Deleted";
     }

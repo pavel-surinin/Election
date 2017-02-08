@@ -37,4 +37,8 @@ public class CountyRepository {
     public CountyEntity findById(Long id) {
         return em.find(CountyEntity.class, id);
     }
+
+    public Long getCountiesCount(){
+        return em.createQuery("SELECT COUNT(c) FROM CountyEntity c", Long.class).getSingleResult();
+    }
 }

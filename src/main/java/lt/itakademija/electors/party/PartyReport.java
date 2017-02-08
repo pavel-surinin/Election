@@ -11,6 +11,8 @@ import lt.itakademija.electors.candidate.CandidateReport;
  */
 public class PartyReport {
 
+    private PartyEntity pe;
+
     private Long id;
 
     private String name;
@@ -18,6 +20,16 @@ public class PartyReport {
     private List<CandidateReport> members;
 
     private Integer partyNumber;
+
+    public PartyReport(PartyEntity pe) {
+        this.id = pe.getId();
+        this.name = pe.getName();
+//        this.members = pe.getMembers().stream().map(c-> new CandidateReport(c));
+        this.partyNumber = pe.getPartyNumber();
+    }
+
+    public PartyReport() {
+    }
 
     public Long getId() {
         return id;

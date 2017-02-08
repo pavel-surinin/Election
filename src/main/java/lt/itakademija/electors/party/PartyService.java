@@ -65,12 +65,12 @@ public class PartyService {
     public void save(String partyName, Integer partyNumber, MultipartFile file) {
         List<CandidateEntity> candidatesFromCsv = storageService.store("Party", file);
         PartyEntity party = new PartyEntity();
-        party.setName(partyName);
         final List<PartyEntity> parties = repository.findAll();
         boolean isNameExists = parties.stream().anyMatch(par -> par.getName().equals(partyName));
         throwIf(isNameExists, new PartyNameCloneException("Party exists with name " + partyName));
         boolean isNumExists = parties.stream().anyMatch(par -> par.getPartyNumber() == partyNumber);
         throwIf(isNumExists, new PartyNumberCloneException("Party exists with number " + partyNumber));
+        party.setName(partyName);
         party.setPartyNumber(partyNumber);
         PartyEntity createPartyResponse = repository.save(party);
         candidatesFromCsv.stream()
@@ -111,6 +111,7 @@ public class PartyService {
         return pr;
     }
 
+
     public PartyEntity getPartyEntityById(Long id) {
         return repository.getById(id);
     }
@@ -145,5 +146,10 @@ public class PartyService {
             }
         }
         return false;
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.delete(id);
     }
 }

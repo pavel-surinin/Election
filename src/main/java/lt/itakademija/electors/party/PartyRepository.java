@@ -44,9 +44,17 @@ public class PartyRepository {
                 .setParameter("pNum", number)
                 .getResultList();
         if (list.size() != 0) {
-            list.stream().forEach(partyEntity -> System.out.println("------------" + partyEntity.getName()));
+            list.stream().forEach(partyEntity -> System.out.println("-" + partyEntity.getName()));
             return list.get(0);
         }
         return null;
+    }
+
+    public void delete(Long id) {
+        em.remove(em.find(PartyEntity.class, id));
+    }
+
+    public Long getPartiesCount(){
+        return em.createQuery("SELECT COUNT(c) FROM PartyEntity c", Long.class).getSingleResult();
     }
 }

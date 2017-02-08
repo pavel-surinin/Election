@@ -2,7 +2,6 @@ package lt.itakademija.electors.results.single;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 /**
@@ -19,7 +18,8 @@ public class ResultSingleController {
         return service.save(results);
     }
 
-    @PostMapping("/result/single/{id}/approve/")
+
+    @PatchMapping("/result/single/{id}/approve/")
     public String approve(@PathVariable Long id){
         return service.approve(id);
     }
