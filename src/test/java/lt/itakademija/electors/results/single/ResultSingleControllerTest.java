@@ -4,15 +4,19 @@ import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateRepository;
+import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.county.*;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.party.PartyRepository;
+import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -63,6 +68,15 @@ public class ResultSingleControllerTest {
     CandidateRepository candidateRepository;
 
     @Autowired
+    CandidateService candidateService;
+
+    @Autowired
+    PartyService partyService;
+
+    @Autowired
+    PartyRepository partyRepository;
+
+    @Autowired
     ResultSingleRepository resultSingleRepository;
 
     @Autowired
@@ -71,7 +85,7 @@ public class ResultSingleControllerTest {
     @Autowired
     TransactionTemplate transactionTemplate;
 
-    String URI = "/results";
+    String URI = "/result/single";
 
     @Before
     public void setUp() throws Exception {
@@ -81,6 +95,7 @@ public class ResultSingleControllerTest {
     @After
     public void tearDown() throws Exception {
 
+//        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
     }
 
     @Test
@@ -91,34 +106,36 @@ public class ResultSingleControllerTest {
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
         countyService.update(id, result);
-
-        //setup adding district
+        //setup addnig district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
         ResponseEntity<DistrictReport> respCreateDistrict;
         respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
-
         //votes
         final DistrictEntity d1 = districtRepository.findAll().get(0);
+
 
         final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
+        final CandidateEntity cs = candidateRepository.getCandidatesList().get(-1991);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(c1,d1,200L);
-        ResultSingleEntity res2 = new ResultSingleEntity(c2,d1,500L);
-        ResultSingleEntity res3 = new ResultSingleEntity(c3,d1,400L);
+        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
+        ResultSingleEntity ress = new ResultSingleEntity(cs, d1, 10L, new Date());
 
         List<ResultSingleEntity> rl = new ArrayList<>();
         rl.add(res1);
         rl.add(res2);
         rl.add(res3);
+        rl.add(ress);
 
         final String save = resultSingleService.save(rl);
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(4));
     }
 
     @Test
@@ -126,6 +143,7 @@ public class ResultSingleControllerTest {
 
     }
 
+    @Ignore
     @Test
     public void deleteResultsButNotCandidates() throws Exception {
 

@@ -110,9 +110,16 @@ public class MyUtils {
         return partyString;
     }
 
-
-    public static String getResultsJson(Long resultId, Long countyId, Long candidateId, Long votes){
-        String resultString = "{\"id\": \"" + candidateId + "\",\"county\" : {\"id\" : " + countyId + "}, \"candidate\" : {\"id\": " + candidateId + "\", \"votes\": \"" + votes + "}}";
+    /**
+     * @param resultId
+     * @param districtId
+     * @param candidateId
+     * @param votes
+     * @param datePublished
+     * @return
+     */
+    public static String getResultsJson(Long resultId, Long districtId, Long candidateId, Long votes, Date datePublished){
+        String resultString = "{\"id\": \"" + candidateId + "\",\"district\" : {\"id\" : " + districtId + "}, \"candidate\" : {\"id\": " + candidateId + "\", \"votes\": \"" + votes + "}, \"datePublished\":\""+datePublished+"}";
         return resultString;
     }
 }

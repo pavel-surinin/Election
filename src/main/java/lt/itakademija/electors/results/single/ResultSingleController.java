@@ -14,17 +14,17 @@ public class ResultSingleController {
     @Autowired
     ResultSingleService service;
 
-    @PostMapping("/result-single")
+    @PostMapping("/result/single")
     public String save(@RequestBody List<ResultSingleEntity> results){
         return service.save(results);
     }
 
-    @PostMapping("/result-single/{id}/approve/")
+    @PostMapping("/result/single/{id}/approve/")
     public String approve(@PathVariable Long id){
         return service.approve(id);
     }
 
-    @DeleteMapping("/result-single/{id}")
+    @DeleteMapping("/result/single/{id}")
     public String delete(@PathVariable Long id){
         return service.delete(id);
     }
