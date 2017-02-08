@@ -20,6 +20,7 @@ function getPartyById(self,id) {
   .get('/party/' + id)
   .then(function(response){
     console.log(response);
+    EventEmitter.publish({ eventType: 'LogCounty' });
     self.setState({
       name : response.data.name.trim(),
       number : response.data.partyNumber,

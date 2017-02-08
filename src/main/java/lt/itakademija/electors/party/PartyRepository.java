@@ -53,4 +53,8 @@ public class PartyRepository {
     public void delete(Long id) {
         em.remove(em.find(PartyEntity.class, id));
     }
+
+    public Long getPartiesCount(){
+        return em.createQuery("SELECT COUNT(c) FROM PartyEntity c", Long.class).getSingleResult();
+    }
 }

@@ -210,8 +210,7 @@ public class PartyControllerTest {
         partyService.delete();
     }
     */
-    @Ignore
-    @Transactional
+
     @Test
     public void deleteFileParty() {
         //setup
@@ -222,13 +221,9 @@ public class PartyControllerTest {
         //exercise
         ResponseEntity<PartyRepository[]> response = rest.getForEntity(URI, PartyRepository[].class);
         Long id = partyRepository.getPartyByNumber(number).getId();
-        System.out.println("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
-        System.out.println(id);
-        System.out.println(partyRepository.getById(id).getName());
-        System.out.println("size:" + partyRepository.getById(id).getMembers());
         candidateService.deleteCandidatesByPartyId(id);
-        //ResponseEntity<CandidateReport[]> responseCandidates = rest.getForEntity("/candidate", CandidateReport[].class);
-        //ResponseEntity<CandidateReport[]> responseCandidatesDelete = rest.getForEntity("/candidate", CandidateReport[].class);
-        //assertThat(responseCandidates.getBody().length, CoreMatchers.is(responseCandidatesDelete.getBody().length));
+        ResponseEntity<CandidateReport[]> responseCandidates = rest.getForEntity("/candidate", CandidateReport[].class);
+        ResponseEntity<CandidateReport[]> responseCandidatesDelete = rest.getForEntity("/candidate", CandidateReport[].class);
+        assertThat(responseCandidates.getBody().length, CoreMatchers.is(responseCandidatesDelete.getBody().length));
     }
 }

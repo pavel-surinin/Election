@@ -3,6 +3,8 @@ package lt.itakademija.users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by Pavel on 2017-01-10.
  */
@@ -25,6 +27,11 @@ public class UsersController {
     @GetMapping("/users/logout")
     public void logout(){
         service.logout();
+    }
+
+    @GetMapping("users/admin-info")
+    public List<Long> getAdminPanelInfo(){
+        return service.getAdminPanelInfo();
     }
 
 }

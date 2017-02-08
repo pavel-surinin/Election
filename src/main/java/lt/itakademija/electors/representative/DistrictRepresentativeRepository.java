@@ -29,4 +29,8 @@ public class DistrictRepresentativeRepository {
         em.merge(representative);
         return representative;
     }
+
+    public Long getDistrictRepsCount(){
+        return em.createQuery("SELECT COUNT(c) FROM DistrictRepresentativeEntity c", Long.class).getSingleResult();
+    }
 }

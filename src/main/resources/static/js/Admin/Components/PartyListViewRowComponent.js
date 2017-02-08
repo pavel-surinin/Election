@@ -23,12 +23,35 @@ var  PartyListViewRowComponent= React.createClass({
                 {this.props.name}
               </td>
               <td className="small">
-                <button onClick={this.handleDetailsClick(this.props.id)} ref="info" title="Detaliau" id={'details-button-' + this.props.id}
-                  className='btn btn-info btn-sm fa fa-info' role='button'></button>
+                <button
+                  onClick={this.handleDetailsClick(this.props.id)}
+                  id={'details-button-' + this.props.id}
+                  className='btn btn-info btn-sm fa fa-info'
+                  ref="info"
+                  title="Detaliau"
+                  role='button'
+                  >
+                </button>
                 &nbsp;
-                <a href={'#/admin/party/edit/' + this.props.id} data-toggle="tooltip2" id={'edit-button-' + this.props.id} title="Atnaujinti Partijos informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
+                <a
+                  href={'#/admin/party/edit/' + this.props.id}
+                  data-toggle="tooltip2"
+                  id={'edit-button-' + this.props.id}
+                  title="Atnaujinti Partijos informaciją"
+                  type="button"
+                  ref='edit'
+                  className="btn btn-primary btn-sm fa fa-pencil">
+                </a>
                 &nbsp;
-                <button onClick={this.delete} id={'delete-button' + this.props.id} className='btn btn-danger btn-sm'><i className="fa fa-trash-o" aria-hidden="true"></i></button>
+                <button
+                  onClick={this.delete}
+                  id={'delete-button' + this.props.id}
+                  className='btn btn-danger btn-sm fa fa-trash-o'
+                  ref="delete"
+                  title="Ištrinti Partiją"
+                  role='button'
+                  >
+                </button>
 
               </td>
             </tr>
