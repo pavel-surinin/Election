@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value= HttpStatus.FAILED_DEPENDENCY, reason="County Candidates Already Exist in this County")
 public class CountyCandidatesAlreadyExistException extends RuntimeException{
 
-//    public String CountyCandidatesAlreadyExistException (String message){ super(message); }
+    public CountyCandidatesAlreadyExistException (String message){ super(message); }
 
     public CountyCandidatesAlreadyExistException(String message, Throwable cause) {
         super(message, cause);
