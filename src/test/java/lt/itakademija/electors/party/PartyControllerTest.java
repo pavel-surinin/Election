@@ -5,7 +5,10 @@ import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.CandidateRepository;
 import lt.itakademija.electors.county.CountyControllerTest;
 import lt.itakademija.electors.county.CountyReport;
+import lt.itakademija.exceptions.BadCSVFileExceprion;
+import lt.itakademija.exceptions.PartyNameCloneException;
 import lt.itakademija.exceptions.PartyNumberCloneException;
+import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
@@ -44,12 +47,11 @@ public class PartyControllerTest {
     PartyService partyService;
 
     @Autowired
-    TestRestTemplate rest;
+    PartyReport partyReport;
 
     @Autowired
-    CandidateRepository candidateRepository;
+    TestRestTemplate rest;
 
-    @Transactional
     @Before
     public void setUp() throws Exception {
 
