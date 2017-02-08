@@ -317,6 +317,7 @@ public class CandidateControllerTest {
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
         candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
+        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(0));
     }
 
     @TestConfiguration

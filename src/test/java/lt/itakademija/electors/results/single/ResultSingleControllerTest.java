@@ -127,7 +127,7 @@ public class ResultSingleControllerTest {
     }
 
     @Test
-    public void delete() throws Exception {
+    public void deleteResultsButNotCandidates() throws Exception {
 
         //setup adding candidates
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
