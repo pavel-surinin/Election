@@ -1,5 +1,6 @@
 package lt.itakademija.electors.county;
 
+
 import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.CandidateEntity;
