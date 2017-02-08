@@ -1,5 +1,6 @@
 package lt.itakademija.electors.county;
 
+
 import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.CandidateEntity;
@@ -29,6 +30,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -83,6 +85,9 @@ public class CountyControllerTest {
 
     @Autowired
     DistrictService districtService;
+
+    @Autowired
+    CountyDetailsReport countyDetailsReport;
 
     @Autowired
     TransactionTemplate transactionTemplate;
@@ -189,6 +194,41 @@ public class CountyControllerTest {
         assertThat(respCountyReport.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respCountyReport.getBody()[0].getCandidatesCount(), CoreMatchers.is(0));
         assertThat(respCountyReportafterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
+    }
+
+    @Test
+    @Transactional
+    public void uploadSingleCandidates_CandidatesAlreadyExistsInCounty_UploadingCandidatesWhichWasNotInList() throws Exception {
+        //setup
+        final MultipartFile partyfile1 = MyUtils.parseToMultiPart("test-csv/Good__Skaidruoliu_Party_candidate_data.csv");
+        String partyName1 = "Darbo";
+        Integer partyNumber1 = 1;
+        partyService.save(partyName1, partyNumber1, partyfile1);
+
+        final MultipartFile partyfile2 = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String partyName2 = "Skaidruolių";
+        Integer partyNumber2 = 2;
+        partyService.save(partyName2, partyNumber2, partyfile2);
+        FileInputStream fis = new FileInputStream(new File("test-csv/Good_County_NoParty_And_Party_candidate_data.csv"));
+        List<CandidateEntity> candidateEntityList = csvParser.extractCandidates(fis);
+
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data.csv");
+        ResponseEntity<CountyReport[]> respCountyReport = rest.getForEntity("/county", CountyReport[].class);
+        final Long id = respCountyReport.getBody()[0].getId();
+        countyService.update(id, result);
+        ResponseEntity<CountyReport[]> respCountyReportAfterUpdate = rest.getForEntity("/county", CountyReport[].class);
+        //execute
+        MultipartFile resultUpdate = MyUtils.parseToMultiPart("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv");
+        countyService.update(id,resultUpdate);
+        ResponseEntity<CountyReport[]> respCountyReportUpdate= rest.getForEntity("/county", CountyReport[].class);
+        FileInputStream candidateFile = new FileInputStream(new File("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv"));
+        List<CandidateEntity> candidateEntityUpdateList = csvParser.extractCandidates(candidateFile);
+        //verify
+// TODO Kandidatus pridede papildomai, yra Exception'as CountyCandidatesAlreadyExistException bet nesutvarkytas
+        //assertThat(respCountyReportAfterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
+        assertThat(respCountyReportUpdate.getStatusCodeValue(),CoreMatchers.is(200));
+        assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
+
     }
 
     @Test

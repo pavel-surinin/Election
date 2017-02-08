@@ -13,7 +13,6 @@ var SingleResultComponent = React.createClass({
     });
     var errorMesages = validation.showMsg(this.props.errorMesages);
     return (
-      <div>
         <div className="panel panel-default col-md-12">
           <div className="row panel-heading">
             <div className="col-md-6">
@@ -37,11 +36,10 @@ var SingleResultComponent = React.createClass({
               </div>
               <br/>
             </div>
+            {errorMesages}
               <button type="submit" className="btn btn-primary">Submit</button>
           </form>
-          {errorMesages}
         </div>
-      </div>
     );
   }
   });
