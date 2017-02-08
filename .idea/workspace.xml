@@ -6,16 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/DataPreloader.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/DataPreloader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictController.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiController.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsListComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsListComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsMultiListRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsMultiListRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsSingleListRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsSingleListRowComponent.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/ResultsListContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/ResultsListContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/myStyle.css" afterPath="$PROJECT_DIR$/src/main/resources/static/myStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -95,21 +89,28 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="PartyService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="145" column="9" lean-forward="true" selection-start-line="145" selection-start-column="9" selection-end-line="145" selection-end-column="9" />
+              <folding>
+                <element signature="method#save#0;class#PartyService#0" expanded="false" />
+                <element signature="method#save#1;class#PartyService#0" expanded="false" />
+                <element signature="method#getPartyList#0;class#PartyService#0" expanded="false" />
+                <element signature="method#getPartyById#0;class#PartyService#0" expanded="false" />
+                <element signature="method#throwIf#0;class#PartyService#0" expanded="false" />
+                <element signature="method#throwIfNumberExists#0;class#PartyService#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="DataPreloader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/DataPreloader.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="197">
               <caret line="50" column="33" lean-forward="true" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResultMultiService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -179,8 +180,6 @@
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/exceptions/PartyNumberCloneException.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/FileSystemStorageService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java" />
@@ -200,6 +199,8 @@
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/DataPreloader.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiController.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" />
+        <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" />
       </list>
     </option>
   </component>
@@ -272,6 +273,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="party" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -455,6 +486,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="party" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -552,32 +617,6 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="CountyControllerTest.deleteCountyWithResultsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="lt.itakademija.electors.county.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Election" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="lt.itakademija.electors.county" />
-      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.county.CountyControllerTest" />
-      <option name="METHOD_NAME" value="deleteCountyWithResultsTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="PartyControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -613,6 +652,32 @@
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="PartyControllerTest.checkCandidatesAttachment" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="lt.itakademija.electors.party.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Election" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="lt.itakademija.electors.party" />
+      <option name="MAIN_CLASS_NAME" value="lt.itakademija.electors.party.PartyControllerTest" />
+      <option name="METHOD_NAME" value="checkCandidatesAttachment" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -907,17 +972,17 @@
       <item index="1" class="java.lang.String" itemvalue="JUnit.CountyControllerTest" />
       <item index="2" class="java.lang.String" itemvalue="Application.Application" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.uploadSingleCandidates" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.deleteCountyWithResultsTest" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.PartyControllerTest" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.All in Election" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.PartyControllerTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.All in Election" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.PartyControllerTest.checkCandidatesAttachment" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Application" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.All in Election" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.PartyControllerTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.uploadSingleCandidates" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.deleteCountyWithResultsTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.PartyControllerTest.checkCandidatesAttachment" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in Election" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.PartyControllerTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CountyControllerTest.uploadSingleCandidates" />
       </list>
     </recent_temporary>
   </component>
@@ -981,29 +1046,29 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 17m 19s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 01m 25s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 46m 44s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 02m 15s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 47m 26s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 03m 42s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 48m 42s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 09m 45s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 53m 06s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 11m 46s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 53m 42s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 15m 04s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 54m 03s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 18m 48s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PartyControllerTest - 2017.02.06 at 12h 56m 52s.xml">
-      <configuration name="PartyControllerTest" configurationId="JUnit" />
+    <history-entry file="PartyControllerTest_checkCandidatesAttachment - 2017.02.08 at 10h 19m 27s.xml">
+      <configuration name="PartyControllerTest.checkCandidatesAttachment" configurationId="JUnit" />
     </history-entry>
     <history-entry file="lt_itakademija_in_Election - 2017.02.07 at 13h 25m 30s.xml">
       <configuration name="lt.itakademija in Election" configurationId="JUnit" />
@@ -1022,7 +1087,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1046,7 +1111,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3438486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44321766" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44321766" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22620791" sideWeight="0.49369085" order="9" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1238,6 +1303,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1252,13 +1318,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="8" column="36" lean-forward="false" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="80" column="50" lean-forward="true" selection-start-line="80" selection-start-column="50" selection-end-line="80" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1350,17 +1410,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="71" column="0" lean-forward="false" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding>
-            <element signature="e#910#911#0" expanded="false" />
-            <element signature="e#964#965#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -1368,20 +1417,6 @@
           <folding>
             <element signature="e#2802#2803#0" expanded="false" />
             <element signature="e#2840#2841#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="50" column="19" lean-forward="false" selection-start-line="50" selection-start-column="19" selection-end-line="50" selection-end-column="19" />
-          <folding>
-            <element signature="method#save#2;class#PartyService#0" expanded="false" />
-            <element signature="method#getPartyList#0;class#PartyService#0" expanded="false" />
-            <element signature="method#getPartyById#0;class#PartyService#0" expanded="false" />
-            <element signature="method#throwIf#0;class#PartyService#0" expanded="false" />
-            <element signature="method#throwIfNumberExists#0;class#PartyService#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1494,6 +1529,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -1502,11 +1545,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="108">
+          <caret line="33" column="27" lean-forward="false" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+          <folding>
+            <element signature="e#910#911#0" expanded="false" />
+            <element signature="e#964#965#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+          <folding>
+            <element signature="method#setUp#0;class#PartyControllerTest#0" expanded="false" />
+            <element signature="method#saveExistingNumberParty#0;class#PartyControllerTest#0" expanded="false" />
+            <element signature="class#Config#0;class#PartyControllerTest#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="145" column="9" lean-forward="true" selection-start-line="145" selection-start-column="9" selection-end-line="145" selection-end-column="9" />
+          <folding>
+            <element signature="method#save#0;class#PartyService#0" expanded="false" />
+            <element signature="method#save#1;class#PartyService#0" expanded="false" />
+            <element signature="method#getPartyList#0;class#PartyService#0" expanded="false" />
+            <element signature="method#getPartyById#0;class#PartyService#0" expanded="false" />
+            <element signature="method#throwIf#0;class#PartyService#0" expanded="false" />
+            <element signature="method#throwIfNumberExists#0;class#PartyService#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

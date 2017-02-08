@@ -111,6 +111,7 @@ public class PartyService {
         return pr;
     }
 
+
     public PartyEntity getPartyEntityById(Long id) {
         return repository.getById(id);
     }

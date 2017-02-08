@@ -23,11 +23,24 @@ function approve(self,type,id){
   .patch('/result/'+type+'/'+id+'/approve/')
   .then(function(response){
     getMulti(self);
+    getSingle(self);
   })
   .catch(function(err){
     console.error('ResultsListContainer.onHandleApprove',err);
   });
 }
+function deleteVotes(self,type,id) {
+  axios
+  .delete('/result/'+type+'/'+id)
+  .then(function(response){
+    getMulti(self);
+    getSingle(self);
+  })
+  .catch(function(err){
+    console.error('ResultsListContainer.onHandleDelete',err);
+  });
+}
+
 var ResultsListContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -45,10 +58,9 @@ var ResultsListContainer = React.createClass({
     getSingle(this);
   },
   onHandleDelete : function(id,type){
-    console.log(id,type);
+    deleteVotes(this,type,id);
   },
   onHandleApprove : function(id,type){
-    console.log('/result/'+type+'/'+id+'/approve/');
     approve(this,type,id);
   },
   render: function() {
