@@ -49,16 +49,26 @@ var CandidateEditContainer = React.createClass({
   },
   onHandleSubmit: function(event){
     var self = this;
+    var pd = null;
+    if (this.state.partijosId != null) {
+      pd = {id : this.state.partijosId};
+    }
+
+    var countyD = null;
+    if (this.state.countyId != null) {
+      countyD = {id : this.state.countyId};
+    }
     var postCandidateObject = {
       id: this.props.params.id,
       name : this.state.name.trim(),
       surname : this.state.surname.trim(),
-      birthDate : this.state.birthDate,
+      birthDate : new Date(this.state.birthDate),
       description : this.state.description,
       numberInParty : this.state.numberInParty,
-      partyDependencies : {id : this.state.partijosId},
-      county : {id : this.state.countyId},
+      partyDependencies : pd,
+      county : countyD,
     };
+    console.log(postCandidateObject);
     event.preventDefault();
     axios.post('/candidate', postCandidateObject)
     .then(function(response){

@@ -4,6 +4,7 @@ import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.district.DistrictEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by Pavel on 2017-02-02.
@@ -32,13 +33,17 @@ public class ResultSingleEntity {
     @NotNull
     private boolean isApproved = false;
 
+    @NotNull
+    private Date datePublished;
+
     public ResultSingleEntity() {
     }
 
-    public ResultSingleEntity(CandidateEntity candidate, DistrictEntity district, Long votes) {
+    public ResultSingleEntity(CandidateEntity candidate, DistrictEntity district, Long votes, Date date) {
         this.candidate = candidate;
         this.district = district;
         this.votes = votes;
+        this.datePublished = date;
     }
 
     public Long getId() {
@@ -79,5 +84,13 @@ public class ResultSingleEntity {
 
     public void setApproved(boolean approved) {
         isApproved = approved;
+    }
+
+    public Date getDatePublished() {
+        return datePublished;
+    }
+
+    public void setDatePublished(Date datePublished) {
+        this.datePublished = datePublished;
     }
 }
