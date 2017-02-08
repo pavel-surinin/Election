@@ -406,7 +406,7 @@ public class CountyControllerTest {
         final String save = resultSingleService.save(rl);
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(4));
 //        countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
 //        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }

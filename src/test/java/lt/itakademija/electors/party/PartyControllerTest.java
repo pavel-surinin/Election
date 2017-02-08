@@ -38,12 +38,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-<<<<<<< HEAD
-        classes = {PartyControllerTest.Config.class, Application.class})
-
-=======
         classes = {PartyControllerTest.class, Application.class})
->>>>>>> pavel-surinin-master
+
 public class PartyControllerTest {
 
     @Autowired
@@ -91,12 +87,7 @@ public class PartyControllerTest {
 
     @Transactional
     @Test
-<<<<<<< HEAD
-    public void saveExistingNumberParty() throws Exception {
-        //setup
-=======
     public void savePartyWithExistingNumber() throws Exception {
->>>>>>> pavel-surinin-master
         final int sizeBeforeSave = partyRepository.findAll().size();
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
         String name = "Testeriu Partija";
@@ -124,9 +115,6 @@ public class PartyControllerTest {
         } catch (PartyNameCloneException e) {
             assertThat(e.getMessage(), CoreMatchers.is("Party exists with name " + name));
         }
-<<<<<<< HEAD
-
-=======
 
     }
 
@@ -242,6 +230,5 @@ public class PartyControllerTest {
         ResponseEntity<CandidateReport[]> responseCandidates = rest.getForEntity("/candidate", CandidateReport[].class);
         ResponseEntity<CandidateReport[]> responseCandidatesDelete = rest.getForEntity("/candidate", CandidateReport[].class);
         assertThat(responseCandidates.getBody().length, CoreMatchers.is(responseCandidatesDelete.getBody().length));
->>>>>>> pavel-surinin-master
     }
 }

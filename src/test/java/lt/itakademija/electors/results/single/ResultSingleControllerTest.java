@@ -111,48 +111,44 @@ public class ResultSingleControllerTest {
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
         ResponseEntity<DistrictReport> respCreateDistrict;
         respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
+
         //votes
         final DistrictEntity d1 = districtRepository.findAll().get(0);
-
 
         final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
-        final CandidateEntity cs = candidateRepository.getCandidatesList().get(-1991);
+        final CandidateEntity spoiled = new CandidateEntity();
+
+        spoiled.setId(-1991L);
 
         ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
         ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
         ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
-        ResultSingleEntity ress = new ResultSingleEntity(cs, d1, 10L, new Date());
+        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
 
         List<ResultSingleEntity> rl = new ArrayList<>();
         rl.add(res1);
         rl.add(res2);
         rl.add(res3);
-        rl.add(ress);
+        rl.add(res4);
+
 
         final String save = resultSingleService.save(rl);
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(4));
+//        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
     }
 
     @Test
     public void approve() throws Exception {
-
-    }
-
-    @Ignore
-    @Test
-    public void deleteResultsButNotCandidates() throws Exception {
 
         //setup adding candidates
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
         countyService.update(id, result);
-
         //setup adding district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
@@ -165,24 +161,72 @@ public class ResultSingleControllerTest {
         final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
+        final CandidateEntity spoiled = new CandidateEntity();
 
-        ResultSingleEntity res1 = new ResultSingleEntity(c1,d1,200L);
-        ResultSingleEntity res2 = new ResultSingleEntity(c2,d1,500L);
-        ResultSingleEntity res3 = new ResultSingleEntity(c3,d1,400L);
+        spoiled.setId(-1991L);
+
+        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
+        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
 
         List<ResultSingleEntity> rl = new ArrayList<>();
         rl.add(res1);
         rl.add(res2);
         rl.add(res3);
+        rl.add(res4);
 
         final String save = resultSingleService.save(rl);
 
-        //exercise
-        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+        final String approve = resultSingleService.approve(d1.getId());
+        //verify
+        assertThat(save, CoreMatchers.is("Votes registered"));
+        assertThat(approve, CoreMatchers.is("Results approved"));
+    }
+
+    @Test
+    public void deleteResultsButNotCandidates() throws Exception {
+
+        //setup adding candidates
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
+        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        final Long id = resp1.getBody()[0].getId();
+        countyService.update(id, result);
+        //setup adding district
+        final Long countyId = countyRepository.findAll().get(0).getId();
+        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
+        ResponseEntity<DistrictReport> respCreateDistrict;
+        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
+
+        //votes
+        final DistrictEntity d1 = districtRepository.findAll().get(0);
+
+        final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
+        final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
+        final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
+        final CandidateEntity spoiled = new CandidateEntity();
+
+        spoiled.setId(-1991L);
+
+        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
+        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
+
+        List<ResultSingleEntity> rl = new ArrayList<>();
+        rl.add(res1);
+        rl.add(res2);
+        rl.add(res3);
+        rl.add(res4);
+
+
+        final String save = resultSingleService.save(rl);
 
         //verify
+        assertThat(save, CoreMatchers.is("Votes registered"));
+//        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        resultSingleRepository.getByDistrictId(d1).stream().forEach(c -> resultSingleService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
-        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(3));
     }
 
     @TestConfiguration
