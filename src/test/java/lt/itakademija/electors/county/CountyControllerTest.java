@@ -153,6 +153,7 @@ public class CountyControllerTest {
     @Test
     public void uploadSingleCandidates() throws Exception {
         //setup
+
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         //execute
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
@@ -329,6 +330,7 @@ public class CountyControllerTest {
     @Test
     public void deleteCountyWithResultsTest() {
         //setup adding candidates
+
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
@@ -344,15 +346,21 @@ public class CountyControllerTest {
         final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
+        final CandidateEntity spoiled = new CandidateEntity();
+        spoiled.setId(-1991L);
+
 
         ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
         ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
         ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
+        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
 
         List<ResultSingleEntity> rl = new ArrayList<>();
         rl.add(res1);
         rl.add(res2);
         rl.add(res3);
+        rl.add(res4);
+
 
         final String save = resultSingleService.save(rl);
         //verify
