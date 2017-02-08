@@ -1,9 +1,9 @@
 var ResultsSingleListRowComponent = React.createClass({
   approve : function(){
-    this.props.onHandleApprove(this.props.info.id,'multi');
+    this.props.onHandleApprove(this.props.info.id,'single');
   },
   delete : function(){
-    this.props.onHandleDelete(this.props.info.id,'multi');
+    this.props.onHandleDelete(this.props.info.id,'single');
   },
   render: function() {
     return (
