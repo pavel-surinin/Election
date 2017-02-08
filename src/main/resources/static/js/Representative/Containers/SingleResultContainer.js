@@ -1,13 +1,13 @@
-function getParties(self) {
+function getCandidates(self,district) {
   axios
-    .get('/party')
+    .get('candidate/' + district + '/district')
     .then(function(response){
       self.setState({
-        partyList :  response.data,
+        candidatesList :  response.data,
       });
     })
     .catch(function(err){
-      console.error('MultiResultContainer.componentWillMount.axios.get.party', err);
+      console.error('SingleResultContainer.componentWillMount.axios.get.party', err);
     });
 }
 function getDistrict(self,id) {
@@ -18,12 +18,12 @@ function getDistrict(self,id) {
         districtInfo :  response.data,
         isLoading : false,
       });
-      if (response.data.resultMultiRegistered) {
+      if (response.data.resultSingleRegistered) {
         self.setState({isVotesRegistered : true});
       }
     })
     .catch(function(err){
-      console.error('MultiResultContainer.componentWillMount.axios.get.district', err);
+      console.error('SingleResultContainer.componentWillMount.axios.get.district', err);
     });
 }
 function isCountEqualsOrLess(list,max){
@@ -39,26 +39,25 @@ function isCountEqualsOrLess(list,max){
     return true;
   }
 }
-var errorMesages = [];
 var list = {};
-var postArray =[];
-var MultiResultContainer = React.createClass({
+var postArray = [];
+var errorMesages = [];
+var SingleResultContainer = React.createClass({
   getInitialState: function() {
     return {
-      partyList: [],
       districtId : 5,
+      candidatesList : [],
       districtInfo : [],
-      isVotesRegistered : false,
       isLoading : true,
+      isVotesRegistered : false,
       errorMesages : [],
     };
   },
   componentWillMount: function() {
-    getParties(this);
+    getCandidates(this,this.state.districtId);
     getDistrict(this,this.state.districtId);
-
   },
-  registerVotes : function(id,votes){
+  registerVotes :function(id,votes){
     list[id]=votes;
   },
   onHandleSpoiledChange : function(event){
@@ -68,7 +67,7 @@ var MultiResultContainer = React.createClass({
     event.preventDefault();
     errorMesages = [];
     this.setState({errorMesages : []});
-    if (!isCountEqualsOrLess(list, this.state.districtInfo.numberOfElectors)) {
+    if (!isCountEqualsOrLess(list,this.state.districtInfo.numberOfElectors)) {
       errorMesages.push('Apygarda ' + this.state.districtInfo.name + ' turi tik ' +  this.state.districtInfo.numberOfElectors + ' balsų.');
       this.setState({errorMesages : errorMesages});
     } else {
@@ -77,7 +76,7 @@ var MultiResultContainer = React.createClass({
           var self = this;
           postArray.push(
             {
-              'party' : {'id' : key},
+              'candidate' : {'id' : key},
               'district' : {'id' : this.state.districtId},
               'votes' : list[key],
               'datePublished' : new Date(),
@@ -86,16 +85,15 @@ var MultiResultContainer = React.createClass({
         }
       }
       axios
-      .post('/result-multi', postArray)
+      .post('/result-single', postArray)
       .then(function(response){
         self.setState({isVotesRegistered : true});
       })
       .catch(function(err){
-        console.error('MultiResultContainer.onHandleSubmit.axios',err);
+        console.error('SingleResultContainer.onHandleSubmit.axios',err);
       });
     }
   },
-
   render: function() {
     if (this.state.isLoading) {
       return <div><img src='/images/loading.gif'/></div>;
@@ -108,18 +106,17 @@ var MultiResultContainer = React.createClass({
       );
     } else {
       return (
-        <MultiResultComponent
-        list = {this.state.partyList}
-        onNumberChange={this.onNumberChange}
-        registerVotes={this.registerVotes}
-        onHandleSubmit={this.onHandleSubmit}
-        onHandleSpoiledChange={this.onHandleSpoiledChange}
-        errorMesages={this.state.errorMesages}
+        <SingleResultComponent
+          list={this.state.candidatesList}
+          registerVotes={this.registerVotes}
+          onHandleSpoiledChange={this.onHandleSpoiledChange}
+          onHandleSubmit={this.onHandleSubmit}
+          errorMesages={this.state.errorMesages}
         />
       );
     }
   }
-
 });
 
-window.MultiResultContainer = MultiResultContainer;
+
+window.SingleResultContainer = SingleResultContainer;
