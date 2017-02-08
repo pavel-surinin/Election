@@ -1,24 +1,28 @@
-
 var ResultsMultiListRowComponent = React.createClass({
-
+  approve : function(){
+    this.props.onHandleApprove(this.props.info.id,'multi');
+  },
+  delete : function(){
+    this.props.onHandleDelete(this.props.info.id,'multi');
+  },
   render: function() {
     return (
       <tr>
         <td className="small">
-          Numeris 1
+          {this.props.info.name}
         </td>
         <td className="small">
-          Vilniaus
+          {this.props.info.representativeName}
         </td>
         <td className="small">
-          Rezultatai
+          {this.props.info.countyName}
         </td>
         <td className="small">
           <div>
             &nbsp;
-              <button data-toggle="tooltip1" title="Patvirtinti" type="button" className="btn btn-success btn-sm fa fa-check"></button>
+              <button onClick={this.approve} data-toggle="tooltip1" title="Patvirtinti" type="button" className="btn btn-success btn-sm fa fa-check"></button>
             &nbsp;
-              <button data-toggle="tooltip1" title="Ištrinti" type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
+              <button onClick={this.delete} data-toggle="tooltip1" title="Ištrinti" type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
           </div>
         </td>
       </tr>

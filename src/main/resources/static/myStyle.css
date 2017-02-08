@@ -25,3 +25,5 @@
 .panel > .panel-heading { text-transform: uppercase;}
 
 #register-button {text-transform: capitalize;}
+
+#result-refresh.text-success {cursor:pointer;}

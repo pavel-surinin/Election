@@ -41,7 +41,7 @@ public class ResultMultiService {
     public String approve(Long id) {
         List<ResultMultiEntity> results = getDistrictResults(id);
         results.forEach(res -> res.setApproved(true));
-        save(results);
+        results.stream().forEach(res -> repository.save(res));
         return "Votes Approved";
     }
 

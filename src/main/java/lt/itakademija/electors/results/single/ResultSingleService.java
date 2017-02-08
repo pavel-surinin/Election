@@ -28,7 +28,6 @@ public class ResultSingleService {
 
     @Transactional
     public String save(List<ResultSingleEntity> results) {
-
         final ResultSingleEntity spoiled = results.stream().filter(res -> res.getCandidate().getId() == -1991L).findAny().get();
         DistrictEntity district = spoiled.getDistrict();
         final DistrictEntity districtEnt = districtRepository.findById(district.getId());
