@@ -54,7 +54,7 @@ var DistrictCreateEditComponent = React.createClass({
                           <div className="input-group col-xs-12 text-primary">
                           <label>Apylinkės rinkėjų Skaičius</label>
                             <input
-                              id="adress-input"
+                              id="voters-input"
                               type="text"
                               onChange={this.props.onHandleNumberChange}
                               value={this.props.numberOfElectors}

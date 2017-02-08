@@ -22,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,6 +46,10 @@ public class PartyControllerTest {
     @Autowired
     TestRestTemplate rest;
 
+    @Autowired
+    CandidateRepository candidateRepository;
+
+    @Transactional
     @Before
     public void setUp() throws Exception {
 
@@ -85,6 +90,7 @@ public class PartyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Party exists with number " + number));
         }
     }
+
 
     @TestConfiguration
     static class Config {

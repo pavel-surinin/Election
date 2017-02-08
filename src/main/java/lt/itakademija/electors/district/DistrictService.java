@@ -61,6 +61,19 @@ public class DistrictService {
                 .collect(Collectors.toList());
     }
 
-	
 
+    public List getDistrictSingleRegistered() {
+        return getDistrictsList().stream()
+                .filter(dr -> dr.isResultSingleRegistered())
+                .filter(dr -> !dr.isResultSingleApproved())
+                .collect(Collectors.toList());
+    }
+
+    public List getDistrictMultiRegistered() {
+        return getDistrictsList().stream()
+                .filter(dr -> dr.isResultMultiRegistered())
+                .filter(dr -> !dr.isResultMultiApproved())
+                .collect(Collectors.toList());
+
+    }
 }
