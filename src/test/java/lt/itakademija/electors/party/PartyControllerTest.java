@@ -198,7 +198,7 @@ public class PartyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Party exists with name " + updatedName));
         }
     }
-    /*
+
     @Test
     public void deleteParty(){
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-5.csv");
@@ -206,10 +206,12 @@ public class PartyControllerTest {
         Integer number = 420;
         partyService.save(name, number, file);
         final int sizeBeforeDel = partyRepository.findAll().size();
-        id = partyService
-        partyService.delete();
+        Long id = partyService.getPartyByNumber(number).getId();
+        partyService.delete(id);
+        final int sizeAfterDel = partyRepository.findAll().size();
+        assertThat(sizeAfterDel,CoreMatchers.is(sizeBeforeDel-1));
+
     }
-    */
 
     @Test
     public void deleteFileParty() {

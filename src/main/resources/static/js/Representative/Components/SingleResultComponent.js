@@ -40,9 +40,8 @@ var SingleResultComponent = React.createClass({
               <button type="submit" className="btn btn-primary">Submit</button>
           </form>
         </div>
-
     );
   }
-});
+  });
 
 window.SingleResultComponent = SingleResultComponent;
