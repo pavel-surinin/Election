@@ -223,10 +223,10 @@ public class CountyControllerTest {
         FileInputStream candidateFile = new FileInputStream(new File("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv"));
         List<CandidateEntity> candidateEntityUpdateList = csvParser.extractCandidates(candidateFile);
         //verify
-//        assertThat(respCountyReportAfterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
-//        assertThat(respCountyReportAfterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
-//        assertThat(respCountyReportUpdate.getStatusCodeValue(),CoreMatchers.is(200));
-        assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()+candidateEntityUpdateList.size()));
+// TODO Kandidatus pridede papildomai, yra Exception'as CountyCandidatesAlreadyExistException bet nesutvarkytas
+        //assertThat(respCountyReportAfterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
+        assertThat(respCountyReportUpdate.getStatusCodeValue(),CoreMatchers.is(200));
+        assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
 
     }
 
