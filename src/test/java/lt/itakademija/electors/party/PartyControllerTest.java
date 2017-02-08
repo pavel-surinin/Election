@@ -2,7 +2,7 @@ package lt.itakademija.electors.party;
 
 import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
-import lt.itakademija.electors.candidate.CandidateRepository;
+import lt.itakademija.electors.candidate.*;
 import lt.itakademija.electors.county.CountyControllerTest;
 import lt.itakademija.electors.county.CountyReport;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
@@ -12,6 +12,7 @@ import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = {PartyControllerTest.Config.class, Application.class})
+        classes = {PartyControllerTest.class, Application.class})
 public class PartyControllerTest {
 
     @Autowired
@@ -46,14 +47,19 @@ public class PartyControllerTest {
     @Autowired
     PartyService partyService;
 
-    @Autowired
-    PartyReport partyReport;
 
     @Autowired
     TestRestTemplate rest;
 
-    String URI = "/party";
+    @Autowired
+    CandidateRepository candidateRepository;
 
+    @Autowired
+    CandidateService candidateService;
+
+
+    String URI = "/party";
+    @Transactional
     @Before
     public void setUp() throws Exception {
 
@@ -76,17 +82,16 @@ public class PartyControllerTest {
     @After
     public void tearDown() throws Exception {
 
-    }
 
+    }
+    @Transactional
     @Test
-    public void saveExistingNumberParty() throws Exception {
-        //setpu
+    public void savePartyWithExistingNumber() throws Exception {
         final int sizeBeforeSave = partyRepository.findAll().size();
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
         String name = "Testeriu Partija";
         Integer number = 45;
-        //verify
-        try {
+          try {
             partyService.save(name, number, file);
             final int sizeAfterSave = partyRepository.findAll().size();
             assertThat(sizeBeforeSave, CoreMatchers.is(sizeAfterSave - 1));
@@ -96,12 +101,12 @@ public class PartyControllerTest {
     }
 
     @Test
-    public void saveExistingNameParty() throws Exception {
+    public void savePartyWithExistingName() throws Exception {
 
         final int sizeBeforeSave = partyRepository.findAll().size();
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
         String name = "Testeriu Partija";
-        Integer number = 45;
+        Integer number = 21;
         try {
             partyService.save(name, number, file);
             final int sizeAfterSave = partyRepository.findAll().size();
@@ -111,9 +116,44 @@ public class PartyControllerTest {
         }
 
     }
+    @Ignore
+    @Test
+    public void savePartyWithBadName() throws Exception {
+
+        final int sizeBeforeSave = partyRepository.findAll().size();
+        final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
+        String name = "Testeriu_Partija1234";
+        Integer number = 41;
+        try {
+            partyService.save(name, number, file);
+            final int sizeAfterSave = partyRepository.findAll().size();
+            assertThat(sizeBeforeSave, CoreMatchers.is(sizeAfterSave - 1));
+        } catch (PartyNameCloneException e) {
+            assertThat(e.getMessage(), CoreMatchers.is("Party exists with name " + name));
+        }
+
+    }
+    @Test
+    public void savePartyWithLtName() throws Exception {
+
+        final int sizeBeforeSave = partyRepository.findAll().size();
+        final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-5.csv");
+        String name = "Tėsterių pąrtįjąą ";
+        Integer number = 16;
+        partyService.save(name, number, file);
+        final int sizeAfterSave = partyRepository.findAll().size();
+        assertThat(sizeBeforeSave, CoreMatchers.is(sizeAfterSave -1));
+        System.out.println("+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
+        System.out.println(partyRepository.getPartyByNumber(number).getName());
+        /*try {
+        } catch (PartyNameCloneException e) {
+            assertThat(e.getMessage(), CoreMatchers.is("Party exists with name " + name));
+        }*/
+
+    }
 
     @Test
-    public void saveWithBadCsvDataParty() throws Exception {
+    public void savePartyWithBadCsvData() throws Exception {
 
         final int sizeBeforeSave = partyRepository.findAll().size();
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/bad-data3.csv");
@@ -122,27 +162,28 @@ public class PartyControllerTest {
         try {
             partyService.save(name, number, file);
             final int sizeAfterSave = partyRepository.findAll().size();
-            assertThat(sizeBeforeSave, CoreMatchers.is(sizeAfterSave - 1));
+            assertThat(sizeBeforeSave, CoreMatchers.is(sizeAfterSave-1));
         } catch (BadCSVFileExceprion e) {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
 
     }
     @Test
-    public void updateNameParty() throws  Exception {
+    public void updatePartyName() throws  Exception {
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
         String name = "Testeriu Partija";
         Integer number = 49;
         partyService.save(name, number, file);
         Long id = partyRepository.getPartyByNumber(49).getId();
-        //assertThat(partyService.getPartyByNumber(number).getName(),CoreMatchers.is(name));
         String updatedName = "Testuotoju partija";
         partyService.save(id, updatedName, number, file);
         assertThat(partyRepository.getById(id).getName(),CoreMatchers.is(updatedName));
+        assertThat(partyRepository.getById(id).getPartyNumber(), CoreMatchers.is(number));
 
     }
+
     @Test
-    public void updateNumberParty(){
+    public void updatePartyNumber(){
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
         String name = "Testeriu Partija";
         Integer number = 49;
@@ -153,27 +194,75 @@ public class PartyControllerTest {
         assertThat(partyRepository.getById(id).getPartyNumber(),CoreMatchers.is(updatedNumber));
 
     }
+
     @Test
-    public void deleteFileParty(){
+    public void updatePartyNumberWithExistingNumber(){
+
+        final int sizeBeforeSave = partyRepository.findAll().size();
+        final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
+        String name = "Egzistuojančių numerių partija";
+        Integer number = 101;
+        partyService.save(name, number, file);
+        Long id = partyRepository.getPartyByNumber(101).getId();
+        Integer updatedNumber = 45;
+        try {
+            partyService.save(id,name,updatedNumber,file);
+            final int sizeAfterSave = partyRepository.findAll().size();
+            assertThat(sizeBeforeSave,CoreMatchers.is(sizeAfterSave-1));
+        } catch (PartyNumberCloneException e) {
+            assertThat(e.getMessage(), CoreMatchers.is("Party exists with number " + updatedNumber));
+        }
+
+    }
+    @Test
+    public void updatePartyNameWithExistingName() throws  Exception {
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
         String name = "Testeriu Partija";
         Integer number = 49;
         partyService.save(name, number, file);
+        Long id = partyRepository.getPartyByNumber(49).getId();
+        String updatedName = "IT Partija";
+        try {
+            partyService.save(id, updatedName, number, file);
+        } catch (PartyNameCloneException e) {
+            assertThat(e.getMessage(),CoreMatchers.is("Party exists with name " + updatedName));
+        }
+
+    }
+    @Ignore
+    @Transactional
+    @Test
+    public void deleteFileParty(){
+        //setup
+        final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
+        String name = "Testeriu Partija Test";
+        Integer number = 49;
+        partyService.save(name, number, file);
+        //exercise
         ResponseEntity<PartyRepository[]> response = rest.getForEntity(URI, PartyRepository[].class);
-        assertThat(response.getStatusCodeValue(),CoreMatchers.is(200));
+        Long id = partyRepository.getPartyByNumber(number).getId();
+        System.out.println("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
+        System.out.println(id);
+        System.out.println(partyRepository.getById(id).getName());
+        System.out.println("size:" + partyRepository.getById(id).getMembers());
+        candidateService.deleteCandidatesByPartyId(id);
+        //ResponseEntity<CandidateReport[]> responseCandidates = rest.getForEntity("/candidate", CandidateReport[].class);
+        //ResponseEntity<CandidateReport[]> responseCandidatesDelete = rest.getForEntity("/candidate", CandidateReport[].class);
+        //assertThat(responseCandidates.getBody().length, CoreMatchers.is(responseCandidatesDelete.getBody().length));
+
 
 
 
     }
-
+    /*
     @TestConfiguration
     static class Config {
 
         @Bean
         @Primary
-        public CandidateRepository repository() {
-            return new CandidateRepository();
+        public PartyReport report() {
+            return new PartyReport();
         }
     }
-
+    */
 }
