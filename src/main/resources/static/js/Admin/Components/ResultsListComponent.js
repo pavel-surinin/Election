@@ -2,7 +2,12 @@ var ResultsListComponent = React.createClass({
   render: function() {
     var self = this;
     var single = this.props.single.map(function(district,index){
-      return (<ResultsSingleListRowComponent key={index} info={district}/>);
+      return (<ResultsSingleListRowComponent
+                key={index}
+                onHandleApprove={self.props.onHandleApprove}
+                onHandleDelete={self.props.onHandleDelete}
+
+                info={district}/>);
     });
     var multi = this.props.multi.map(function(district,index){
       return (<ResultsMultiListRowComponent

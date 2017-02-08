@@ -48,6 +48,7 @@ public class ResultSingleService {
 
     @Transactional
     public String delete(Long id) {
+        districtRepository.findById(id).setSpoiledSingle(null);
         getDistrictResults(id).stream().forEach(res -> repository.delete(res));
         return "Results Deleted";
     }

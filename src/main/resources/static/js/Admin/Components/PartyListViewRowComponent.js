@@ -10,6 +10,9 @@ var  PartyListViewRowComponent= React.createClass({
       self.context.router.push('admin/party/' + id);
     };
   },
+  delete : function(){
+    this.props.onHandleDelete(this.props.id);
+  },
   render: function() {
     return (
             <tr>
@@ -20,9 +23,13 @@ var  PartyListViewRowComponent= React.createClass({
                 {this.props.name}
               </td>
               <td className="small">
-                <button onClick={this.handleDetailsClick(this.props.id)} ref="info" title="Detaliau" id={'details-button-' + this.props.id} className='btn btn-info btn-sm fa fa-info' role='button'></button>
+                <button onClick={this.handleDetailsClick(this.props.id)} ref="info" title="Detaliau" id={'details-button-' + this.props.id}
+                  className='btn btn-info btn-sm fa fa-info' role='button'></button>
                 &nbsp;
                 <a href={'#/admin/party/edit/' + this.props.id} data-toggle="tooltip2" id={'edit-button-' + this.props.id} title="Atnaujinti Partijos informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
+                &nbsp;
+                <button onClick={this.delete} id={'delete-button' + this.props.id} className='btn btn-danger btn-sm'><i className="fa fa-trash-o" aria-hidden="true"></i></button>
+
               </td>
             </tr>
     );
