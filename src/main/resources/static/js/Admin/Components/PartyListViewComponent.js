@@ -2,6 +2,7 @@ var PartyListViewComponent = React.createClass({
   render: function() {
     var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
     var array = [];
+    var self = this;
     this.props.partyList.map(function(party,index) {
       array.push(
         <PartyListViewRowComponent
@@ -9,6 +10,7 @@ var PartyListViewComponent = React.createClass({
           key={index}
           name={party.name}
           partyNumber={party.partyNumber}
+          onHandleDelete={self.props.onHandleDelete}
         />
       );
     });

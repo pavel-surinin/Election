@@ -147,4 +147,9 @@ public class PartyService {
         }
         return false;
     }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.delete(id);
+    }
 }
