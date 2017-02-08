@@ -65,6 +65,7 @@ var MultiResultContainer = React.createClass({
     list[-1991]=event.target.value;
   },
   onHandleSubmit : function(event) {
+    postArray = [];
     event.preventDefault();
     errorMesages = [];
     this.setState({errorMesages : []});

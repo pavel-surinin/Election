@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsSingleListRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsSingleListRowComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/ResultsListContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/ResultsListContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/MultiResultContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/MultiResultContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/SingleResultContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/SingleResultContainer.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -1087,7 +1084,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
