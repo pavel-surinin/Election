@@ -41,9 +41,9 @@ var SingleResultComponent = React.createClass({
           </form>
           {errorMesages}
         </div>
-      
+      </div>
     );
   }
-});
+  });
 
 window.SingleResultComponent = SingleResultComponent;
