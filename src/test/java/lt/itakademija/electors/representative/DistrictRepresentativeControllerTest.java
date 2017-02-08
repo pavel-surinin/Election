@@ -54,9 +54,7 @@ public class DistrictRepresentativeControllerTest {
     @Autowired
     CountyService countyService;
 
-
     String URI = "/representative";
-
 
     @Before
     public void setUp() throws Exception {
@@ -73,15 +71,12 @@ public class DistrictRepresentativeControllerTest {
                 districtCreateResponse.getBody().getId());
         ResponseEntity<DistrictRepresentativeEntity> representativeCreateResponse = rest.postForEntity(URI,
                 MyUtils.parseStringToJson(representativeTestString), DistrictRepresentativeEntity.class);
-
     }
 
     @After
     public void tearDown() throws Exception {
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
         districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
-
-
     }
 
     @Transactional
@@ -91,8 +86,7 @@ public class DistrictRepresentativeControllerTest {
         int lastRepresentative = districtRepresentativeRepository.findAll().size() - 1;
         String lastRepresentativeName = districtRepresentativeRepository.findAll().get(lastRepresentative).getName();
         assertThat(response.getBody().length, CoreMatchers.is(districtRepresentativeRepository.findAll().size()));
-        assertThat(response.getBody()[lastRepresentative].getName(),CoreMatchers.is(lastRepresentativeName));
-
+        assertThat(response.getBody()[lastRepresentative].getName(), CoreMatchers.is(lastRepresentativeName));
     }
 
     @Transactional
@@ -103,27 +97,22 @@ public class DistrictRepresentativeControllerTest {
         int sizeBeforeDel = districtRepresentativeRepository.findAll().size();
         countyService.delete(id);
         int sizeAfterDel = districtRepresentativeRepository.findAll().size();
-        assertThat(sizeAfterDel, CoreMatchers.is(sizeBeforeDel-1));
+        assertThat(sizeAfterDel, CoreMatchers.is(sizeBeforeDel - 1));
     }
 
     @Transactional
     @Test
     public void deleteRepresentativeByDistrictDelete() {
-
         int lastDistrict = districtRepository.findAll().size() - 1;
         Long id = districtRepository.findAll().get(lastDistrict).getId();
         int sizeBeforeDel = districtRepresentativeRepository.findAll().size();
         districtRepository.delete(id);
         int sizeAfterDel = districtRepresentativeRepository.findAll().size();
-
-
-        assertThat(sizeAfterDel, CoreMatchers.is(sizeBeforeDel-1));
-
+        assertThat(sizeAfterDel, CoreMatchers.is(sizeBeforeDel - 1));
     }
 
     @Test
     public void saveRepresentative() throws Exception {
-
         String countyTestString = MyUtils.getCountyJson(null, "ApygardaTestName2");
         ResponseEntity<CountyEntity> countyCreateResponse = rest.postForEntity("/county",
                 MyUtils.parseStringToJson(countyTestString), CountyEntity.class);
@@ -139,12 +128,10 @@ public class DistrictRepresentativeControllerTest {
                 MyUtils.parseStringToJson(representativeTestString), DistrictRepresentativeEntity.class);
 
         ResponseEntity<DistrictRepresentativeReport[]> response = rest.getForEntity(URI, DistrictRepresentativeReport[].class);
-
         int lastRepresentative = districtRepresentativeRepository.findAll().size() - 1;
         String lastRepresentativesName = districtRepresentativeRepository.findAll().get(lastRepresentative).getName();
         assertThat(response.getBody().length, CoreMatchers.is(districtRepresentativeRepository.findAll().size()));
-        assertThat(response.getBody()[lastRepresentative].getName(),CoreMatchers.is(lastRepresentativesName));
-
+        assertThat(response.getBody()[lastRepresentative].getName(), CoreMatchers.is(lastRepresentativesName));
     }
 
     @TestConfiguration

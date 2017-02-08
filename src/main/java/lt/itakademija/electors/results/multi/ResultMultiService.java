@@ -41,12 +41,13 @@ public class ResultMultiService {
     public String approve(Long id) {
         List<ResultMultiEntity> results = getDistrictResults(id);
         results.forEach(res -> res.setApproved(true));
-        save(results);
+        results.stream().forEach(res -> repository.save(res));
         return "Votes Approved";
     }
 
     @Transactional
     public String delete(Long id) {
+        districtRepository.findById(id).setSpoiledMulti(null);
         getDistrictResults(id).stream().forEach(res -> repository.delete(res));
         return "Votes Deleted";
     }

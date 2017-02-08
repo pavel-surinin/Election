@@ -31,6 +31,15 @@ public class DistrictController {
         return service.getDistrictsWithNullRepresentativesList();
     }
 
+    @GetMapping("/district/single/registered")
+    public List getDistrictsSingleRegistered(){
+        return service.getDistrictSingleRegistered();
+    }
+
+    @GetMapping("/district/multi/registered")
+    public List getDistrictsMultiRegistered(){
+        return service.getDistrictMultiRegistered();
+    }
 
     @PostMapping("/district")
     public DistrictEntity save(@RequestBody DistrictEntity district){
