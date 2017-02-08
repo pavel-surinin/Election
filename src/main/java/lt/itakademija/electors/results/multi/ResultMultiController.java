@@ -19,12 +19,12 @@ public class ResultMultiController {
         return service.save(results);
     }
 
-    @PostMapping("/result-multi/{id}/approve/")
+    @PatchMapping("/result/multi/{id}/approve/")
     public String approve(@PathVariable Long id){
         return service.approve(id);
     }
 
-    @DeleteMapping("/result-multi/{id}")
+    @DeleteMapping("/result/multi/{id}")
     public String delete(@PathVariable Long id){
         return service.delete(id);
     }

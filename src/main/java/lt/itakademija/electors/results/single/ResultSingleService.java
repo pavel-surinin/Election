@@ -2,7 +2,10 @@ package lt.itakademija.electors.results.single;
 
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
+import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +23,19 @@ public class ResultSingleService {
     @Autowired
     DistrictRepository districtRepository;
 
+    @Autowired
+    DistrictService districtService;
+
     @Transactional
     public String save(List<ResultSingleEntity> results) {
-     results.stream().forEach(result -> repository.save(result));
-     return "Votes registered";
+        final ResultSingleEntity spoiled = results.stream().filter(res -> res.getCandidate().getId() == -1991L).findAny().get();
+        DistrictEntity district = spoiled.getDistrict();
+        final DistrictEntity districtEnt = districtRepository.findById(district.getId());
+        districtEnt.setSpoiledSingle(spoiled.getVotes().intValue());
+        districtService.save(districtEnt);
+        results.remove(spoiled);
+        results.stream().forEach(res -> repository.save(res));
+        return "Votes registered";
     }
 
     @Transactional
@@ -36,6 +48,7 @@ public class ResultSingleService {
 
     @Transactional
     public String delete(Long id) {
+        districtRepository.findById(id).setSpoiledSingle(null);
         getDistrictResults(id).stream().forEach(res -> repository.delete(res));
         return "Results Deleted";
     }

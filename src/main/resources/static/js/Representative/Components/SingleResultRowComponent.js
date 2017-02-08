@@ -1,18 +1,15 @@
-var MultiResultRowComponent = React.createClass({
+var SingleResultRowComponent = React.createClass({
   onInputChange : function(event){
     var votes = event.target.value;
-    var pid = this.props.party.id;
-    this.props.registerVotes(pid, votes);
+    var cid = this.props.candidate.id;
+    this.props.registerVotes(cid, votes);
   },
   render: function() {
-    var p = this.props.party;
+    var p = this.props.candidate;
     return (
-      <div className="row text-primary">
-        <div className="col-md-2 small">
-          <h5>{p.partyNumber}</h5>
-        </div>
-        <div className="col-md-5 small">
-          <h5>{p.name}</h5>
+      <div className='row'>
+        <div className="col-md-6 small">
+          <h5 className='text-primary'>{p.name} {p.surname}</h5>
         </div>
         <div className="input-group col-md-3 small">
           <input onChange={this.onInputChange} type="number" className="form-control" placeholder="Balsų skaičius" aria-describedby="basic-addon2" required/>
@@ -24,4 +21,4 @@ var MultiResultRowComponent = React.createClass({
 
 });
 
-window.MultiResultRowComponent = MultiResultRowComponent;
+window.SingleResultRowComponent = SingleResultRowComponent;

@@ -32,6 +32,11 @@ public class CandidateController {
         return service.getCandidateById(id);
     }
 
+    @GetMapping("/candidate/{id}/district")
+    public List<CandidateReport> getCandidatesInDistrict(@PathVariable Long id){
+        return service.getCandidateByDistrictId(id);
+    }
+
     @DeleteMapping("/candidate/{id}")
     public boolean deleteCandidateById(@PathVariable Long id) {
         return service.delete(id);

@@ -111,6 +111,7 @@ public class PartyService {
         return pr;
     }
 
+
     public PartyEntity getPartyEntityById(Long id) {
         return repository.getById(id);
     }
@@ -145,5 +146,10 @@ public class PartyService {
             }
         }
         return false;
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.delete(id);
     }
 }

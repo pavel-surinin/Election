@@ -53,5 +53,10 @@ public class PartyController {
     public PartyEntity save(@RequestBody PartyEntity partyEntity) {
         return service.save(partyEntity);
     }
+
+    @DeleteMapping("/party/{id}")
+    public void deleteParty(@PathVariable Long id){
+        service.delete(id);
+    }
 }
 

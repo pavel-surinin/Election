@@ -1,11 +1,31 @@
 var ResultsListComponent = React.createClass({
-
   render: function() {
+    var self = this;
+    var single = this.props.single.map(function(district,index){
+      return (<ResultsSingleListRowComponent
+                key={index}
+                onHandleApprove={self.props.onHandleApprove}
+                onHandleDelete={self.props.onHandleDelete}
+
+                info={district}/>);
+    });
+    var multi = this.props.multi.map(function(district,index){
+      return (<ResultsMultiListRowComponent
+                onHandleApprove={self.props.onHandleApprove}
+                onHandleDelete={self.props.onHandleDelete}
+                key={index}
+                info={district}
+              />);
+    });
+
     return (
       <div className="panel panel-default">
-        <div className="panel-heading" style={{paddingLeft:15, paddingBottom:10,paddingTop:10}}>
-          <h4>Rezultatai</h4>
+      <div className="panel-heading" style={{paddingTop:20,paddingBottom:20}}>
+        <h4 style={{display:'inline'}}><i className="fa fa-table"></i>&nbsp; Rezultatai</h4>
+        <div className="text-success pull-right">
+          <a id='result-refresh' onClick={this.props.onHandleRefresh} className="text-success"><i className="fa fa-refresh fa-lg"></i></a>
         </div>
+      </div>
         <div className="panel-body">
           <div className="tab-content">
             <ul className="nav nav-tabs">
@@ -23,14 +43,14 @@ var ResultsListComponent = React.createClass({
                   <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                     <thead>
                       <tr>
-                        <th> Apylinkės Numeris </th>
                         <th> Apylinkės Pavadinimas </th>
-                        <th> Rezultatai pateikti </th>
+                        <th> Apylinkės Atstovas </th>
+                        <th> Apygarda </th>
                         <th> &nbsp; Veiksmai &nbsp; </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <ResultsSingleListRowComponent />
+                      {single}
                     </tbody>
                   </table>
                 </div>
@@ -39,14 +59,14 @@ var ResultsListComponent = React.createClass({
                   <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                     <thead>
                       <tr>
-                        <th> Apylinkės Numeris </th>
                         <th> Apylinkės Pavadinimas </th>
-                        <th> Rezultatai pateikti </th>
+                        <th> Apylinkės Atstovas </th>
+                        <th> Apygarda </th>
                         <th> &nbsp; Veiksmai &nbsp; </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <ResultsMultiListRowComponent />
+                      {multi}
                     </tbody>
                   </table>
                 </div>

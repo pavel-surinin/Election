@@ -132,7 +132,7 @@ public class CandidateReport {
     }
 
     private String formatDateToString(Date date){
-        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(date);
     }
 
