@@ -20,6 +20,7 @@ import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,7 +196,7 @@ public class CountyControllerTest {
         assertThat(respCountyReport.getBody()[0].getCandidatesCount(), CoreMatchers.is(0));
         assertThat(respCountyReportafterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
     }
-
+    @Ignore
     @Test
     @Transactional
     public void uploadSingleCandidates_CandidatesAlreadyExistsInCounty_UploadingCandidatesWhichWasNotInList() throws Exception {

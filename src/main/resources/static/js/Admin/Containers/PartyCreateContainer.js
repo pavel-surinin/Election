@@ -55,10 +55,10 @@ var PartyCreateContainer = React.createClass({
       file = this.state.file;}
     var data = new FormData();
     var header = { headers: {
-      'Content-Type': 'multipart/form-data',
-      'Party-name': this.state.name.trim(),
-      'Party-number': number} };
+      'Content-Type': 'multipart/form-data'}};
     data.append('file', file);
+    data.append('name', this.state.name.trim());
+    data.append('number', number);
     //validation
     if(!validation.checkForCsv(file.name)) {fileErrorMesages.push('Būtina prisegti *.csv formato failą');}
     if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}
