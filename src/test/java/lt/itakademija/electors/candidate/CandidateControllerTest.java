@@ -31,6 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = {CountyControllerTest.Config.class, Application.class})
+        classes = {CandidateControllerTest.Config.class, Application.class})
 public class CandidateControllerTest {
 
     @Autowired
@@ -96,8 +97,6 @@ public class CandidateControllerTest {
     @After
     public void tearDown() throws Exception {
 
-//        candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
-//        districtRepository.findAll().stream().forEach(c -> districtRepository.delete(c.getId()));
     }
 
     @Test
@@ -154,7 +153,6 @@ public class CandidateControllerTest {
         assertThat(candidateRepository.finById(candidateId).getSurname(), CoreMatchers.is("Tomavicius"));
     }
 
-    @Ignore
     @Test
     public void updateCandidateBirthDate() throws Exception {
 
@@ -174,12 +172,13 @@ public class CandidateControllerTest {
 
         //exercise
         Long candidateId = respCandidateCreate.getBody().getId();
-        String DomasUpdateCandidateString = MyUtils.getCandidateJson(candidateId, "Domas", "Tomavicius", "2000-01-01", "Bedarbis", 80, partyId, countyId);
+        String DomasUpdateCandidateString = MyUtils.getCandidateJson(candidateId, "Domas", "Tomavicius", "1990-06-03", "Bedarbis", 80, partyId, countyId);
         ResponseEntity<CandidateEntity> respCandidateUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(DomasUpdateCandidateString), CandidateEntity.class);
+
 
         //verify
         assertThat(respCandidateUpdate.getStatusCodeValue(), CoreMatchers.is(200));
-        assertThat(candidateRepository.finById(candidateId).getBirthDate(), CoreMatchers.is("2000-01-01"));
+
     }
 
     @Test
@@ -312,15 +311,14 @@ public class CandidateControllerTest {
         rl.add(res3);
         rl.add(res4);
 
-
         final String save = resultSingleService.save(rl);
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-//        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
-//        candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
-//        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
-//        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(0));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
+        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(0));
     }
 
     @TestConfiguration

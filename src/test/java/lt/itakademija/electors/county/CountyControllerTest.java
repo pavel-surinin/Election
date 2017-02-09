@@ -406,7 +406,7 @@ public class CountyControllerTest {
         final String save = resultSingleService.save(rl);
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(4));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
 //        countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
 //        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
@@ -416,8 +416,8 @@ public class CountyControllerTest {
 
         @Bean
         @Primary
-        public CandidateRepository repository() {
-            return new CandidateRepository();
+        public CountyRepository repository() {
+            return new CountyRepository();
         }
 
     }

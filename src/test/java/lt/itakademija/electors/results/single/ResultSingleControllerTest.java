@@ -43,7 +43,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = {CountyControllerTest.Config.class, Application.class})
+        classes = {ResultSingleControllerTest.Config.class, Application.class})
 public class ResultSingleControllerTest {
 
     @Autowired
@@ -95,7 +95,7 @@ public class ResultSingleControllerTest {
     @After
     public void tearDown() throws Exception {
 
-//        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
     }
 
     @Test
@@ -133,12 +133,11 @@ public class ResultSingleControllerTest {
         rl.add(res3);
         rl.add(res4);
 
-
         final String save = resultSingleService.save(rl);
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-//        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
     }
 
     @Test
@@ -154,6 +153,7 @@ public class ResultSingleControllerTest {
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
         ResponseEntity<DistrictReport> respCreateDistrict;
         respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
+        Long districtId = respCreateDistrict.getBody().getId();
 
         //votes
         final DistrictEntity d1 = districtRepository.findAll().get(0);
@@ -178,9 +178,12 @@ public class ResultSingleControllerTest {
 
         final String save = resultSingleService.save(rl);
 
-        final String approve = resultSingleService.approve(d1.getId());
+        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.approve(c.getId()));
+
+        final String approve = resultSingleService.approve(districtId);
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
         assertThat(approve, CoreMatchers.is("Results approved"));
     }
 
@@ -219,13 +222,13 @@ public class ResultSingleControllerTest {
         rl.add(res3);
         rl.add(res4);
 
-
         final String save = resultSingleService.save(rl);
+
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-//        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
-        resultSingleRepository.getByDistrictId(d1).stream().forEach(c -> resultSingleService.delete(c.getId()));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
 
@@ -233,8 +236,8 @@ public class ResultSingleControllerTest {
     static class Config{
         @Bean
         @Primary
-        public CandidateRepository repository() {
-            return new CandidateRepository();
+        public ResultSingleRepository repository() {
+            return new ResultSingleRepository();
         }
     }
 }

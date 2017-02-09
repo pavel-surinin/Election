@@ -119,12 +119,27 @@ public class MyUtils {
      * @param districtId
      * @param candidateId
      * @param votes
+     * @param isApproved
      * @param datePublished
      * @return
      */
-    public static String getResultsJson(Long resultId, Long districtId, Long candidateId, Long votes, Date datePublished){
-        String resultString = "{\"id\": \"" + candidateId + "\",\"district\" : {\"id\" : " + districtId + "}, \"candidate\" : {\"id\": " + candidateId + "\", \"votes\": \"" + votes + "}, \"datePublished\":\""+datePublished+"}";
+    public static String getResultsJson(Long resultId, Long districtId, Long candidateId, Long votes, Boolean isApproved, Date datePublished){
+        String resultString = "{\"id\": \"" + resultId + "\", \"district\" : {\"id\" : " + districtId + "}, \"candidate\" : {\"id\": " + candidateId + "}, \"votes\": \"" + votes + "\", \"isApproved\": \"" + isApproved + "\", \"datePublished\":\""+datePublished+"}";
         return resultString;
+    }
+
+    /**
+     * @param resultId
+     * @param partyId
+     * @param districtId
+     * @param votes
+     * @param isApproved
+     * @param datePublished
+     * @return
+     */
+    public static String getMultiResultsJson (Long resultId, Long partyId, Long districtId, Long votes, Boolean isApproved, Date datePublished){
+        String multiResultsString = "{\"id\": \"" + resultId + "\", \"party\" : {\"id\": " + partyId + "}, \"district\" : {\"id\" : " + districtId + "}, \"votes\": \"" + votes + "\", \"isApproved\": \"" + isApproved + "\", \"datePublished\":\""+datePublished+"}";
+        return multiResultsString;
     }
 }
 

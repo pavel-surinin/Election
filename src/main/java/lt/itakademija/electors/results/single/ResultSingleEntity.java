@@ -36,7 +36,7 @@ public class ResultSingleEntity {
     @NotNull
     private Date datePublished;
 
-    public ResultSingleEntity(CandidateEntity c1, DistrictEntity d1, long l) {
+    public ResultSingleEntity() {
     }
 
     public ResultSingleEntity(CandidateEntity candidate, DistrictEntity district, Long votes, Date date) {
