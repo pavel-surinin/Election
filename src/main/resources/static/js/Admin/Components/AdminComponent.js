@@ -1,10 +1,24 @@
+function getCounts(self) {
+  axios
+  .get('users/admin-info')
+  .then(function(response) {
+    self.setState({ counts : response.data});
+    console.log(response.data);
+  })
+  .catch(function(err){
+    console.error('AdminComponent.onHandleLogout.axios',err);
+  });
+}
+
 var AdminComponent = React.createClass({
   getInitialState: function() {
     return {
       adminIsLogged : false,
+      counts : [],
     };
   },
   componentWillMount: function() {
+    getCounts(this);
     var self = this;
     axios
     .get('/users/logged')
@@ -20,6 +34,15 @@ var AdminComponent = React.createClass({
       console.error('AdminComponent.onHandleLogout.axios',err);
     });
 
+  },
+  componentDidMount: function() {
+    EventEmitter.subscribe(this, this.onLogCounty, 'LogCounty');
+  },
+  componentWillUnmount: function() {
+    EventEmitter.unsubscribe(this);
+  },
+  onLogCounty : function(){
+    getCounts(this);
   },
   onHandleLogout : function(){
     var self = this;
@@ -38,6 +61,7 @@ var AdminComponent = React.createClass({
     if (this.state.adminIsLogged == false) {
       return <div><img src='./Images/loading.gif'/></div>;
     }
+    var c = this.state.counts;
     return (
       <div>
       <div id="wrapper">
@@ -68,11 +92,11 @@ var AdminComponent = React.createClass({
                           <li><a href="#/admin"><i className="fa fa-dashboard fa-fw"></i> Administratoriaus panele</a>
 
                           </li>
-                          <li><a href="#/admin/county" id="county-button"><i className="fa fa-expand" aria-hidden="true"></i> Apygardos</a></li>
-                          <li><a href="#/admin/district" id="district-button"><i className="fa fa-compress" aria-hidden="true"></i> Apylinkės</a></li>
-                          <li><a href="#/admin/representative" id="representative-button"><i className="fa fa-address-book-o " aria-hidden="true"></i> Apylinkių atstovai</a></li>
-                          <li><a href="#/admin/candidate" id="candidates-button"><i className="fa fa-user" aria-hidden="true"></i> Kandidatai</a></li>
-                          <li><a href="#/admin/party" id="party-button"> <i className="fa fa-users" aria-hidden="true"></i> Partijos</a></li>
+                          <li><a href="#/admin/county" id="county-button"><i className="fa fa-expand" aria-hidden="true"></i> Apygardos ({c[0]})</a></li>
+                          <li><a href="#/admin/district" id="district-button"><i className="fa fa-compress" aria-hidden="true"></i> Apylinkės ({c[1]})</a></li>
+                          <li><a href="#/admin/representative" id="representative-button"><i className="fa fa-address-book-o " aria-hidden="true"></i> Apylinkių atstovai ({c[2]})</a></li>
+                          <li><a href="#/admin/candidate" id="candidates-button"><i className="fa fa-user" aria-hidden="true"></i> Kandidatai ({c[4]})</a></li>
+                          <li><a href="#/admin/party" id="party-button"> <i className="fa fa-users" aria-hidden="true"></i> Partijos ({c[3]})</a></li>
                           <li><a href="#/admin/results" id="results-button"> <i className="fa fa-line-chart" aria-hidden="true"></i> Rezultatai</a></li>
                       </ul>
                   </div>
@@ -80,11 +104,7 @@ var AdminComponent = React.createClass({
           </nav>
 
           <div id="page-wrapper">
-              <div className="row">
-                  <div className="col-lg-12">
-                      <h3 className="page-header">Dashbordas</h3>
-                  </div>
-              </div>
+              <br/>
               <div className="row">
                   <div className="col-lg-12">
                       {this.props.children}

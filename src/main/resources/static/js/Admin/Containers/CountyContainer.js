@@ -7,6 +7,7 @@ function getCounty(self) {
         countyList :  response.data,
         isLoading : false,
       });
+      EventEmitter.publish({ eventType: 'LogCounty' });
     })
     .catch(function(err){
       console.error('CountyContainer.getCounty.axios.get.county', err);

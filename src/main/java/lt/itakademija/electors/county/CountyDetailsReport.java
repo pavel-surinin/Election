@@ -3,6 +3,8 @@ package lt.itakademija.electors.county;
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.district.DistrictReport;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Pavel on 2017-01-19.
  */
+@Component
 public class CountyDetailsReport {
 
     private CountyEntity ent;

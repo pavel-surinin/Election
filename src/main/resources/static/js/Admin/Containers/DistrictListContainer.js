@@ -2,6 +2,7 @@ function getDistrict(self) {
   axios
     .get('/district')
     .then(function(response){
+      EventEmitter.publish({ eventType: 'LogCounty' });
       self.setState({
         districtList :  response.data,
         isLoading : false,
@@ -20,7 +21,7 @@ var DistrictListContainer = React.createClass({
   },
 
   componentWillMount: function() {
-    console.log(this.props);
+
     if (this.props.location.query.succesCreateText != null) {
       this.setState({succesCreateText : this.props.location.query.succesCreateText});
     }
