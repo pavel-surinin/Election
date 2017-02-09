@@ -1,6 +1,6 @@
 var  PartyListViewRowComponent= React.createClass({
   componentDidMount: function () {
-    $(this.refs.remove).tooltip();
+    $(this.refs.delete).tooltip();
     $(this.refs.edit).tooltip();
     $(this.refs.info).tooltip();
     $(this.refs.details).tooltip()
