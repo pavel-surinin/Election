@@ -2,13 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyRepository.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/PartyCreateContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/PartyCreateContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/PartyEditContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/PartyEditContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictReport.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictReport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CandidatesListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CandidatesListViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CandidatesListViewRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CandidatesListViewRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyCreateEditFormComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyCreateEditFormComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictCreateEditComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictCreateEditComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRepresentativeComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRepresentativeComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyCreateEditFormComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyCreateEditFormComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsListComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsListComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/CountyContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/CountyContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/DistrictCreateContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/DistrictCreateContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/validation.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/validation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/MultiResultComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/MultiResultComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/RepresentativeComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/RepresentativeComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/SingleResultComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/SingleResultComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Styles/styles.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Styles/styles.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/index.jsx" afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,56 +50,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CountyService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java">
+      <file leaf-file-name="ResultMultiService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="83" column="8" lean-forward="true" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
+            <state relative-caret-position="85">
+              <caret line="43" column="62" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartyService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java">
+      <file leaf-file-name="ResultSingleService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="45" column="28" lean-forward="true" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
-              <folding>
-                <element signature="method#save#0;class#PartyService#0" expanded="false" />
-                <element signature="method#getPartyList#0;class#PartyService#0" expanded="false" />
-                <element signature="method#throwIf#0;class#PartyService#0" expanded="false" />
-                <element signature="method#throwIfNumberExists#0;class#PartyService#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PartyController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PartyRepository.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PartyEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="29" column="31" lean-forward="false" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="31" />
+            <state relative-caret-position="65">
+              <caret line="42" column="67" lean-forward="true" selection-start-line="42" selection-start-column="67" selection-end-line="42" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -116,6 +96,8 @@
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyService.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictReport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" />
       </list>
     </option>
   </component>
@@ -242,6 +224,82 @@
               <option name="myItemId" value="electors" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="results" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="single" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="results" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -274,6 +332,74 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="party" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="district" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="candidate" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -605,8 +731,8 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -629,7 +755,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3438486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44321766" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44321766" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22620791" sideWeight="0.49369085" order="9" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -649,6 +775,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -779,13 +909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="42" column="11" lean-forward="true" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -798,13 +921,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="41" column="14" lean-forward="false" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="36" column="30" lean-forward="false" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="30" />
+          <folding>
+            <element signature="e#2802#2803#0" expanded="false" />
+            <element signature="e#2840#2841#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -819,6 +939,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -834,6 +955,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="74" column="57" lean-forward="false" selection-start-line="74" selection-start-column="57" selection-end-line="74" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -841,6 +963,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="50" column="33" lean-forward="true" selection-start-line="50" selection-start-column="33" selection-end-line="50" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -848,6 +971,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
           <caret line="55" column="0" lean-forward="true" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="e#759#760#0" expanded="false" />
+            <element signature="e#831#832#0" expanded="false" />
+            <element signature="e#927#928#0" expanded="false" />
+            <element signature="e#987#988#0" expanded="false" />
+            <element signature="e#1081#1082#0" expanded="false" />
+            <element signature="e#1140#1141#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -862,17 +993,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
           <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -880,13 +1005,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="49" column="32" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -894,6 +1013,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -904,25 +1024,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictReport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyReport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
           <caret line="45" column="0" lean-forward="true" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateReport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="96" column="0" lean-forward="true" selection-start-line="96" selection-start-column="0" selection-end-line="96" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -971,6 +1076,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="54" column="28" lean-forward="false" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1040,6 +1146,60 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="80" column="7" lean-forward="true" selection-start-line="80" selection-start-column="7" selection-end-line="80" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateReport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="136" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictReport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="195" column="5" lean-forward="true" selection-start-line="195" selection-start-column="5" selection-end-line="195" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5318#5319#0" expanded="true" />
+            <element signature="e#5366#5367#0" expanded="true" />
+            <element signature="e#5573#5574#0" expanded="true" />
+            <element signature="e#5620#5621#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="43" column="62" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="42" column="67" lean-forward="true" selection-start-line="42" selection-start-column="67" selection-end-line="42" selection-end-column="67" />
           <folding />
         </state>
       </provider>

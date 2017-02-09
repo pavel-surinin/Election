@@ -64,7 +64,7 @@ render: function() {
                 onClick={this.props.onHandleAddClick}
                 ref="add"
                 data-toggle="tooltip2"
-                title="Pridėti Kandidatų sąrašą"
+                title="Pridėti kandidatų sąrašą"
                 type="button"
                 id={'add-button-' + this.props.id}
                 className="btn btn-success btn-sm fa fa-plus"

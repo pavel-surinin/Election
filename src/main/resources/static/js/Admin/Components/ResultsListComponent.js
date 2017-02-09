@@ -39,12 +39,12 @@ var ResultsListComponent = React.createClass({
                   <p>Rezultatai patvirtinami, tik tada</p>
                 </div>
                 <div id="results1" className="tab-pane fade">
-                  <h3>Vienmandatės Rezultatai</h3>
+                  <h3>Vienmandatės rezultatai</h3>
                   <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                     <thead>
                       <tr>
-                        <th> Apylinkės Pavadinimas </th>
-                        <th> Apylinkės Atstovas </th>
+                        <th> Apylinkės pavadinimas </th>
+                        <th> Apylinkės atstovas </th>
                         <th> Apygarda </th>
                         <th> &nbsp; Veiksmai &nbsp; </th>
                       </tr>
@@ -55,12 +55,12 @@ var ResultsListComponent = React.createClass({
                   </table>
                 </div>
                 <div id="results2" className="tab-pane fade">
-                  <h3>Daugiamandatės Rezultatai</h3>
+                  <h3>Daugiamandatės rezultatai</h3>
                   <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                     <thead>
                       <tr>
-                        <th> Apylinkės Pavadinimas </th>
-                        <th> Apylinkės Atstovas </th>
+                        <th> Apylinkės pavadinimas </th>
+                        <th> Apylinkės atstovas </th>
                         <th> Apygarda </th>
                         <th> &nbsp; Veiksmai &nbsp; </th>
                       </tr>

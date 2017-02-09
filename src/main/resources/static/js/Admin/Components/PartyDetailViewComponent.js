@@ -21,9 +21,7 @@ var PartyDetailViewComponent = React.createClass({
             <h4 style={{display:'inline', padding:'10, 15'}}><i className="fa fa-table"></i>
               &nbsp; {this.props.partyDetails.name}
             </h4>
-            <div className="text-success pull-right">
-            <a id="delete-button" className="text-danger" onClick={this.props.onHandleDeleteClick}> <i className="fa fa-trash-o fa-lg"></i> Ištrinti sąrašą</a>
-            </div>
+            
           </div>
            <table className="table table-striped table-hover">
              <thead>
