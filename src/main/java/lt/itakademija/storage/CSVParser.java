@@ -49,8 +49,8 @@ public class CSVParser {
                         can.setPartyDependencies(parseParty(line[3]));
                         can.setNumberInParty(parseNullOrInteger(line[4]));
                         return can;
-                    } catch (Throwable t){
-                        throw new BadCSVFileExceprion("Not acceptable CSV data for county single-list");
+                    } catch (Exception t){
+                        throw new BadCSVFileExceprion("Not acceptable CSV data for county single-list", t);
                     }
                 })
                 .collect(Collectors.toList());

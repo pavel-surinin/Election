@@ -2,6 +2,8 @@ package lt.itakademija.electors.results.multi;
 
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.party.PartyEntity;
+import lt.itakademija.electors.results.multi.rating.RatingEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -15,6 +17,7 @@ public class ResultMultiEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "RESULT_MULTI_ID")
     private Long id;
 
     @NotNull
@@ -33,8 +36,19 @@ public class ResultMultiEntity {
     @NotNull
     private boolean isApproved = false;
 
-    @NotNull
+//    @NotNull
     private Date datePublished;
+
+    @OneToMany(mappedBy="multiResults", cascade = CascadeType.ALL)
+    private List<RatingEntity> rating;
+
+    public List<RatingEntity> getRating() {
+        return rating;
+    }
+
+    public void setRating(List<RatingEntity> rating) {
+        this.rating = rating;
+    }
 
     public Long getId() {
         return id;

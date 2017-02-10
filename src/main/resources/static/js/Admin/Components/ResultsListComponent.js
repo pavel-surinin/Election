@@ -45,7 +45,7 @@ var ResultsListComponent = React.createClass({
                       <tr>
                         <th> Apylinkės pavadinimas </th>
                         <th> Apylinkės atstovas </th>
-                        <th> Apygarda </th>
+                        <th> Registravimo data/laikas </th>
                         <th> &nbsp; Veiksmai &nbsp; </th>
                       </tr>
                     </thead>
@@ -61,7 +61,7 @@ var ResultsListComponent = React.createClass({
                       <tr>
                         <th> Apylinkės pavadinimas </th>
                         <th> Apylinkės atstovas </th>
-                        <th> Apygarda </th>
+                        <th> Registravimo data/laikas </th>
                         <th> &nbsp; Veiksmai &nbsp; </th>
                       </tr>
                     </thead>

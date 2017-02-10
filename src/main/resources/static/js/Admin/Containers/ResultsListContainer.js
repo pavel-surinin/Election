@@ -44,9 +44,10 @@ function deleteVotes(self,type,id) {
 var ResultsListContainer = React.createClass({
   getInitialState: function() {
     return {
-      isLoading : true,
       districtMultiList : [],
       districtSingleList : [],
+      multiEnabled : false,
+      singleEnabled : false,
     };
   },
   componentWillMount: function() {

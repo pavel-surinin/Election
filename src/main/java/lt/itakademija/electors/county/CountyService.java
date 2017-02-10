@@ -67,10 +67,11 @@ public class CountyService {
     @Transactional
     public boolean delete(Long id) {
         repository.findById(id).getCandidates()
-                .stream().forEach(c -> {
+                .stream().map(c -> {
                     c.setCounty(null);
                     candidateService.save(c);
-        });
+                    return c;
+        }).filter(c -> !c.isMultiList()).forEach(c->candidateService.delete(c.getId()));
         repository.delete(id);
         return true;
     }
@@ -90,6 +91,7 @@ public class CountyService {
 
         noPartyCandidates.stream().forEach(can -> {
             can.setCounty(county);
+            can.setMultiList(false);
             candidateService.save(can);
         });
 
