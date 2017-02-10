@@ -42,7 +42,7 @@ var CountyListViewComponent = React.createClass({
 		            <table width="100%" className="table table-striped table-hover" id="dataTables-example">
 		              <thead>
 		                <tr>
-		                  <th> Nr </th>
+		                  <th> Nr. </th>
 		                  <th> Apygarda </th>
 		                  <th> Veiksmai </th>
 		                </tr>

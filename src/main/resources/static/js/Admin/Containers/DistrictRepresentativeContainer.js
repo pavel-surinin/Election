@@ -14,6 +14,7 @@ var DistrictRepresentativeContainer = React.createClass({
     if (this.props.location.query.credentials != null) {
       this.setState({credentials : this.props.location.query.credentials});
     }
+    EventEmitter.publish({ eventType: 'LogCounty' });
     var self = this;
     axios
       .get('/representative')

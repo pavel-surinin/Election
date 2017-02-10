@@ -20,6 +20,7 @@ function getPartyById(self,id) {
   .get('/party/' + id)
   .then(function(response){
     console.log(response);
+    EventEmitter.publish({ eventType: 'LogCounty' });
     self.setState({
       name : response.data.name.trim(),
       number : response.data.partyNumber,
@@ -59,11 +60,11 @@ var PartyEditContainer = React.createClass({
       file = this.state.file;}
     var data = new FormData();
     var header = { headers: {
-      'Content-Type': 'multipart/form-data',
-      'Party-id' : pid,
-      'Party-name': this.state.name.trim(),
-      'Party-number': this.state.number} };
+      'Content-Type': 'multipart/form-data'}};
     data.append('file', file);
+    data.append('name', this.state.name.trim());
+    data.append('number', parseInt(this.state.number));
+    data.append('id', pid);
     //validation
     if(!validation.checkForCsv(file.name)) {fileErrorMesages.push('Būtina prisegti *.csv formato failą');}
     if(!validation.checkPartyName(this.state.name)) {nameErrorMesages.push('Pavadinimą gali sudaryti tik raidės ir tarpai');}

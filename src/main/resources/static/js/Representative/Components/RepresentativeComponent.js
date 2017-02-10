@@ -1,7 +1,6 @@
 var RepresentativeComponent = React.createClass({
 
   render: function() {
-    console.log('RepresentativeComponent children: ' , this.props.children);
     return (
       <div>
       <div id="wrapper">
@@ -27,6 +26,7 @@ var RepresentativeComponent = React.createClass({
               <div className="navbar-default sidebar" role="navigation">
                   <div className="sidebar-nav navbar-collapse">
                       <ul className="nav" id="side-menu">
+
                           <li className="sidebar-search">
                           </li>
                           <li><a href="#/representative"><i className="fa fa-dashboard fa-fw"></i> Atstovo panele</a>
@@ -39,15 +39,9 @@ var RepresentativeComponent = React.createClass({
                   </div>
               </div>
           </nav>
-
           <div id="page-wrapper">
               <div className="row">
-                  <div className="col-lg-12">
-                      <h3 className="page-header">Dashbordas</h3>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="col-lg-12">
+                  <div style={{marginTop : '30px'}} className="col-lg-12">
                       {this.props.children}
                   </div>
               </div>

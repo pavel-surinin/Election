@@ -198,7 +198,7 @@ public class PartyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Party exists with name " + updatedName));
         }
     }
-    /*
+
     @Test
     public void deleteParty(){
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-5.csv");
@@ -206,12 +206,13 @@ public class PartyControllerTest {
         Integer number = 420;
         partyService.save(name, number, file);
         final int sizeBeforeDel = partyRepository.findAll().size();
-        id = partyService
-        partyService.delete();
+        Long id = partyService.getPartyByNumber(number).getId();
+        partyService.delete(id);
+        final int sizeAfterDel = partyRepository.findAll().size();
+        assertThat(sizeAfterDel,CoreMatchers.is(sizeBeforeDel-1));
+
     }
-    */
-    @Ignore
-    @Transactional
+
     @Test
     public void deleteFileParty() {
         //setup
@@ -222,13 +223,9 @@ public class PartyControllerTest {
         //exercise
         ResponseEntity<PartyRepository[]> response = rest.getForEntity(URI, PartyRepository[].class);
         Long id = partyRepository.getPartyByNumber(number).getId();
-        System.out.println("+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+");
-        System.out.println(id);
-        System.out.println(partyRepository.getById(id).getName());
-        System.out.println("size:" + partyRepository.getById(id).getMembers());
         candidateService.deleteCandidatesByPartyId(id);
-        //ResponseEntity<CandidateReport[]> responseCandidates = rest.getForEntity("/candidate", CandidateReport[].class);
-        //ResponseEntity<CandidateReport[]> responseCandidatesDelete = rest.getForEntity("/candidate", CandidateReport[].class);
-        //assertThat(responseCandidates.getBody().length, CoreMatchers.is(responseCandidatesDelete.getBody().length));
+        ResponseEntity<CandidateReport[]> responseCandidates = rest.getForEntity("/candidate", CandidateReport[].class);
+        ResponseEntity<CandidateReport[]> responseCandidatesDelete = rest.getForEntity("/candidate", CandidateReport[].class);
+        assertThat(responseCandidates.getBody().length, CoreMatchers.is(responseCandidatesDelete.getBody().length));
     }
 }

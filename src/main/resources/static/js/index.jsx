@@ -64,15 +64,12 @@ var hashHistory = ReactRouter.hashHistory;
 
 ReactDOM.render((
   <Router history={hashHistory}>
-
     <Route path="/representative" component={RepresentativeContainer}>
-      <IndexRoute component={NoMatch} />
+      <IndexRoute component={RepHomeContainer} />
       <Route path="/representative/single" component={SingleResultContainer} />
       <Route path="/representative/multi" component={MultiResultContainer} />
-      <Route path="*" component={NoMatch}/>
+      <Route path="*" component={RepHomeContainer}/>
     </Route>
-
-
     <Route path="/admin" component={AdminComponent}>
       <IndexRoute component={EmptyComponent} />
       <Route path="/admin/district" component={DistrictListContainer} />

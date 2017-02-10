@@ -1,5 +1,9 @@
 package lt.itakademija.electors.district;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by Pavel on 2017-01-16.
  */
@@ -20,6 +24,8 @@ public class DistrictReport {
     private boolean isResultMultiRegistered = false;
     private boolean isResultSingleApproved = false;
     private boolean isResultMultiApproved = false;
+    private String votesSingleRegisteredDate;
+    private String votesMultiRegisteredDate;
 
     public DistrictReport() {
     }
@@ -53,6 +59,12 @@ public class DistrictReport {
         }
         this.spoiledMulti = ent.getSpoiledMulti();
         this.spoiledSingle = ent.getSpoiledSingle();
+        if (ent.getResultSingleEntity().size() != 0) {
+            this.votesSingleRegisteredDate = formatDateToString(ent.getResultSingleEntity().get(0).getDatePublished());
+        }
+        if (ent.getResultMultiEntity().size() != 0) {
+            this.votesMultiRegisteredDate = formatDateToString(ent.getResultMultiEntity().get(0).getDatePublished());
+        }
     }
 
     public Integer getSpoiledMulti() {
@@ -165,5 +177,26 @@ public class DistrictReport {
 
     public void setRepresentativeName(String representativeName) {
         this.representativeName = representativeName;
+    }
+
+    public String getVotesSingleRegisteredDate() {
+        return votesSingleRegisteredDate;
+    }
+
+    public void setVotesSingleRegisteredDate(String votesSingleRegisteredDate) {
+        this.votesSingleRegisteredDate = votesSingleRegisteredDate;
+    }
+
+    public String getVotesMultiRegisteredDate() {
+        return votesMultiRegisteredDate;
+    }
+
+    public void setVotesMultiRegisteredDate(String votesMultiRegisteredDate) {
+        this.votesMultiRegisteredDate = votesMultiRegisteredDate;
+    }
+
+    private String formatDateToString(Date date){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        return df.format(date);
     }
 }

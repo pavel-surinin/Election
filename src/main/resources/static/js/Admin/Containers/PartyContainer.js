@@ -2,6 +2,7 @@ function getParties(self) {
   axios
   .get('/party')
   .then(function(response){
+    EventEmitter.publish({ eventType: 'LogCounty' });
     self.setState({
       partyList :  response.data,
       isLoading : false,

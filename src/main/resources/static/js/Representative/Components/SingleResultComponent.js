@@ -13,14 +13,13 @@ var SingleResultComponent = React.createClass({
     });
     var errorMesages = validation.showMsg(this.props.errorMesages);
     return (
-      <div>
         <div className="panel panel-default col-md-12">
           <div className="row panel-heading">
             <div className="col-md-6">
               <h4>Vardas</h4>
             </div>
             <div className="col-md-6">
-              <h4>Balsu skaicius</h4>
+              <h4>Balsų skaičius</h4>
             </div>
           </div>
           <form onSubmit={this.props.onHandleSubmit}>
@@ -37,11 +36,10 @@ var SingleResultComponent = React.createClass({
               </div>
               <br/>
             </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
+            {errorMesages}
+              <button type="submit" className="btn btn-success">Registruoti</button>
           </form>
-          {errorMesages}
         </div>
-      
     );
   }
 });

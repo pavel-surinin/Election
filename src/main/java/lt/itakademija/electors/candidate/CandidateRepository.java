@@ -51,4 +51,8 @@ public class CandidateRepository {
         if (list.size() != 0) {return list.get(0);}
         return null;
     }
+
+    public Long getCandidatesCount(){
+        return em.createQuery("SELECT COUNT(c) FROM CandidateEntity c", Long.class).getSingleResult();
+    }
 }

@@ -20,7 +20,7 @@ var MultiResultComponent = React.createClass({
               <h4>Partija</h4>
             </div>
             <div className="col-md-5">
-              <h4>Balsu skaicius</h4>
+              <h4>Balsų skaičius</h4>
             </div>
           </div>
           <form onSubmit={this.props.onHandleSubmit}>
@@ -36,9 +36,9 @@ var MultiResultComponent = React.createClass({
                 <span className="input-group-addon" id="basic-addon2">vnt.</span>
               </div>
               <br/>
-              <button type="submit" className="btn btn-primary">Submit</button>
             </div>
             {errorMesages}
+            <button type="submit" className="btn btn-success">Registruoti</button>
           </form>
         </div>
       </div>

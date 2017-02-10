@@ -33,13 +33,13 @@ var PartyListViewComponent = React.createClass({
 		              <thead>
 		                <tr>
 		                  <th>
-		                    Nr
+		                    Nr.
 		                  </th>
 		                  <th>
 		                    Partija
 		                  </th>
 		                  <th>
-		                    Redaguoti
+		                    Veiksmai
 		                  </th>
 		                </tr>
 		              </thead>

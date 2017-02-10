@@ -16,7 +16,7 @@ var DistrictCreateContainer = React.createClass({
     if(!validation.checkMax(this.state.adress,50)) {adressErrorMesages.push('Adresas negali būti ilgesnis, nei 50 simbolių');}
     if(!validation.checkMin(this.state.adress,4)) {adressErrorMesages.push('Adresas negali būti trumpesnis, nei 4 simboliai');}
     var numberErrorMesages = [];
-    if(!validation.checkNumber(this.state.numberOfElectors)) {numberErrorMesages.push('Rinkejų skaičiaus laukas priima tik skačius');}
+    if(!validation.checkNumber(this.state.numberOfElectors)) {numberErrorMesages.push('Rinkėjų skaičiaus laukas priima tik skačius');}
     if (nameErrorMesages.length == 0 && adressErrorMesages.length == 0 && numberErrorMesages.length == 0) {
       var self = this;
       axios

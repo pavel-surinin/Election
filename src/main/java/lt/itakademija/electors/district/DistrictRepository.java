@@ -48,4 +48,8 @@ public class DistrictRepository {
                         .setParameter("ac", apylinke.getCounty())
                         .getResultList();
     }
+
+    public Long getDistrictsCount(){
+        return em.createQuery("SELECT COUNT(c) FROM DistrictEntity c", Long.class).getSingleResult();
+    }
 }
