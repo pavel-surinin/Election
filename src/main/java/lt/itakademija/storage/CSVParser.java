@@ -1,16 +1,13 @@
 package lt.itakademija.storage;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
-import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.party.PartyEntity;
-import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
 import lt.itakademija.exceptions.PartyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;

@@ -2,10 +2,8 @@ package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.party.PartyEntity;
-import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;

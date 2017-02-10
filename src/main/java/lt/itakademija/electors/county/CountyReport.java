@@ -1,14 +1,5 @@
 package lt.itakademija.electors.county;
 
-import lt.itakademija.electors.candidate.CandidateEntity;
-import lt.itakademija.electors.district.DistrictEntity;
-import lt.itakademija.electors.party.PartyEntity;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-import java.util.List;
-
 /**
  * Created by Pavel on 2017-01-17.
  */

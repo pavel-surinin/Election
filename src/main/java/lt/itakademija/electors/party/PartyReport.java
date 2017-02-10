@@ -1,10 +1,8 @@
 package lt.itakademija.electors.party;
 
 import lt.itakademija.electors.candidate.CandidateReport;
-
 import java.util.List;
 
-import lt.itakademija.electors.candidate.CandidateReport;
 
 /**
  * Created by Pavel on 2017-01-12.

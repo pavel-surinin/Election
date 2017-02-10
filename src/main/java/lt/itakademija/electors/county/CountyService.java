@@ -1,18 +1,14 @@
 package lt.itakademija.electors.county;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
-import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.candidate.CandidateService;
-import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.exceptions.*;
 import lt.itakademija.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
