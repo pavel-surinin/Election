@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,30 +80,12 @@ public class PartyService {
     }
 
     public List<PartyReport> getPartyList() {
-        List<PartyReport> list = new ArrayList<>();
-        for (PartyEntity party : repository.findAll()) {
-            PartyReport report = new PartyReport();
-            report.setId(party.getId());
-            report.setName(party.getName());
-            report.setPartyNumber(party.getPartyNumber());
-            List<PartyEntity> narysIdList = new ArrayList<>();
-            list.add(report);
-        }
-        return list;
+        return repository.findAll().stream().map(PartyReport::new).collect(Collectors.toList());
     }
 
     public PartyReport getPartyById(Long id) {
         PartyEntity party = repository.getById(id);
-        PartyReport pr = new PartyReport();
-        pr.setId(party.getId());
-        pr.setName(party.getName());
-        pr.setPartyNumber(party.getPartyNumber());
-        List<CandidateReport> members = party.getMembers()
-                .stream()
-                .map(c -> new CandidateReport(c))
-                .collect(Collectors.toList());
-        pr.setMembers(members);
-        return pr;
+        return new PartyReport(party);
     }
 
 

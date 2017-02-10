@@ -1,5 +1,6 @@
 var MultiResultComponent = React.createClass({
   render: function() {
+    console.log(this.props.list);
     var self = this;
     var parties = [];
     this.props.list.map(function(p,index){
