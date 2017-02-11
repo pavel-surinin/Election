@@ -13,32 +13,34 @@ var MultiResultComponent = React.createClass({
       <div>
         <div className="panel panel-default col-md-12">
           <div className="row panel-heading">
-            <div className="col-md-2">
+            <div className="col-md-1">
               <h4>Nr.</h4>
             </div>
             <div className="col-md-5">
               <h4>Partija</h4>
             </div>
-            <div className="col-md-5">
+            <div className="col-md-6">
               <h4>Balsų skaičius</h4>
             </div>
           </div>
           <form onSubmit={this.props.onHandleSubmit}>
             <br/>
             {parties}
-            <br/>
-            <div className="form-group panel-footer">
-              <div className="col-md-7">
-                <h4><b>Sugadinti balsai:</b></h4>
+            <div style={{padding : '2px 0px'}} className='row bg-warning'>
+              <div className='col-md-5 small'>
+                <h5><b>Sugadinti biuleteniai</b></h5>
               </div>
-              <div className="input-group col-md-3 small">
-                <input onChange={this.props.onHandleSpoiledChange} type="number" className="form-control" placeholder="Balsų skaičius" aria-describedby="basic-addon2" required/>
-                <span className="input-group-addon" id="basic-addon2">vnt.</span>
+              <div className='col-md-1 small'>
+                <h5></h5>
               </div>
-              <br/>
+              <div style={{float : 'left'}} className='input-group col-md-3 small'>
+                <input onChange={this.props.onHandleSpoiledChange} type='number' className='form-control' placeholder='Skaičius' aria-describedby='basic-addon2' required/>
+                <span className='input-group-addon' id='basic-addon2'>vnt.</span>
+              </div>
             </div>
-            {errorMesages}
-            <button type="submit" className="btn btn-success">Registruoti</button>
+              <br/>
+              {errorMesages}
+              <button style={{marginTop : '-8px'}} type="submit" className="btn btn-success btn-outline">Registruoti</button>
           </form>
         </div>
       </div>

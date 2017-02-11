@@ -49,7 +49,24 @@ function isVotesNegativeValue(list) {
   }
   return false;
 }
-
+function getRatings(arr,pid) {
+  var list = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].party == pid) {
+      for (var j = 0; j < arr[i].members.length; j++) {
+        if (arr[i].members[j].value != 0) {
+          list.push(
+            {
+              candidate :
+                {id : arr[i].members[j].key },
+              points : arr[i].members[j].value,
+            });
+        }
+      }
+    }
+  }
+  return list;
+}
 var errorMesages = [];
 var list = {};
 var postArray =[];
@@ -72,13 +89,11 @@ var MultiResultContainer = React.createClass({
   },
   componentDidMount: function() {
     this.state.partyList.forEach(function(p) {
-      console.log(p.id);
       this.state.ratings.push(p.id);
     }
     );
   },
   onChangePartyRating : function(pid,cid,points){
-    console.log(pid,cid,points);
     if (ratings.length == 0) {
       this.state.partyList.forEach(function(p) {
         ratings.push(
@@ -88,6 +103,7 @@ var MultiResultContainer = React.createClass({
           }
         );});
     }
+
     for (var i = 0; i < ratings.length; i++) {
       if (ratings[i].party == pid) {
         for (var j = 0; j < ratings[i].members.length; j++) {
@@ -125,10 +141,12 @@ var MultiResultContainer = React.createClass({
               'district' : {'id' : this.state.districtId},
               'votes' : list[key],
               'datePublished' : new Date(),
+              'rating' : getRatings(ratings,key),
             }
           );
         }
       }
+      ratings = [];
       axios
       .post('/result-multi', postArray)
       .then(function(response){
