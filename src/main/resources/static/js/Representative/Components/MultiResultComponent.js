@@ -1,11 +1,10 @@
 var MultiResultComponent = React.createClass({
   render: function() {
-    console.log(this.props.list);
     var self = this;
     var parties = [];
     this.props.list.map(function(p,index){
       parties.push(
-      <MultiResultRowComponent registerVotes={self.props.registerVotes} key={index} party={p} />
+      <MultiResultRowComponent onChangePartyRating={self.props.onChangePartyRating} registerVotes={self.props.registerVotes} key={index} party={p} />
     );
     });
     var errorMesages = validation.showMsg(this.props.errorMesages);

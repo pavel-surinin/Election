@@ -53,6 +53,7 @@ function isVotesNegativeValue(list) {
 var errorMesages = [];
 var list = {};
 var postArray =[];
+var ratings = [];
 var MultiResultContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -62,12 +63,41 @@ var MultiResultContainer = React.createClass({
       isVotesRegistered : false,
       isLoading : true,
       errorMesages : [],
+      ratings : [],
     };
   },
   componentWillMount: function() {
     getParties(this);
     getDistrict(this,this.state.districtId);
-
+  },
+  componentDidMount: function() {
+    this.state.partyList.forEach(function(p) {
+      console.log(p.id);
+      this.state.ratings.push(p.id);
+    }
+    );
+  },
+  onChangePartyRating : function(pid,cid,points){
+    console.log(pid,cid,points);
+    if (ratings.length == 0) {
+      this.state.partyList.forEach(function(p) {
+        ratings.push(
+          {
+            party : p.id,
+            members : p.members.map(function(m){return {key : m.id, value : 0};})
+          }
+        );});
+    }
+    for (var i = 0; i < ratings.length; i++) {
+      if (ratings[i].party == pid) {
+        for (var j = 0; j < ratings[i].members.length; j++) {
+          if (ratings[i].members[j].key == cid) {
+            ratings[i].members[j].value = points;
+            break;
+          }
+        }
+      }
+    }
   },
   registerVotes : function(id,votes){
     list[id]=votes;
@@ -129,6 +159,7 @@ var MultiResultContainer = React.createClass({
         onHandleSubmit={this.onHandleSubmit}
         onHandleSpoiledChange={this.onHandleSpoiledChange}
         errorMesages={this.state.errorMesages}
+        onChangePartyRating={this.onChangePartyRating}
         />
       );
     }
