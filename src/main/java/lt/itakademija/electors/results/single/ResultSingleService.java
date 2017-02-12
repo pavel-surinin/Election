@@ -3,9 +3,7 @@ package lt.itakademija.electors.results.single;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
-import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,7 +53,7 @@ public class ResultSingleService {
 
     private List<ResultSingleEntity> getDistrictResults(Long id) {
         DistrictEntity district = districtRepository.findById(id);
-        List<ResultSingleEntity> listOfResults = repository.getByDistrictId(district);
+        List<ResultSingleEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
     }
 }

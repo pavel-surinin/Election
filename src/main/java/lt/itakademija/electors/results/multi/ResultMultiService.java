@@ -3,7 +3,6 @@ package lt.itakademija.electors.results.multi;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
-import lt.itakademija.electors.results.single.ResultSingleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +53,7 @@ public class ResultMultiService {
 
     private List<ResultMultiEntity> getDistrictResults(Long id) {
         DistrictEntity district = districtRepository.findById(id);
-        List<ResultMultiEntity> listOfResults = repository.getByDistrictId(district);
+        List<ResultMultiEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
     }
 }
