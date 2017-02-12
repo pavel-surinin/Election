@@ -1,6 +1,5 @@
 package lt.itakademija.electors.county;
 
-import lt.itakademija.exceptions.CountyCandidatesAlreadyExistException;
 import lt.itakademija.storage.StorageFileNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

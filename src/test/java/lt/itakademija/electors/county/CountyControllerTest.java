@@ -10,14 +10,11 @@ import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
-import lt.itakademija.electors.party.PartyReport;
-import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
 import lt.itakademija.electors.results.single.ResultSingleService;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
-import lt.itakademija.exceptions.CountyCandidatesAlreadyExistException;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
 import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
@@ -96,12 +93,6 @@ public class CountyControllerTest {
     @Autowired
     TransactionTemplate transactionTemplate;
 
-    @Autowired
-    PartyRepository partyRepository;
-
-    @Autowired
-    PartyReport PartyReport;
-
     String URI = "/county";
 
 
@@ -135,10 +126,8 @@ public class CountyControllerTest {
         //setup
         String VilniusString = "{\"name\":\"KedainiaiTest\"}";
         ResponseEntity<CountyEntity> respCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(VilniusString), CountyEntity.class);
-        Long countyId = respCreate.getBody().getId();
         //verify
         assertThat(respCreate.getStatusCodeValue(), CoreMatchers.is(200));
-        assertThat(countyRepository.findById(countyId).getName(), CoreMatchers.is("KedainiaiTest"));
     }
 
     @Test
@@ -155,11 +144,11 @@ public class CountyControllerTest {
     @Test
     public void updateCountyName() throws Exception {
         //setup
-        String kedainiaiString = MyUtils.getCountyJson(null,"KedainiaiTest");
+        String kedainiaiString = "{\"name\":\"KedainiaiTest\"}";
         ResponseEntity<CountyEntity> respCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(kedainiaiString), CountyEntity.class);
         //exercise
-        Long countyId = respCreate.getBody().getId();
-        String kedainiaiUpdateString = MyUtils.getCountyJson(countyId ,"KedainiaiUpdate");
+        Long id = respCreate.getBody().getId();
+        String kedainiaiUpdateString = "{\"id\":" + id + ", \"name\" : \"KedainiaiUpdate\"}";
         ResponseEntity<CountyEntity> respUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(kedainiaiUpdateString), CountyEntity.class);
         //verify
         assertThat(respCreate.getStatusCodeValue(), CoreMatchers.is(200));
@@ -170,10 +159,11 @@ public class CountyControllerTest {
     @Test
     public void uploadSingleCandidates() throws Exception {
         //setup
+
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
+        //execute
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
-        //execute
         countyService.update(id, result);
         ResponseEntity<CountyReport[]> resp = rest.getForEntity("/county", CountyReport[].class);
         //verify
@@ -229,33 +219,26 @@ public class CountyControllerTest {
         countyService.update(id, result);
         ResponseEntity<CountyReport[]> respCountyReportAfterUpdate = rest.getForEntity("/county", CountyReport[].class);
         //execute
-
-        try {
-            MultipartFile resultUpdate = MyUtils.parseToMultiPart("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv");
-            countyService.update(id,resultUpdate);
-            ResponseEntity<CountyReport[]> respCountyReportUpdate= rest.getForEntity("/county", CountyReport[].class);
-            FileInputStream candidateFile = new FileInputStream(new File("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv"));
-            List<CandidateEntity> candidateEntityUpdateList = csvParser.extractCandidates(candidateFile);
-        } catch (CountyCandidatesAlreadyExistException e) {
-            //verify
-            assertThat(e.getMessage(), CoreMatchers.is("County Candidates Already Exist "));
-        }
+        MultipartFile resultUpdate = MyUtils.parseToMultiPart("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv");
+        countyService.update(id,resultUpdate);
+        ResponseEntity<CountyReport[]> respCountyReportUpdate= rest.getForEntity("/county", CountyReport[].class);
+        FileInputStream candidateFile = new FileInputStream(new File("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv"));
+        List<CandidateEntity> candidateEntityUpdateList = csvParser.extractCandidates(candidateFile);
         //verify
 // TODO Kandidatus pridede papildomai, yra Exception'as CountyCandidatesAlreadyExistException bet nesutvarkytas
         //assertThat(respCountyReportAfterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
-       // assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
+        assertThat(respCountyReportUpdate.getStatusCodeValue(),CoreMatchers.is(200));
+        assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
 
     }
 
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_DiferentColumn() throws Exception {
         //setup
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long countyId = resp1.getBody()[0].getId();
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_data_with_different_column_count.csv");
         //execute
         try {
-        countyService.update(countyId, result);
+        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (NotEqualColumnsCountCsv e) {
         //verify
         assertThat(e.getMessage(), CoreMatchers.is("Not equal columns count *.csv"));
@@ -266,26 +249,22 @@ public class CountyControllerTest {
     public void uploadSingleCandidatesWithBadCsvFile_NoNumberInParty() throws Exception {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_noNumberInParty_data.csv");
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId, result);
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (BadCSVFileExceprion e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data  for county single-list"));
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
 
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NoPartyNumber() throws Exception {
         //setup
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long countyId = resp1.getBody()[0].getId();
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_noPartyNumber_data.csv");
         //execute
         try {
-           countyService.update(countyId, result);
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
@@ -295,27 +274,23 @@ public class CountyControllerTest {
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NotExistingPartyNumber() throws Exception {
         //setup
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long countyId = resp1.getBody()[0].getId();
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_notExistingPartyNumber_data.csv");
         //execute
         try {
-           countyService.update(countyId,result);
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (BadCSVFileExceprion e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
 
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badNameCharacters() throws Exception {
         //setup
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long countyId = resp1.getBody()[0].getId();
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badNameCharacters_data.csv");
         //execute
         try {
-            countyService.update(countyId, result);
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
@@ -326,11 +301,9 @@ public class CountyControllerTest {
     public void uploadSingleCandidatesWithBadCsvFile_badSurnameCharacters() throws Exception {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badSurnameCharacters_data.csv");
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
-           countyService.update(countyId, result);
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
@@ -340,14 +313,12 @@ public class CountyControllerTest {
     public void uploadSingleCandidatesWithBadCsvFile_badDateFormat() throws Exception {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badDateFormat_data.csv");
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
-           countyService.update(countyId, result);
+            ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (BadCSVFileExceprion e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
 
@@ -439,44 +410,6 @@ public class CountyControllerTest {
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
-
-    @Test
-    public void saveResultsWithMinusResultType() {
-        //setup adding candidates
-        MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String newTownDistrictCreate = MyUtils.getDistrictJson(null, "Naujamiesčio", "Gėlių g. 1-5", 600, countyId);
-        ResponseEntity<DistrictReport> respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(newTownDistrictCreate), DistrictReport.class);
-        //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
-        final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
-        final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
-        final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
-        final CandidateEntity spoiled = new CandidateEntity();
-        spoiled.setId(-1991L);
-
-
-        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 100L, new Date());
-        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 50L, new Date());
-        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, -200L, new Date());
-        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
-
-        List<ResultSingleEntity> rl = new ArrayList<>();
-        rl.add(res1);
-        rl.add(res2);
-        rl.add(res3);
-        rl.add(res4);
-
-            final String save = resultSingleService.save(rl);
-            assertThat(save, CoreMatchers.is("Votes registered"));
-    }
-
-
 
     @TestConfiguration
     static class Config {

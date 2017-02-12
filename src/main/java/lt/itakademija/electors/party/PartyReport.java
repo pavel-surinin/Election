@@ -1,10 +1,9 @@
 package lt.itakademija.electors.party;
 
 import lt.itakademija.electors.candidate.CandidateReport;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
-import lt.itakademija.electors.candidate.CandidateReport;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -24,7 +23,9 @@ public class PartyReport {
     public PartyReport(PartyEntity pe) {
         this.id = pe.getId();
         this.name = pe.getName();
-//        this.members = pe.getMembers().stream().map(c-> new CandidateReport(c));
+        if (pe.getMembers() != null) {
+            this.members = pe.getMembers().stream().map(CandidateReport::new).collect(Collectors.toList());
+        }
         this.partyNumber = pe.getPartyNumber();
     }
 

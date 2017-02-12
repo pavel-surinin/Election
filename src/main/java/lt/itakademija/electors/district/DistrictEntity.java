@@ -4,7 +4,6 @@ import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;

@@ -2,9 +2,8 @@ package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.party.PartyEntity;
-import lt.itakademija.electors.results.multi.ResultMultiEntity;
+import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -48,6 +47,17 @@ public class CandidateEntity {
 
     @OneToMany(mappedBy="candidate", cascade = CascadeType.REMOVE)
     private List<ResultSingleEntity> results;
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.REMOVE)
+    private List<RatingEntity> ratingPoints;
+
+    public List<RatingEntity> getRatingPoints() {
+        return ratingPoints;
+    }
+
+    public void setRatingPoints(List<RatingEntity> ratingPoints) {
+        this.ratingPoints = ratingPoints;
+    }
 
     public boolean isMultiList() {
         return isMultiList;

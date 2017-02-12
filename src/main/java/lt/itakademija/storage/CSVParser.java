@@ -1,16 +1,13 @@
 package lt.itakademija.storage;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
-import lt.itakademija.electors.candidate.CandidateService;
 import lt.itakademija.electors.party.PartyEntity;
-import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
 import lt.itakademija.exceptions.PartyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -49,8 +46,8 @@ public class CSVParser {
                         can.setPartyDependencies(parseParty(line[3]));
                         can.setNumberInParty(parseNullOrInteger(line[4]));
                         return can;
-                    } catch (Throwable t){
-                        throw new BadCSVFileExceprion("Not acceptable CSV data for county single-list");
+                    } catch (Exception t){
+                        throw new BadCSVFileExceprion("Not acceptable CSV data for county single-list", t);
                     }
                 })
                 .collect(Collectors.toList());
@@ -90,8 +87,8 @@ public class CSVParser {
         Date date = null;
         try {
             date = format.parse(string);
-        } catch (Throwable e) {
-            throw new RuntimeException("BAD DATE FORMAT");
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return date;
     }

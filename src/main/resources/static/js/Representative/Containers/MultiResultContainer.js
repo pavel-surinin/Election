@@ -49,10 +49,28 @@ function isVotesNegativeValue(list) {
   }
   return false;
 }
-
+function getRatings(arr,pid) {
+  var list = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i].party == pid) {
+      for (var j = 0; j < arr[i].members.length; j++) {
+        if (arr[i].members[j].value != 0) {
+          list.push(
+            {
+              candidate :
+                {id : arr[i].members[j].key },
+              points : arr[i].members[j].value,
+            });
+        }
+      }
+    }
+  }
+  return list;
+}
 var errorMesages = [];
 var list = {};
 var postArray =[];
+var ratings = [];
 var MultiResultContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -62,12 +80,40 @@ var MultiResultContainer = React.createClass({
       isVotesRegistered : false,
       isLoading : true,
       errorMesages : [],
+      ratings : [],
     };
   },
   componentWillMount: function() {
     getParties(this);
     getDistrict(this,this.state.districtId);
+  },
+  componentDidMount: function() {
+    this.state.partyList.forEach(function(p) {
+      this.state.ratings.push(p.id);
+    }
+    );
+  },
+  onChangePartyRating : function(pid,cid,points){
+    if (ratings.length == 0) {
+      this.state.partyList.forEach(function(p) {
+        ratings.push(
+          {
+            party : p.id,
+            members : p.members.map(function(m){return {key : m.id, value : 0};})
+          }
+        );});
+    }
 
+    for (var i = 0; i < ratings.length; i++) {
+      if (ratings[i].party == pid) {
+        for (var j = 0; j < ratings[i].members.length; j++) {
+          if (ratings[i].members[j].key == cid) {
+            ratings[i].members[j].value = points;
+            break;
+          }
+        }
+      }
+    }
   },
   registerVotes : function(id,votes){
     list[id]=votes;
@@ -95,10 +141,12 @@ var MultiResultContainer = React.createClass({
               'district' : {'id' : this.state.districtId},
               'votes' : list[key],
               'datePublished' : new Date(),
+              'rating' : getRatings(ratings,key),
             }
           );
         }
       }
+      ratings = [];
       axios
       .post('/result-multi', postArray)
       .then(function(response){
@@ -129,6 +177,7 @@ var MultiResultContainer = React.createClass({
         onHandleSubmit={this.onHandleSubmit}
         onHandleSpoiledChange={this.onHandleSpoiledChange}
         errorMesages={this.state.errorMesages}
+        onChangePartyRating={this.onChangePartyRating}
         />
       );
     }

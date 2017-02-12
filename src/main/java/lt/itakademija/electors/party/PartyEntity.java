@@ -2,7 +2,6 @@ package lt.itakademija.electors.party;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;

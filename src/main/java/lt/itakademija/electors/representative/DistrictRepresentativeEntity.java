@@ -1,8 +1,6 @@
 package lt.itakademija.electors.representative;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lt.itakademija.electors.district.DistrictEntity;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
