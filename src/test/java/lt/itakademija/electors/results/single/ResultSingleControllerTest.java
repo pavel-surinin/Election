@@ -13,6 +13,7 @@ import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
+import lt.itakademija.exceptions.TooManyVotersException;
 import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
@@ -177,15 +178,17 @@ public class ResultSingleControllerTest {
 
         try{
             Long sum = res1.getVotes()+res2.getVotes()+res3.getVotes()+res4.getVotes();
-            if(sum <= d1.getNumberOfElectors()){
+            if(sum <= d1.getNumberOfElectors()) {
                 final String save = resultSingleService.save(results);
+            }else{
+                throw new TooManyVotersException("There are more votes than voters in the district");
             }
-        }catch (final Exception e){
-            throw new TooManyVoters("There were too many voters", e);
+        }catch (TooManyVotersException e){
+            assertThat(e.getMessage(), CoreMatchers.is("There are more votes than voters in the district"));
         }
 
         //verify
-        assertThat(e.getMessage(), CoreMatchers.is("There were too many voters"));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
 
     @Test
@@ -241,6 +244,11 @@ public class ResultSingleControllerTest {
 
         //verify
 //        assertThat(answer, CoreMatchers.is(false));
+    }
+
+    @Test
+    public void badData() throws Exception{
+
     }
 
     @Test
