@@ -40,7 +40,7 @@ public class ResultSingleService {
     public String approve(Long id) {
         List<ResultSingleEntity> listOfResults = getDistrictResults(id);
         listOfResults.stream().forEach(res -> res.setApproved(true));
-        save(listOfResults);
+        listOfResults.stream().forEach(res -> repository.save(res));
         return "Results approved";
     }
 

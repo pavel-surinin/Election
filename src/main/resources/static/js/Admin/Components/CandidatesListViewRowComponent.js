@@ -25,7 +25,8 @@ var CandidatesListViewRowComponent = React.createClass({
                 {this.props.partijosPavadinimas}
               </td>
               <td>
-                <button ref="info" title="Aprašymas" id={'description-button-' + this.props.id} type="button"  className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}></button>
+                <button ref="info" title="Aprašymas" id={'description-button-' + this.props.id}
+                  type="button"  className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}></button>
                 <div id={this.props.id} className="modal fade" role="dialog">
                   <div className="modal-dialog">
                     <div className="modal-content">
@@ -43,7 +44,7 @@ var CandidatesListViewRowComponent = React.createClass({
                   </div>
                 </div>
                 &nbsp;
-                <a href={'#/admin/candidate/edit/' + this.props.id} ref="edit" data-toggle="tooltip2" id={'edit-button-' + this.props.id} title="Atnaujinti Kandidato informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
+                <a href={'#/admin/candidate/edit/' + this.props.id} ref="edit" data-toggle="tooltip2" id={'edit-button-' + this.props.id} title="Atnaujinti kandidato informaciją" type="button" className="btn btn-primary btn-sm fa fa-pencil"></a>
                 &nbsp;
               </td>
             </tr>

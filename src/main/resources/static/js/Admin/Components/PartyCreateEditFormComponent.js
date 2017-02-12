@@ -23,7 +23,7 @@ var PartyCreateEditFormComponent = React.createClass({
                   <div className="panel-body">
                     <form onSubmit={this.props.onHandleSubmit} role="form">
                       <div className="input-group col-xs-12 text-primary">
-                        <label>Partijos Pavadinimas</label>
+                        <label>Partijos pavadinimas</label>
                           <input
                             id="name-input"
                             type="text"

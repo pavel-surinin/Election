@@ -32,7 +32,12 @@ public class ResultMultiService {
         districtEnt.setSpoiledMulti(spoiled.getVotes().intValue());
         districtService.save(districtEnt);
         results.remove(spoiled);
-        results.stream().forEach(res -> repository.save(res));
+        results.stream().forEach(res -> {
+            if (res.getRating() != null){
+                res.getRating().stream().forEach(rat->rat.setMultiResults(res));
+            }
+            repository.save(res);
+        });
         return "Votes registered";
     }
 

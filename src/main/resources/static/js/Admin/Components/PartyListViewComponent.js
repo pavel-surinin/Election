@@ -33,13 +33,17 @@ var PartyListViewComponent = React.createClass({
 		              <thead>
 		                <tr>
 		                  <th>
-		                    Nr
+		                    Nr.
 		                  </th>
 		                  <th>
 		                    Partija
 		                  </th>
 		                  <th>
+<<<<<<< HEAD
 		                    Detali informacija
+=======
+		                    Veiksmai
+>>>>>>> pavel-surinin-master
 		                  </th>
 			              <th>
 			                Redaguoti

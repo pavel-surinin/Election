@@ -20,10 +20,11 @@ public class PartyController {
 
     @PostMapping("/party")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   @RequestHeader(required = false, value = "Party-id") Long partyId,
-                                   @RequestHeader("Party-name") String partyName,
-                                   @RequestHeader("Party-number") Integer partyNumber,
+                                   @RequestParam("name") String partyName,
+                                   @RequestParam("number") Integer partyNumber,
+                                   @RequestParam(required = false, value = "id") Long partyId,
                                    RedirectAttributes redirectAttributes) {
+        System.out.println("name " + partyName + ", number + " + partyNumber);
         if (partyId == null){
             service.save(partyName, partyNumber, file);
         } else {
@@ -39,7 +40,6 @@ public class PartyController {
     }
 
     @GetMapping("/party")
-
     public List<PartyReport> getParties(){
         return service.getPartyList();
     }

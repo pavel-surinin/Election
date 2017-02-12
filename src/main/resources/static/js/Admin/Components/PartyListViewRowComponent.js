@@ -1,9 +1,9 @@
 var  PartyListViewRowComponent= React.createClass({
   componentDidMount: function () {
-    $(this.refs.remove).tooltip();
+    $(this.refs.delete).tooltip();
     $(this.refs.edit).tooltip();
     $(this.refs.info).tooltip();
-    $(this.refs.details).tooltip()
+    $(this.refs.details).tooltip();
   },
   handleDetailsClick: function(id){
     var self = this;
@@ -38,7 +38,7 @@ var  PartyListViewRowComponent= React.createClass({
                   href={'#/admin/party/edit/' + this.props.id}
                   data-toggle="tooltip2"
                   id={'edit-button-' + this.props.id}
-                  title="Atnaujinti Partijos informaciją"
+                  title="Atnaujinti partijos informaciją"
                   type="button"
                   ref='edit'
                   className="btn btn-primary btn-sm fa fa-pencil">
@@ -49,7 +49,7 @@ var  PartyListViewRowComponent= React.createClass({
                   id={'delete-button' + this.props.id}
                   className='btn btn-danger btn-sm fa fa-trash-o'
                   ref="delete"
-                  title="Ištrinti Partiją"
+                  title="Ištrinti"
                   role='button'
                   >
                 </button>

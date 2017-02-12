@@ -1,9 +1,7 @@
 package lt.itakademija.electors.party;
 
-import lt.itakademija.electors.candidate.CandidateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -40,7 +38,7 @@ public class PartyRepository {
     }
 
     public PartyEntity getPartyByNumber(Integer number) {
-        List<PartyEntity> list = em.createQuery("SELECT p FROM PartyEntity p WHERE p.partyNumber = :pNum")
+        List<PartyEntity> list = em.createQuery("SELECT p FROM PartyEntity p WHERE p.partyNumber =:pNum")
                 .setParameter("pNum", number)
                 .getResultList();
         if (list.size() != 0) {
@@ -56,5 +54,19 @@ public class PartyRepository {
 
     public Long getPartiesCount(){
         return em.createQuery("SELECT COUNT(c) FROM PartyEntity c", Long.class).getSingleResult();
+    }
+
+    public boolean isNameExists(String name) {
+        final Long nameCount = em.createQuery("SELECT COUNT(c) FROM PartyEntity c WHERE c.name =:name", Long.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        return nameCount > 0;
+    }
+
+    public boolean isNumberExists(Integer number) {
+        final Long numberCount = em.createQuery("SELECT COUNT(c) FROM PartyEntity c WHERE c.partyNumber =:number", Long.class)
+                .setParameter("number", number)
+                .getSingleResult();
+        return numberCount > 0;
     }
 }

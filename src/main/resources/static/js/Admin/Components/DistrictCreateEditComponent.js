@@ -38,28 +38,28 @@ var DistrictCreateEditComponent = React.createClass({
                           <br/>
                           {nameErrorMesages}
                           <div className="input-group col-xs-12 text-primary">
-                          <label>Apylinkės Adresas</label>
+                          <label>Apylinkės adresas</label>
                             <input
                               id="adress-input"
                               type="text"
                               onChange={this.props.onHandleAdressChange}
                               value={this.props.adress}
                               className="form-control"
-                              placeholder="Apylinkės Adresas"
+                              placeholder="Apylinkės adresas"
                               required
                             />
                           </div><br/>
                           {adressErrorMesages}
 
                           <div className="input-group col-xs-12 text-primary">
-                          <label>Apylinkės rinkėjų Skaičius</label>
+                          <label>Apylinkės rinkėjų skaičius</label>
                             <input
                               id="voters-input"
                               type="text"
                               onChange={this.props.onHandleNumberChange}
                               value={this.props.numberOfElectors}
                               className="form-control"
-                              placeholder="Rinkėjų skačius"
+                              placeholder="Rinkėjų skaičius"
                               required
                             />
                           </div><br/>
