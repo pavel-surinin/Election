@@ -36,6 +36,16 @@ public class ResultMultiEntity {
     @NotNull
     private Date datePublished;
 
+    public ResultMultiEntity() {
+    }
+
+    public ResultMultiEntity(PartyEntity party, DistrictEntity district, Long votes, Date date) {
+        this.party = party;
+        this.district = district;
+        this.votes = votes;
+        this.datePublished = date;
+    }
+
     public Long getId() {
         return id;
     }
