@@ -3,9 +3,7 @@ package lt.itakademija.electors.results.single;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
-import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,11 +29,11 @@ public class ResultSingleService {
         final ResultSingleEntity spoiled = results.stream().filter(res -> res.getCandidate().getId() == -1991L).findAny().get();
         DistrictEntity district = spoiled.getDistrict();
         final DistrictEntity districtEnt = districtRepository.findById(district.getId());
-        districtEnt.setSpoiledSingle(spoiled.getVotes().intValue());
-        districtService.save(districtEnt);
-        results.remove(spoiled);
-        results.stream().forEach(res -> repository.save(res));
-        return "Votes registered";
+            districtEnt.setSpoiledSingle(spoiled.getVotes().intValue());
+            districtService.save(districtEnt);
+            results.remove(spoiled);
+            results.stream().forEach(res -> repository.save(res));
+            return "Votes registered";
     }
 
     @Transactional

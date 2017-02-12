@@ -90,8 +90,8 @@ public class CSVParser {
         Date date = null;
         try {
             date = format.parse(string);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (Throwable e) {
+            throw new RuntimeException("BAD DATE FORMAT");
         }
         return date;
     }
