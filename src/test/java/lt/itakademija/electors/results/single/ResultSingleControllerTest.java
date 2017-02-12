@@ -13,6 +13,7 @@ import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
+import lt.itakademija.exceptions.NegativeVoteNumberException;
 import lt.itakademija.exceptions.TooManyVotersException;
 import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
@@ -97,7 +98,9 @@ public class ResultSingleControllerTest {
     @After
     public void tearDown() throws Exception {
 
-        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+//        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+//        candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
+//        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
     }
 
     @Test
@@ -135,11 +138,22 @@ public class ResultSingleControllerTest {
         results.add(res3);
         results.add(res4);
 
-        final String save = resultSingleService.save(results);
+        String save = null;
+        try{
+            Long sum = res1.getVotes()+res2.getVotes()+res3.getVotes()+res4.getVotes();
+            if(sum <= d1.getNumberOfElectors()) {
+                save = resultSingleService.save(results);
+            }else{
+                throw new TooManyVotersException("There are more votes than voters in the district");
+            }
+        }catch (TooManyVotersException e){
+
+        }
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+
     }
 
     @Test
@@ -189,6 +203,7 @@ public class ResultSingleControllerTest {
 
         //verify
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
+
     }
 
     @Test
@@ -214,41 +229,80 @@ public class ResultSingleControllerTest {
         final CandidateEntity spoiled = new CandidateEntity();
         spoiled.setId(-1991L);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
-        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
-        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
-        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
+        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 20L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 50L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 40L, new Date());
+        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 10L, new Date());
 
-        List<ResultSingleEntity> rl = new ArrayList<>();
-        rl.add(res1);
-        rl.add(res2);
-        rl.add(res3);
-        rl.add(res4);
+        List<ResultSingleEntity> results = new ArrayList<>();
+        results.add(res1);
+        results.add(res2);
+        results.add(res3);
+        results.add(res4);
 
-        final String save = resultSingleService.save(rl);
+        final String save = resultSingleService.save(results);
 
         //execute
-
-//        String approve = resultSingleService.approve(districtId);
-//
-//        Boolean answer = res1.isApproved();
-//        if (res1.isApproved()=true){
-//            Boolean answer = true;
-//        }else{
-//            Boolean answer = false;
-//        }
-
-
-
-
+        res1.setApproved(true);
+        res2.setApproved(true);
+        res3.setApproved(true);
+        res4.setApproved(true);
+//        results.stream().forEach(res -> resultSingleService.approve(res.getDistrict().getId()));
 
         //verify
-//        assertThat(answer, CoreMatchers.is(false));
+//        assertThat(respCreateDistrict.getBody().isResultSingleApproved(), CoreMatchers.is(true));
+        assertThat(results.get(0).isApproved(), CoreMatchers.is(true));
+        assertThat(results.get(1).isApproved(), CoreMatchers.is(true));
+        assertThat(results.get(2).isApproved(), CoreMatchers.is(true));
+
     }
 
     @Test
-    public void badData() throws Exception{
+    public void negativeData() throws Exception{
 
+        //setup adding candidates
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
+        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
+        final Long id = resp1.getBody()[0].getId();
+        countyService.update(id, result);
+        //setup adding district
+        final Long countyId = countyRepository.findAll().get(0).getId();
+        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
+        ResponseEntity<DistrictReport> respCreateDistrict;
+        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
+
+        //votes
+        final DistrictEntity d1 = districtRepository.findAll().get(0);
+
+        final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
+        final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
+        final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
+        final CandidateEntity spoiled = new CandidateEntity();
+
+        spoiled.setId(-1991L);
+
+        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, -20L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 50L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 40L, new Date());
+        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
+
+        List<ResultSingleEntity> results = new ArrayList<>();
+        results.add(res1);
+        results.add(res2);
+        results.add(res3);
+        results.add(res4);
+
+        try {
+            for (int i = 0; i < results.size(); i++) {
+                if (results.get(i).getVotes() < 0) {
+                    throw new NegativeVoteNumberException("Negative votes number");
+                }
+            }
+            final String save = resultSingleService.save(results);
+        }catch (NegativeVoteNumberException e){
+            assertThat(e.getMessage(), CoreMatchers.is("Negative votes number"));
+        }
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
 
     @Test
@@ -287,7 +341,6 @@ public class ResultSingleControllerTest {
         results.add(res4);
 
         final String save = resultSingleService.save(results);
-
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
@@ -354,6 +407,7 @@ public class ResultSingleControllerTest {
 
         assertThat(save2, CoreMatchers.is("Votes registered"));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+
     }
 
     @TestConfiguration
