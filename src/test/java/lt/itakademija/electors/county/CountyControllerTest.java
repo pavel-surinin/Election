@@ -3,6 +3,7 @@ package lt.itakademija.electors.county;
 
 import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
+import lt.itakademija.electors.candidate.CandidateController;
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateRepository;
 import lt.itakademija.electors.candidate.CandidateService;
@@ -10,6 +11,7 @@ import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.party.PartyReport;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
@@ -31,7 +33,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -231,7 +235,7 @@ public class CountyControllerTest {
         assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
 
     }
-
+    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_DiferentColumn() throws Exception {
         //setup
@@ -244,7 +248,7 @@ public class CountyControllerTest {
         assertThat(e.getMessage(), CoreMatchers.is("Not equal columns count *.csv"));
         }
     }
-
+    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NoNumberInParty() throws Exception {
         //setup
@@ -257,7 +261,7 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
-
+    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NoPartyNumber() throws Exception {
         //setup
@@ -267,10 +271,10 @@ public class CountyControllerTest {
             ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         } catch (BadCSVFileExceprion e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list111111"));
         }
     }
-
+    //TODO pridarei hujinios predaryk
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NotExistingPartyNumber() throws Exception {
         //setup
@@ -283,7 +287,7 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
-
+    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badNameCharacters() throws Exception {
         //setup
@@ -296,7 +300,7 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
-
+    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badSurnameCharacters() throws Exception {
         //setup
@@ -309,6 +313,7 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
+    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badDateFormat() throws Exception {
         //setup
@@ -410,8 +415,127 @@ public class CountyControllerTest {
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
+    @Test
+    public void CandidateUploadCountCheck(){
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        Long darboPartijaId = partyResponse.getBody()[0].getId();
+        String darboPartijaName = partyResponse.getBody()[0].getName();
+        Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+        MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+        int candidateCountBeforeUploads = candidateService.getAllCandidates().size();
+        partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
+        int candidateCountAfterPartyUpdate = candidateService.getAllCandidates().size();
+        countyService.update(vilniusId,mixedFile);
+        int candidateCountAfterCountyUpdate = candidateService.getAllCandidates().size();
+        assertThat(candidateCountAfterCountyUpdate,CoreMatchers.is(16));
+    }
 
-    @TestConfiguration
+    @Test
+    public void CandidateIsMultilist(){
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        Long darboPartijaId = partyResponse.getBody()[0].getId();
+        String darboPartijaName = partyResponse.getBody()[0].getName();
+        Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+        MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+        //int candidateCountBeforeUploads = candidateService.getAllCandidates().size();
+        partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
+        //int candidateCountAfterPartyUpdate = candidateService.getAllCandidates().size();
+        countyService.update(vilniusId,mixedFile);
+        Boolean execute = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                boolean isNotMultiMember = countyRepository.findById(vilniusId).getCandidates()
+                        .stream()
+                        .filter(c -> c.getPartyDependencies() == null)
+                        .findFirst().get().isMultiList();
+
+                return isNotMultiMember;
+            }
+        });
+            assertThat(execute, CoreMatchers.is(false));
+        }
+
+        @Test
+        public void CandidateCountNoParty(){
+            ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+            Long vilniusId = countyResponse.getBody()[0].getId();
+            ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+            Long darboPartijaId = partyResponse.getBody()[0].getId();
+            String darboPartijaName = partyResponse.getBody()[0].getName();
+            Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+            MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+            MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+            //int candidateCountBeforeUploads = candidateService.getAllCandidates().size();
+            partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
+            //int candidateCountAfterPartyUpdate = candidateService.getAllCandidates().size();
+            countyService.update(vilniusId,mixedFile);
+            //TODO reikia surasti kiek yra nepartiniu kandidatu
+            Boolean execute = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    long noPartyCandidateCount = countyRepository.findById(vilniusId).getCandidates()
+                            .stream().filter(c -> c.getPartyDependencies() == null).count();
+                    assertThat(noPartyCandidateCount,CoreMatchers.is((1L)));
+                    return true;
+                }
+
+            });
+        }
+
+        @Test
+        public void CandidateCountNotInMultilist(){
+            ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+            Long vilniusId = countyResponse.getBody()[0].getId();
+            ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+            Long darboPartijaId = partyResponse.getBody()[0].getId();
+            String darboPartijaName = partyResponse.getBody()[0].getName();
+            Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+            MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+            MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+            partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
+            countyService.update(vilniusId,mixedFile);
+            //TODO reikia surasti kiek yra vienmandates kandidatu
+            Long execute = transactionTemplate.execute(new TransactionCallback<Long>() {
+                @Override
+                public Long doInTransaction(TransactionStatus transactionStatus) {
+                    long count = countyRepository.findById(vilniusId).getCandidates()
+                            .stream().filter(c -> c.isMultiList() == false).count();
+
+                    return count;
+                }
+
+            });
+            assertThat(execute, CoreMatchers.is(4L));
+        }
+        @Ignore
+        @Test
+        public void MultiCandidatesAfterCountyDelete(){
+            ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+            Long vilniusId = countyResponse.getBody()[0].getId();
+            ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+            Long darboPartijaId = partyResponse.getBody()[0].getId();
+            String darboPartijaName = partyResponse.getBody()[0].getName();
+            Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+            MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+            MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+            partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
+            countyService.update(vilniusId,mixedFile);
+            countyService.delete(vilniusId);
+            //county candidates without party should be gone
+            long countAfterDel =  candidateRepository.getCandidatesList().stream().filter(c -> c.getPartyDependencies() == null).count();
+            assertThat(countAfterDel,CoreMatchers.is(6L));
+
+
+
+        }
+
+        @TestConfiguration
     static class Config {
 
         @Bean

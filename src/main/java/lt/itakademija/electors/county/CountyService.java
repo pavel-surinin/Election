@@ -90,6 +90,7 @@ public class CountyService {
 
         noPartyCandidates.stream().forEach(can -> {
             can.setCounty(county);
+            can.setMultiList(false);
             candidateService.save(can);
         });
 
