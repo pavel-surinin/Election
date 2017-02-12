@@ -61,6 +61,7 @@ var CountyContainer = React.createClass({
       'County-Id': this.state.countyId} };
     data.append('file', file);
     //validation
+    console.log(file);
     if(!validation.checkForCsv(file.name)) {fileErrorMesages.push('Būtina prisegti *.csv formato failą');}
     if (fileErrorMesages.length == 0) {
       axios
@@ -74,6 +75,9 @@ var CountyContainer = React.createClass({
           validate(self, error.response.status);
         }
       });
+    }
+    else {
+      this.setState({fileErrorMesages : fileErrorMesages});
     }
   },
   onHandleDelete: function(i) {

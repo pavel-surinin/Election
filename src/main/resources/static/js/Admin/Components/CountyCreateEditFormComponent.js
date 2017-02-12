@@ -14,14 +14,14 @@
           <div className="col-md-6 col-md-offset-3 col-xs-12">
             <div className="panel panel-primary">
             <div className="panel-heading text-center">
-            <h4><b>Registruoti Apygardą</b></h4>
+            <h4><b>Registruoti apygardą</b></h4>
             </div>
               <div className="panel-body">
                 <div className="form-heading">
                 </div>
                 <form onSubmit={this.props.onHandleSubmit} role="form">
                 <div className="input-group col-xs-12 text-primary">
-                <label>Apygardos Pavadinimas</label>
+                <label>Apygardos pavadinimas</label>
                   <input
                     id="name-input"
                     type="text"

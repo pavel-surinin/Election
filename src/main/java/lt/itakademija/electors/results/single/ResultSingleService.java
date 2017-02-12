@@ -3,9 +3,7 @@ package lt.itakademija.electors.results.single;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
-import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,7 +40,7 @@ public class ResultSingleService {
     public String approve(Long id) {
         List<ResultSingleEntity> listOfResults = getDistrictResults(id);
         listOfResults.stream().forEach(res -> res.setApproved(true));
-        save(listOfResults);
+        listOfResults.stream().forEach(res -> repository.save(res));
         return "Results approved";
     }
 

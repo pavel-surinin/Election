@@ -14,6 +14,14 @@ var styles = {
     } else {
       return {display : 'none'};
     }
+  },
+  toggleGreen :
+  function(bool){
+    if (bool) {
+      return {background : '#dff0d8'};
+    } else {
+      return {background : 'none'};
+    }
   }
 
 

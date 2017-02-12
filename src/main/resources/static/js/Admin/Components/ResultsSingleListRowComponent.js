@@ -15,7 +15,7 @@ var ResultsSingleListRowComponent = React.createClass({
           {this.props.info.representativeName}
         </td>
         <td className="small">
-          {this.props.info.countyName}
+          {this.props.info.votesSingleRegisteredDate}
         </td>
         <td>
           <div>

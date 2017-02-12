@@ -19,7 +19,7 @@ var SingleResultComponent = React.createClass({
               <h4>Vardas</h4>
             </div>
             <div className="col-md-6">
-              <h4>Balsu skaicius</h4>
+              <h4>Balsų skaičius</h4>
             </div>
           </div>
           <form onSubmit={this.props.onHandleSubmit}>
@@ -37,11 +37,11 @@ var SingleResultComponent = React.createClass({
               <br/>
             </div>
             {errorMesages}
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <button type="submit" className="btn btn-success">Registruoti</button>
           </form>
         </div>
     );
   }
-  });
+});
 
 window.SingleResultComponent = SingleResultComponent;
