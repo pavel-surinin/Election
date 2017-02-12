@@ -1,5 +1,6 @@
 package lt.itakademija.electors;
 
+import lt.itakademija.electors.candidate.CandidateEntity;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -81,6 +84,62 @@ public class MyUtils {
     public static String getDistrictRepresentativeJson(String name, String surname, Long representingDistrict){
         String representativeString = "{\"name\" : \"" + name + "\", \"surname\" : \"" + surname + "\", \"district\" : {\"id\" : " + representingDistrict + "}}";
         return representativeString;
+    }
+
+    /**
+     * @param candidateId
+     * @param name
+     * @param surname
+     * @param birthDate
+     * @param description
+     * @param numberInParty
+     * @param countyId
+     * @param partyId
+     * @return JSON String to parse in parseStringToJson
+     */
+
+    public static String getCandidateJson(Long candidateId, String name, String surname, String birthDate, String description, Integer numberInParty, Long countyId, Long partyId){
+        String candidateString = "{\"id\": \"" + candidateId + "\",\"name\": \"" + name + "\",\"surname\": \"" + surname + "\", \"description\": \"" + description + "\",\"numberInParty\": \"" + numberInParty + "\",\"birthDate\": \"" + birthDate + "\", \"county\" : {\"id\" : " + countyId + "}, \"party\" : {\"id\": " + partyId + "}}";
+        return candidateString;
+    }
+
+    /**
+     * @param partyId
+     * @param name
+     * @param partyNumber
+     * @return
+     */
+    public static String getPartyJson(Long partyId, String name, Integer partyNumber, List<CandidateEntity> members){
+        String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber +"}";
+        return partyString;
+    }
+
+    /**
+     * @param resultId
+     * @param districtId
+     * @param candidateId
+     * @param votes
+     * @param isApproved
+     * @param datePublished
+     * @return
+     */
+    public static String getResultsJson(Long resultId, Long districtId, Long candidateId, Long votes, Boolean isApproved, Date datePublished){
+        String resultString = "{\"id\": \"" + resultId + "\", \"district\" : {\"id\" : " + districtId + "}, \"candidate\" : {\"id\": " + candidateId + "}, \"votes\": \"" + votes + "\", \"isApproved\": \"" + isApproved + "\", \"datePublished\":\""+datePublished+"}";
+        return resultString;
+    }
+
+    /**
+     * @param resultId
+     * @param partyId
+     * @param districtId
+     * @param votes
+     * @param isApproved
+     * @param datePublished
+     * @return
+     */
+    public static String getMultiResultsJson (Long resultId, Long partyId, Long districtId, Long votes, Boolean isApproved, Date datePublished){
+        String multiResultsString = "{\"id\": \"" + resultId + "\", \"party\" : {\"id\": " + partyId + "}, \"district\" : {\"id\" : " + districtId + "}, \"votes\": \"" + votes + "\", \"isApproved\": \"" + isApproved + "\", \"datePublished\":\""+datePublished+"}";
+        return multiResultsString;
     }
 }
 

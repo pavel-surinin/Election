@@ -58,7 +58,7 @@ public class ResultMultiService {
 
     private List<ResultMultiEntity> getDistrictResults(Long id) {
         DistrictEntity district = districtRepository.findById(id);
-        List<ResultMultiEntity> listOfResults = repository.getByDistrictId(district);
+        List<ResultMultiEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
     }
 }

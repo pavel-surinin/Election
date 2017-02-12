@@ -53,7 +53,7 @@ public class ResultSingleService {
 
     private List<ResultSingleEntity> getDistrictResults(Long id) {
         DistrictEntity district = districtRepository.findById(id);
-        List<ResultSingleEntity> listOfResults = repository.getByDistrictId(district);
+        List<ResultSingleEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
     }
 }
