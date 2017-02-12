@@ -1,11 +1,5 @@
 package lt.itakademija.electors.representative;
 
-import lt.itakademija.electors.district.DistrictEntity;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-
 /**
  * Created by Pavel on 2017-01-16.
  */

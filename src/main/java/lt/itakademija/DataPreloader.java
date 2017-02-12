@@ -7,10 +7,13 @@ import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.util.Date;
 
@@ -61,6 +64,7 @@ public class DataPreloader {
         can.setSurname(surname);
         can.setDescription(desc);
         can.setCounty(ces);
+        can.setMultiList(false);
         service.save(can);
     }
 }

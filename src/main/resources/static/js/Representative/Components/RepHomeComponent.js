@@ -31,8 +31,6 @@ var RepHomeComponent = React.createClass({
                  <li style={multi} className="list-group-item">Daugiamandatės registravimo laikas:
                   <span className="text-info">{this.props.info.votesMultiRegisteredDate}</span></li>
               </ul>
-
-          <div className="panel-footer">{this.props.info.representativeName}</div>
         </div>
       </div>
     );
