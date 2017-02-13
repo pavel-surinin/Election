@@ -4,6 +4,7 @@ import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
+import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -136,6 +137,14 @@ public class MyUtils {
         res1.setVotes(votes);
         res1.setDatePublished(new Date());
         return res1;
+    }
+
+    public static RatingEntity getRatingEntity(CandidateEntity candidate, ResultMultiEntity multiResults, Integer points){
+        RatingEntity rating = new RatingEntity();
+        rating.setCandidate(candidate);
+        rating.setMultiResults(multiResults);
+        rating.setPoints(points);
+        return rating;
     }
 }
 

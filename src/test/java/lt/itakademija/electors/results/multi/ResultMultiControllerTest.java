@@ -16,6 +16,7 @@ import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
+import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
 import lt.itakademija.electors.results.single.ResultSingleService;
@@ -35,6 +36,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,6 +46,7 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
 
@@ -84,6 +88,12 @@ public class ResultMultiControllerTest {
 
     @Autowired
     ResultMultiService resultMultiService;
+
+    @Autowired
+    CandidateService candidateService;
+
+    @Autowired
+    CandidateRepository candidateRepository;
 
     @Autowired
     TransactionTemplate transactionTemplate;
@@ -128,12 +138,8 @@ public class ResultMultiControllerTest {
         final DistrictEntity d1 = districtRepository.findAll().get(0);
 
         final PartyEntity p1 = partyRepository.getPartyByNumber(45);
-        Long partyId1 = p1.getId();
         final PartyEntity p2 = partyRepository.getPartyByNumber(46);
-        Long partyId2 = p2.getId();
-
         final PartyEntity spoiled = new PartyEntity();
-
         spoiled.setId(-1991L);
 
         ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 20L);
@@ -434,7 +440,49 @@ public class ResultMultiControllerTest {
     @Test
     public void rating() throws Exception{
 
+        //setup adding parties
+        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
+        String name1 = "Bangu Partija";
+        Integer number1 = 75;
+        partyService.save(name1, number1, file1);
 
+        //setup adding district
+        final Long countyId = countyRepository.findAll().get(0).getId();
+        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
+        ResponseEntity<DistrictReport> respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
+
+        //votes
+        final DistrictEntity d1 = districtRepository.findAll().get(0);
+
+        final PartyEntity p1 = partyRepository.getPartyByNumber(75);
+        final PartyEntity spoiled = new PartyEntity();
+        spoiled.setId(-1991L);
+
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 200L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
+
+        final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
+        final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
+        final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
+
+        RatingEntity rating1 = MyUtils.getRatingEntity(c1, res1, 10);
+//        RatingEntity rating2 = MyUtils.getRatingEntity(c2, res1, 15);
+        RatingEntity rating3 = MyUtils.getRatingEntity(c3, res1, 5);
+
+        List<RatingEntity> ratingsList = new ArrayList<>();
+        ratingsList.add(rating1);
+//        ratingsList.add(rating2);
+        ratingsList.add(rating3);
+
+        res1.setRating(ratingsList);
+
+        List<ResultMultiEntity> results = new ArrayList<>();
+        results.add(res1);
+        results.add(res3);
+        String save = resultMultiService.save(results);
+
+        //verify
+        assertThat(res1.getRating().size(), CoreMatchers.is(2));
     }
 
     @TestConfiguration
