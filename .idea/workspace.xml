@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/MultiResultRowModalRowComponent.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/custom-party-1.csv" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/data-county-party-notmultilist.csv" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test-csv/Good_County_NoParty_And_Party_candidate_data.csv" afterPath="$PROJECT_DIR$/test-csv/Good_County_NoParty_And_Party_candidate_data_2.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test-csv/Good_Darbo_Party_candidate_data.csv" afterPath="$PROJECT_DIR$/test-csv/Good_Darbo_Party_candidate_data.csv" />
-    </list>
+    <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -873,9 +863,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CountyControllerTest - 2017.02.13 at 13h 31m 45s.xml">
-      <configuration name="CountyControllerTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="CountyControllerTest - 2017.02.13 at 13h 33m 19s.xml">
       <configuration name="CountyControllerTest" configurationId="JUnit" />
     </history-entry>
@@ -901,6 +888,9 @@
       <configuration name="PartyControllerTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="lt_itakademija_electors_in_Election - 2017.02.13 at 13h 39m 44s.xml">
+      <configuration name="lt.itakademija.electors in Election" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="lt_itakademija_electors_in_Election - 2017.02.13 at 13h 42m 51s.xml">
       <configuration name="lt.itakademija.electors in Election" configurationId="JUnit" />
     </history-entry>
   </component>
