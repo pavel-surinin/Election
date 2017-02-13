@@ -95,4 +95,5 @@ public class ResultMultiEntity {
     public void setDatePublished(Date datePublished) {
         this.datePublished = datePublished;
     }
+
 }

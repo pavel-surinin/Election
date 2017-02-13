@@ -238,7 +238,13 @@ public class PartyControllerTest {
         ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity("/county", CountyReport[].class);
         Long vilniusId = countyResponse.getBody()[0].getId();
         MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/data-county-party-notmultilist.csv");
-        countyService.update(vilniusId, mixedFile);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(vilniusId, mixedFile);
+                return true;
+            }
+        });
         candidateService.deleteCandidatesByPartyId(partyResponse.getBody()[3].getId());
         Integer execute = transactionTemplate.execute(new TransactionCallback<Integer>() {
             @Override
