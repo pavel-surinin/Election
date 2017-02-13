@@ -5,6 +5,8 @@ import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.*;
 import lt.itakademija.electors.county.CountyControllerTest;
 import lt.itakademija.electors.county.CountyReport;
+import lt.itakademija.electors.county.CountyRepository;
+import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
 import lt.itakademija.exceptions.PartyNameCloneException;
 import lt.itakademija.exceptions.PartyNumberCloneException;
@@ -26,7 +28,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,6 +62,15 @@ public class PartyControllerTest {
     @Autowired
     CandidateService candidateService;
 
+    @Autowired
+    CountyService countyService;
+
+    @Autowired
+    CountyRepository countyRepository;
+
+    @Autowired
+    TransactionTemplate transactionTemplate;
+
     String URI = "/party";
 
     @Before
@@ -80,6 +94,7 @@ public class PartyControllerTest {
     @After
     public void tearDown() throws Exception {
         partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
+        candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
     }
 
     @Transactional
@@ -211,6 +226,34 @@ public class PartyControllerTest {
         final int sizeAfterDel = partyRepository.findAll().size();
         assertThat(sizeAfterDel,CoreMatchers.is(sizeBeforeDel-1));
 
+    }
+
+    @Test
+    public void NotMultilistCheckOnPartyListDelete(){
+        final MultipartFile file = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String name = "Custom test Partija";
+        Integer number = 111;
+        partyService.save(name, number, file);
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity("/county", CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/data-county-party-notmultilist.csv");
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(vilniusId, mixedFile);
+                return true;
+            }
+        });
+        candidateService.deleteCandidatesByPartyId(partyResponse.getBody()[3].getId());
+        Integer execute = transactionTemplate.execute(new TransactionCallback<Integer>() {
+            @Override
+            public Integer doInTransaction(TransactionStatus transactionStatus) {
+                int size = partyService.getPartyByNumber(number).getMembers().size();
+                return size;
+            }
+        });
+        assertThat(execute,CoreMatchers.is(1));
     }
 
     @Test
