@@ -19,6 +19,7 @@ function validate(self, code){
   if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas, stulpelių skaičius skiriasi');}
   if (code == 422) {fileErrorMesages.push('Blogi CSV duomenys');}
   if (code == 424) {fileErrorMesages.push('Blogi CSV duomenys, yra kandidatu, kurie jau užregistruoti');}
+  if (code == 426) {fileErrorMesages.push('Blogi CSV duomenys, kandidatai jau priskirti apygardai prieš keldami ištrinkite esanti kandidatų sąrašą');}
   if (code == 451) {fileErrorMesages.push('Kandidatas priskiriamas partijai, kuri neregistruota');}
   self.setState({
     fileErrorMesages : fileErrorMesages,
@@ -35,6 +36,7 @@ var CountyContainer = React.createClass({
       file : null,
       fileErrorMesages : [],
       succesMessage : '',
+      deletedCountyName : '',
     };
   },
   componentWillMount: function() {
@@ -80,12 +82,13 @@ var CountyContainer = React.createClass({
       this.setState({fileErrorMesages : fileErrorMesages});
     }
   },
-  onHandleDelete: function(i) {
+  onHandleDelete: function(id, name) {
     var self = this;
     event.preventDefault();
     axios
-      .delete('/county/'+ i)
+      .delete('/county/'+ id)
       .then(function(response){
+        self.setState({succesCreateText : '' , deletedCountyName : 'Apygarda ' + name + ' ištrinta'});
         getCounty(self);
       })
       .catch(function(err){
@@ -120,6 +123,7 @@ var CountyContainer = React.createClass({
           onHandleFormAddSingleCandSubmit={this.onHandleFormAddSingleCandSubmit}
           onHandleAddClick={this.onHandleAddClick}
           succesMessage={this.state.succesMessage}
+          deletedCountyName={this.state.deletedCountyName}
         />
       );
     }

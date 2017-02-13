@@ -34,4 +34,11 @@ public class ResultMultiRepository {
     public void delete(ResultMultiEntity res) {
         em.remove(res);
     }
+
+    public List<ResultMultiEntity> findAll() {
+        List list = em
+                .createQuery("SELECT r FROM ResultMultiEntity r")
+                .getResultList();
+        return list;
+    }
 }
