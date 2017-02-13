@@ -110,6 +110,7 @@ public class ResultMultiControllerTest {
 
 //        resultMultiRepository.getResultsByDistrictId(districtService.getDistrictById(d1)).stream().forEach(p-> resultMultiService.delete(p.getId()));
 //        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
+        districtRepository.findAll().stream().forEach(d -> districtService.delete());
     }
 
     @Test
@@ -144,10 +145,9 @@ public class ResultMultiControllerTest {
 
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = new ResultMultiEntity(p1, d1, 20L, new Date());
-        ResultMultiEntity res2 = new ResultMultiEntity(p2, d1, 50L, new Date());
-
-        ResultMultiEntity res3 = new ResultMultiEntity(spoiled, d1, 10L, new Date());
+        ResultMultiEntity res1 = getResultMultiEntity(p1, d1, 20L, new Date());
+        ResultMultiEntity res2 = getResultMultiEntity(p2, d1, 50L, new Date());
+        ResultMultiEntity res3 = getResultMultiEntity(spoiled, d1, 10L, new Date());
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -206,10 +206,9 @@ public class ResultMultiControllerTest {
 
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = new ResultMultiEntity(p1, d1, 200L, new Date());
-        ResultMultiEntity res2 = new ResultMultiEntity(p2, d1, 500L, new Date());
-
-        ResultMultiEntity res3 = new ResultMultiEntity(spoiled, d1, 100L, new Date());
+        ResultMultiEntity res1 = getResultMultiEntity(p1, d1, 200L, new Date());
+        ResultMultiEntity res2 = getResultMultiEntity(p2, d1, 500L, new Date());
+        ResultMultiEntity res3 = getResultMultiEntity(spoiled, d1, 100L, new Date());
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -228,6 +227,15 @@ public class ResultMultiControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("There are more votes than voters in the district"));
         }
 
+    }
+
+    private ResultMultiEntity getResultMultiEntity(PartyEntity p1,DistrictEntity d1 ,long l, Date date) {
+        ResultMultiEntity res1 = new ResultMultiEntity();
+        res1.setParty(p1);
+        res1.setDistrict(d1);
+        res1.setVotes(l);
+        res1.setDatePublished(date);
+        return res1;
     }
 
     @Test
@@ -262,10 +270,9 @@ public class ResultMultiControllerTest {
 
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = new ResultMultiEntity(p1, d1, 20L, new Date());
-        ResultMultiEntity res2 = new ResultMultiEntity(p2, d1, 50L, new Date());
-
-        ResultMultiEntity res3 = new ResultMultiEntity(spoiled, d1, 10L, new Date());
+        ResultMultiEntity res1 = getResultMultiEntity(p1, d1, 20L, new Date());
+        ResultMultiEntity res2 = getResultMultiEntity(p2, d1, 50L, new Date());
+        ResultMultiEntity res3 = getResultMultiEntity(spoiled, d1, 10L, new Date());
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -311,18 +318,15 @@ public class ResultMultiControllerTest {
         final DistrictEntity d1 = districtRepository.findAll().get(0);
 
         final PartyEntity p1 = partyRepository.getPartyByNumber(42);
-        Long partyId1 = p1.getId();
         final PartyEntity p2 = partyRepository.getPartyByNumber(43);
-        Long partyId2 = p2.getId();
 
         final PartyEntity spoiled = new PartyEntity();
 
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = new ResultMultiEntity(p1, d1, 20L, new Date());
-        ResultMultiEntity res2 = new ResultMultiEntity(p2, d1, 50L, new Date());
-
-        ResultMultiEntity res3 = new ResultMultiEntity(spoiled, d1, 10L, new Date());
+        ResultMultiEntity res1 = getResultMultiEntity(p1, d1, 20L, new Date());
+        ResultMultiEntity res2 = getResultMultiEntity(p2, d1, 50L, new Date());
+        ResultMultiEntity res3 = getResultMultiEntity(spoiled, d1, 10L, new Date());
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -366,18 +370,13 @@ public class ResultMultiControllerTest {
         final DistrictEntity d1 = districtRepository.findAll().get(0);
 
         final PartyEntity p1 = partyRepository.getPartyByNumber(55);
-        Long partyId1 = p1.getId();
         final PartyEntity p2 = partyRepository.getPartyByNumber(56);
-        Long partyId2 = p2.getId();
-
         final PartyEntity spoiled = new PartyEntity();
-
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = new ResultMultiEntity(p1, d1, 20L, new Date());
-        ResultMultiEntity res2 = new ResultMultiEntity(p2, d1, 50L, new Date());
-
-        ResultMultiEntity res3 = new ResultMultiEntity(spoiled, d1, 10L, new Date());
+        ResultMultiEntity res1 = getResultMultiEntity(p1, d1, 20L, new Date());
+        ResultMultiEntity res2 = getResultMultiEntity(p2, d1, 50L, new Date());
+        ResultMultiEntity res3 = getResultMultiEntity(spoiled, d1, 10L, new Date());
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -417,18 +416,13 @@ public class ResultMultiControllerTest {
         final DistrictEntity d1 = districtRepository.findAll().get(0);
 
         final PartyEntity p1 = partyRepository.getPartyByNumber(65);
-        Long partyId1 = p1.getId();
         final PartyEntity p2 = partyRepository.getPartyByNumber(66);
-        Long partyId2 = p2.getId();
-
         final PartyEntity spoiled = new PartyEntity();
-
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = new ResultMultiEntity(p1, d1, 20L, new Date());
-        ResultMultiEntity res2 = new ResultMultiEntity(p2, d1, 50L, new Date());
-
-        ResultMultiEntity res3 = new ResultMultiEntity(spoiled, d1, 10L, new Date());
+        ResultMultiEntity res1 = getResultMultiEntity(p1, d1, 20L, new Date());
+        ResultMultiEntity res2 = getResultMultiEntity(p2, d1, 50L, new Date());
+        ResultMultiEntity res3 = getResultMultiEntity(spoiled, d1, 10L, new Date());
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -443,9 +437,9 @@ public class ResultMultiControllerTest {
         resultMultiRepository.getResultsByDistrictId(d1).stream().forEach(c -> resultMultiService.delete(c.getId()));
         assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(0));
 
-        ResultMultiEntity res10 = new ResultMultiEntity(p1, d1, 20L, new Date());
-        ResultMultiEntity res20 = new ResultMultiEntity(p2, d1, 50L, new Date());
-        ResultMultiEntity res30 = new ResultMultiEntity(spoiled, d1, 10L, new Date());
+        ResultMultiEntity res10 = getResultMultiEntity(p1, d1, 20L, new Date());
+        ResultMultiEntity res20 = getResultMultiEntity(p2, d1, 50L, new Date());
+        ResultMultiEntity res30 = getResultMultiEntity(spoiled, d1, 10L, new Date());
 
         List<ResultMultiEntity> results2 = new ArrayList<>();
         results2.add(res10);

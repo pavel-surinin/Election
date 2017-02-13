@@ -48,15 +48,6 @@ public class ResultMultiEntity {
     public void setRating(List<RatingEntity> rating) {
         this.rating = rating;
     }
-    public ResultMultiEntity() {
-    }
-
-    public ResultMultiEntity(PartyEntity party, DistrictEntity district, Long votes, Date date) {
-        this.party = party;
-        this.district = district;
-        this.votes = votes;
-        this.datePublished = date;
-    }
 
     public Long getId() {
         return id;

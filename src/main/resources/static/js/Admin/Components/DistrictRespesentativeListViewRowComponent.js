@@ -1,10 +1,4 @@
 var DistrictRespesentativeListViewRowComponent = React.createClass({
-	handleEditClick: function(id){
-		  var self = this;
-		  return function () {
-			self.context.router.push('/admin/representative/edit/' + id);  
-		  };
-		},
 		
   render: function() {
     return (
