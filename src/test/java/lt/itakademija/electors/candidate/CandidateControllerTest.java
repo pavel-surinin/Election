@@ -91,7 +91,6 @@ public class CandidateControllerTest {
 
         String SauliusString = MyUtils.getCandidateJson(null, "Saulius", "Domavicius", "2000-12-12", "Adminas", 92, null, null);
         ResponseEntity<CandidateEntity> respCandidateCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(SauliusString), CandidateEntity.class);
-
     }
 
     @After
@@ -246,7 +245,6 @@ public class CandidateControllerTest {
         assertThat(resp.getBody().length, CoreMatchers.is(candidateRepository.getCandidatesList().size()));
     }
 
-
     @Test
     public void deleteCandidateList() throws Exception {
 
@@ -275,7 +273,6 @@ public class CandidateControllerTest {
 
     }
 
-
     @Test
     public void deleteCandidateAndTheirResults() throws Exception {
 
@@ -284,7 +281,7 @@ public class CandidateControllerTest {
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
         countyService.update(id, result);
-        //setup addnig district
+        //setup adding district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
         ResponseEntity<DistrictReport> respCreateDistrict;

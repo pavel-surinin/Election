@@ -466,12 +466,12 @@ public class ResultMultiControllerTest {
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
 
         RatingEntity rating1 = MyUtils.getRatingEntity(c1, res1, 10);
-//        RatingEntity rating2 = MyUtils.getRatingEntity(c2, res1, 15);
+        RatingEntity rating2 = MyUtils.getRatingEntity(c2, res1, 15);
         RatingEntity rating3 = MyUtils.getRatingEntity(c3, res1, 5);
 
         List<RatingEntity> ratingsList = new ArrayList<>();
         ratingsList.add(rating1);
-//        ratingsList.add(rating2);
+        ratingsList.add(rating2);
         ratingsList.add(rating3);
 
         res1.setRating(ratingsList);
@@ -482,7 +482,7 @@ public class ResultMultiControllerTest {
         String save = resultMultiService.save(results);
 
         //verify
-        assertThat(res1.getRating().size(), CoreMatchers.is(2));
+        assertThat(res1.getRating().size(), CoreMatchers.is(3));
     }
 
     @TestConfiguration
