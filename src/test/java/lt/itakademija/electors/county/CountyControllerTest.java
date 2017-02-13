@@ -105,6 +105,7 @@ public class CountyControllerTest {
         rest.postForEntity(URI, MyUtils.parseStringToJson(KaunasString), CountyEntity.class);
         String KlaipedaString = "{\"name\":\"KlaipedaTest\"}";
         rest.postForEntity(URI, MyUtils.parseStringToJson(KlaipedaString), CountyEntity.class);
+
     }
 
     @After
@@ -500,7 +501,7 @@ public class CountyControllerTest {
                 }
 
             });
-            assertThat(execute, CoreMatchers.is(4L));
+            assertThat(execute, CoreMatchers.is(2L));
         }
 
         @Test
