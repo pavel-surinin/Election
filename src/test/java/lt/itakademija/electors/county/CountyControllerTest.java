@@ -3,9 +3,7 @@ package lt.itakademija.electors.county;
 
 import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
-import lt.itakademija.electors.candidate.CandidateEntity;
-import lt.itakademija.electors.candidate.CandidateRepository;
-import lt.itakademija.electors.candidate.CandidateService;
+import lt.itakademija.electors.candidate.*;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictRepository;
@@ -252,28 +250,28 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data.csv");
         ResponseEntity<CountyReport[]> respCountyReport = rest.getForEntity("/county", CountyReport[].class);
         final Long id = respCountyReport.getBody()[0].getId();
-            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
-                @Override
-                public Boolean doInTransaction(TransactionStatus transactionStatus) {
-                    countyService.update(id, result);
-                    return true;
-                }
-            });
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         //execute
         MultipartFile resultUpdate = MyUtils.parseToMultiPart("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv");
         String countyName = countyRepository.findById(id).getName();
         ResponseEntity<CountyReport[]> respCountyAfterUpdateReport = rest.getForEntity("/county", CountyReport[].class);
 
-      Integer execute = transactionTemplate.execute(new TransactionCallback<Integer>() {
+        Integer execute = transactionTemplate.execute(new TransactionCallback<Integer>() {
             @Override
             public Integer doInTransaction(TransactionStatus transactionStatus) {
-               int numberOfCandidatesInCounty = countyRepository.findById(id).getCandidates().size();
+                int numberOfCandidatesInCounty = countyRepository.findById(id).getCandidates().size();
                 return numberOfCandidatesInCounty;
             }
         });
         //verify
         assertThat(execute, CoreMatchers.is(candidateEntityList.size()));
-        try{
+        try {
             Boolean executeAfterUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
                 @Override
                 public Boolean doInTransaction(TransactionStatus transactionStatus) {
@@ -283,8 +281,13 @@ public class CountyControllerTest {
             });
         } catch (CountyCandidatesAlreadyExistException e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is(countyName+" county already has candidates."));
+            assertThat(e.getMessage(), CoreMatchers.is(countyName + " county already has candidates."));
         }
+    }
+
+    @Test
+    public void VoteNumberOverkill() {
+
     }
 
     @Test
@@ -292,7 +295,7 @@ public class CountyControllerTest {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_data_with_different_column_count.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        Long  countyId = resp1.getBody()[0].getId();
+        Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
             Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
@@ -313,7 +316,7 @@ public class CountyControllerTest {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_noNumberInParty_data.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        Long  countyId = resp1.getBody()[0].getId();
+        Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
             Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
@@ -334,7 +337,7 @@ public class CountyControllerTest {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_noPartyNumber_data.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        Long  countyId = resp1.getBody()[0].getId();
+        Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
             Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
@@ -346,7 +349,7 @@ public class CountyControllerTest {
             });
         } catch (BadCSVFileExceprion e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list111111"));
         }
     }
 
@@ -355,7 +358,7 @@ public class CountyControllerTest {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_notExistingPartyNumber_data.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        Long  countyId = resp1.getBody()[0].getId();
+        Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
             Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
@@ -376,7 +379,7 @@ public class CountyControllerTest {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badNameCharacters_data.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        Long  countyId = resp1.getBody()[0].getId();
+        Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
             Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
@@ -397,7 +400,7 @@ public class CountyControllerTest {
         //setup
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badSurnameCharacters_data.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        Long  countyId = resp1.getBody()[0].getId();
+        Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
             Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
@@ -419,7 +422,7 @@ public class CountyControllerTest {
 
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badDateFormat_data.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        Long  countyId = resp1.getBody()[0].getId();
+        Long countyId = resp1.getBody()[0].getId();
         //execute
         try {
             Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
@@ -454,7 +457,6 @@ public class CountyControllerTest {
         assertThat(respDetailsBefore.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respCreate.getBody().getName(), CoreMatchers.is("Panerių"));
         assertThat(respDetailsAfter.getBody().getCandidates().size(), CoreMatchers.is(3));
-//        assertThat(respDetailsAfter.getBody().getDistricts().size(), CoreMatchers.is(1));
 
 
     }
@@ -474,6 +476,7 @@ public class CountyControllerTest {
 
         //exercise
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
+        ResponseEntity<CountyReport[]> response = rest.getForEntity("/county", CountyReport[].class);
         //verify
         assertThat(countyRepository.findAll().size(), CoreMatchers.is(0));
         assertThat(districtRepository.findAll().size(), CoreMatchers.is(0));
@@ -500,7 +503,6 @@ public class CountyControllerTest {
         respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
         //votes
         final DistrictEntity d1 = districtRepository.findAll().get(0);
-
         final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
@@ -526,6 +528,159 @@ public class CountyControllerTest {
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
+    }
+
+    @Test
+    public void CandidateUploadCountCheck() {
+        //setup
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String partyName1 = "Darbo";
+        Integer partyNumber1 = 5;
+        partyService.save(partyName1, partyNumber1,darboPartijaFile);
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        Long darboPartijaId = partyResponse.getBody()[0].getId();
+        String darboPartijaName = partyResponse.getBody()[0].getName();
+        Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+        int candidateCountBeforeUploads = candidateService.getAllCandidates().size();
+        partyService.save(darboPartijaId, darboPartijaName, darboPartijaNumber, darboPartijaFile);
+        int candidateCountAfterPartyUpdate = candidateService.getAllCandidates().size();
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(vilniusId, mixedFile);
+                return true;
+            }
+        });
+        ResponseEntity<CandidateReport[]> responseAfterUpdate = rest.getForEntity("/candidate", CandidateReport[].class);
+        int candidateCountAfterCountyUpdate = candidateService.getAllCandidates().size();
+        assertThat(candidateCountAfterCountyUpdate, CoreMatchers.is(responseAfterUpdate.getBody().length));
+    }
+
+    @Test
+    public void CandidateIsMultilist() {
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String partyName1 = "Darbo";
+        Integer partyNumber1 = 5;
+        partyService.save(partyName1, partyNumber1,darboPartijaFile);
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        Long darboPartijaId = partyResponse.getBody()[0].getId();
+        String darboPartijaName = partyResponse.getBody()[0].getName();
+        Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+        partyService.save(darboPartijaId, darboPartijaName, darboPartijaNumber, darboPartijaFile);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(vilniusId, mixedFile);
+                return true;
+            }
+        });
+        Boolean execute = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                boolean isNotMultiMember = countyRepository.findById(vilniusId).getCandidates()
+                        .stream()
+                        .filter(c -> c.getPartyDependencies() == null)
+                        .findFirst().get().isMultiList();
+
+                return isNotMultiMember;
+            }
+        });
+        assertThat(execute, CoreMatchers.is(false));
+    }
+
+    @Test
+    public void CandidateCountNoParty() {
+        //setup
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        //setup party
+        MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String partyName1 = "Darbo";
+        Integer partyNumber1 = 5;
+        partyService.save(partyName1, partyNumber1,darboPartijaFile);
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        Long darboPartijaId = partyResponse.getBody()[0].getId();
+        String darboPartijaName = partyResponse.getBody()[0].getName();
+        Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(vilniusId, mixedFile);
+                return true;
+            }
+        });
+        Boolean execute = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                long noPartyCandidateCount = countyRepository.findById(vilniusId).getCandidates()
+                        .stream().filter(c -> c.getPartyDependencies() == null).count();
+                assertThat(noPartyCandidateCount, CoreMatchers.is((1L)));
+                return true;
+            }
+
+        });
+    }
+
+    @Test
+    public void CandidateCountNotInMultilist() {
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String partyName1 = "Darbo";
+        Integer partyNumber1 = 5;
+        partyService.save(partyName1, partyNumber1,darboPartijaFile);
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        Long darboPartijaId = partyResponse.getBody()[0].getId();
+        String darboPartijaName = partyResponse.getBody()[0].getName();
+        Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+        partyService.save(darboPartijaId, darboPartijaName, darboPartijaNumber, darboPartijaFile);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(vilniusId, mixedFile);
+                return true;
+            }
+        });
+        Long execute = transactionTemplate.execute(new TransactionCallback<Long>() {
+            @Override
+            public Long doInTransaction(TransactionStatus transactionStatus) {
+                long count = countyRepository.findById(vilniusId).getCandidates()
+                        .stream().filter(c -> c.isMultiList() == false).count();
+
+                return count;
+            }
+
+        });
+        assertThat(execute, CoreMatchers.is(2L));
+    }
+
+    @Test
+    public void MultiCandidatesAfterCountyDelete() {
+        ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
+        Long vilniusId = countyResponse.getBody()[0].getId();
+        MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
+        String partyName1 = "Darbo";
+        Integer partyNumber1 = 5;
+        partyService.save(partyName1, partyNumber1,darboPartijaFile);
+        ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
+        Long darboPartijaId = partyResponse.getBody()[0].getId();
+        String darboPartijaName = partyResponse.getBody()[0].getName();
+        Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
+        MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
+        partyService.save(darboPartijaId, darboPartijaName, darboPartijaNumber, darboPartijaFile);
+
+
+        countyService.delete(vilniusId);
+        long countAfterDel = candidateRepository.getCandidatesList().stream().filter(c -> c.getPartyDependencies() == null).count();
+        assertThat(countAfterDel, CoreMatchers.is(0L));
     }
 
     @Test
@@ -673,7 +828,7 @@ public class CountyControllerTest {
         countyService.delete(id);
         //verify
         assertThat(saveKaroluResults, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size() , CoreMatchers.is(0));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
@@ -717,7 +872,7 @@ public class CountyControllerTest {
         //verify
         assertThat(saveKaroluResults, CoreMatchers.is("Votes registered"));
         assertThat(approveKaroluResults, CoreMatchers.is("Results approved"));
-        assertThat(resultSingleRepository.findAll().size() , CoreMatchers.is(3));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
     }
@@ -758,11 +913,11 @@ public class CountyControllerTest {
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
 
-        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L );
-        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L );
+        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L);
+        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L);
         ResultMultiEntity paneriuSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, paneriuDistrict, 100L);
-        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L );
-        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L );
+        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L);
+        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L);
         ResultMultiEntity karoluSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, karoluDistrict, 100L);
 
         List<ResultMultiEntity> paneriuResults = new ArrayList<>();
@@ -821,11 +976,11 @@ public class CountyControllerTest {
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
 
-        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L );
-        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L );
+        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L);
+        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L);
         ResultMultiEntity paneriuSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, paneriuDistrict, 100L);
-        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L );
-        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L );
+        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L);
+        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L);
         ResultMultiEntity karoluSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, karoluDistrict, 100L);
 
         List<ResultMultiEntity> paneriuResults = new ArrayList<>();
@@ -882,11 +1037,11 @@ public class CountyControllerTest {
         final PartyEntity p2 = partyRepository.getById(skaidruoliuPartyId);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
-        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L );
-        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L );
+        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L);
+        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L);
         ResultMultiEntity paneriuSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, paneriuDistrict, 100L);
-        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L );
-        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L );
+        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L);
+        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L);
         ResultMultiEntity karoluSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, karoluDistrict, 100L);
 
         List<ResultMultiEntity> paneriuResults = new ArrayList<>();
@@ -945,11 +1100,11 @@ public class CountyControllerTest {
         final PartyEntity p2 = partyRepository.getById(skaidruoliuPartyId);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
-        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L );
-        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L );
+        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L);
+        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L);
         ResultMultiEntity paneriuSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, paneriuDistrict, 100L);
-        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L );
-        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L );
+        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L);
+        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L);
         ResultMultiEntity karoluSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, karoluDistrict, 100L);
 
         List<ResultMultiEntity> paneriuResults = new ArrayList<>();
@@ -1006,11 +1161,11 @@ public class CountyControllerTest {
         final PartyEntity p2 = partyRepository.getById(skaidruoliuPartyId);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
-        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L );
-        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L );
+        ResultMultiEntity party1PaneriuVotes = MyUtils.getResultMultiEntity(darboPartyEntity, paneriuDistrict, 200L);
+        ResultMultiEntity party2PaneriuVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, paneriuDistrict, 200L);
         ResultMultiEntity paneriuSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, paneriuDistrict, 100L);
-        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L );
-        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L );
+        ResultMultiEntity party1KaroluVotes = MyUtils.getResultMultiEntity(darboPartyEntity, karoluDistrict, 150L);
+        ResultMultiEntity party2KaroluVotes = MyUtils.getResultMultiEntity(skaidruoliuPartyEntity, karoluDistrict, 100L);
         ResultMultiEntity karoluSpoiledVotes = MyUtils.getResultMultiEntity(spoiled, karoluDistrict, 100L);
 
         List<ResultMultiEntity> paneriuResults = new ArrayList<>();
@@ -1035,6 +1190,7 @@ public class CountyControllerTest {
     }
 
     @TestConfiguration
+
     static class Config {
 
         @Bean
