@@ -1,7 +1,8 @@
 ﻿
 var CountyListViewComponent = React.createClass({
   render: function() {
-    var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
+    var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
+    var deletedCountyMessage = alerts.showDangerFixed(this.props.deletedCountyName);
     var array = [];
     var self= this.props;
     this.props.countyList.map(function(county,index) {
@@ -37,6 +38,7 @@ var CountyListViewComponent = React.createClass({
 		        </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
+                {deletedCountyMessage}
 		          </div>
 
 		            <table width="100%" className="table table-striped table-hover" id="dataTables-example">

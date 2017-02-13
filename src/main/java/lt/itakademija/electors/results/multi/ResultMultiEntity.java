@@ -1,5 +1,4 @@
 package lt.itakademija.electors.results.multi;
-
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.results.multi.rating.RatingEntity;
@@ -96,4 +95,5 @@ public class ResultMultiEntity {
     public void setDatePublished(Date datePublished) {
         this.datePublished = datePublished;
     }
+
 }

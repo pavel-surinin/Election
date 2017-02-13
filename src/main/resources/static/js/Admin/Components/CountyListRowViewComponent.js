@@ -7,23 +7,23 @@ var CountyListRowViewComponent = React.createClass({
   },
 
   onHandleDeleteClick: function () {
-    this.props.onHandleDelete(this.props.id);
+    this.props.onHandleDelete(this.props.id, this.props.name);
   },
 
   handleDetailsClick: function(id){
-      var self = this;
-      return function() {
-        self.context.router.push('/admin/county/' + id);
-      };
-    },
+    var self = this;
+    return function() {
+      self.context.router.push('/admin/county/' + id);
+    };
+  },
   onFileChange : function(){
     this.props.onFileChange(this.refs.file.files[0], this.props.id);
   },
-render: function() {
-  var addButtonStyle = styles.toggle(this.props.members);
-  var fileErrorMesagesShow = validation.showMsg(this.props.fileErrorMesages);
-  var succesMessage = alerts.showSucces(this.props.succesMessage);
-  return (
+  render: function() {
+    var addButtonStyle = styles.toggle(this.props.members);
+    var fileErrorMesagesShow = validation.showMsg(this.props.fileErrorMesages);
+    var succesMessage = alerts.showSucces(this.props.succesMessage);
+    return (
             <tr>
               <td className='small'>
                 {this.props.id}
