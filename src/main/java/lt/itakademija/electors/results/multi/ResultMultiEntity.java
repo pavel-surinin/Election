@@ -1,5 +1,4 @@
 package lt.itakademija.electors.results.multi;
-
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.results.multi.rating.RatingEntity;
