@@ -214,10 +214,10 @@ public class CountyControllerTest {
         String partyName2 = "Skaidruolių";
         Integer partyNumber2 = 2;
         partyService.save(partyName2, partyNumber2, partyfile2);
-        FileInputStream fis = new FileInputStream(new File("test-csv/Good_County_NoParty_And_Party_candidate_data.csv"));
+        FileInputStream fis = new FileInputStream(new File("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv"));
         List<CandidateEntity> candidateEntityList = csvParser.extractCandidates(fis);
 
-        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data.csv");
+        MultipartFile result = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
         ResponseEntity<CountyReport[]> respCountyReport = rest.getForEntity("/county", CountyReport[].class);
         final Long id = respCountyReport.getBody()[0].getId();
         countyService.update(id, result);
@@ -229,13 +229,17 @@ public class CountyControllerTest {
         FileInputStream candidateFile = new FileInputStream(new File("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv"));
         List<CandidateEntity> candidateEntityUpdateList = csvParser.extractCandidates(candidateFile);
         //verify
-// TODO Kandidatus pridede papildomai, yra Exception'as CountyCandidatesAlreadyExistException bet nesutvarkytas
+        // TODO Kandidatus pridede papildomai, yra Exception'as CountyCandidatesAlreadyExistException bet nesutvarkytas
         //assertThat(respCountyReportAfterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
         assertThat(respCountyReportUpdate.getStatusCodeValue(),CoreMatchers.is(200));
         assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
 
     }
-    //TODO testas nieko netikrina, patikrink kanors
+
+    @Test
+    public void VoteNumberOverkill(){
+
+    }
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_DiferentColumn() throws Exception {
         //setup
@@ -248,7 +252,6 @@ public class CountyControllerTest {
         assertThat(e.getMessage(), CoreMatchers.is("Not equal columns count *.csv"));
         }
     }
-    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NoNumberInParty() throws Exception {
         //setup
@@ -261,7 +264,6 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
-    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NoPartyNumber() throws Exception {
         //setup
@@ -274,7 +276,6 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list111111"));
         }
     }
-    //TODO pridarei hujinios predaryk
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_NotExistingPartyNumber() throws Exception {
         //setup
@@ -287,7 +288,6 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
-    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badNameCharacters() throws Exception {
         //setup
@@ -300,7 +300,6 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
-    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badSurnameCharacters() throws Exception {
         //setup
@@ -313,7 +312,6 @@ public class CountyControllerTest {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }
-    //TODO testas nieko netikrina, patikrink kanors
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badDateFormat() throws Exception {
         //setup
@@ -346,7 +344,6 @@ public class CountyControllerTest {
         assertThat(respDetailsBefore.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(respCreate.getBody().getName(), CoreMatchers.is("Panerių"));
         assertThat(respDetailsAfter.getBody().getCandidates().size(), CoreMatchers.is(3));
-//        assertThat(respDetailsAfter.getBody().getDistricts().size(), CoreMatchers.is(1));
 
 
     }
@@ -388,7 +385,6 @@ public class CountyControllerTest {
         respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
         //votes
         final DistrictEntity d1 = districtRepository.findAll().get(0);
-
         final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
         final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
@@ -443,9 +439,7 @@ public class CountyControllerTest {
         Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
         MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
         MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
-        //int candidateCountBeforeUploads = candidateService.getAllCandidates().size();
         partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
-        //int candidateCountAfterPartyUpdate = candidateService.getAllCandidates().size();
         countyService.update(vilniusId,mixedFile);
         Boolean execute = transactionTemplate.execute(new TransactionCallback<Boolean>() {
             @Override
@@ -513,7 +507,7 @@ public class CountyControllerTest {
             });
             assertThat(execute, CoreMatchers.is(4L));
         }
-        @Ignore
+
         @Test
         public void MultiCandidatesAfterCountyDelete(){
             ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity(URI, CountyReport[].class);
@@ -527,12 +521,8 @@ public class CountyControllerTest {
             partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
             countyService.update(vilniusId,mixedFile);
             countyService.delete(vilniusId);
-            //county candidates without party should be gone
             long countAfterDel =  candidateRepository.getCandidatesList().stream().filter(c -> c.getPartyDependencies() == null).count();
             assertThat(countAfterDel,CoreMatchers.is(6L));
-
-
-
         }
 
         @TestConfiguration
