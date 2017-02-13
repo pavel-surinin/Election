@@ -106,17 +106,6 @@ public class MyUtils {
     }
 
     /**
-     * @param partyId
-     * @param name
-     * @param partyNumber
-     * @return
-     */
-    public static String getPartyJson(Long partyId, String name, Integer partyNumber, List<CandidateEntity> members) {
-        String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber + "}";
-        return partyString;
-    }
-
-    /**
      * @param resultId
      * @param districtId
      * @param candidateId
@@ -146,6 +135,16 @@ public class MyUtils {
         rating.setPoints(points);
         return rating;
     }
+
+    /**
+     * @param partyId
+     * @param name
+     * @param partyNumber
+     * @return
+     */
+    public static String getPartyJson(Long partyId, String name, Integer partyNumber, List<CandidateEntity> members) {
+        String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber + "}";
+        return partyString;
+    }
+
 }
-
-

@@ -2,8 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/Good_County_NoParty_And_Party_candidate_data_2.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/MultiResultRowModalRowComponent.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/custom-party-1.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test-csv/data-county-party-notmultilist.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiEntity.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/exceptions/CountyCandidatesAlreadyExistException.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/exceptions/CountyCandidatesAlreadyExistException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/CSVParser.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/storage/CSVParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/CountyContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/CountyContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test-csv/Bad_County_candidate_badDateFormat_data.csv" afterPath="$PROJECT_DIR$/test-csv/Bad_County_candidate_badDateFormat_data.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test-csv/Good_County_NoParty_And_Party_candidate_data.csv" afterPath="$PROJECT_DIR$/test-csv/Good_County_NoParty_And_Party_candidate_data.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test-csv/Good_Darbo_Party_candidate_data.csv" afterPath="$PROJECT_DIR$/test-csv/Good_Darbo_Party_candidate_data.csv" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,7 +63,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResultSingleControllerTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ResultSingleControllerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1334">
@@ -60,6 +75,16 @@
                 <element signature="class#NegativeVoteNumberException#0;class#ResultSingleControllerTest#0" expanded="false" />
                 <element signature="class#Config#0;class#ResultSingleControllerTest#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,13 +134,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/users/UsersController.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/users/UsersService.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictReport.java" />
-        <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/rating/RatingEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/MyUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/DataPreloader.java" />
@@ -148,10 +171,12 @@
         <option value="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyListViewComponent.js" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiRepository.java" />
-        <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/multi/ResultMultiControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/candidate/CandidateControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -160,28 +185,6 @@
     <option name="y" value="-8" />
     <option name="width" value="1382" />
     <option name="height" value="744" />
-  </component>
-  <component name="ProjectInspectionProfilesVisibleTreeState">
-    <entry key="Project Default">
-      <profile-state>
-        <expanded-state>
-          <State>
-            <id />
-          </State>
-          <State>
-            <id>Java</id>
-          </State>
-          <State>
-            <id>Javadoc issuesJava</id>
-          </State>
-        </expanded-state>
-        <selected-state>
-          <State>
-            <id>JavaDoc</id>
-          </State>
-        </selected-state>
-      </profile-state>
-    </entry>
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -788,6 +791,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -795,11 +812,6 @@
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="rating&#9;FILE&#9;file://C:/Users/Pavel/workspace/election/Election/src/main/java/lt/itakademija/electors/results/multi/rating/RatingEntity.java&#10;candida&#9;FILE&#9;file://C:/Users/Pavel/workspace/election/Election/src/main/java/lt/itakademija/electors/candidate/CandidateReport.java&#10;party&#9;FILE&#9;file://C:/Users/Pavel/workspace/election/Election/src/main/java/lt/itakademija/electors/party/PartyReport.java" />
     <property name="extract.method.default.visibility" value="private" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="lt.itakademija" />
-    </key>
   </component>
   <component name="RunManager" selected="JUnit.ResultSingleControllerTest">
     <configuration default="false" name="CandidateControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -1177,9 +1189,6 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="Merge branch 'master' of https://github.com/pavel-surinin/Rinkimu_sistema&#10;&#10;# Conflicts:&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasController.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasReport.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/kandidatas/KandidatasService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaController.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaEntity.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaRepository.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartijaService.class&#10;#&#9;target/classes/lt/itakademija/electors/partija/PartjiaReport.class&#10;#&#9;target/test-classes/lt/itakademija/electors/partija/PartijaEntityTest.class&#10;" />
@@ -1283,14 +1292,14 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39905363" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33753943" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33753943" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3438486" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3643533" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2949527" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15153733" sideWeight="0.49369085" order="9" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23279649" sideWeight="0.49369085" order="9" side_tool="false" content_ui="combo" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Running Info" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1370,13 +1379,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyReport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -1723,37 +1725,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="145" column="31" lean-forward="false" selection-start-line="145" selection-start-column="31" selection-end-line="145" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="363" column="90" lean-forward="true" selection-start-line="363" selection-start-column="8" selection-end-line="363" selection-end-column="90" />
-          <folding>
-            <element signature="method#save#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#saveCountyWithSameName#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#updateCountyName#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidates#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidates_NoSingleCandidatesExists#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidates_CandidatesAlreadyExistsInCounty_UploadingCandidatesWhichWasNotInList#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidatesWithBadCsvFile_DiferentColumn#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidatesWithBadCsvFile_NoNumberInParty#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidatesWithBadCsvFile_NoPartyNumber#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidatesWithBadCsvFile_NotExistingPartyNumber#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidatesWithBadCsvFile_badNameCharacters#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidatesWithBadCsvFile_badSurnameCharacters#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#uploadSingleCandidatesWithBadCsvFile_badDateFormat#0;class#CountyControllerTest#0" expanded="false" />
-            <element signature="method#getCountyDetails#0;class#CountyControllerTest#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="369">
@@ -1770,7 +1741,7 @@
         <state relative-caret-position="295">
           <caret line="126" column="34" lean-forward="false" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
             <element signature="method#getAll#0;class#CountyService#0" expanded="false" />
             <element signature="method#save#0;class#CountyService#0" expanded="false" />
             <element signature="method#getCountyById#0;class#CountyService#0" expanded="false" />
@@ -1868,6 +1839,47 @@
             <element signature="class#NegativeVoteNumberException#0;class#ResultSingleControllerTest#0" expanded="false" />
             <element signature="class#Config#0;class#ResultSingleControllerTest#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="1193" column="25" lean-forward="false" selection-start-line="1193" selection-start-column="25" selection-end-line="1193" selection-end-column="25" />
+          <folding>
+            <element signature="method#save#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#saveCountyWithSameName#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#updateCountyName#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidates#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidates_NoSingleCandidatesExists#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidates_CandidatesAlreadyExistsInCounty_UploadingCandidatesWhichWasNotInList#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidatesWithBadCsvFile_DiferentColumn#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidatesWithBadCsvFile_NoNumberInParty#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidatesWithBadCsvFile_NoPartyNumber#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidatesWithBadCsvFile_NotExistingPartyNumber#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidatesWithBadCsvFile_badNameCharacters#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidatesWithBadCsvFile_badSurnameCharacters#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#uploadSingleCandidatesWithBadCsvFile_badDateFormat#0;class#CountyControllerTest#0" expanded="false" />
+            <element signature="method#getCountyDetails#0;class#CountyControllerTest#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="136" column="5" lean-forward="false" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
