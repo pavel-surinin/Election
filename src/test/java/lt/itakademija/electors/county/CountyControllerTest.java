@@ -248,7 +248,6 @@ public class CountyControllerTest {
         //assertThat(respCountyReportAfterUpdate.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
         assertThat(respCountyReportUpdate.getStatusCodeValue(), CoreMatchers.is(200));
         assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
-
     }
 
     @Test
@@ -341,10 +340,10 @@ public class CountyControllerTest {
         }
     }
 
-    @Autowired
     @Test
     public void uploadSingleCandidatesWithBadCsvFile_badDateFormat() throws Exception {
         //setup
+
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Bad_County_candidate_badDateFormat_data.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         Long  countyId = resp1.getBody()[0].getId();
@@ -353,7 +352,7 @@ public class CountyControllerTest {
             countyService.update(countyId,result);
         } catch (BadCSVFileExceprion e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
+            assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
         }
     }
 
