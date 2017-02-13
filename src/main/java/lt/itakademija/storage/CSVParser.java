@@ -65,7 +65,7 @@ public class CSVParser {
                         can.setNumberInParty(parseNullOrInteger(line[3]));
                         can.setDescription(line[4]);
                         return can;
-                    } catch (Throwable pe) {
+                    } catch (Exception pe) {
                         throw new BadCSVFileExceprion("Not acceptable csv data for party-list");
                     }
                 }).collect(Collectors.toList());
@@ -88,7 +88,7 @@ public class CSVParser {
         try {
             date = format.parse(string);
         } catch (ParseException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Bad date format");
         }
         return date;
     }
