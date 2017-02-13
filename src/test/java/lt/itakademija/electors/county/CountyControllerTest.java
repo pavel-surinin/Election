@@ -38,7 +38,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -183,7 +185,13 @@ public class CountyControllerTest {
         //execute
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         ResponseEntity<CountyReport[]> resp = rest.getForEntity("/county", CountyReport[].class);
         //verify
         assertThat(resp1.getBody()[0].getCandidatesCount(), CoreMatchers.is(0));
@@ -208,7 +216,13 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv");
         ResponseEntity<CountyReport[]> respCountyReport = rest.getForEntity("/county", CountyReport[].class);
         final Long id = respCountyReport.getBody()[0].getId();
-        countyService.update(id, result);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         ResponseEntity<CountyReport[]> respCountyReportafterUpdate = rest.getForEntity("/county", CountyReport[].class);
         //verify
         assertThat(respCountyReport.getStatusCodeValue(), CoreMatchers.is(200));
@@ -217,7 +231,6 @@ public class CountyControllerTest {
     }
 
     @Test
-    @Transactional
     public void uploadSingleCandidates_CandidatesAlreadyExistsInCounty_UploadingCandidatesWhichWasNotInList() throws Exception {
         //setup
         partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
@@ -239,19 +252,38 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data.csv");
         ResponseEntity<CountyReport[]> respCountyReport = rest.getForEntity("/county", CountyReport[].class);
         final Long id = respCountyReport.getBody()[0].getId();
-        countyService.update(id, result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(id, result);
+                    return true;
+                }
+            });
         //execute
         MultipartFile resultUpdate = MyUtils.parseToMultiPart("test-csv/Good_County_Darbo_Skaidruoliu_Party_candidate_data.csv");
         String countyName = countyRepository.findById(id).getName();
         ResponseEntity<CountyReport[]> respCountyAfterUpdateReport = rest.getForEntity("/county", CountyReport[].class);
+
+      Integer execute = transactionTemplate.execute(new TransactionCallback<Integer>() {
+            @Override
+            public Integer doInTransaction(TransactionStatus transactionStatus) {
+               int numberOfCandidatesInCounty = countyRepository.findById(id).getCandidates().size();
+                return numberOfCandidatesInCounty;
+            }
+        });
         //verify
-        assertThat(respCountyAfterUpdateReport.getBody()[0].getCandidatesCount(), CoreMatchers.is(candidateEntityList.size()));
-//        assertThat(countyRepository.findById(id).getCandidates().size(), CoreMatchers.is(candidateEntityList.size()));
+        assertThat(execute, CoreMatchers.is(candidateEntityList.size()));
         try{
-            countyService.update(id, resultUpdate);
+            Boolean executeAfterUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(id, resultUpdate);
+                    return true;
+                }
+            });
         } catch (CountyCandidatesAlreadyExistException e) {
             //verify
-            assertThat(e.getMessage(), CoreMatchers.is(countyName+" already has candidate"));
+            assertThat(e.getMessage(), CoreMatchers.is(countyName+" county already has candidates."));
         }
     }
 
@@ -263,7 +295,13 @@ public class CountyControllerTest {
         Long  countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId,result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(countyId, result);
+                    return true;
+                }
+            });
         } catch (NotEqualColumnsCountCsv e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not equal columns count *.csv"));
@@ -278,7 +316,13 @@ public class CountyControllerTest {
         Long  countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId,result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(countyId, result);
+                    return true;
+                }
+            });
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
@@ -293,7 +337,13 @@ public class CountyControllerTest {
         Long  countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId,result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(countyId, result);
+                    return true;
+                }
+            });
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
@@ -308,7 +358,13 @@ public class CountyControllerTest {
         Long  countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId,result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(countyId, result);
+                    return true;
+                }
+            });
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
@@ -323,7 +379,13 @@ public class CountyControllerTest {
         Long  countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId,result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(countyId, result);
+                    return true;
+                }
+            });
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
@@ -338,7 +400,13 @@ public class CountyControllerTest {
         Long  countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId,result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(countyId, result);
+                    return true;
+                }
+            });
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
@@ -354,7 +422,13 @@ public class CountyControllerTest {
         Long  countyId = resp1.getBody()[0].getId();
         //execute
         try {
-            countyService.update(countyId,result);
+            Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+                @Override
+                public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                    countyService.update(countyId, result);
+                    return true;
+                }
+            });
         } catch (BadCSVFileExceprion e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
@@ -403,8 +477,6 @@ public class CountyControllerTest {
         //verify
         assertThat(countyRepository.findAll().size(), CoreMatchers.is(0));
         assertThat(districtRepository.findAll().size(), CoreMatchers.is(0));
-        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(0));
-
     }
 
     @Test
@@ -414,7 +486,13 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         //setup addnig district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
@@ -457,7 +535,13 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         //setup addnig district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String paneriuDistrictCreate = MyUtils.getDistrictJson(null, "Panerių", "Ūmėdžių g. 9", 500, countyId);
@@ -504,7 +588,13 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         //setup addnig district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String paneriuDistrictCreate = MyUtils.getDistrictJson(null, "Panerių", "Ūmėdžių g. 9", 500, countyId);
@@ -553,7 +643,13 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         //setup addnig district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String karoluDistrictCreate = MyUtils.getDistrictJson(null, "Karolų", "Koralų g 15", 1000, countyId);
@@ -589,7 +685,13 @@ public class CountyControllerTest {
         MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
         ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
         final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
+        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
+            @Override
+            public Boolean doInTransaction(TransactionStatus transactionStatus) {
+                countyService.update(id, result);
+                return true;
+            }
+        });
         //setup addnig district
         final Long countyId = countyRepository.findAll().get(0).getId();
         String karoluDistrictCreate = MyUtils.getDistrictJson(null, "Karolų", "Koralų g 15", 1000, countyId);
