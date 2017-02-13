@@ -3,10 +3,7 @@ package lt.itakademija.electors.county;
 
 import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
-import lt.itakademija.electors.candidate.CandidateController;
-import lt.itakademija.electors.candidate.CandidateEntity;
-import lt.itakademija.electors.candidate.CandidateRepository;
-import lt.itakademija.electors.candidate.CandidateService;
+import lt.itakademija.electors.candidate.*;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictReport;
 import lt.itakademija.electors.district.DistrictRepository;
@@ -363,10 +360,11 @@ public class CountyControllerTest {
 
         //exercise
         countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
+        ResponseEntity<CountyReport[]> response = rest.getForEntity("/county", CountyReport[].class);
         //verify
         assertThat(countyRepository.findAll().size(), CoreMatchers.is(0));
         assertThat(districtRepository.findAll().size(), CoreMatchers.is(0));
-        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(3));
+        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(response.getBody().length));
 
     }
 
@@ -425,8 +423,9 @@ public class CountyControllerTest {
         partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
         int candidateCountAfterPartyUpdate = candidateService.getAllCandidates().size();
         countyService.update(vilniusId,mixedFile);
+        ResponseEntity<CandidateReport[]> responseAfterUpdate = rest.getForEntity("/candidate", CandidateReport[].class);
         int candidateCountAfterCountyUpdate = candidateService.getAllCandidates().size();
-        assertThat(candidateCountAfterCountyUpdate,CoreMatchers.is(16));
+        assertThat(candidateCountAfterCountyUpdate,CoreMatchers.is(responseAfterUpdate.getBody().length));
     }
 
     @Test
@@ -465,11 +464,8 @@ public class CountyControllerTest {
             Integer darboPartijaNumber = partyResponse.getBody()[0].getPartyNumber();
             MultipartFile darboPartijaFile = MyUtils.parseToMultiPart("test-csv/Good_Darbo_Party_candidate_data.csv");
             MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
-            //int candidateCountBeforeUploads = candidateService.getAllCandidates().size();
             partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
-            //int candidateCountAfterPartyUpdate = candidateService.getAllCandidates().size();
             countyService.update(vilniusId,mixedFile);
-            //TODO reikia surasti kiek yra nepartiniu kandidatu
             Boolean execute = transactionTemplate.execute(new TransactionCallback<Boolean>() {
                 @Override
                 public Boolean doInTransaction(TransactionStatus transactionStatus) {
@@ -494,7 +490,6 @@ public class CountyControllerTest {
             MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/Good_County_NoParty_And_Party_candidate_data_3.csv");
             partyService.save(darboPartijaId,darboPartijaName,darboPartijaNumber,darboPartijaFile);
             countyService.update(vilniusId,mixedFile);
-            //TODO reikia surasti kiek yra vienmandates kandidatu
             Long execute = transactionTemplate.execute(new TransactionCallback<Long>() {
                 @Override
                 public Long doInTransaction(TransactionStatus transactionStatus) {
@@ -522,7 +517,7 @@ public class CountyControllerTest {
             countyService.update(vilniusId,mixedFile);
             countyService.delete(vilniusId);
             long countAfterDel =  candidateRepository.getCandidatesList().stream().filter(c -> c.getPartyDependencies() == null).count();
-            assertThat(countAfterDel,CoreMatchers.is(6L));
+            assertThat(countAfterDel,CoreMatchers.is(0L));
         }
 
         @TestConfiguration
