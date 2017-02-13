@@ -36,8 +36,8 @@ body {
 
 #wrapper {background-color: #fff; border-left: 1px solid #ccc;  border-right: 1px solid #ccc;}
 
-/*.notification{
+.notification{
   position: fixed;
   right: 10px;
   bottom: 3px;
-}*/
+}

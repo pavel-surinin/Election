@@ -36,6 +36,7 @@ var CountyContainer = React.createClass({
       file : null,
       fileErrorMesages : [],
       succesMessage : '',
+      deletedCountyName : '',
     };
   },
   componentWillMount: function() {
@@ -81,12 +82,13 @@ var CountyContainer = React.createClass({
       this.setState({fileErrorMesages : fileErrorMesages});
     }
   },
-  onHandleDelete: function(i) {
+  onHandleDelete: function(id, name) {
     var self = this;
     event.preventDefault();
     axios
-      .delete('/county/'+ i)
+      .delete('/county/'+ id)
       .then(function(response){
+        self.setState({succesCreateText : '' , deletedCountyName : 'Apygarda ' + name + ' ištrinta'});
         getCounty(self);
       })
       .catch(function(err){
@@ -121,6 +123,7 @@ var CountyContainer = React.createClass({
           onHandleFormAddSingleCandSubmit={this.onHandleFormAddSingleCandSubmit}
           onHandleAddClick={this.onHandleAddClick}
           succesMessage={this.state.succesMessage}
+          deletedCountyName={this.state.deletedCountyName}
         />
       );
     }
