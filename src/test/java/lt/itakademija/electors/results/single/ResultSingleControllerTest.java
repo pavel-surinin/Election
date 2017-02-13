@@ -13,8 +13,6 @@ import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
-import lt.itakademija.exceptions.NegativeVoteNumberException;
-import lt.itakademija.exceptions.TooManyVotersException;
 import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
@@ -28,9 +26,11 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -242,18 +242,10 @@ public class ResultSingleControllerTest {
 
         final String save = resultSingleService.save(results);
 
-        //execute
-        res1.setApproved(true);
-        res2.setApproved(true);
-        res3.setApproved(true);
-        res4.setApproved(true);
-//        results.stream().forEach(res -> resultSingleService.approve(res.getDistrict().getId()));
+        final String approveResults = resultSingleService.approve(respCreateDistrict.getBody().getId());
 
         //verify
-//        assertThat(respCreateDistrict.getBody().isResultSingleApproved(), CoreMatchers.is(true));
-        assertThat(results.get(0).isApproved(), CoreMatchers.is(true));
-        assertThat(results.get(1).isApproved(), CoreMatchers.is(true));
-        assertThat(results.get(2).isApproved(), CoreMatchers.is(true));
+        assertThat(approveResults, CoreMatchers.is("Results approved"));
 
     }
 
@@ -408,6 +400,30 @@ public class ResultSingleControllerTest {
         assertThat(save2, CoreMatchers.is("Votes registered"));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
 
+    }
+
+    @ResponseStatus(value= HttpStatus.FAILED_DEPENDENCY, reason="More votes registered than there is voters in the district")
+    public class TooManyVotersException extends RuntimeException{
+
+        public TooManyVotersException(String message) {
+            super(message);
+        }
+
+        public TooManyVotersException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
+
+    @ResponseStatus(value= HttpStatus.FAILED_DEPENDENCY, reason="Negative value of votes number")
+    public class NegativeVoteNumberException extends RuntimeException{
+
+        public NegativeVoteNumberException(String message) {
+            super(message);
+        }
+
+        public NegativeVoteNumberException(String message, Throwable cause) {
+            super(message, cause);
+        }
     }
 
     @TestConfiguration
