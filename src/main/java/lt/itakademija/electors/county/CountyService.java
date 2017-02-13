@@ -78,6 +78,9 @@ public class CountyService {
 
     public void update(Long countyId, MultipartFile file) {
         CountyEntity county = repository.findById(countyId);
+        if (county.getCandidates().size() != 0){
+            throw new CountyCandidatesAlreadyExistException(county.getName() + " already has candidates.");
+        }
         List<CandidateEntity> candidatesFromFile = storageService.store("County", file);
         validateCandidateIsInCounty(candidatesFromFile);
         final List<CandidateEntity> noPartyCandidates = filterNoPartyCandidates(candidatesFromFile);
