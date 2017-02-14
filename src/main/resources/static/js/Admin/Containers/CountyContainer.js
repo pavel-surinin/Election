@@ -84,7 +84,6 @@ var CountyContainer = React.createClass({
   },
   onHandleDelete: function(id, name) {
     var self = this;
-    event.preventDefault();
     axios
       .delete('/county/'+ id)
       .then(function(response){
