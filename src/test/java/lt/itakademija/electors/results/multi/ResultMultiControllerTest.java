@@ -225,7 +225,7 @@ public class ResultMultiControllerTest {
         results.add(res3);
 
         String save = null;
-        if(res1.getVotes() >= 0 & res2.getVotes() >= 0 & res3.getVotes() < 0){
+        if(res1.getVotes() >= 0 & res2.getVotes() >= 0 & res3.getVotes() >= 0){
             save = resultMultiService.save(results);
         }
 

@@ -96,11 +96,9 @@ public class ResultSingleControllerTest {
     @Before
     public void setUp() throws Exception {
 
-        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
-        countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
-
         String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
         ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
+        Long countyId = countyEntityResponseEntity.getBody().getId();
 
         DistrictEntity districtEnt = new DistrictEntity();
         districtEnt.setAdress("Saules 5-23");
@@ -109,15 +107,18 @@ public class ResultSingleControllerTest {
         districtEnt.setNumberOfElectors(5000L);
         DistrictEntity districtEntity = districtService.save(districtEnt);
 
-//        String SauliusString = MyUtils.getCandidateJson(null, "Saulius", "Domavicius", "2000-12-12", "Adminas", 92, null, null);
-//        ResponseEntity<CandidateEntity> respCandidateCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(SauliusString), CandidateEntity.class);
-        
+        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
+        String name1 = "Jonu Partija";
+        Integer number1 = 45;
+        partyService.save(name1, number1, file1);
+        Long partyId = partyRepository.getPartyByNumber(45).getId();
+
     }
 
     @After
     public void tearDown() throws Exception {
 
-        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+        districtRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
         candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
         districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
         partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
@@ -126,44 +127,44 @@ public class ResultSingleControllerTest {
 
     @Test
     public void save() throws Exception {
-        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
-        //setup adding county and district
-        String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
-        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
-        Long countyId = countyEntityResponseEntity.getBody().getId();
 
         DistrictEntity districtEnt1 = new DistrictEntity();
-        districtEnt1.setAdress("Saules 55-23");
-        districtEnt1.setName("Tvarkos");
+        districtEnt1.setAdress("Winterfelas 5-23");
+        districtEnt1.setName("Starku");
         districtEnt1.setCounty(countyRepository.findAll().get(0));
-        districtEnt1.setNumberOfElectors(800L);
-        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
+        districtEnt1.setNumberOfElectors(4900L);
+        DistrictEntity districtEntity = districtService.save(districtEnt1);
 
-        //setup adding candidates
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Davatku Partija";
-        Integer number1 = 14;
-        partyService.save(name1, number1, file1);
+        CandidateEntity candSauliusEnt = new CandidateEntity();
+        candSauliusEnt.setName("Saulius");
+        candSauliusEnt.setSurname("Domavicius");
+        candSauliusEnt.setBirthDate(new Date());
+        candSauliusEnt.setCounty(countyRepository.findAll().get(0));
+        CandidateEntity candidateEntity1 = candidateService.save(candSauliusEnt);
+
+        CandidateEntity candPauliusEnt = new CandidateEntity();
+        candPauliusEnt.setName("Paulius");
+        candPauliusEnt.setSurname("Tomkus");
+        candPauliusEnt.setBirthDate(new Date());
+        candPauliusEnt.setCounty(countyRepository.findAll().get(0));
+        candPauliusEnt.setPartyDependencies(partyRepository.getPartyByNumber(45));
+        candPauliusEnt.setNumberInParty(5);
+        CandidateEntity candidateEntity2 = candidateService.save(candPauliusEnt);
 
         //votes
-        final CandidateEntity cand1 = candidateRepository.getCandidatesList().get(0);
-        final CandidateEntity cand2 = candidateRepository.getCandidatesList().get(1);
-        final CandidateEntity cand3 = candidateRepository.getCandidatesList().get(2);
         final CandidateEntity spoiled = new CandidateEntity();
         spoiled.setId(-1991L);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(cand1, districtEnt1, 200L, new Date());
-        ResultSingleEntity res2 = new ResultSingleEntity(cand2, districtEnt1, 50L, new Date());
-        ResultSingleEntity res3 = new ResultSingleEntity(cand3, districtEnt1, 100L, new Date());
-        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, districtEnt1, 50L, new Date());
+        ResultSingleEntity res1 = new ResultSingleEntity(candSauliusEnt, districtEnt1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(candPauliusEnt, districtEnt1, 50L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
 
         List<ResultSingleEntity> resultList = new ArrayList<>();
         resultList.add(res1);
         resultList.add(res2);
         resultList.add(res3);
-        resultList.add(res4);
 
-        String save = resultSingleService.save(resultList);
+        final String save = resultSingleService.save(resultList);
 //        try{
 //            Long sum = res1.getVotes()+res2.getVotes()+res3.getVotes();
 //            if(sum <= districtEntity1.getNumberOfElectors()) {
@@ -176,174 +177,267 @@ public class ResultSingleControllerTest {
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(2));
 
     }
 
-    @Ignore
     @Test
-    public void approve() throws Exception {
-
-        //setup adding candidates
-        MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
-        ResponseEntity<CountyReport[]> responseCountiesList = rest.getForEntity("/county", CountyReport[].class);
-        final Long id = responseCountiesList.getBody()[0].getId();
-        Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
-            @Override
-            public Boolean doInTransaction(TransactionStatus transactionStatus) {
-                countyService.update(id, result);
-                return true;
-            }
-        });
-        //setup adding district
-        DistrictEntity de = new DistrictEntity();
-        de.setAdress("aaaaaaa");
-        de.setName("AAAAAAb");
-        de.setCounty(countyRepository.findAll().get(0));
-        de.setNumberOfElectors(5000L);
-        DistrictEntity districtEntity = districtService.save(de);
-
-        //votes
-        final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
-        final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
-        final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
-        final CandidateEntity spoiled = new CandidateEntity();
-        spoiled.setId(-1991L);
-
-        ResultSingleEntity res1 = new ResultSingleEntity(c1, districtEntity, 20L, new Date());
-        ResultSingleEntity res2 = new ResultSingleEntity(c2, districtEntity, 50L, new Date());
-        ResultSingleEntity res3 = new ResultSingleEntity(c3, districtEntity, 40L, new Date());
-        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, districtEntity, 10L, new Date());
-
-        List<ResultSingleEntity> results = new ArrayList<>();
-        results.add(res1);
-        results.add(res2);
-        results.add(res3);
-        results.add(res4);
-
-        final String save = resultSingleService.save(results);
-        final String approveResults = resultSingleService.approve(districtEntity.getId());
-        boolean approved = resultSingleRepository.findAll().get(0).isApproved();
-        //verify
-        assertThat(approveResults, CoreMatchers.is("Results approved"));
-        assertThat(approved, CoreMatchers.is(true));
-
-    }
-
-
-    @Test
-    public void deleteResultsButNotCandidates() throws Exception {
-        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
-        //setup adding county and district
-        String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
-        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
-        Long countyId = countyEntityResponseEntity.getBody().getId();
-
+    public void negativeData() throws Exception{
         DistrictEntity districtEnt1 = new DistrictEntity();
-        districtEnt1.setAdress("Sales 55-23");
-        districtEnt1.setName("Darbo");
+        districtEnt1.setAdress("Winterfelas 5-23");
+        districtEnt1.setName("Starku");
         districtEnt1.setCounty(countyRepository.findAll().get(0));
-        districtEnt1.setNumberOfElectors(800L);
-        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
+        districtEnt1.setNumberOfElectors(4900L);
+        DistrictEntity districtEntity = districtService.save(districtEnt1);
 
-        //setup adding candidates
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Lavonu Partija";
-        Integer number1 = 150;
-        partyService.save(name1, number1, file1);
+        CandidateEntity candSauliusEnt = new CandidateEntity();
+        candSauliusEnt.setName("Saulius");
+        candSauliusEnt.setSurname("Domavicius");
+        candSauliusEnt.setBirthDate(new Date());
+        candSauliusEnt.setCounty(countyRepository.findAll().get(0));
+        CandidateEntity candidateEntity1 = candidateService.save(candSauliusEnt);
+
+        CandidateEntity candPauliusEnt = new CandidateEntity();
+        candPauliusEnt.setName("Paulius");
+        candPauliusEnt.setSurname("Tomkus");
+        candPauliusEnt.setBirthDate(new Date());
+        candPauliusEnt.setCounty(countyRepository.findAll().get(0));
+        candPauliusEnt.setPartyDependencies(partyRepository.getPartyByNumber(45));
+        candPauliusEnt.setNumberInParty(5);
+        CandidateEntity candidateEntity2 = candidateService.save(candPauliusEnt);
 
         //votes
-        final CandidateEntity cand1 = candidateRepository.getCandidatesList().get(0);
-        final CandidateEntity cand2 = candidateRepository.getCandidatesList().get(1);
-        final CandidateEntity cand3 = candidateRepository.getCandidatesList().get(2);
         final CandidateEntity spoiled = new CandidateEntity();
         spoiled.setId(-1991L);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(cand1, districtEnt1, 200L, new Date());
-        ResultSingleEntity res2 = new ResultSingleEntity(cand2, districtEnt1, 50L, new Date());
-        ResultSingleEntity res3 = new ResultSingleEntity(cand3, districtEnt1, 100L, new Date());
-        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, districtEnt1, 50L, new Date());
+        ResultSingleEntity res1 = new ResultSingleEntity(candSauliusEnt, districtEnt1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(candPauliusEnt, districtEnt1, -50L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
 
         List<ResultSingleEntity> resultList = new ArrayList<>();
         resultList.add(res1);
         resultList.add(res2);
         resultList.add(res3);
-        resultList.add(res4);
 
-        String save = resultSingleService.save(resultList);
+        String save = null;
+        if(res1.getVotes() >= 0 & res2.getVotes() >= 0 & res3.getVotes() >= 0){
+            save = resultSingleService.save(resultList);
+        }
+
+        //verify
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
+    }
+
+    @Test
+    public void tooManyVotes() throws Exception{
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Winterfelas 5-23");
+        districtEnt1.setName("Starku");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(490L);
+        DistrictEntity districtEntity = districtService.save(districtEnt1);
+
+        CandidateEntity candSauliusEnt = new CandidateEntity();
+        candSauliusEnt.setName("Saulius");
+        candSauliusEnt.setSurname("Domavicius");
+        candSauliusEnt.setBirthDate(new Date());
+        candSauliusEnt.setCounty(countyRepository.findAll().get(0));
+        CandidateEntity candidateEntity1 = candidateService.save(candSauliusEnt);
+
+        CandidateEntity candPauliusEnt = new CandidateEntity();
+        candPauliusEnt.setName("Paulius");
+        candPauliusEnt.setSurname("Tomkus");
+        candPauliusEnt.setBirthDate(new Date());
+        candPauliusEnt.setCounty(countyRepository.findAll().get(0));
+        candPauliusEnt.setPartyDependencies(partyRepository.getPartyByNumber(45));
+        candPauliusEnt.setNumberInParty(5);
+        CandidateEntity candidateEntity2 = candidateService.save(candPauliusEnt);
+
+        //votes
+        final CandidateEntity spoiled = new CandidateEntity();
+        spoiled.setId(-1991L);
+
+        ResultSingleEntity res1 = new ResultSingleEntity(candSauliusEnt, districtEnt1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(candPauliusEnt, districtEnt1, 500L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
+
+        List<ResultSingleEntity> resultList = new ArrayList<>();
+        resultList.add(res1);
+        resultList.add(res2);
+        resultList.add(res3);
+
+        String save = null;
+        Long sumOfVotes = res1.getVotes() + res2.getVotes() + res3.getVotes();
+        if(sumOfVotes <= districtEnt1.getNumberOfElectors()){
+            save = resultSingleService.save(resultList);
+        }
+
+        //verify
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
+    }
+
+    @Test
+    public void approve() throws Exception {
+
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Winterfelas 5-23");
+        districtEnt1.setName("Starku");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(4900L);
+        DistrictEntity districtEntity = districtService.save(districtEnt1);
+
+        CandidateEntity candSauliusEnt = new CandidateEntity();
+        candSauliusEnt.setName("Saulius");
+        candSauliusEnt.setSurname("Domavicius");
+        candSauliusEnt.setBirthDate(new Date());
+        candSauliusEnt.setCounty(countyRepository.findAll().get(0));
+        CandidateEntity candidateEntity1 = candidateService.save(candSauliusEnt);
+
+        CandidateEntity candPauliusEnt = new CandidateEntity();
+        candPauliusEnt.setName("Paulius");
+        candPauliusEnt.setSurname("Tomkus");
+        candPauliusEnt.setBirthDate(new Date());
+        candPauliusEnt.setCounty(countyRepository.findAll().get(0));
+        candPauliusEnt.setPartyDependencies(partyRepository.getPartyByNumber(45));
+        candPauliusEnt.setNumberInParty(5);
+        CandidateEntity candidateEntity2 = candidateService.save(candPauliusEnt);
+
+        //votes
+        final CandidateEntity spoiled = new CandidateEntity();
+        spoiled.setId(-1991L);
+
+        ResultSingleEntity res1 = new ResultSingleEntity(candSauliusEnt, districtEnt1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(candPauliusEnt, districtEnt1, 50L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
+
+        List<ResultSingleEntity> resultList = new ArrayList<>();
+        resultList.add(res1);
+        resultList.add(res2);
+        resultList.add(res3);
+
+        final String save = resultSingleService.save(resultList);
+        final String approveResults = resultSingleService.approve(districtEntity.getId());
+
+        //verify
+        assertThat(approveResults, CoreMatchers.is("Results approved"));
+        assertThat(resultSingleRepository.getResultsByDistrictId(districtEnt1).get(1).isApproved(), CoreMatchers.is(true));
+    }
+
+    @Test
+    public void deleteResultsButNotCandidates() throws Exception {
+
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Winterfelas 5-23");
+        districtEnt1.setName("Starku");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(4900L);
+        DistrictEntity districtEntity = districtService.save(districtEnt1);
+
+        CandidateEntity candSauliusEnt = new CandidateEntity();
+        candSauliusEnt.setName("Saulius");
+        candSauliusEnt.setSurname("Domavicius");
+        candSauliusEnt.setBirthDate(new Date());
+        candSauliusEnt.setCounty(countyRepository.findAll().get(0));
+        CandidateEntity candidateEntity1 = candidateService.save(candSauliusEnt);
+
+        CandidateEntity candPauliusEnt = new CandidateEntity();
+        candPauliusEnt.setName("Paulius");
+        candPauliusEnt.setSurname("Tomkus");
+        candPauliusEnt.setBirthDate(new Date());
+        candPauliusEnt.setCounty(countyRepository.findAll().get(0));
+        candPauliusEnt.setPartyDependencies(partyRepository.getPartyByNumber(45));
+        candPauliusEnt.setNumberInParty(5);
+        CandidateEntity candidateEntity2 = candidateService.save(candPauliusEnt);
+
+        //votes
+        final CandidateEntity spoiled = new CandidateEntity();
+        spoiled.setId(-1991L);
+
+        ResultSingleEntity res1 = new ResultSingleEntity(candSauliusEnt, districtEnt1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(candPauliusEnt, districtEnt1, 50L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
+
+        List<ResultSingleEntity> resultList = new ArrayList<>();
+        resultList.add(res1);
+        resultList.add(res2);
+        resultList.add(res3);
+
+        Long candidateSizeBefore = candidateRepository.getCandidatesCount();
+        final String save = resultSingleService.save(resultList);
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(2));
 
-        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+        final String delete = resultSingleService.delete(districtEnt1.getId());
+        Long candidateSizeAfter = candidateRepository.getCandidatesCount();
+        assertThat(delete, CoreMatchers.is("Results Deleted"));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
-        assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(3));
+        assertThat(candidateSizeAfter, CoreMatchers.is(candidateSizeBefore));
     }
 
     @Test
     public void deleteResultsAddAgain() throws Exception {
 
-        //setup adding county and district
-        String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
-        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
-        Long countyId = countyEntityResponseEntity.getBody().getId();
-
         DistrictEntity districtEnt1 = new DistrictEntity();
-        districtEnt1.setAdress("Ssdfules 55-23");
-        districtEnt1.setName("Namu");
+        districtEnt1.setAdress("Winterfelas 5-23");
+        districtEnt1.setName("Starku");
         districtEnt1.setCounty(countyRepository.findAll().get(0));
-        districtEnt1.setNumberOfElectors(900L);
-        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
+        districtEnt1.setNumberOfElectors(4900L);
+        DistrictEntity districtEntity = districtService.save(districtEnt1);
 
-        //setup adding candidates
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Kalnu Partija";
-        Integer number1 = 10;
-        partyService.save(name1, number1, file1);
+        CandidateEntity candSauliusEnt = new CandidateEntity();
+        candSauliusEnt.setName("Saulius");
+        candSauliusEnt.setSurname("Domavicius");
+        candSauliusEnt.setBirthDate(new Date());
+        candSauliusEnt.setCounty(countyRepository.findAll().get(0));
+        CandidateEntity candidateEntity1 = candidateService.save(candSauliusEnt);
+
+        CandidateEntity candPauliusEnt = new CandidateEntity();
+        candPauliusEnt.setName("Paulius");
+        candPauliusEnt.setSurname("Tomkus");
+        candPauliusEnt.setBirthDate(new Date());
+        candPauliusEnt.setCounty(countyRepository.findAll().get(0));
+        candPauliusEnt.setPartyDependencies(partyRepository.getPartyByNumber(45));
+        candPauliusEnt.setNumberInParty(5);
+        CandidateEntity candidateEntity2 = candidateService.save(candPauliusEnt);
 
         //votes
-        final CandidateEntity cand1 = candidateRepository.getCandidatesList().get(0);
-        final CandidateEntity cand2 = candidateRepository.getCandidatesList().get(1);
-        final CandidateEntity cand3 = candidateRepository.getCandidatesList().get(2);
         final CandidateEntity spoiled = new CandidateEntity();
         spoiled.setId(-1991L);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(cand1, districtEnt1, 200L, new Date());
-        ResultSingleEntity res2 = new ResultSingleEntity(cand2, districtEnt1, 50L, new Date());
-        ResultSingleEntity res3 = new ResultSingleEntity(cand3, districtEnt1, 100L, new Date());
-        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, districtEnt1, 50L, new Date());
+        ResultSingleEntity res1 = new ResultSingleEntity(candSauliusEnt, districtEnt1, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(candPauliusEnt, districtEnt1, 50L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
 
         List<ResultSingleEntity> resultList = new ArrayList<>();
         resultList.add(res1);
         resultList.add(res2);
         resultList.add(res3);
-        resultList.add(res4);
 
-        String save1 = resultSingleService.save(resultList);
+        final String save1 = resultSingleService.save(resultList);
 
         //verify
         assertThat(save1, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
-        resultSingleRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(2));
+        final String delete = resultSingleService.delete(districtEnt1.getId());
+        assertThat(delete, CoreMatchers.is("Results Deleted"));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
 
-        ResultSingleEntity res10 = new ResultSingleEntity(cand1, districtEnt1, 200L, new Date());
-        ResultSingleEntity res20 = new ResultSingleEntity(cand2, districtEnt1, 500L, new Date());
-        ResultSingleEntity res30 = new ResultSingleEntity(cand3, districtEnt1, 350L, new Date());
-        ResultSingleEntity res40 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
+        ResultSingleEntity res10 = new ResultSingleEntity(candSauliusEnt, districtEnt1, 200L, new Date());
+        ResultSingleEntity res20 = new ResultSingleEntity(candPauliusEnt, districtEnt1, 500L, new Date());
+        ResultSingleEntity res30 = new ResultSingleEntity(spoiled, districtEnt1, 100L, new Date());
 
         List<ResultSingleEntity> results2 = new ArrayList<>();
         results2.add(res10);
         results2.add(res20);
         results2.add(res30);
-        results2.add(res40);
 
         String save2 = resultSingleService.save(results2);
 
         assertThat(save2, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
-
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(2));
+        assertThat(resultSingleRepository.getResultsByDistrictId(districtEnt1).get(1).getVotes(), CoreMatchers.is(500L));
     }
 
     @TestConfiguration
