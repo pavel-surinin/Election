@@ -6,6 +6,7 @@ import lt.itakademija.electors.candidate.CandidateControllerTest;
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateRepository;
 import lt.itakademija.electors.candidate.CandidateService;
+import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.county.CountyReport;
 import lt.itakademija.electors.county.CountyRepository;
 import lt.itakademija.electors.county.CountyService;
@@ -103,14 +104,16 @@ public class ResultMultiControllerTest {
     @Before
     public void setUp() throws Exception {
 
+
     }
 
     @After
     public void tearDown() throws Exception {
 
-//        resultMultiRepository.findAll().stream().forEach(p-> resultMultiService.delete(p.getId()));
-//        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
-//        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
+        resultMultiRepository.findAll().stream().forEach(p-> resultMultiService.delete(p.getId()));
+        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
+        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
+        countyRepository.findAll().stream().forEach(c-> countyService.delete(c.getId()));
     }
 
     @Test
@@ -163,55 +166,6 @@ public class ResultMultiControllerTest {
     }
 
     @Test
-    public void moreVotesThanVoters () throws Exception{
-
-        //setup adding parties
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Balvanu Partija";
-        Integer number1 = 47;
-        partyService.save(name1, number1, file1);
-
-        final MultipartFile file2 = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
-        String name2 = "Ereliu Partija";
-        Integer number2 = 48;
-        partyService.save(name2, number2, file2);
-
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
-        Long districtId = respCreateDistrict.getBody().getId();
-        //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
-        final PartyEntity p1 = partyRepository.getPartyByNumber(47);
-        final PartyEntity p2 = partyRepository.getPartyByNumber(48);
-        final PartyEntity spoiled = new PartyEntity();
-        spoiled.setId(-1991L);
-
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 200L);
-        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, d1, 500L);
-        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 100L);
-
-        List<ResultMultiEntity> results = new ArrayList<>();
-        results.add(res1);
-        results.add(res2);
-        results.add(res3);
-
-        try{
-            Long sum = res1.getVotes()+res2.getVotes()+res3.getVotes();
-            if(sum > d1.getNumberOfElectors()) {
-                throw new TooManyVotersException("There are more votes than voters in the district");
-            }else{
-                final String save = resultMultiService.save(results);
-            }
-        }catch (TooManyVotersException e){
-            assertThat(e.getMessage(), CoreMatchers.is("There are more votes than voters in the district"));
-        }
-    }
-
-    @Test
     public void approve() throws Exception {
 
         //setup adding parties
@@ -258,7 +212,18 @@ public class ResultMultiControllerTest {
 
     @Test
     public void negativeData() throws Exception{
+        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
+        //setup adding county and district
+        String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
+        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
+        Long countyId = countyEntityResponseEntity.getBody().getId();
 
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Tvarkos");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
         //setup adding parties
         final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
         String name1 = "Valio Partija";
@@ -270,39 +235,28 @@ public class ResultMultiControllerTest {
         Integer number2 = 43;
         partyService.save(name2, number2, file2);
 
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
-        Long districtId = respCreateDistrict.getBody().getId();
         //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
         final PartyEntity p1 = partyRepository.getPartyByNumber(42);
         final PartyEntity p2 = partyRepository.getPartyByNumber(43);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 20L);
-        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, d1, 50L);
-        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
+//        final int sizeBeforeSave = resultMultiRepository.findAll().size();
+
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, -20L);
+        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, 50L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 10L);
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
         results.add(res2);
         results.add(res3);
 
-        try {
-            for (int i = 0; i < results.size(); i++) {
-                if (results.get(i).getVotes() < 0) {
-                    throw new NegativeVoteNumberException("Negative votes number");
-                }
-            }
-            final String save = resultMultiService.save(results);
-        }catch (NegativeVoteNumberException e){
-            assertThat(e.getMessage(), CoreMatchers.is("Negative votes number"));
-        }
+        final String save = resultMultiService.save(results);
+        final int sizeAfterSave = resultMultiRepository.findAll().size();
+
+        //verify
+        assertThat(sizeAfterSave, CoreMatchers.is(0));
     }
 
     @Test
@@ -411,30 +365,6 @@ public class ResultMultiControllerTest {
         assertThat(save2, CoreMatchers.is("Votes registered"));
         assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(2));
 
-    }
-
-    @ResponseStatus(value= HttpStatus.FAILED_DEPENDENCY, reason="More votes registered than there is voters in the district")
-    public class TooManyVotersException extends RuntimeException{
-
-        public TooManyVotersException(String message) {
-            super(message);
-        }
-
-        public TooManyVotersException(String message, Throwable cause) {
-            super(message, cause);
-        }
-    }
-
-    @ResponseStatus(value= HttpStatus.FAILED_DEPENDENCY, reason="Negative value of votes number")
-    public class NegativeVoteNumberException extends RuntimeException{
-
-        public NegativeVoteNumberException(String message) {
-            super(message);
-        }
-
-        public NegativeVoteNumberException(String message, Throwable cause) {
-            super(message, cause);
-        }
     }
 
     @Test

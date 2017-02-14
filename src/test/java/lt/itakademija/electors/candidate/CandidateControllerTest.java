@@ -76,6 +76,9 @@ public class CandidateControllerTest {
     DistrictRepository districtRepository;
 
     @Autowired
+    DistrictService districtService;
+
+    @Autowired
     ResultSingleService resultSingleService;
 
     @Autowired
@@ -89,6 +92,16 @@ public class CandidateControllerTest {
     @Before
     public void setUp() throws Exception {
 
+        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
+        String name1 = "Balvanu Partija";
+        Integer number1 = 45;
+        partyService.save(name1, number1, file1);
+
+        final MultipartFile file2 = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
+        String name2 = "Ereliu Partija";
+        Integer number2 = 46;
+        partyService.save(name2, number2, file2);
+
         String SauliusString = MyUtils.getCandidateJson(null, "Saulius", "Domavicius", "2000-12-12", "Adminas", 92, null, null);
         ResponseEntity<CandidateEntity> respCandidateCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(SauliusString), CandidateEntity.class);
     }
@@ -96,6 +109,8 @@ public class CandidateControllerTest {
     @After
     public void tearDown() throws Exception {
 
+        candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
+        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
     }
 
     @Test
@@ -103,7 +118,7 @@ public class CandidateControllerTest {
 
         //setup
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
-        String name = "Tvarka ir tt";
+        String name = "Tvarka ir kt";
         Integer number = 2;
         partyService.save(name, number, file);
         Long partyId = partyRepository.getPartyByNumber(2).getId();
@@ -276,43 +291,53 @@ public class CandidateControllerTest {
     @Test
     public void deleteCandidateAndTheirResults() throws Exception {
 
+        //setup adding county and district
+        String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
+        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
+        Long countyId = countyEntityResponseEntity.getBody().getId();
+
+        DistrictEntity districtEnt = new DistrictEntity();
+        districtEnt.setAdress("Saules 5-23");
+        districtEnt.setName("Tautos");
+        districtEnt.setCounty(countyRepository.findAll().get(0));
+        districtEnt.setNumberOfElectors(5000L);
+        DistrictEntity districtEntity = districtService.save(districtEnt);
+
         //setup adding candidates
-        MultipartFile result = MyUtils.parseToMultiPart("test-csv/data-county-non-party.csv");
-        ResponseEntity<CountyReport[]> resp1 = rest.getForEntity("/county", CountyReport[].class);
-        final Long id = resp1.getBody()[0].getId();
-        countyService.update(id, result);
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
+        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
+        String name1 = "TroliuMumiu Partija";
+        Integer number1 = 15;
+        partyService.save(name1, number1, file1);
+        Long partyId = partyRepository.getPartyByNumber(15).getId();
+
+        String SauliusString = MyUtils.getCandidateJson(null, "Saulius", "Domavicius", "2000-12-12", "Adminas", 92, partyId, countyId);
+        ResponseEntity<CandidateEntity> respCandidateCreate1 = rest.postForEntity(URI, MyUtils.parseStringToJson(SauliusString), CandidateEntity.class);
+        Long sauliusId = respCandidateCreate1.getBody().getId();
+
+        String PauliusString = MyUtils.getCandidateJson(null, "Paulius", "Protavicius", "2000-10-10", "Sandelininkas", 19, partyId, countyId);
+        ResponseEntity<CandidateEntity> respCandidateCreate2 = rest.postForEntity(URI, MyUtils.parseStringToJson(PauliusString), CandidateEntity.class);
+        Long pauliusId = respCandidateCreate2.getBody().getId();
 
         //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
-        final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
-        final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
-        final CandidateEntity c3 = candidateRepository.getCandidatesList().get(2);
+        final CandidateEntity cand1 = candidateRepository.finById(sauliusId);
+        final CandidateEntity cand2 = candidateRepository.finById(pauliusId);
         final CandidateEntity spoiled = new CandidateEntity();
-
         spoiled.setId(-1991L);
 
-        ResultSingleEntity res1 = new ResultSingleEntity(c1, d1, 200L, new Date());
-        ResultSingleEntity res2 = new ResultSingleEntity(c2, d1, 500L, new Date());
-        ResultSingleEntity res3 = new ResultSingleEntity(c3, d1, 400L, new Date());
-        ResultSingleEntity res4 = new ResultSingleEntity(spoiled, d1, 100L, new Date());
+        ResultSingleEntity res1 = new ResultSingleEntity(cand1, districtEnt, 200L, new Date());
+        ResultSingleEntity res2 = new ResultSingleEntity(cand2, districtEnt, 500L, new Date());
+        ResultSingleEntity res3 = new ResultSingleEntity(spoiled, districtEnt, 100L, new Date());
 
-        List<ResultSingleEntity> rl = new ArrayList<>();
-        rl.add(res1);
-        rl.add(res2);
-        rl.add(res3);
-        rl.add(res4);
+        List<ResultSingleEntity> resultList = new ArrayList<>();
+        resultList.add(res1);
+        resultList.add(res2);
+        resultList.add(res3);
 
-        final String save = resultSingleService.save(rl);
+        final String save = resultSingleService.save(resultList);
 
         //verify
         assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(3));
+        assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(2));
         candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
         assertThat(resultSingleRepository.findAll().size(), CoreMatchers.is(0));
         assertThat(candidateRepository.getCandidatesList().size(), CoreMatchers.is(0));
