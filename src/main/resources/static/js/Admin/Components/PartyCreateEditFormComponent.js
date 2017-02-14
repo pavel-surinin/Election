@@ -9,7 +9,13 @@ var PartyCreateEditFormComponent = React.createClass({
     var fileErrorMesages = validation.showMsg(this.props.fileErrorMesages);
     var uploadStyle = styles.toggleTF(false);
     var deleteBtnStyle = styles.toggleTF(true);
-    if (this.props.members.length == 0) {
+    var memCount = 0;
+    for (var i = 0; i < this.props.members.length; i++) {
+      if (this.props.members[i].multiList == true) {
+        memCount++;
+      }
+    }
+    if (memCount == 0) {
       uploadStyle = styles.toggleTF(true);
       deleteBtnStyle = styles.toggleTF(false);
     }

@@ -104,8 +104,14 @@ var SingleResultContainer = React.createClass({
       .then(function(response){
         self.setState({isVotesRegistered : true});
       })
-      .catch(function(err){
-        console.error('SingleResultContainer.onHandleSubmit.axios',err);
+      .catch(function(error){
+        if (error.response) {
+          if (error.response.status == 417) {
+            var res = error.response.data.message.split(' ');
+            errorMesages.push('Neteisingas biuletenių skaičius, daugiamandateje prabalsavo ' + res[7] + ', jūs užregistravote ' + res[10] + '.');
+            self.setState({errorMesages : errorMesages});
+          }
+        }
       });
     }
   },

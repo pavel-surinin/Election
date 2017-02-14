@@ -54,7 +54,7 @@ public class ResultMultiService {
         if (resultsSingle.size() != 0){
             final long votesSumMulti = resultsSingle.stream().mapToLong(r -> r.getVotes()).sum();
             if (votesSumMulti != sumOfVotes){
-                throw new NotEqualVotersSumException("Not equal voters sum. SingleResults sum is " + votesSumMulti + ". SingleResults entered " + sumOfVotes);
+                throw new NotEqualVotersSumException("Not equal voters sum. SingleResults sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
             }
         }
     }

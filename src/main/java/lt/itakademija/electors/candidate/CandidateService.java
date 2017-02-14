@@ -53,8 +53,9 @@ public class CandidateService {
         List<CandidateReport> candidates = partyService.getPartyById(id).getMembers();
         partyService.detach(partyEntity);
         for (CandidateReport candidate : candidates) {
-            System.out.println(candidate.getId());
-            repository.delete(candidate.getId());
+            if (candidate.isMultiList() == true) {
+                repository.delete(candidate.getId());
+            }
         }
     return true;
     }
