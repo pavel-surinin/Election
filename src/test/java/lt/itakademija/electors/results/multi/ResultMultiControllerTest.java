@@ -104,23 +104,6 @@ public class ResultMultiControllerTest {
     @Before
     public void setUp() throws Exception {
 
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
-        resultMultiRepository.findAll().stream().forEach(p-> resultMultiService.delete(p.getId()));
-        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
-        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
-        countyRepository.findAll().stream().forEach(c-> countyService.delete(c.getId()));
-    }
-
-    @Test
-    public void save() throws Exception {
-
-        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
-        //setup adding parties
         final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
         String name1 = "Jonu Partija";
         Integer number1 = 45;
@@ -131,119 +114,43 @@ public class ResultMultiControllerTest {
         Integer number2 = 46;
         partyService.save(name2, number2, file2);
 
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
-        Long districtId = respCreateDistrict.getBody().getId();
-        //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
+        String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
+        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
+        Long countyId = countyEntityResponseEntity.getBody().getId();
 
+        DistrictEntity districtEnt = new DistrictEntity();
+        districtEnt.setAdress("Saules 55-23");
+        districtEnt.setName("Tvarkos");
+        districtEnt.setCounty(countyRepository.findAll().get(0));
+        districtEnt.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        districtRepository.findAll().stream().forEach(p-> resultMultiService.delete(p.getId()));
+        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
+        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
+        countyRepository.findAll().stream().forEach(c-> countyService.delete(c.getId()));
+    }
+
+    @Test
+    public void save() throws Exception {
+
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Lanisteriu");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
+
+        //votes
         final PartyEntity p1 = partyRepository.getPartyByNumber(45);
         final PartyEntity p2 = partyRepository.getPartyByNumber(46);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 20L);
-        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, d1, 50L);
-        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
-
-        List<ResultMultiEntity> results = new ArrayList<>();
-        results.add(res1);
-        results.add(res2);
-        results.add(res3);
-
-        String save = null;
-        Long sum = res1.getVotes()+res2.getVotes()+res3.getVotes();
-        if(sum <= d1.getNumberOfElectors()) {
-            save = resultMultiService.save(results);
-        }
-
-        //verify
-        assertThat(save, CoreMatchers.is("Votes registered"));
-        assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(2));
-    }
-
-    @Test
-    public void approve() throws Exception {
-
-        //setup adding parties
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Lavonu Partija";
-        Integer number1 = 49;
-        partyService.save(name1, number1, file1);
-
-        final MultipartFile file2 = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
-        String name2 = "Monu Partija";
-        Integer number2 = 41;
-        partyService.save(name2, number2, file2);
-
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
-        Long districtId = respCreateDistrict.getBody().getId();
-        //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
-        final PartyEntity p1 = partyRepository.getPartyByNumber(49);
-        final PartyEntity p2 = partyRepository.getPartyByNumber(41);
-        final PartyEntity spoiled = new PartyEntity();
-        spoiled.setId(-1991L);
-
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 20L);
-        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, d1, 50L);
-        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
-
-        List<ResultMultiEntity> results = new ArrayList<>();
-        results.add(res1);
-        results.add(res2);
-        results.add(res3);
-
-        final String save = resultMultiService.save(results);
-        final String approveResults = resultMultiService.approve(respCreateDistrict.getBody().getId());
-
-        //verify
-        assertThat(approveResults, CoreMatchers.is("Votes Approved"));
-
-    }
-
-    @Test
-    public void negativeData() throws Exception{
-        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
-        //setup adding county and district
-        String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
-        ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
-        Long countyId = countyEntityResponseEntity.getBody().getId();
-
-        DistrictEntity districtEnt1 = new DistrictEntity();
-        districtEnt1.setAdress("Saules 55-23");
-        districtEnt1.setName("Tvarkos");
-        districtEnt1.setCounty(countyRepository.findAll().get(0));
-        districtEnt1.setNumberOfElectors(800L);
-        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
-        //setup adding parties
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Valio Partija";
-        Integer number1 = 42;
-        partyService.save(name1, number1, file1);
-
-        final MultipartFile file2 = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
-        String name2 = "Namu Partija";
-        Integer number2 = 43;
-        partyService.save(name2, number2, file2);
-
-        //votes
-        final PartyEntity p1 = partyRepository.getPartyByNumber(42);
-        final PartyEntity p2 = partyRepository.getPartyByNumber(43);
-        final PartyEntity spoiled = new PartyEntity();
-        spoiled.setId(-1991L);
-
-//        final int sizeBeforeSave = resultMultiRepository.findAll().size();
-
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, -20L);
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, 20L);
         ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, 50L);
         ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 10L);
 
@@ -253,43 +160,31 @@ public class ResultMultiControllerTest {
         results.add(res3);
 
         final String save = resultMultiService.save(results);
-        final int sizeAfterSave = resultMultiRepository.findAll().size();
 
         //verify
-        assertThat(sizeAfterSave, CoreMatchers.is(0));
+        assertThat(save, CoreMatchers.is("Votes registered"));
+        assertThat(resultMultiRepository.getResultsByDistrictId(districtEnt1).size(), CoreMatchers.is(2));
     }
 
     @Test
-    public void deleteResultsButNotParties() throws Exception {
-        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
-        //setup adding parties
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Trolo Partija";
-        Integer number1 = 55;
-        partyService.save(name1, number1, file1);
+    public void approve() throws Exception {
 
-        final MultipartFile file2 = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
-        String name2 = "Lolo Partija";
-        Integer number2 = 56;
-        partyService.save(name2, number2, file2);
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Lanisteriu");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
 
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
-        Long districtId = respCreateDistrict.getBody().getId();
         //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
-        final PartyEntity p1 = partyRepository.getPartyByNumber(55);
-        final PartyEntity p2 = partyRepository.getPartyByNumber(56);
+        final PartyEntity p1 = partyRepository.getPartyByNumber(45);
+        final PartyEntity p2 = partyRepository.getPartyByNumber(46);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 20L);
-        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, d1, 50L);
-        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, 20L);
+        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, 50L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 10L);
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -297,46 +192,135 @@ public class ResultMultiControllerTest {
         results.add(res3);
 
         final String save = resultMultiService.save(results);
+        final String approveResults = resultMultiService.approve(districtEnt1.getId());
 
         //verify
-//        assertThat(save, CoreMatchers.is("Votes registered"));
-//        assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(2));
-        resultMultiRepository.findAll().stream().forEach(c -> resultMultiService.delete(c.getId()));
-        assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(0));
-        assertThat(partyRepository.findAll().size(), CoreMatchers.is(2));
+        assertThat(approveResults, CoreMatchers.is("Votes Approved"));
+        assertThat(resultMultiRepository.getResultsByDistrictId(districtEnt1).get(1).isApproved(), CoreMatchers.is(true));
+
+    }
+
+    @Test
+    public void negativeData() throws Exception{
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Lanisteriu");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
+
+        //votes
+        final PartyEntity p1 = partyRepository.getPartyByNumber(45);
+        final PartyEntity p2 = partyRepository.getPartyByNumber(46);
+        final PartyEntity spoiled = new PartyEntity();
+        spoiled.setId(-1991L);
+
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, 20L);
+        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, -50L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 10L);
+
+        List<ResultMultiEntity> results = new ArrayList<>();
+        results.add(res1);
+        results.add(res2);
+        results.add(res3);
+
+        String save = null;
+        if(res1.getVotes() >= 0 & res2.getVotes() >= 0 & res3.getVotes() < 0){
+            save = resultMultiService.save(results);
+        }
+
+        //verify
+        assertThat(resultMultiRepository.findAll().size(), CoreMatchers.is(0));
+    }
+
+    @Test
+    public void tooManyVotes() throws Exception{
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Lanisteriu");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
+
+        //votes
+        final PartyEntity p1 = partyRepository.getPartyByNumber(45);
+        final PartyEntity p2 = partyRepository.getPartyByNumber(46);
+        final PartyEntity spoiled = new PartyEntity();
+        spoiled.setId(-1991L);
+
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, 200L);
+        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, 500L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 200L);
+
+        List<ResultMultiEntity> results = new ArrayList<>();
+        results.add(res1);
+        results.add(res2);
+        results.add(res3);
+
+        String save = null;
+        Long sumOfVotes = res1.getVotes() + res2.getVotes() + res3.getVotes();
+        if(sumOfVotes <= districtEnt1.getNumberOfElectors()){
+            save = resultMultiService.save(results);
+        }
+
+        //verify
+        assertThat(resultMultiRepository.findAll().size(), CoreMatchers.is(0));
+    }
+
+    @Test
+    public void deleteResultsButNotParties() throws Exception {
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Lanisteriu");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
+
+        //votes
+        final PartyEntity p1 = partyRepository.getPartyByNumber(45);
+        final PartyEntity p2 = partyRepository.getPartyByNumber(46);
+        final PartyEntity spoiled = new PartyEntity();
+        spoiled.setId(-1991L);
+
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, 20L);
+        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, 50L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 10L);
+
+        List<ResultMultiEntity> results = new ArrayList<>();
+        results.add(res1);
+        results.add(res2);
+        results.add(res3);
+
+        Integer partySizeBefore = partyRepository.findAll().size();
+        final String save = resultMultiService.save(results);
+        final String delete = resultMultiService.delete(districtEnt1.getId());
+        Integer partySizeAfter = partyRepository.findAll().size();
+
+        //verify
+        assertThat(delete, CoreMatchers.is("Votes Deleted"));
+        assertThat(resultMultiRepository.getResultsByDistrictId(districtEnt1).size(), CoreMatchers.is(0));
+        assertThat(partySizeBefore, CoreMatchers.is(partySizeAfter));
     }
 
     @Test
     public void deleteResultsAddAgain() throws Exception {
 
-        //setup adding parties
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Wast Partija";
-        Integer number1 = 65;
-        partyService.save(name1, number1, file1);
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Lanisteriu");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
 
-        final MultipartFile file2 = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
-        String name2 = "Mau Partija";
-        Integer number2 = 66;
-        partyService.save(name2, number2, file2);
-
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict;
-        respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
-        Long districtId = respCreateDistrict.getBody().getId();
         //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
-        final PartyEntity p1 = partyRepository.getPartyByNumber(65);
-        final PartyEntity p2 = partyRepository.getPartyByNumber(66);
+        final PartyEntity p1 = partyRepository.getPartyByNumber(45);
+        final PartyEntity p2 = partyRepository.getPartyByNumber(46);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 20L);
-        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, d1, 50L);
-        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, 20L);
+        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, 50L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 10L);
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
@@ -347,13 +331,14 @@ public class ResultMultiControllerTest {
 
         //verify
         assertThat(save1, CoreMatchers.is("Votes registered"));
-        assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(2));
-        resultMultiRepository.getResultsByDistrictId(d1).stream().forEach(c -> resultMultiService.delete(c.getId()));
-        assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(0));
+        assertThat(resultMultiRepository.getResultsByDistrictId(districtEnt1).size(), CoreMatchers.is(2));
+        final String delete = resultMultiService.delete(districtEnt1.getId());
+        assertThat(delete, CoreMatchers.is("Votes Deleted"));
+        assertThat(resultMultiRepository.getResultsByDistrictId(districtEnt1).size(), CoreMatchers.is(0));
 
-        ResultMultiEntity res10 = MyUtils.getResultMultiEntity(p1, d1, 20L);
-        ResultMultiEntity res20 = MyUtils.getResultMultiEntity(p2, d1, 50L);
-        ResultMultiEntity res30 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
+        ResultMultiEntity res10 = MyUtils.getResultMultiEntity(p1, districtEnt1, 20L);
+        ResultMultiEntity res20 = MyUtils.getResultMultiEntity(p2, districtEnt1, 60L);
+        ResultMultiEntity res30 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 90L);
 
         List<ResultMultiEntity> results2 = new ArrayList<>();
         results2.add(res10);
@@ -363,33 +348,29 @@ public class ResultMultiControllerTest {
         String save2 = resultMultiService.save(results2);
 
         assertThat(save2, CoreMatchers.is("Votes registered"));
-        assertThat(resultMultiRepository.getResultsByDistrictId(d1).size(), CoreMatchers.is(2));
-
+        assertThat(resultMultiRepository.getResultsByDistrictId(districtEnt1).size(), CoreMatchers.is(2));
+        assertThat(resultMultiRepository.getResultsByDistrictId(districtEnt1).get(1).getVotes(), CoreMatchers.is(60L));
     }
 
     @Test
     public void rating() throws Exception{
 
-        //setup adding parties
-        final MultipartFile file1 = MyUtils.parseToMultiPart("test-csv/data-party-1.csv");
-        String name1 = "Bangu Partija";
-        Integer number1 = 75;
-        partyService.save(name1, number1, file1);
-
-        //setup adding district
-        final Long countyId = countyRepository.findAll().get(0).getId();
-        String jsonDistrictCreate = "{\"name\" : \"Panerių\",\"adress\" : \"Ūmėdžių g. 9\",\"numberOfElectors\":500,\"county\":{\"id\":" + countyId + "}}";
-        ResponseEntity<DistrictReport> respCreateDistrict = rest.postForEntity("/district", MyUtils.parseStringToJson(jsonDistrictCreate), DistrictReport.class);
+        DistrictEntity districtEnt1 = new DistrictEntity();
+        districtEnt1.setAdress("Saules 55-23");
+        districtEnt1.setName("Lanisteriu");
+        districtEnt1.setCounty(countyRepository.findAll().get(0));
+        districtEnt1.setNumberOfElectors(800L);
+        DistrictEntity districtEntity1 = districtService.save(districtEnt1);
 
         //votes
-        final DistrictEntity d1 = districtRepository.findAll().get(0);
-
-        final PartyEntity p1 = partyRepository.getPartyByNumber(75);
+        final PartyEntity p1 = partyRepository.getPartyByNumber(45);
+        final PartyEntity p2 = partyRepository.getPartyByNumber(46);
         final PartyEntity spoiled = new PartyEntity();
         spoiled.setId(-1991L);
 
-        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, d1, 200L);
-        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, d1, 10L);
+        ResultMultiEntity res1 = MyUtils.getResultMultiEntity(p1, districtEnt1, 20L);
+        ResultMultiEntity res2 = MyUtils.getResultMultiEntity(p2, districtEnt1, 50L);
+        ResultMultiEntity res3 = MyUtils.getResultMultiEntity(spoiled, districtEnt1, 10L);
 
         final CandidateEntity c1 = candidateRepository.getCandidatesList().get(0);
         final CandidateEntity c2 = candidateRepository.getCandidatesList().get(1);
@@ -408,8 +389,10 @@ public class ResultMultiControllerTest {
 
         List<ResultMultiEntity> results = new ArrayList<>();
         results.add(res1);
+        results.add(res2);
         results.add(res3);
-        String save = resultMultiService.save(results);
+
+        final String save = resultMultiService.save(results);
 
         //verify
         assertThat(res1.getRating().size(), CoreMatchers.is(3));
