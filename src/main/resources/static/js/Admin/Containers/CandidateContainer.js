@@ -4,11 +4,15 @@ var CandidateContainer = React.createClass({
     return {
       candidateList : [],
       isLoading : true,
+      succesCreateText: '',
     };
   },
 
   componentWillMount: function() {
     var self = this;
+    if (this.props.location.query.succesCreateText != null) {
+      this.setState({succesCreateText : this.props.location.query.succesCreateText});
+    }
     axios
       .get('/candidate')
       .then(function(response){
@@ -23,6 +27,7 @@ var CandidateContainer = React.createClass({
   },
 
   render: function() {
+    console.log('Candidate container THIS', this);
     if (this.state.isLoading) {
       return (
         <div>
@@ -33,6 +38,7 @@ var CandidateContainer = React.createClass({
       return (
         <CandidatesListViewComponent
           candidateList={this.state.candidateList}
+          succesCreateText={this.state.succesCreateText}
         />
       );
     }

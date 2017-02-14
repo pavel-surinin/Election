@@ -1,6 +1,6 @@
 var DistrictRepresentativeComponent = React.createClass({
   render: function() {
-    var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
+    var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
     var credentialsMessage = alerts.showInfo(this.props.credentials);
     var array = [];
     this.props.representativesList.map(function(rep,index) {

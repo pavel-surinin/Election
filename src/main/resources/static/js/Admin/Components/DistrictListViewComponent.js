@@ -1,7 +1,7 @@
 ﻿var DistrictListViewComponent = React.createClass({
   render: function() {
-    var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
-
+    var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
+    var deleteDistrictMessage = alerts.showDangerFixed(this.props.deletedDistrictName)
     var self = this.props;
     var array = [];
     this.props.districtList.map(function(dist,index) {
@@ -35,7 +35,7 @@
             </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
-
+                {deleteDistrictMessage}
 		          </div>
 
 		            <table className="table table-striped table-hover">

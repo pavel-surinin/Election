@@ -44,6 +44,7 @@ var PartyEditContainer = React.createClass({
       numberErrorMesages : [],
       fileErrorMesages : [],
       postErrCode : 199,
+      deletedPartyFileText : '',
     };
   },
   submitWithFile : function(){
@@ -147,6 +148,7 @@ var PartyEditContainer = React.createClass({
       axios
         .delete('/candidate/party/'+ this.props.params.id)
         .then(function(response){
+          self.setState({deletedPartyFileText: 'Partijos sarašas ištrintas'})
           getPartyById(self, self.props.params.id);
         })
         .catch(function(err){
@@ -185,6 +187,7 @@ var PartyEditContainer = React.createClass({
        numberErrorMesages={this.state.numberErrorMesages}
        fileErrorMesages={this.state.fileErrorMesages}
        action='Atnaujinti'
+       deletedPartyFileText={this.state.deletedPartyFileText}
        />
     );
   },

@@ -4,6 +4,7 @@ var PartyCreateEditFormComponent = React.createClass({
   },
 
   render: function() {
+    var deletePartyFileMessage = alerts.showDangerFixed(this.props.deletedPartyFileText);
     var nameErrorMesages = validation.showMsg(this.props.nameErrorMesages);
     var numberErrorMesages = validation.showMsg(this.props.numberErrorMesages);
     var fileErrorMesages = validation.showMsg(this.props.fileErrorMesages);
@@ -66,6 +67,7 @@ var PartyCreateEditFormComponent = React.createClass({
                 </div>
               </div>
             </div>
+            {deletePartyFileMessage}
           </div>
     );
   }

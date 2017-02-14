@@ -17,6 +17,7 @@ var DistrictListContainer = React.createClass({
     return {
       districtList : [],
       isLoading : true,
+      deleteDistrictName : '',
     };
   },
 
@@ -28,13 +29,14 @@ var DistrictListContainer = React.createClass({
     getDistrict(this);
   },
 
-  onHandleDelete: function(i) {
+  onHandleDelete: function(id, name) {
     var self = this;
     event.preventDefault();
     axios
-      .delete('/district/'+ i)
+      .delete('/district/'+ id)
       .then(function(response){
         getDistrict(self);
+        self.setState({succesCreateText : '', deletedDistrictName : 'Apylinke ' + name + ' ištrinta.'})
       })
       .catch(function(err){
         console.error('DistrictListContainer.onHandleDelete.axios', err);
@@ -56,6 +58,7 @@ var DistrictListContainer = React.createClass({
           districtList={this.state.districtList}
           onHandleDelete={this.onHandleDelete}
           succesCreateText={this.state.succesCreateText}
+          deletedDistrictName={this.state.deletedDistrictName}
           />
       );
     }
