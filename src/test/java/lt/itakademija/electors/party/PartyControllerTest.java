@@ -3,10 +3,7 @@ package lt.itakademija.electors.party;
 import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.*;
-import lt.itakademija.electors.county.CountyControllerTest;
-import lt.itakademija.electors.county.CountyReport;
-import lt.itakademija.electors.county.CountyRepository;
-import lt.itakademija.electors.county.CountyService;
+import lt.itakademija.electors.county.*;
 import lt.itakademija.exceptions.BadCSVFileExceprion;
 import lt.itakademija.exceptions.PartyNameCloneException;
 import lt.itakademija.exceptions.PartyNumberCloneException;
@@ -239,7 +236,9 @@ public class PartyControllerTest {
         partyService.save(name, number, file);
         ResponseEntity<PartyReport[]> partyResponse = rest.getForEntity("/party", PartyReport[].class);
         ResponseEntity<CountyReport[]> countyResponse = rest.getForEntity("/county", CountyReport[].class);
-        Long vilniusId = countyResponse.getBody()[0].getId();
+        String VilniusString = "{\"name\":\"VilniusTest\"}";
+        rest.postForEntity("/county", MyUtils.parseStringToJson(VilniusString), CountyEntity.class);
+        final Long vilniusId = countyRepository.findAll().get(0).getId();
         MultipartFile mixedFile = MyUtils.parseToMultiPart("test-csv/data-county-party-notmultilist.csv");
         Boolean executeUpdate = transactionTemplate.execute(new TransactionCallback<Boolean>() {
             @Override

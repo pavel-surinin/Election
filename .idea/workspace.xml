@@ -2,10 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiReport.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/rating/RatingReport.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultCountyReport.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultDistrictReport.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultGeneralReport.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/CandidateFloatDTO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/CandidateIntDTO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/PartyFloatDTO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/PartyIntDTO.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleReport.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/exceptions/NotEqualVotersSumException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/candidate/CandidateControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/candidate/CandidateControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/multi/ResultMultiControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/multi/ResultMultiControllerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiEntity.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyCreateEditFormComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/PartyCreateEditFormComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/CountyContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/CountyContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/DistrictListContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Containers/DistrictListContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/alerts.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/alerts.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/validation.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/validation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/MultiResultRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/MultiResultRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/MultiResultContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/MultiResultContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/SingleResultContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Containers/SingleResultContainer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/myStyle.css" afterPath="$PROJECT_DIR$/src/main/resources/static/myStyle.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" afterPath="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,8 +94,8 @@
       <file leaf-file-name="DistrictRepresentativeControllerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/representative/DistrictRepresentativeControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+            <state relative-caret-position="478">
+              <caret line="144" column="1" lean-forward="true" selection-start-line="144" selection-start-column="1" selection-end-line="144" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -110,8 +138,8 @@
       <file leaf-file-name="PartyControllerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1819">
-              <caret line="142" column="67" lean-forward="false" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="67" />
+            <state relative-caret-position="2312">
+              <caret line="139" column="67" lean-forward="false" selection-start-line="139" selection-start-column="67" selection-end-line="139" selection-end-column="67" />
               <folding />
             </state>
           </provider>
@@ -125,11 +153,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>templa</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -180,11 +203,11 @@
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiRepository.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/county/CountyControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/MyUtils.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/candidate/CandidateControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/multi/ResultMultiControllerTest.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -578,6 +601,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="candidate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1006,50 +1043,6 @@
     <option name="localTasksCounter" value="5" />
     <servers />
   </component>
-  <component name="TestHistory">
-    <history-entry file="ResultMultiControllerTest - 2017.02.14 at 00h 12m 04s.xml">
-      <configuration name="ResultMultiControllerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultMultiControllerTest_negativeData - 2017.02.14 at 00h 22m 22s.xml">
-      <configuration name="ResultMultiControllerTest.negativeData" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultMultiControllerTest_negativeData - 2017.02.14 at 00h 24m 01s.xml">
-      <configuration name="ResultMultiControllerTest.negativeData" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultMultiControllerTest_negativeData - 2017.02.14 at 00h 26m 35s.xml">
-      <configuration name="ResultMultiControllerTest.negativeData" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultMultiControllerTest_negativeData - 2017.02.14 at 00h 27m 35s.xml">
-      <configuration name="ResultMultiControllerTest.negativeData" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultMultiControllerTest_negativeData - 2017.02.14 at 00h 29m 18s.xml">
-      <configuration name="ResultMultiControllerTest.negativeData" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultSingleControllerTest - 2017.02.14 at 00h 01m 01s.xml">
-      <configuration name="ResultSingleControllerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultSingleControllerTest - 2017.02.14 at 00h 07m 52s.xml">
-      <configuration name="ResultSingleControllerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultSingleControllerTest - 2017.02.14 at 00h 10m 34s.xml">
-      <configuration name="ResultSingleControllerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultSingleControllerTest_save - 2017.02.13 at 23h 51m 12s.xml">
-      <configuration name="ResultSingleControllerTest.save" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultSingleControllerTest_save - 2017.02.13 at 23h 57m 05s.xml">
-      <configuration name="ResultSingleControllerTest.save" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultSingleControllerTest_save - 2017.02.13 at 23h 58m 01s.xml">
-      <configuration name="ResultSingleControllerTest.save" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ResultSingleControllerTest_save - 2017.02.13 at 23h 59m 25s.xml">
-      <configuration name="ResultSingleControllerTest.save" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="lt_itakademija_electors_in_Election - 2017.02.14 at 00h 13m 37s.xml">
-      <configuration name="lt.itakademija.electors in Election" configurationId="JUnit" />
-    </history-entry>
-  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
@@ -1151,10 +1144,6 @@
       <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
-  </component>
-  <component name="antWorkspaceConfiguration">
-    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
-    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictEntity.java">
@@ -1397,13 +1386,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
@@ -1483,6 +1465,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
           <caret line="334" column="0" lean-forward="true" selection-start-line="334" selection-start-column="0" selection-end-line="334" selection-end-column="0" />
+          <folding>
+            <element signature="method#updateCandidateName#0;class#CandidateControllerTest#0" expanded="false" />
+            <element signature="method#updateCandidateSurname#0;class#CandidateControllerTest#0" expanded="false" />
+            <element signature="method#updateCandidateBirthDate#0;class#CandidateControllerTest#0" expanded="false" />
+            <element signature="method#updateCandidateDescription#0;class#CandidateControllerTest#0" expanded="false" />
+            <element signature="method#updateCandidateNumberInParty#0;class#CandidateControllerTest#0" expanded="false" />
+            <element signature="method#getKandidatasList#0;class#CandidateControllerTest#0" expanded="false" />
+            <element signature="method#deleteCandidateList#0;class#CandidateControllerTest#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1493,18 +1484,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/representative/DistrictRepresentativeControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/party/PartyControllerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1819">
-          <caret line="142" column="67" lean-forward="false" selection-start-line="142" selection-start-column="8" selection-end-line="142" selection-end-column="67" />
+        <state relative-caret-position="2312">
+          <caret line="139" column="67" lean-forward="false" selection-start-line="139" selection-start-column="67" selection-end-line="139" selection-end-column="67" />
           <folding />
         </state>
       </provider>
@@ -1520,6 +1503,22 @@
             <element signature="method#deleteResultsAddAgain#0;class#ResultSingleControllerTest#0" expanded="false" />
             <element signature="class#Config#0;class#ResultSingleControllerTest#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/lt/itakademija/electors/representative/DistrictRepresentativeControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="144" column="1" lean-forward="true" selection-start-line="144" selection-start-column="1" selection-end-line="144" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-23914">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

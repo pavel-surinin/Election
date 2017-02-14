@@ -1,3 +1,11 @@
+var errorMesages = [];
+var list = {};
+var postArray =[];
+var ratings = [];
+function RatingnegativeValuesException(message) {
+  this.message = message;
+  this.name = 'RatingnegativeValuesException';
+}
 function getParties(self) {
   axios
     .get('/party')
@@ -49,12 +57,16 @@ function isVotesNegativeValue(list) {
   }
   return false;
 }
-function getRatings(arr,pid) {
+function getRatings(self,arr,pid) {
   var list = [];
   for (var i = 0; i < arr.length; i++) {
     if (arr[i].party == pid) {
       for (var j = 0; j < arr[i].members.length; j++) {
         if (arr[i].members[j].value != 0) {
+          if (arr[i].members[j].value < 0) {
+            errorMesages.push('Reitingo laukai negali turėti neigiamų reikšmių');
+            self.setState({errorMesages : errorMesages});
+            throw new RatingnegativeValuesException('Reitingo laukai negali turėti neigiamų reikšmių');}
           list.push(
             {
               candidate :
@@ -67,10 +79,6 @@ function getRatings(arr,pid) {
   }
   return list;
 }
-var errorMesages = [];
-var list = {};
-var postArray =[];
-var ratings = [];
 var MultiResultContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -141,7 +149,7 @@ var MultiResultContainer = React.createClass({
               'district' : {'id' : this.state.districtId},
               'votes' : list[key],
               'datePublished' : new Date(),
-              'rating' : getRatings(ratings,key),
+              'rating' : getRatings(self,ratings,key),
             }
           );
         }
@@ -152,12 +160,17 @@ var MultiResultContainer = React.createClass({
       .then(function(response){
         self.setState({isVotesRegistered : true});
       })
-      .catch(function(err){
-        console.error('MultiResultContainer.onHandleSubmit.axios',err);
+      .catch(function(error){
+        if (error.response) {
+          if (error.response.status == 417) {
+            var res = error.response.data.message.split(' ');
+            errorMesages.push('Neteisingas biuletenių skaičius, vienmandatieje prabalsavo ' + res[7] + ', jūs užregistravote ' + res[10] + '.');
+            self.setState({errorMesages : errorMesages});
+          }
+        }
       });
     }
   },
-
   render: function() {
     if (this.state.isLoading) {
       return <div><img src='/images/loading.gif'/></div>;

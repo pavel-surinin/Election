@@ -30,7 +30,6 @@ var DistrictListContainer = React.createClass({
 
   onHandleDelete: function(i) {
     var self = this;
-    event.preventDefault();
     axios
       .delete('/district/'+ i)
       .then(function(response){
