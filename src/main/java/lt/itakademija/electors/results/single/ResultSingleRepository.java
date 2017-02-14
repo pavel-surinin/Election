@@ -35,7 +35,7 @@ public class ResultSingleRepository {
         em.remove(res);
     }
 
-    public List<ResultSingleEntity> getByDistrictId(DistrictEntity district) {
+    public List<ResultSingleEntity> getResultsByDistrictId(DistrictEntity district) {
         List<ResultSingleEntity> list = em
                 .createQuery("SELECT r FROM ResultSingleEntity r WHERE r.district = :rDistrict")
                 .setParameter("rDistrict", district)

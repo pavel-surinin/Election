@@ -4,6 +4,7 @@ import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
+import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -35,7 +36,6 @@ public class MyUtils {
         }
         return parsedJson;
     }
-
 
     /**
      * @param pathToFile apth to csv from root
@@ -100,21 +100,9 @@ public class MyUtils {
      * @param partyId
      * @return JSON String to parse in parseStringToJson
      */
-
     public static String getCandidateJson(Long candidateId, String name, String surname, String birthDate, String description, Integer numberInParty, Long countyId, Long partyId) {
         String candidateString = "{\"id\": \"" + candidateId + "\",\"name\": \"" + name + "\",\"surname\": \"" + surname + "\", \"description\": \"" + description + "\",\"numberInParty\": \"" + numberInParty + "\",\"birthDate\": \"" + birthDate + "\", \"county\" : {\"id\" : " + countyId + "}, \"party\" : {\"id\": " + partyId + "}}";
         return candidateString;
-    }
-
-    /**
-     * @param partyId
-     * @param name
-     * @param partyNumber
-     * @return
-     */
-    public static String getPartyJson(Long partyId, String name, Integer partyNumber, List<CandidateEntity> members) {
-        String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber + "}";
-        return partyString;
     }
 
     /**
@@ -131,12 +119,32 @@ public class MyUtils {
         return resultString;
     }
 
-    public static ResultMultiEntity getResultMultiEntity(PartyEntity party, DistrictEntity ditrict, long votes) {
+    public static ResultMultiEntity getResultMultiEntity(PartyEntity party, DistrictEntity district, long votes) {
         ResultMultiEntity res1 = new ResultMultiEntity();
         res1.setParty(party);
-        res1.setDistrict(ditrict);
+        res1.setDistrict(district);
         res1.setVotes(votes);
         res1.setDatePublished(new Date());
         return res1;
     }
+
+    public static RatingEntity getRatingEntity(CandidateEntity candidate, ResultMultiEntity multiResults, Integer points){
+        RatingEntity rating = new RatingEntity();
+        rating.setCandidate(candidate);
+        rating.setMultiResults(multiResults);
+        rating.setPoints(points);
+        return rating;
+    }
+
+    /**
+     * @param partyId
+     * @param name
+     * @param partyNumber
+     * @return
+     */
+    public static String getPartyJson(Long partyId, String name, Integer partyNumber, List<CandidateEntity> members) {
+        String partyString = "{\"id\": \"" + partyId + "\",\"name\": \"" + name + "\", \"partyNumber\": \"" + partyNumber + "}";
+        return partyString;
+    }
+
 }

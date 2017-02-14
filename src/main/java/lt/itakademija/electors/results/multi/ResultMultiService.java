@@ -35,7 +35,7 @@ public class ResultMultiService {
         final ResultMultiEntity spoiled = results.stream().filter(res -> res.getParty().getId() == -1991L).findAny().get();
         DistrictEntity district = spoiled.getDistrict();
         final DistrictEntity districtEnt = districtRepository.findById(district.getId());
-        validateEqualVotersSum(results,district);
+//        validateEqualVotersSum(results,district);
         districtEnt.setSpoiledMulti(spoiled.getVotes().intValue());
         districtService.save(districtEnt);
         results.remove(spoiled);
@@ -48,16 +48,16 @@ public class ResultMultiService {
         return "Votes registered";
     }
 
-    private void validateEqualVotersSum(List<ResultMultiEntity> results, DistrictEntity district) {
-        final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
-        final List<ResultSingleEntity> resultsSingle = resultSingleRepository.getByDistrictId(district);
-        if (resultsSingle.size() != 0){
-            final long votesSumMulti = resultsSingle.stream().mapToLong(r -> r.getVotes()).sum();
-            if (votesSumMulti != sumOfVotes){
-                throw new NotEqualVotersSumException("Not equal voters sum. SingleResults sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
-            }
-        }
-    }
+//    private void validateEqualVotersSum(List<ResultMultiEntity> results, DistrictEntity district) {
+//        final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
+//        final List<ResultSingleEntity> resultsSingle = resultSingleRepository.getByDistrictId(district);
+//        if (resultsSingle.size() != 0){
+//            final long votesSumMulti = resultsSingle.stream().mapToLong(r -> r.getVotes()).sum();
+//            if (votesSumMulti != sumOfVotes){
+//                throw new NotEqualVotersSumException("Not equal voters sum. SingleResults sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
+//            }
+//        }
+//    }
 
     @Transactional
     public String approve(Long id) {
@@ -76,7 +76,7 @@ public class ResultMultiService {
 
     private List<ResultMultiEntity> getDistrictResults(Long id) {
         DistrictEntity district = districtRepository.findById(id);
-        List<ResultMultiEntity> listOfResults = repository.getByDistrictId(district);
+        List<ResultMultiEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
     }
 }

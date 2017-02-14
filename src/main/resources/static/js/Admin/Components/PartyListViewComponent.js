@@ -41,6 +41,9 @@ var PartyListViewComponent = React.createClass({
 		                  <th>
 		                    Veiksmai
 		                  </th>
+			              <th>
+			                Redaguoti
+			              </th>
 		                </tr>
 		              </thead>
 		              <tbody>
