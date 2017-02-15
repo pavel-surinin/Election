@@ -8,7 +8,9 @@ var MultiResultRowComponent = React.createClass({
     var self = this;
     var p = this.props.party;
     var candidates = p.members.map(function(c,index){
-      return <MultiResultRowModalRowComponent onChangePartyRating={self.props.onChangePartyRating} key={index} info={c} />;
+      if (c.multiList == true) {
+        return <MultiResultRowModalRowComponent onChangePartyRating={self.props.onChangePartyRating} key={index} info={c} />;
+      }
     });
     return (
       <div style={{paddingTop : '2px'}} className='row text-primary'>

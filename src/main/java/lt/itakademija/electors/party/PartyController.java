@@ -24,8 +24,8 @@ public class PartyController {
                                    @RequestParam("number") Integer partyNumber,
                                    @RequestParam(required = false, value = "id") Long partyId,
                                    RedirectAttributes redirectAttributes) {
-        System.out.println("name " + partyName + ", number + " + partyNumber);
         if (partyId == null){
+
             service.save(partyName, partyNumber, file);
         } else {
             service.save(partyId ,partyName, partyNumber, file);

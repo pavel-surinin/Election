@@ -64,7 +64,7 @@ var validation = {
     }
   },
   showMsg :
-  function checkMin(obj) {
+  function showMsg(obj) {
     if (obj !== undefined) {
       var arr = [];
       obj.forEach(function(entry, index) {
