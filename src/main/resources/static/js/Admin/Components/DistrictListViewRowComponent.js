@@ -4,7 +4,7 @@
     $(this.refs.edit).tooltip();
   },
   onHandleDeleteClick : function(){
-    this.props.onHandleDelete(this.props.id);
+    this.props.onHandleDelete(this.props.id,this.props.name);
   } ,
   onHandleUploadCanClick : function(){
     this.props.onHandleDelete({

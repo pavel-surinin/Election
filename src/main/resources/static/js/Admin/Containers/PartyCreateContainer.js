@@ -73,7 +73,7 @@ var PartyCreateContainer = React.createClass({
       axios
       .post('/party', data, header)
       .then(function(response){
-        self.context.router.push('/admin/party?succesCreateText=Partija ' + self.state.name + ' sukurta');
+        self.context.router.push('/admin/party?succesCreateText=' + self.state.name + ' sukurta');
       })
       .catch(function (error) {
         if (error.response) {
