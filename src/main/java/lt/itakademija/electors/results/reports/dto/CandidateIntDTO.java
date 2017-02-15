@@ -17,6 +17,11 @@ public class CandidateIntDTO {
         this.count = count;
     }
 
+    public CandidateIntDTO(CandidateReport candidate, Integer count) {
+        this.candidate = candidate;
+        this.count = count;
+    }
+
     public CandidateIntDTO() {
     }
 

@@ -67,11 +67,11 @@ public class RatingEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RatingEntity that = (RatingEntity) o;
-        return Objects.equals(candidate, that.candidate);
+        return Objects.equals(candidate.getId(), that.candidate.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(candidate);
+        return Objects.hash(candidate.getId());
     }
 }

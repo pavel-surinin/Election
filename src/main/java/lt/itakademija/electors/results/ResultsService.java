@@ -1,5 +1,6 @@
 package lt.itakademija.electors.results;
 
+import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.county.CountyRepository;
 import lt.itakademija.electors.district.DistrictEntity;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -59,7 +61,7 @@ public class ResultsService {
         List<CandidateIntDTO> candidatesResultList = getCandidatesResults(allSingleResults, candidatesIntDtoSet);
         report.setCandidatesVotesSummary(candidatesResultList);
 
-        if (candidatesResultList.size() != 0){
+        if (candidatesResultList.size() != 0) {
             report.setSingleMandateWinner(candidatesResultList.get(0).getCandidate());
         }
 
@@ -67,6 +69,26 @@ public class ResultsService {
         List<RatingEntity> countyRatings = getCountyRatings(countyMultiResults);
         List<PartyIntDTO> partyIntDTOList = getPartyIntDtoList(countyMultiResults);
         List<PartyIntDTO> partiesVotesSummary = getPartiesVotesSummary(countyMultiResults, countyRatings, partyIntDTOList);
+
+        for (PartyIntDTO partyIntDTO : partiesVotesSummary) {
+            List<CandidateIntDTO> newRatings = new ArrayList<>();
+            for (RatingEntity countyRating : countyRatings) {
+                if (countyRating.getCandidate().getPartyDependencies().getId().equals(partyIntDTO.getPar().getId())) {
+                    newRatings.add(new CandidateIntDTO(countyRating.getCandidate(), countyRating.getPoints()));
+                }
+            }
+            Map<CandidateReport, List<CandidateIntDTO>> collect = newRatings
+                    .stream()
+                    .collect(Collectors.groupingBy(CandidateIntDTO::getCandidate));
+            List<CandidateIntDTO> ratings = new ArrayList<>();
+            collect.forEach((key, value) -> {
+                ratings.add(new CandidateIntDTO(key, value
+                        .stream()
+                        .mapToInt(CandidateIntDTO::getCount)
+                        .sum()));
+            });
+            partyIntDTO.setRatings(ratings.stream().sorted((ra1,ra2) -> ra2.getCount().compareTo(ra1.getCount())).collect(Collectors.toList()));
+        }
         report.setPartiesVotesSummary(partiesVotesSummary);
 
         return report;
@@ -89,22 +111,23 @@ public class ResultsService {
                             .filter(result -> result.getParty().getId().equals(partyDto.getPar().getId()))
                             .forEach(result -> {
                                 partyDto.setCount(partyDto.getCount() + result.getVotes().intValue());
-                                List<CandidateIntDTO> ratings = countyRatings
-                                        .stream()
-                                        .filter(rat -> rat.getCandidate().getPartyDependencies().getId().equals(partyDto.getPar().getId()))
-                                        .map(rating -> {
-                                            if (partyDto.getRatings().contains(rating)){
-                                                int indexOf = partyDto.getRatings().indexOf(rating);
-                                                return new CandidateIntDTO(
-                                                        rating.getCandidate()
-                                                        ,partyDto.getRatings().get(indexOf).getCount() + rating.getPoints());
-                                            } else {
-                                                return new CandidateIntDTO(rating.getCandidate(), rating.getPoints());
-                                            }
-                                        })
-                                        .sorted((ra1,ra2) -> ra2.getCount().compareTo(ra1.getCount()))
-                                        .collect(Collectors.toList());
-                                partyDto.setRatings(ratings);
+//                                List<CandidateIntDTO> ratings = countyRatings
+//                                        .stream()
+//                                        .filter(rat -> rat.getCandidate().getPartyDependencies().getId().equals(partyDto.getPar().getId()))
+//                                        .map(rating -> {
+//                                            if (partyDto.getRatings().contains(rating)){
+//                                                int indexOf = partyDto.getRatings().indexOf(rating);
+//                                                partyDto.getRatings().get(indexOf).setCount(partyDto.getRatings().get(indexOf).getCount() + rating.getPoints());
+//                                                return new CandidateIntDTO(
+//                                                        rating.getCandidate()
+//                                                        ,partyDto.getRatings().get(indexOf).getCount() + rating.getPoints());
+//                                            } else {
+//                                                return new CandidateIntDTO(rating.getCandidate(), rating.getPoints());
+//                                            }
+//                                        })
+//                                        .sorted((ra1,ra2) -> ra2.getCount().compareTo(ra1.getCount()))
+//                                        .collect(Collectors.toList());
+//                                partyDto.setRatings(ratings);
                             });
 
                     return partyDto;
