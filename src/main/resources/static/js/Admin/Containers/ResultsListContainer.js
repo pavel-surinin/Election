@@ -24,7 +24,8 @@ function approve(self,type,id,name){
   .then(function(response){
     getMulti(self);
     getSingle(self);
-    self.setState({succesCreateText: name + ' balsai patvirtinti.'});
+    self.setState({deletedResultsText: ''});
+    self.setState({succesCreateText: name + ' balsai patvirtinti.'})
   })
   .catch(function(err){
     console.error('ResultsListContainer.onHandleApprove',err);
@@ -36,7 +37,8 @@ function deleteVotes(self,type,id,name) {
   .then(function(response){
     getMulti(self);
     getSingle(self);
-    self.setState({succesCreateText: '', deletedResultsText : name + ' balsai atmesti.'});
+    self.setState({succesCreateText: ''});
+    self.setState({deletedResultsText : name + ' balsai atmesti.'});
   })
   .catch(function(err){
     console.error('ResultsListContainer.onHandleDelete',err);
