@@ -100,7 +100,7 @@ var SingleResultContainer = React.createClass({
         }
       }
       axios
-      .post('/result-single', postArray)
+      .post('/result/single', postArray)
       .then(function(response){
         self.setState({isVotesRegistered : true});
       })
