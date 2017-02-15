@@ -23,7 +23,7 @@ public class ResultMultiRepository {
         }
     }
 
-    public List<ResultMultiEntity> getByDistrictId(DistrictEntity district) {
+    public List<ResultMultiEntity> getResultsByDistrictId(DistrictEntity district) {
         List<ResultMultiEntity> list = em
                 .createQuery("SELECT r FROM ResultMultiEntity r WHERE r.district = :rDistrict")
                 .setParameter("rDistrict", district)

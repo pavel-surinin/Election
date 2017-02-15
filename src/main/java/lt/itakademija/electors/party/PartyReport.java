@@ -2,6 +2,7 @@ package lt.itakademija.electors.party;
 
 import lt.itakademija.electors.candidate.CandidateReport;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -62,5 +63,20 @@ public class PartyReport {
 
     public void setMembers(List<CandidateReport> members) {
         this.members = members;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PartyReport that = (PartyReport) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(partyNumber, that.partyNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, partyNumber);
     }
 }

@@ -50,7 +50,7 @@ public class ResultMultiService {
 
     private void validateEqualVotersSum(List<ResultMultiEntity> results, DistrictEntity district) {
         final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
-        final List<ResultSingleEntity> resultsSingle = resultSingleRepository.getByDistrictId(district);
+        final List<ResultSingleEntity> resultsSingle = resultSingleRepository.getResultsByDistrictId(district);
         if (resultsSingle.size() != 0){
             final long votesSumMulti = resultsSingle.stream().mapToLong(r -> r.getVotes()).sum();
             if (votesSumMulti != sumOfVotes){
@@ -76,7 +76,7 @@ public class ResultMultiService {
 
     private List<ResultMultiEntity> getDistrictResults(Long id) {
         DistrictEntity district = districtRepository.findById(id);
-        List<ResultMultiEntity> listOfResults = repository.getByDistrictId(district);
+        List<ResultMultiEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
     }
 }
