@@ -34,7 +34,7 @@ public class ResultSingleService {
     public String save(List<ResultSingleEntity> results) {
         final ResultSingleEntity spoiled = results.stream().filter(res -> res.getCandidate().getId() == -1991L).findAny().get();
         DistrictEntity district = spoiled.getDistrict();
-//        validateEqualVotersSum(results, district);
+        validateEqualVotersSum(results, district);
         final DistrictEntity districtEnt = districtRepository.findById(district.getId());
         districtEnt.setSpoiledSingle(spoiled.getVotes().intValue());
         districtService.save(districtEnt);
@@ -43,16 +43,16 @@ public class ResultSingleService {
         return "Votes registered";
     }
 
-//    private void validateEqualVotersSum(List<ResultSingleEntity> results, DistrictEntity district) {
-//        final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
-//        final List<ResultMultiEntity> resultsMulti = resultMultiRepository.getByDistrictId(district);
-//        if (resultsMulti.size() != 0){
-//            final long votesSumMulti = resultsMulti.stream().mapToLong(r -> r.getVotes()).sum();
-//            if (votesSumMulti != sumOfVotes){
-//                throw new NotEqualVotersSumException("Not equal voters sum. MultiResuts sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
-//            }
-//        }
-//    }
+    private void validateEqualVotersSum(List<ResultSingleEntity> results, DistrictEntity district) {
+        final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
+        final List<ResultMultiEntity> resultsMulti = resultMultiRepository.getResultsByDistrictId(district);
+        if (resultsMulti.size() != 0){
+            final long votesSumMulti = resultsMulti.stream().mapToLong(r -> r.getVotes()).sum();
+            if (votesSumMulti != sumOfVotes){
+                throw new NotEqualVotersSumException("Not equal voters sum. MultiResuts sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
+            }
+        }
+    }
 
     @Transactional
     public String approve(Long id) {
