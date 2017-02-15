@@ -13,10 +13,11 @@ public class ResultSingleController {
     @Autowired
     ResultSingleService service;
 
-    @PostMapping("/result-single")
+    @PostMapping("/result/single")
     public String save(@RequestBody List<ResultSingleEntity> results){
         return service.save(results);
     }
+
 
     @PatchMapping("/result/single/{id}/approve/")
     public String approve(@PathVariable Long id){

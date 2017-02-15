@@ -41,6 +41,7 @@ import static org.junit.Assert.*;
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = {PartyControllerTest.class, Application.class})
+
 public class PartyControllerTest {
 
     @Autowired
@@ -80,11 +81,13 @@ public class PartyControllerTest {
         final MultipartFile file2 = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
         String name2 = "Ereliu Partija";
         Integer number2 = 46;
+
         partyService.save(name2, number2, file2);
 
         final MultipartFile file3 = MyUtils.parseToMultiPart("test-csv/data-party-3.csv");
         String name3 = "IT Partija";
         Integer number3 = 47;
+
         partyService.save(name3, number3, file3);
     }
 

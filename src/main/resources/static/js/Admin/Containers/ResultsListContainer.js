@@ -18,23 +18,25 @@ function getSingle(self) {
     console.error('ResultsListContainer.componentWillMount.axios',err);
   });
 }
-function approve(self,type,id){
+function approve(self,type,id,name){
   axios
   .patch('/result/'+type+'/'+id+'/approve/')
   .then(function(response){
     getMulti(self);
     getSingle(self);
+    self.setState({succesCreateText: name + ' balsai patvirtinti.'});
   })
   .catch(function(err){
     console.error('ResultsListContainer.onHandleApprove',err);
   });
 }
-function deleteVotes(self,type,id) {
+function deleteVotes(self,type,id,name) {
   axios
   .delete('/result/'+type+'/'+id)
   .then(function(response){
     getMulti(self);
     getSingle(self);
+    self.setState({succesCreateText: '', deletedResultsText : name + ' balsai atmesti.'});
   })
   .catch(function(err){
     console.error('ResultsListContainer.onHandleDelete',err);
@@ -48,6 +50,8 @@ var ResultsListContainer = React.createClass({
       districtSingleList : [],
       multiEnabled : false,
       singleEnabled : false,
+      succesCreateText : '',
+      deletedResultsText : '',
     };
   },
   componentWillMount: function() {
@@ -58,11 +62,11 @@ var ResultsListContainer = React.createClass({
     getMulti(this);
     getSingle(this);
   },
-  onHandleDelete : function(id,type){
-    deleteVotes(this,type,id);
+  onHandleDelete : function(id,type,name){
+    deleteVotes(this,type,id,name);
   },
-  onHandleApprove : function(id,type){
-    approve(this,type,id);
+  onHandleApprove : function(id,type,name){
+    approve(this,type,id,name);
   },
   render: function() {
     if (this.state.isLoading) {
@@ -72,6 +76,7 @@ var ResultsListContainer = React.createClass({
         </div>
       );
     } else {
+      console.log('RESULTS CONTAINER LOG: ', this);
       return(
         <ResultsListComponent
           single={this.state.districtSingleList}
@@ -79,6 +84,8 @@ var ResultsListContainer = React.createClass({
           onHandleRefresh={this.onHandleRefresh}
           onHandleDelete={this.onHandleDelete}
           onHandleApprove={this.onHandleApprove}
+          succesCreateText={this.state.succesCreateText}
+          deletedResultsText={this.state.deletedResultsText}
         />
       );
     }

@@ -1,6 +1,7 @@
 var PartyListViewComponent = React.createClass({
   render: function() {
-    var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
+    var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
+    var deletePartyMessage = alerts.showDangerFixed(this.props.deletedPartyText);
     var array = [];
     var self = this;
     this.props.partyList.map(function(party,index) {
@@ -28,6 +29,7 @@ var PartyListViewComponent = React.createClass({
 		        </div>
 		          <div className="panel-body">
                 {succesCreateMessage}
+                {deletePartyMessage}
 		          </div>
 		            <table className="table table-striped table-hover">
 		              <thead>
@@ -41,6 +43,9 @@ var PartyListViewComponent = React.createClass({
 		                  <th>
 		                    Veiksmai
 		                  </th>
+			              <th>
+			                Redaguoti
+			              </th>
 		                </tr>
 		              </thead>
 		              <tbody>

@@ -19,13 +19,16 @@ var PartyContainer = React.createClass({
       partyList : [],
       isLoading : true,
       succesCreateText : '',
+      deletedPartyText : '',
+
     };
   },
-  onHandleDelete : function(id){
+  onHandleDelete : function(id, name){
     var self = this;
     axios
       .delete('/party/'+id)
       .then(function(response){
+        self.setState({succesCreateText : '', deletedPartyText : name + ' ištrinta'});
         getParties(self);
       })
       .catch(function(err){
@@ -53,6 +56,7 @@ var PartyContainer = React.createClass({
           partyList={this.state.partyList}
           succesCreateText={this.state.succesCreateText}
           onHandleDelete={this.onHandleDelete}
+          deletedPartyText={this.state.deletedPartyText}
         />
       );
     }
