@@ -1,7 +1,7 @@
 var CandidatesListViewComponent = React.createClass({
 
   render: function() {
-	      var succesCreateMessage = alerts.showSucces(this.props.succesCreateText);
+	      var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
 	      var array = [];
       this.props.candidateList.map(function(cand,index) {
         array.push(
@@ -18,7 +18,7 @@ var CandidatesListViewComponent = React.createClass({
           />
         );
       });
-
+      console.log('candlistview this: ', this);
     return (
           <div className="panel panel-default">
           <div className="panel-heading">
@@ -41,6 +41,7 @@ var CandidatesListViewComponent = React.createClass({
               {array}
             </tbody>
           </table>
+          {succesCreateMessage}
         <script src="../vendor/jquery/jquery.min.js"></script>
 
           <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>

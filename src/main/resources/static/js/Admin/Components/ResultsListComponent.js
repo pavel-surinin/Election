@@ -1,5 +1,7 @@
 var ResultsListComponent = React.createClass({
   render: function() {
+    var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
+    var deleteResultsMessage = alerts.showDangerFixed(this.props.deletedResultsText);
     var self = this;
     var single = this.props.single.map(function(district,index){
       return (<ResultsSingleListRowComponent
@@ -27,6 +29,8 @@ var ResultsListComponent = React.createClass({
         </div>
       </div>
         <div className="panel-body">
+          {succesCreateMessage}
+          {deleteResultsMessage}
           <div className="tab-content">
             <ul className="nav nav-tabs">
               <li className="active"><a data-toggle="tab" href="#results0">Tvarka</a></li>

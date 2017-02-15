@@ -14,10 +14,10 @@ var ResultsMultiListRowComponent = React.createClass({
     setInterval(1000,(addMinutes(time, 2) - new Date()) < 0);
   },
   approve : function(){
-    this.props.onHandleApprove(this.props.info.id,'multi');
+    this.props.onHandleApprove(this.props.info.id,'multi',this.props.info.name);
   },
   delete : function(){
-    this.props.onHandleDelete(this.props.info.id,'multi');
+    this.props.onHandleDelete(this.props.info.id,'multi',this.props.info.name);
   },
   render: function() {
     this.isDeleteActive();

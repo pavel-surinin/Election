@@ -73,7 +73,7 @@ var CandidateEditContainer = React.createClass({
     axios.post('/candidate', postCandidateObject)
     .then(function(response){
       console.log(response);
-      self.context.router.push('/admin/candidate?succesCreateText=Kandidatas ' + self.state.name + ' atnaujintas');
+      self.context.router.push('/admin/candidate?succesCreateText=Kandidatas ' + self.state.name + ' ' + self.state.surname + ' atnaujintas');
     })
     .catch(function(err){
       console.log('CandidateEditContainer.onHandleSubmit.axios.editCandidate',err);
@@ -105,6 +105,7 @@ var CandidateEditContainer = React.createClass({
                 onHandleDescriptionChange={this.onHandleDescriptionChange}
                 onHandleNumberInPartyChange={this.onHandleNumberInPartyChange}
                 onHandleSubmit={this.onHandleSubmit}
+                succesCreateText={this.state.succesCreateText}
                 action='Atnaujinti'
               />
           </div>

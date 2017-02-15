@@ -12,7 +12,7 @@ var  PartyListViewRowComponent= React.createClass({
     };
   },
   delete : function(){
-    this.props.onHandleDelete(this.props.id);
+    this.props.onHandleDelete(this.props.id, this.props.name);
   },
   render: function() {
     return (

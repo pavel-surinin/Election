@@ -1,11 +1,12 @@
 var ResultsSingleListRowComponent = React.createClass({
   approve : function(){
-    this.props.onHandleApprove(this.props.info.id,'single');
+    this.props.onHandleApprove(this.props.info.id,'single',this.props.info.name);
   },
   delete : function(){
-    this.props.onHandleDelete(this.props.info.id,'single');
+    this.props.onHandleDelete(this.props.info.id,'single',this.props.info.name);
   },
   render: function() {
+    console.log("bla bla bla: ", this.props.info);
     return (
       <tr>
         <td className="small">

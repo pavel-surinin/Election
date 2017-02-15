@@ -1,6 +1,7 @@
 var CandidateEditComponent = React.createClass({
 
   render: function() {
+    console.log('cand edit comp props: ',this.props);
     return (
         <div className="panel panel-default">
           <div className="panel-body">
