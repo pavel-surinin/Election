@@ -4,6 +4,7 @@ import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * Created by Pavel on 2017-02-10.
@@ -59,5 +60,18 @@ public class RatingEntity {
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RatingEntity that = (RatingEntity) o;
+        return Objects.equals(candidate, that.candidate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(candidate);
     }
 }

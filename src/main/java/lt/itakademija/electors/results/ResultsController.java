@@ -1,5 +1,6 @@
 package lt.itakademija.electors.results;
 
+import lt.itakademija.electors.results.reports.ResultCountyReport;
 import lt.itakademija.electors.results.reports.ResultDistrictReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,11 @@ public class ResultsController {
     @GetMapping("results/district/{id}")
     public ResultDistrictReport getDistrictResults(@PathVariable Long id){
         return service.getDistrictResults(id);
+    }
+
+    @GetMapping("results/county/{id}")
+    public ResultCountyReport getCountyResults(@PathVariable Long id) {
+        return service.getCountyResults(id);
     }
 
 }

@@ -1,16 +1,19 @@
 package lt.itakademija.electors.results.reports.dto;
 
 import lt.itakademija.electors.candidate.CandidateEntity;
+import lt.itakademija.electors.candidate.CandidateReport;
+
+import java.util.Objects;
 
 /**
  * Created by Pavel on 2017-02-13.
  */
 public class CandidateIntDTO {
-    private CandidateEntity candidate;
+    private CandidateReport candidate;
     private Integer count;
 
     public CandidateIntDTO(CandidateEntity candidate, Integer count) {
-        this.candidate = candidate;
+        this.candidate = new CandidateReport(candidate);
         this.count = count;
     }
 
@@ -25,11 +28,25 @@ public class CandidateIntDTO {
         this.count = count;
     }
 
-    public CandidateEntity getCandidate() {
+    public CandidateReport getCandidate() {
         return candidate;
     }
 
-    public void setCandidate(CandidateEntity candidate) {
+    public void setCandidate(CandidateReport candidate) {
         this.candidate = candidate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CandidateIntDTO that = (CandidateIntDTO) o;
+        return Objects.equals(candidate, that.candidate) &&
+                Objects.equals(count, that.count);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(candidate, count);
     }
 }
