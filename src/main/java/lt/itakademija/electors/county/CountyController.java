@@ -50,6 +50,5 @@ public class CountyController {
     public boolean deletecounty(@PathVariable Long id){
         return service.delete(id);
     }
-
-
+    
 }
