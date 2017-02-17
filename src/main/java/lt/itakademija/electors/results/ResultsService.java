@@ -116,7 +116,7 @@ public class ResultsService {
         }
         report.setPartiesVotesSummary(partiesVotesSummary);
 
-        
+
         List<PartyIntDTO> partyIntDTOS = sortMemberByRatingAndPartyNumber(report);
         report.setReorderedPartyMembersParties(partyIntDTOS);
 
