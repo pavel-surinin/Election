@@ -45,11 +45,12 @@ public class DistrictRepresentativeService {
     @Transactional
     public DistrictRepresentativeCredentialsReport save(DistrictRepresentativeEntity representative) {
         int randomNum = ThreadLocalRandom.current().nextInt(100, 999 + 1);
-        String username = representative.getName().toLowerCase() + "-" + representative.getSurname().toLowerCase()+randomNum;
-        String password = Md5.generate(username).substring(0,20);
+        String username = representative.getName().toLowerCase() + representative.getSurname().toLowerCase()+randomNum;
+        String password = Md5.generate(username).substring(0,10);
         UsersEntity user = new UsersEntity();
         user.setPassword(password);
         user.setUsername(username);
+        user.setDistrictId(representative.getDistrict().getId().intValue());
         usersService.saveUser(user);
         repository.save(representative);
         return new DistrictRepresentativeCredentialsReport(username, user.getPassword());

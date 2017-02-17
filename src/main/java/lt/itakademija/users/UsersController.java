@@ -19,8 +19,13 @@ public class UsersController {
         return service.checkWhoIsLogged();
     }
 
+    @GetMapping("/users/logged/district")
+    public int whoIsLoggedDistrict(){
+        return service.checkWhoIsDistrict();
+    }
+
     @PostMapping("/users/login")
-    public boolean login(@RequestBody UsersEntity user){
+    public String login(@RequestBody UsersEntity user){
         return service.login(user);
     }
 

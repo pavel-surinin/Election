@@ -15,6 +15,7 @@ public class Application {
     CommandLineRunner init(DataPreloader loader) {
         return (args) -> {
             loader.loadCandidates();
+            loader.loadParties();
         };
 
     }

@@ -8,13 +8,19 @@ import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.party.PartyEntity;
+import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 
 /**
@@ -33,28 +39,62 @@ public class DataPreloader {
     CandidateRepository candidateRepository;
     @Autowired
     DistrictRepresentativeService districtRepresentativeService;
+    @Autowired
+    PartyService partyService;
 
     public void loadCandidates(){
         CountyEntity ce = new CountyEntity();
         ce.setName("Stebuklų šalis");
         final CountyEntity ces = countyService.save(ce);
-        DistrictEntity de = new DistrictEntity();
-        de.setName("Gerosios Vilties");
-        de.setCounty(ces);
-        de.setAdress("Tilto g. 9");
-        de.setNumberOfElectors(5000L);
-        final DistrictEntity des = districtService.save(de);
+        DistrictEntity de = saveDistrict(ces, "Maža" , "Po tiltu");
+        createRepresentative(de, "Burtininkas", "Antanas");
+        DistrictEntity de2 = saveDistrict(ces, "Raudona" , "Nosies g. 3");
+        createRepresentative(de2, "Jiezus", "Marija");
+        DistrictEntity de3 = saveDistrict(ces, "Mėlyna" , "Pijokų g. 40");
+        createRepresentative(de3, "Piktas", "Žmogėnas");
+
         createCandidate(ces,"Vardas","Pavarde","Lirika");
         createCandidate(ces,"Osvaldas","Rimkus","Lirika");
         createCandidate(ces,"Marekas","Testeris","Lirika");
         createCandidate(ces,"Vytautas","Linkus","Lirika");
         createCandidate(ces,"Pavel","Surinin","Lirika");
         createCandidate(ces,"Gabriele","Seliunaite","Lirika");
+        ;
+    }
+
+    private DistrictRepresentativeEntity createRepresentative(DistrictEntity des, String name, String surname) {
         DistrictRepresentativeEntity rep = new DistrictRepresentativeEntity();
-        rep.setName("Gerasisis");
-        rep.setSurname("Burtininkas");
+        rep.setName(name);
+        rep.setSurname(surname);
         rep.setDistrict(des);
         districtRepresentativeService.save(rep);
+        return rep;
+    }
+
+    private DistrictEntity saveDistrict(CountyEntity ces, String name, String adress ) {
+        DistrictEntity de = new DistrictEntity();
+        de.setName(name);
+        de.setCounty(ces);
+        de.setAdress(adress);
+        de.setNumberOfElectors(5000L);
+        return districtService.save(de);
+    }
+
+    public void loadParties(){
+        final MultipartFile file1 = parseToMultiPart("test-csv/data-party-1.csv");
+        partyService.save("Balvanu Partija", 1, file1);
+
+        final MultipartFile file2 = parseToMultiPart("test-csv/data-party-2.csv");
+        partyService.save("Ereliu Partija", 2, file2);
+
+        final MultipartFile file3 = parseToMultiPart("test-csv/data-party-3.csv");
+        partyService.save("IT Partija", 3, file3);
+
+        final MultipartFile file4 = parseToMultiPart("test-csv/data-party-4.csv");
+        partyService.save("Feministai", 4, file4);
+
+        final MultipartFile file5 = parseToMultiPart("test-csv/big-party-100.csv");
+        partyService.save("Monopolistai", 5, file5);
     }
 
     private void createCandidate(CountyEntity ces, String name, String surname, String desc) {
@@ -66,5 +106,18 @@ public class DataPreloader {
         can.setCounty(ces);
         can.setMultiList(false);
         service.save(can);
+    }
+
+    private MultipartFile parseToMultiPart(String pathToFile) {
+        Path path = Paths.get(pathToFile);
+        String name = path.getFileName().toFile().getName();
+        String originalFileName = path.getFileName().toFile().getName();
+        String contentType = "multipart/form-data";
+        byte[] content = null;
+        try {
+            content = Files.readAllBytes(path);
+        } catch (final IOException e) {
+        }
+        return new MockMultipartFile(name, originalFileName, contentType, content);
     }
 }

@@ -1,5 +1,10 @@
 var RepresentativeComponent = React.createClass({
-
+  onHandleLogout : function(){
+    axios.get('/users/logout')
+    .then(function(response){
+      self.context.router.push('/');
+    });
+  },
   render: function() {
     return (
       <div>
@@ -54,5 +59,9 @@ var RepresentativeComponent = React.createClass({
   }
 
 });
+
+RepresentativeComponent.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
 
 window.RepresentativeComponent = RepresentativeComponent;
