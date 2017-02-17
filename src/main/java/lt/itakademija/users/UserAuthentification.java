@@ -10,6 +10,16 @@ public class UserAuthentification {
 
     private String userLogged = "none";
 
+    private int userDistrictId = 5;
+
+    public int getUserDistrictId() {
+        return userDistrictId;
+    }
+
+    public void setUserDistrictId(int userDistrictId) {
+        this.userDistrictId = userDistrictId;
+    }
+
     public String getUserLogged() {
         return userLogged;
     }

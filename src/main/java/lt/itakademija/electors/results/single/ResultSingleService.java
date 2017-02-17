@@ -3,6 +3,7 @@ package lt.itakademija.electors.results.single;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.results.ResultsService;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import lt.itakademija.electors.results.multi.ResultMultiRepository;
 import lt.itakademija.exceptions.NotEqualVotersSumException;
@@ -17,6 +18,9 @@ import java.util.List;
  */
 @Service
 public class ResultSingleService {
+
+    @Autowired
+    ResultsService resultsService;
 
     @Autowired
     ResultMultiRepository resultMultiRepository;
@@ -45,7 +49,7 @@ public class ResultSingleService {
 
     private void validateEqualVotersSum(List<ResultSingleEntity> results, DistrictEntity district) {
         final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
-        final List<ResultMultiEntity> resultsMulti = resultMultiRepository.getByDistrictId(district);
+        final List<ResultMultiEntity> resultsMulti = resultMultiRepository.getResultsByDistrictId(district);
         if (resultsMulti.size() != 0){
             final long votesSumMulti = resultsMulti.stream().mapToLong(r -> r.getVotes()).sum();
             if (votesSumMulti != sumOfVotes){
@@ -59,6 +63,7 @@ public class ResultSingleService {
         List<ResultSingleEntity> listOfResults = getDistrictResults(id);
         listOfResults.stream().forEach(res -> res.setApproved(true));
         listOfResults.stream().forEach(res -> repository.save(res));
+        resultsService.saveCountyResults(districtRepository.findById(id).getCounty().getId());
         return "Results approved";
     }
 
@@ -71,7 +76,7 @@ public class ResultSingleService {
 
     private List<ResultSingleEntity> getDistrictResults(Long id) {
         DistrictEntity district = districtRepository.findById(id);
-        List<ResultSingleEntity> listOfResults = repository.getByDistrictId(district);
+        List<ResultSingleEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
     }
 }

@@ -1,4 +1,4 @@
-insert into users (id, username, password) values (null, 'admin', 'admin');
+insert into users (id, username, password, district_id) values (null, 'admin', 'admin',6);
 insert into county_entity (county_id, name) values (null, 'Vilniaus');
 insert into county_entity (county_id, name) values (null, 'Kauno');
 insert into district_entity (district_id, adress, county_id, name, number_of_electors) values (null, 'Gedimino g. 9', 1, 'Centro', 1000);
@@ -9,9 +9,3 @@ insert into district_representative_entity (id, district_id, name, surname) valu
 insert into district_representative_entity (id, district_id, name, surname) values (null, 2, 'Ponas', 'Binas');
 insert into district_representative_entity (id, district_id, name, surname) values (null, 3, 'Aliukas', 'Brolis');
 insert into district_representative_entity (id, district_id, name, surname) values (null, 4, 'Kaimo', 'Jurgis');
-insert into party_entity (party_id, name, party_number) values (null, 'Darbo Partija', 5);
-insert into party_entity (party_id, name, party_number) values (null, 'Valstiečių Partija', 7);
-insert into party_entity (party_id, name, party_number) values (null, 'Nakties Partija', 1001);
-insert into party_entity (party_id, name, party_number) values (null, 'Apokalipses Partija', 666);
-insert into party_entity (party_id, name, party_number) values (null, 'Valinsko Partija', 901);
-insert into party_entity (party_id, name, party_number) values (null, '69 Danguje Partija', 69);

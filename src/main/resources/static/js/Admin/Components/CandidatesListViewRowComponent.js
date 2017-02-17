@@ -1,9 +1,11 @@
 var CandidatesListViewRowComponent = React.createClass({
+
   componentDidMount: function () {
     $(this.refs.delete).tooltip();
     $(this.refs.edit).tooltip();
     $(this.refs.info).tooltip();
   },
+
   render: function() {
     return (
             <tr>
