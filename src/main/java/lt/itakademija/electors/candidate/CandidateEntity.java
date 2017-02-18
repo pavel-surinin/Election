@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -137,6 +138,22 @@ public class CandidateEntity {
 
     public void setResults(List<ResultSingleEntity> results) {
         this.results = results;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CandidateEntity that = (CandidateEntity) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(surname, that.surname) &&
+                Objects.equals(birthDate, that.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname, birthDate);
     }
 }
 

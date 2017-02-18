@@ -38,6 +38,8 @@ public class ResultDistrictReport {
                     .collect(Collectors.toList());
             this.valid = resultsMulti.stream().mapToInt(r -> r.getVotes().intValue()).sum() + district.getSpoiledMulti();
             this.registrationMulti = formatDateToString(resultsMulti.get(0).getDatePublished());
+        } else if (resultSingle.size() != 0) {
+            this.valid = resultSingle.stream().mapToInt(r -> r.getVotes().intValue()).sum() + district.getSpoiledSingle();
         }
         if (resultSingle.size() != 0) {
             this.votesByCandidate = resultSingle

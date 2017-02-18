@@ -3,6 +3,7 @@ package lt.itakademija.electors.results.single;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.results.ResultsService;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import lt.itakademija.electors.results.multi.ResultMultiRepository;
 import lt.itakademija.exceptions.NotEqualVotersSumException;
@@ -17,6 +18,9 @@ import java.util.List;
  */
 @Service
 public class ResultSingleService {
+
+    @Autowired
+    ResultsService resultsService;
 
     @Autowired
     ResultMultiRepository resultMultiRepository;
@@ -59,6 +63,7 @@ public class ResultSingleService {
         List<ResultSingleEntity> listOfResults = getDistrictResults(id);
         listOfResults.stream().forEach(res -> res.setApproved(true));
         listOfResults.stream().forEach(res -> repository.save(res));
+        resultsService.saveCountyResults(districtRepository.findById(id).getCounty().getId());
         return "Results approved";
     }
 

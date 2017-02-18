@@ -3,6 +3,7 @@ package lt.itakademija.electors.candidate;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by Pavel on 2017-01-12.
@@ -136,4 +137,18 @@ public class CandidateReport {
         return df.format(date);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CandidateReport that = (CandidateReport) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(surname, that.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, surname);
+    }
 }

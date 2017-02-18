@@ -14,6 +14,7 @@ public class Application {
     @Bean
     CommandLineRunner init(DataPreloader loader) {
         return (args) -> {
+            loader.loadParties();
             loader.loadCandidates();
         };
 

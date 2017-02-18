@@ -36,14 +36,14 @@ public class UsersService {
     UserAuthentification auth;
 
     @Autowired
-    UsersRepository rep;
+    UsersRepository repository;
 
     public String checkWhoIsLogged() {
         return auth.getUserLogged();
     }
 
     public UsersEntity findUserByUsername(UsersEntity user){
-        List<UsersEntity> userToFind = rep.findByUsername(user);
+        List<UsersEntity> userToFind = repository.findByUsername(user);
         if (userToFind == null) {
             return null;
         } else {
@@ -51,13 +51,15 @@ public class UsersService {
         }
     }
 
-    public boolean login(UsersEntity user) {
-        List<UsersEntity> resp = rep.checkUserLoginPassword(user);
+    public String login(UsersEntity user) {
+        List<UsersEntity> resp = repository.checkUserLoginPassword(user);
+        System.out.println("---" + resp.size());
         if (resp.size() == 0) {
-            return false;
+            return "none";
         } else {
             auth.setUserLogged(resp.get(0).getUsername());
-            return true;
+            auth.setUserDistrictId(resp.get(0).getDistrictId());
+            return user.getUsername();
         }
     }
 
@@ -69,7 +71,7 @@ public class UsersService {
     public void saveUser(UsersEntity user){
         String hashword = Md5.generate(user.getPassword());
         user.setPassword(hashword);
-        rep.save(user);
+        repository.save(user);
     }
 
     public List<Long> getAdminPanelInfo() {
@@ -80,5 +82,9 @@ public class UsersService {
         list.add(partyRepository.getPartiesCount());
         list.add(candidateRepository.getCandidatesCount());
         return list;
+    }
+
+    public int checkWhoIsDistrict() {
+        return auth.getUserDistrictId();
     }
 }
