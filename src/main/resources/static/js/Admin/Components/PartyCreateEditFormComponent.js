@@ -56,8 +56,31 @@ var PartyCreateEditFormComponent = React.createClass({
                       </div><br/>
                       {numberErrorMesages}
                       <div style={deleteBtnStyle} className="input-group col-xs-12 text-primary">
-                          <button id="delete-button" onClick={this.props.onHandleDeleteClick} className='btn btn-block btn-danger btn-outline '> Ištrinti sąrašą
-                          </button>
+                        &nbsp;
+                        <button data-target={"#confirmationModal" + this.props.id} ref="delete" title="Ištrinti" type="button" id={'confirm-delete-button-' + this.props.id} className='btn btn-block btn-danger btn-outline' data-toggle="modal">Ištrinti sąrašą</button>
+                        <div id={'confirmationModal' + this.props.id} className="modal fade" role="dialog">
+                          <div className="modal-dialog">
+                            <div className="modal-content">
+                              <div className="modal-header">
+                                <button type="button" id="modal-close-button" className="close" data-dismiss="modal">&times;</button>
+                                <h5 className="modal-title">Ar tikrai norite ištrinti {this.props.name} kandidatų sąrašą?</h5>
+                              </div>
+                              <div className="modal-body">
+                                <button type="button" id="close-button"  className="btn btn-info btn-outline" data-dismiss="modal">Uždaryti</button>
+                                &nbsp;
+                                <button
+                                  ref='delete'
+                                  onClick={this.props.onHandleDeleteClick}
+                                  data-toggle="tooltip1"
+                                  title="Ištrinti"
+                                  type="button"
+                                  className="btn btn-danger"
+                                  data-dismiss="modal">Ištrinti
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div style={uploadStyle} className="input-group col-xs-12 text-primary">
                           <label>Prisegti partijos narių sąrašą</label>

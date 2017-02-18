@@ -34,7 +34,24 @@
                 &nbsp;
                 <a href={'#/admin/district/edit/' + this.props.id} ref="edit" data-toggle="tooltip2" title="Redaguoti" id={'edit-district-' + this.props.id} type="button " className="btn btn-primary btn-sm fa fa-pencil"></a>
                 &nbsp;
-                <button onClick={this.onHandleDeleteClick} ref="delete" data-toggle="tooltip1" title="Ištrinti" id={'delete-district-' + this.props.id} type="button" className="btn btn-danger btn-sm fa fa-trash"></button>
+                <a href={"#confirmationModal" + this.props.id}  data-toggle="tooltip1" ref="delete" title="Ištrinti" type="button" id={'confirm-delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"></a>
+                  <div id={'confirmationModal' + this.props.id} className="modal fade" role="dialog">
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <button type="button" id="modal-close-button" className="close" data-dismiss="modal">&times;</button>
+                          <h5 className="modal-title">Ar tikrai norite ištrinti {this.props.name} apygardą?</h5>
+                        </div>
+                        <div className="modal-body">
+                          <button type="button" id="close-button"  className="btn btn-info btn-outline" data-dismiss="modal">Uždaryti</button>
+                          &nbsp;
+                          <button
+                            type="button" onClick={this.onHandleDeleteClick} id={'delete-district-' + this.props.id} className="btn btn-danger" data-dismiss="modal">Ištrinti
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                </div>
               </td>
             </tr>
