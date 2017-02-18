@@ -1,5 +1,5 @@
 var DistrictResults  = React.createClass({
-  loadPieSingle : function() {
+  loadSingle : function() {
     var sp1 = document.createElement('canvas');
     sp1.id = 'canvasPieSingle';
     var parentDiv = document.getElementById('parentPieSingle');
@@ -13,14 +13,20 @@ var DistrictResults  = React.createClass({
     parentBar.appendChild(sp2);
     chartss.bar('horizontalBar',document.getElementById('canvasBarSingle'), this.props.results);
   },
+  componentWillUpdate: function(nextProps, nextState) {
+    if (nextProps.district.id != this.props.district.id) {
+      this.loadSingle();
+    }
+  },
 
   render: function() {
+    console.log(this.props.district);
     var self = this;
     var singleTable = [];
     if (this.props.results.votesByCandidate) {
-      singleTable = this.props.results.votesByCandidate.map(function(cid){
+      singleTable = this.props.results.votesByCandidate.map(function(cid,index){
         return (
-          <tr className='small'>
+          <tr key={index} className='small'>
           <td>{cid.candidate.name + ' ' + cid.candidate.surname}</td>
           <td>{cid.candidate.partijosPavadinimas}</td>
           <td>{cid.votes}</td>
@@ -30,6 +36,17 @@ var DistrictResults  = React.createClass({
         );
       });
     }
+    var dis = this.props.district;
+    var districtInfo = [];
+    if (dis.name) { districtInfo.push(<tr><td>{dis.name} apylinkė</td></tr>);}
+    if (dis.adress) { districtInfo.push(<tr><td>Adresas: {dis.adress}</td></tr>);}
+    if (dis.representativeName) { districtInfo.push(<tr><td>Apylinkės atstovas: {dis.representativeName}</td></tr>);}
+    if (dis.countyName) { districtInfo.push(<tr><td>Apygarda: {dis.countyName}</td></tr>);}
+    if (dis.numberOfElectors) { districtInfo.push(<tr><td>Rinkėjų skaičius: {dis.numberOfElectors}</td></tr>);}
+    if (dis.spoiledMulti) { districtInfo.push(<tr><td>Sugadintų biuletenių daugiamandatėje: {dis.spoiledMulti}</td></tr>);}
+    if (dis.spoiledSingle) { districtInfo.push(<tr><td>Sugadintų biuletenių vienmandatėje: {dis.spoiledSingle}</td></tr>);}
+    if (dis.votesSingleRegisteredDate) { districtInfo.push(<tr><td>Vienmandatės balsų registravimo data/laikas: {dis.votesSingleRegisteredDate}</td></tr>);}
+    if (dis.votesMultiRegisteredDate) { districtInfo.push(<tr><td>Daugiamandatės balsų registravimo data/laikas: {dis.votesMultiRegisteredDate}</td></tr>);}
     return (
       <div>
       <div className="container"><h1>{this.props.district.name} rinkimų apylinkė</h1></div>
@@ -38,7 +55,7 @@ var DistrictResults  = React.createClass({
             <li className="active">
               <a  href="#1a" data-toggle="tab">Apylinkės Informacija</a>
             </li>
-            <li><a onClick={this.loadPieSingle} href="#2a" data-toggle="tab">Vienmandatės rezultatai</a>
+            <li><a onClick={this.loadSingle} href="#2a" data-toggle="tab">Vienmandatės rezultatai</a>
             </li>
             <li><a href="#3a" data-toggle="tab">Daugiamandatės rezultaitai</a>
             </li>
@@ -46,22 +63,30 @@ var DistrictResults  = React.createClass({
 
             <div className="tab-content clearfix">
               <div className="tab-pane active" id="1a">
-                <h3>Contents background color is the same for the tab</h3>
+                <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th className='col-md-10 col-sm-10'>Bendra Informacija</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {districtInfo}
+                    </tbody>
+                  </table>
               </div>
 
-              <div className="tab-pane" id="2a">
+              <div className="tab-pane vytis" id="2a">
                 <h3>Rinkėjų aktyvumas: {this.props.results.valid} balsavusių iš {this.props.results.voters}, {Math.round(this.props.results.valid / this.props.results.voters *100,2)}%</h3>
                 <h3>Sugadintų biuletenių skaičius: {this.props.results.spoiledSingle}</h3>
-                <h5>{this.props.singleText}</h5>
                 <div className='col-md-7'>
                 <table className="table table-striped">
                     <thead>
                       <tr>
-                        <th className='col-md-4'>Kandidatas</th>
-                        <th className='col-md-3'>Partija</th>
-                        <th className='col-md-2'>Balsai</th>
-                        <th className='col-md-2'>% nuo galiojančių</th>
-                        <th className='col-md-1'>% nuo visų</th>
+                        <th className='col-md-4 col-sm-4'>Kandidatas</th>
+                        <th className='col-md-3 col-sm-3'>Partija</th>
+                        <th className='col-md-2 col-sm-2'>Balsai</th>
+                        <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
+                        <th className='col-md-1 col-sm-2'>% nuo visų</th>
                       </tr>
                     </thead>
                     <tbody>

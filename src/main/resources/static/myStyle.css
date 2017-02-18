@@ -30,7 +30,7 @@
 #result-refresh.text-success {cursor:pointer;}
 
 body {
-  background-color: rgba(171, 171, 255, 0.18);
+  background-color: rgba(141, 141, 215, 0.28);
   background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
   font-family: 'Raleway', sans-serif;}
 
@@ -48,9 +48,22 @@ body {
 }
 
 #exTab1 .nav-pills > li > a {
+  color : #0c4373;
+  background-color: #d3d2d4;
+  padding : 20px;
+  border-radius: 1px;
+}
+
+#exTab1 .nav-pills > li.active a  {
   color : #428bca;
   background-color: white;
   padding : 20px;
   border-radius: 1px;
+}
 
+.vytis{
+  background-image:  url('Images/herb.png');
+  background-position: top right;
+  background-size: 62px 70px;
+  background-repeat: no-repeat;
 }

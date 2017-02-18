@@ -87,7 +87,7 @@ public class DataPreloader {
             res.setCandidate(candidatesList.get(i));
             res.setDatePublished(new Date());
             res.setDistrict(de3);
-            Integer round = Math.abs(Math.round(new Random().nextInt(200) * new Random().nextFloat()));
+            Integer round = Math.abs(Math.round(new Random().nextInt(500) * new Random().nextFloat() * new Random().nextFloat()));
             res.setVotes(round.longValue());
             resultSingleEntities.add(res);
         }

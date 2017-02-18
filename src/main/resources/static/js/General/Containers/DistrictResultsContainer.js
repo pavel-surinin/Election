@@ -56,8 +56,6 @@ var DistrictResultsContainer  = React.createClass({
         canvasBar={<canvas id='barC'></canvas>}
         results={this.state.results}
         district={this.state.district}
-        singleText = {formSingleText(this)}
-
       />
     );
   }

@@ -91,7 +91,16 @@ var chartss = {
             hoverBackgroundColor: borderColorArr.slice(1, mdata.labels.length+1),
           }]
       },
-      options: {}
+      //Chart.defaults.global.legend
+      options: {
+        legend: {
+          position : 'bottom',
+          display: true,
+          labels: {
+            fontColor: '#333333'
+          }
+        }
+      }
     });
     return myChart;
   }
