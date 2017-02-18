@@ -1,3 +1,16 @@
+function getDistrictIdLogged(self) {
+  axios
+    .get('/users/logged/district')
+    .then(function(response){
+      self.setState({
+        districtId:response.data,
+      });
+    })
+    .catch(function(err){
+      console.error('componentWillMount.axios.get.districtId', err);
+    });
+}
+
 function getCandidates(self,district) {
   axios
     .get('candidate/' + district + '/district')
@@ -66,8 +79,10 @@ var SingleResultContainer = React.createClass({
     };
   },
   componentWillMount: function() {
+    getDistrictIdLogged(this);
     getCandidates(this,this.state.districtId);
     getDistrict(this,this.state.districtId);
+    console.log(this.state);
   },
   registerVotes :function(id,votes){
     list[id]=votes;

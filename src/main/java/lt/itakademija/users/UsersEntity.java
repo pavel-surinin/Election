@@ -24,10 +24,28 @@ public class UsersEntity {
     @NotNull
     private String password;
 
+    private int districtId;
+
     @ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRoles> roles;
+
+    public int getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(int districtId) {
+        this.districtId = districtId;
+    }
+
+    public Set<UserRoles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<UserRoles> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;

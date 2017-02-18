@@ -23,7 +23,7 @@ public class ResultsController {
 
     @GetMapping("results/county/{id}")
     public ResultCountyReport getCountyResults(@PathVariable Long id) {
-        return service.getCountyResults(id);
+        return service.formOrGetCountyResults(id);
     }
 
 }

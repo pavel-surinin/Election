@@ -19,7 +19,7 @@
     <!-- Morris Charts CSS -->
     <link href="/vendor/morrisjs/morris.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="fa/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="myStyle.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -39,19 +39,20 @@
   <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <script src="/js/Helpers/charts/moment.js"></script>
 
   <script type="text/babel" src="/js/Styles/styles.js"></script>
   <script type="text/babel" src="/js/Helpers/validation.js"></script>
   <script type="text/babel" src="/js/Helpers/alerts.js"></script>
   <script type="text/babel" src="/js/Helpers/eventEmitter.js"></script>
+  <script type="text/babel" src="/js/Helpers/charts.js"></script>
 
   <!-- Other Components -->
   <script type="text/babel" src="/js/General/Components/HomeComponent.js"></script>
   <script type="text/babel" src="/js/General/Components/LoginComponent.js"></script>
   <!-- Other Containers -->
   <script type="text/babel" src="/js/General/Containers/LoginContainer.js"></script>
-
-  <script type="text/babel" src="/js/General/Containers/CreateBookContainer.js"></script>
 
   <!-- Admin Components -->
   <script type="text/babel" src="/js/Admin/Components/AdminComponent.js"></script>
@@ -109,24 +110,26 @@
   <script type="text/babel" src="/js/Admin/Containers/ResultsListContainer.js"></script>
 
   <!-- representative Components -->
+  <script type="text/babel" src="/js/Representative/Components/RepHomeComponent.js"></script>
   <script type="text/babel" src="/js/Representative/Components/RepresentativeComponent.js"></script>
   <script type="text/babel" src="/js/Representative/Components/SingleResultComponent.js"></script>
   <script type="text/babel" src="/js/Representative/Components/SingleResultRowComponent.js"></script>
   <script type="text/babel" src="/js/Representative/Components/MultiResultComponent.js"></script>
   <script type="text/babel" src="/js/Representative/Components/MultiResultRowComponent.js"></script>
-  <script type="text/babel" src="/js/Representative/Components/RepHomeComponent.js"></script>
   <script type="text/babel" src="/js/Representative/Components/MultiResultRowModalRowComponent.js"></script>
 
   <!-- representative Containers -->
   <script type="text/babel" src="/js/Representative/Containers/RepresentativeContainer.js"></script>
+  <script type="text/babel" src="/js/Representative/Containers/RepHomeContainer.js"></script>
   <script type="text/babel" src="/js/Representative/Containers/MultiResultContainer.js"></script>
   <script type="text/babel" src="/js/Representative/Containers/SingleResultContainer.js"></script>
-  <script type="text/babel" src="/js/Representative/Containers/RepHomeContainer.js"></script>
 
   <!-- non register user -->
   <script type="text/babel" src="/js/SideNav/Components/MenuComponent.js"></script>
 
 
+  <script type="text/babel" src="/js/General/Containers/DistrictResultsContainer.js"></script>
+  <script type="text/babel" src="/js/General/Components/DistrictResults.js"></script>
   <script type="text/babel" src="/js/index.jsx"></script>
 
 </body>

@@ -2,6 +2,19 @@ var errorMesages = [];
 var list = {};
 var postArray =[];
 var ratings = [];
+
+function getDistrictIdLogged(self) {
+  axios
+    .get('/users/logged/district')
+    .then(function(response){
+      self.setState({
+        districtId :  response.data,
+      });
+    })
+    .catch(function(err){
+      console.error('componentWillMount.axios.get.districtId', err);
+    });
+}
 function RatingnegativeValuesException(message) {
   this.message = message;
   this.name = 'RatingnegativeValuesException';
@@ -92,6 +105,7 @@ var MultiResultContainer = React.createClass({
     };
   },
   componentWillMount: function() {
+    getDistrictIdLogged(this);
     getParties(this);
     getDistrict(this,this.state.districtId);
   },

@@ -26,20 +26,21 @@ var LoginContainer = React.createClass({
   onHandleSubmit : function(event){
     event.preventDefault();
     var self = this;
-    console.log(this.state);
     axios
     .post('users/login', {
       username : self.state.username,
       password : self.state.password,
     })
     .then(function(response){
-      if (response.data) {
-        self.context.router.push('/admin/');
-      } else {
+      if (response.data == 'none') {
         self.setState({wrongAuth : true});
+      } else {
+        if (response.data == 'admin') {
+          self.context.router.push('/admin/');
+        } else {
+          self.context.router.push('/representative/');
+        }
       }
-      console.log(response.data);
-
     })
     .catch(function(err){
       console.error('axios error at LoginContainer', err);
