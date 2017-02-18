@@ -91,9 +91,10 @@ ReactDOM.render((
       <Route path="*" component={NoMatch}/>
     </Route>
 
-    <Route path="/" component={App}>
+    <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
+
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
