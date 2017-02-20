@@ -61,13 +61,10 @@ var PartyCreateEditFormComponent = React.createClass({
                         <div id={'confirmationModal' + this.props.id} className="modal fade" role="dialog">
                           <div className="modal-dialog">
                             <div className="modal-content">
-                              <div className="modal-header">
-                                <button type="button" id="modal-close-button" className="close" data-dismiss="modal">&times;</button>
-                                <h5 className="modal-title">Ar tikrai norite ištrinti {this.props.name} kandidatų sąrašą?</h5>
+                              <div className="modal-body">
+                                <h4 className="modal-title">Ar tikrai norite ištrinti {this.props.name} kandidatų sąrašą?</h4>
                               </div>
                               <div className="modal-body">
-                                <button type="button" id="close-button"  className="btn btn-info btn-outline" data-dismiss="modal">Uždaryti</button>
-                                &nbsp;
                                 <button
                                   ref='delete'
                                   onClick={this.props.onHandleDeleteClick}
@@ -75,8 +72,10 @@ var PartyCreateEditFormComponent = React.createClass({
                                   title="Ištrinti"
                                   type="button"
                                   className="btn btn-danger"
-                                  data-dismiss="modal">Ištrinti
+                                  data-dismiss="modal">Taip
                                 </button>
+                                &nbsp;
+                                <button type="button" id="close-button"  className="btn btn-primary" data-dismiss="modal">Ne</button>
                               </div>
                             </div>
                           </div>
