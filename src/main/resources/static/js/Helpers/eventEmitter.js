@@ -1,4 +1,5 @@
 //EventEmitter.publish({ eventType: 'AddToCart' }); in child .then()
+//EventEmitter.publish({ eventType: 'AddToCart' }); in child .then()
 
 //    EventEmitter.subscribe(this, this.onCartEvent, 'AddToCart'); in father cdm
 //    EventEmitter.subscribe(this, this.onCartEvent, 'RemoveFromCart'); in father componentDidMount
