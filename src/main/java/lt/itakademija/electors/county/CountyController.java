@@ -1,6 +1,9 @@
 package lt.itakademija.electors.county;
 
+import lt.itakademija.servlet.HttpFilter;
+import lt.itakademija.servlet.MyLoggerFilter;
 import lt.itakademija.storage.StorageFileNotFoundException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +28,8 @@ public class CountyController {
 
     @PostMapping("/county")
     public CountyEntity save(@RequestBody CountyEntity county){
+
+        appLogger.warn("Saved County " +county.getName());
         return service.save(county);
     }
 
@@ -50,5 +55,8 @@ public class CountyController {
     public boolean deletecounty(@PathVariable Long id){
         return service.delete(id);
     }
-    
+
+    public final Logger appLogger = Logger.getLogger(CountyController.class);
+    MyLoggerFilter filter = new MyLoggerFilter();
+
 }
