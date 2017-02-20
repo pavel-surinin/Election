@@ -69,7 +69,7 @@ public class DataPreloader {
         createCandidate(ces,"Pavel","Surinin","Lirika");
         createCandidate(ces,"Gabriele","Seliunaite","Lirika");
 
-        districtRepository.findAll().stream().forEach(d-> votesInDistrict(d));
+//        districtRepository.findAll().stream().forEach(d-> votesInDistrict(d));
     }
 
     private void votesInDistrict(DistrictEntity de3) {

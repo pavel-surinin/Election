@@ -36,24 +36,41 @@ var borderColorArr = [
   'rgba(255, 51, 255, 0.85)',
   'rgba(255, 51, 153, 0.85)',
 ];
-
 var chartDataMapper = {
+  getDataMulti :
+  function(results){
+    if (results.votesByParty) {
+      var labels = results.votesByParty.map(function(pid){
+        return pid.party;
+      });
+      var votes = results.votesByParty.map(function(pid){
+        return pid.votes;
+      });
+      return {labels : labels, votes : votes};
+    } else {
+      return null;
+    }
+  },
   getDataSingle :
   function(results){
-    var labels = results.votesByCandidate.map(function(cid){
-      return cid.candidate.name + ' ' + cid.candidate.surname;
-    });
-    var votes = results.votesByCandidate.map(function(cid){
-      return cid.votes;
-    });
-    return {labels : labels, votes : votes};
+    if (results.votesByCandidate) {
+      var labels = results.votesByCandidate.map(function(cid){
+        return cid.candidate.name + ' ' + cid.candidate.surname;
+      });
+      var votes = results.votesByCandidate.map(function(cid){
+        return cid.votes;
+      });
+      return {labels : labels, votes : votes};
+    } else {
+      return null;
+    }
   },
 };
 
 var chartss = {
-  bar : function(alignment,ctx,data){
+  bar : function(alignment,ctx,data,electionType){
     //bar or horizontalBar
-    var mdata = chartDataMapper.getDataSingle(data);
+    var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
     var myChart = new Chart(ctx, {
       type: alignment,
       data: {
@@ -78,8 +95,8 @@ var chartss = {
     });
     return myChart;
   },
-  pie : function(ctx,data){
-    var mdata = chartDataMapper.getDataSingle(data);
+  pie : function(ctx,data,electionType){
+    var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
     var myChart = new Chart(ctx,{
       type: 'pie',
       data: {
