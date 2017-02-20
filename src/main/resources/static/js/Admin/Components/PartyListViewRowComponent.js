@@ -52,11 +52,12 @@ var  PartyListViewRowComponent= React.createClass({
                           <h4 className="modal-title">Ar tikrai norite ištrinti {this.props.name} partiją?</h4>
                         </div>
                         <div className="modal-footer">
-                          <button
-                            type="button" onClick={this.delete} id={'delete-button-' + this.props.id} className="btn btn-danger" data-dismiss="modal">Taip
-                          </button>
-                          &nbsp;
-                          <button type="button" id="close-button"  className="btn btn-primary" data-dismiss="modal">Ne</button>
+                          <div className="btn-group">
+                            <button
+                                type="button" onClick={this.delete} id={'delete-button-' + this.props.id} className="btn btn-primary btn-outline" data-dismiss="modal">Taip
+                            </button>
+                            <button type="button" id="close-button"  className="btn btn-primary btn-outline" data-dismiss="modal">Ne</button>
+                          </div>
                         </div>
                       </div>
                     </div>

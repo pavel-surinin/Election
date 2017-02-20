@@ -30,14 +30,18 @@
 #result-refresh.text-success {cursor:pointer;}
 
 .modal-footer {
-    text-align:center;
-}
+    text-align:center;}
+
+.modal-body {
+    text-align:center;}
 
 .modal-content {
     position: relative;
     width: auto;
     margin-top: 40%;
-    border-radius: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 2px;
 }
 
 body {

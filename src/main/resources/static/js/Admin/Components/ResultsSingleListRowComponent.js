@@ -31,17 +31,18 @@ var ResultsSingleListRowComponent = React.createClass({
                     <h4 className="modal-title">Ar tikrai norite ištrinti {this.props.name} vienmandatės apygardos rezultatus?</h4>
                   </div>
                   <div className="modal-footer">
-                    <button
-                      ref='delete'
-                      onClick={this.delete}
-                      data-toggle="tooltip1"
-                      title="Ištrinti"
-                      type="button"
-                      className="btn btn-danger"
-                      data-dismiss="modal">Taip
-                    </button>
-                    &nbsp;
-                    <button type="button" id="close-button"  className="btn btn-primary" data-dismiss="modal">Ne</button>
+                    <div className="btn-group">
+                        <button
+                          ref='delete'
+                          onClick={this.delete}
+                          data-toggle="tooltip1"
+                          title="Ištrinti"
+                          type="button"
+                          className="btn btn-primary btn-outline"
+                          data-dismiss="modal">Taip
+                        </button>
+                        <button type="button" id="close-button"  className="btn btn-primary btn-outline" data-dismiss="modal">Ne</button>
+                    </div>
                   </div>
                 </div>
               </div>
