@@ -29,6 +29,21 @@
 
 #result-refresh.text-success {cursor:pointer;}
 
+.modal-footer {
+    text-align:center;}
+
+.modal-body {
+    text-align:center;}
+
+.modal-content {
+    position: relative;
+    width: auto;
+    margin-top: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 2px;
+}
+
 body {
   background-color: rgba(141, 141, 215, 0.28);
   background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
