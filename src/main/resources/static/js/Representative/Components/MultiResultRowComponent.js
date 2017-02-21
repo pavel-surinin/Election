@@ -39,7 +39,7 @@ var MultiResultRowComponent = React.createClass({
           <div id={'rating' + p.id} className='modal fade' role='dialog'>
           <div className='modal-dialog'>
 
-          <div className='modal-content'>
+          <div style={{margin: 'auto'}} className='modal-content'>
           <div className='modal-header'>
           <button type='button' className='close' data-dismiss='modal'><i className="fa fa-times" aria-hidden="true"></i></button>
           &nbsp;

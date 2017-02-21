@@ -9,9 +9,14 @@ import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
+import lt.itakademija.electors.party.PartyEntity;
+import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.electors.representative.DistrictRepresentativeEntity;
 import lt.itakademija.electors.representative.DistrictRepresentativeService;
+import lt.itakademija.electors.results.multi.ResultMultiEntity;
+import lt.itakademija.electors.results.multi.ResultMultiService;
+import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +24,12 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -55,8 +58,13 @@ public class DataPreloader {
     CountyRepository countyRepository;
     @Autowired
     CandidateService candidateService;
+    @Autowired
+    PartyRepository partyRepository;
+    @Autowired
+    ResultMultiService resultMultiService;
 
-    public void createCounties(){
+    public void createCounties() {
+        System.out.println("Starting createCounties");
         String counties = "Naujamiesčio\n" +
                 "Senamiessčio\n" +
                 "Antakalnio\n" +
@@ -92,7 +100,7 @@ public class DataPreloader {
                 "Pietų Žemaitijos\n" +
                 "Tauragės\n" +
                 "Plungės\n" +
-                "Kretingos–Palangos\n"+
+                "Kretingos–Palangos\n" +
                 "Kuršo\n" +
                 "Mažeikių\n" +
                 "Akmenės–Mažeikių\n" +
@@ -136,53 +144,8 @@ public class DataPreloader {
         }
     }
 
-    public void loadCandidates(){
-        CountyEntity ce = new CountyEntity();
-        ce.setName("Stebuklų šalis");
-        final CountyEntity ces = countyService.save(ce);
-        DistrictEntity de = saveDistrict(ces, "Maža" , "Po tiltu");
-        saveRep(de, "Burtininkas", "Antanas");
-        DistrictEntity de2 = saveDistrict(ces, "Raudona" , "Nosies g. 3");
-        saveRep(de2, "Jiezus", "Marija");
-        DistrictEntity de3 = saveDistrict(ces, "Mėlyna" , "Pijokų g. 40");
-        saveRep(de3, "Piktas", "Žmogėnas");
-
-
-        createCandidate(ces,"Vardas","Pavarde","Lirika");
-        createCandidate(ces,"Osvaldas","Rimkus","Lirika");
-        createCandidate(ces,"Marekas","Testeris","Lirika");
-        createCandidate(ces,"Vytautas","Linkus","Lirika");
-        createCandidate(ces,"Pavel","Surinin","Lirika");
-        createCandidate(ces,"Gabriele","Seliunaite","Lirika");
-
-        districtRepository.findAll().stream().forEach(d-> votesInDistrict(d));
-    }
-
-    private void votesInDistrict(DistrictEntity de3) {
-        final List<CandidateEntity> candidatesList = candidateRepository.getCandidatesList();
-        List<ResultSingleEntity> resultSingleEntities = new ArrayList<>();
-        ResultSingleEntity spoiled = new ResultSingleEntity();
-        CandidateEntity spc = new CandidateEntity();
-        spc.setId(-1991L);
-        spoiled.setCandidate(spc);
-        spoiled.setVotes(10L);
-        spoiled.setDistrict(de3);
-        resultSingleEntities.add(spoiled);
-        for (int i = 0; i < 10; i++) {
-            final int nextInt = new Random().nextInt(candidatesList.size() - 1);
-            ResultSingleEntity res = new ResultSingleEntity();
-            res.setCandidate(candidatesList.get(nextInt));
-            res.setDatePublished(new Date());
-            res.setDistrict(de3);
-            Integer round = Math.abs(Math.round(new Random().nextInt(500) * new Random().nextFloat() * new Random().nextFloat()));
-            res.setVotes(round.longValue());
-            resultSingleEntities.add(res);
-        }
-        resultSingleService.save(resultSingleEntities);
-        resultSingleService.approve(de3.getId());
-    }
-
-    public void createRepresentatives(){
+    public void createRepresentatives() {
+        System.out.println("Starting createRepresentatives");
         try {
             FileInputStream fis = new FileInputStream(new File("test-csv/big/names.txt"));
             InputStreamReader isr = new InputStreamReader(fis);
@@ -190,9 +153,9 @@ public class DataPreloader {
             final List<String> names = bufferedReader.lines().collect(Collectors.toList());
             final List<DistrictEntity> districtRepositoryAll = districtRepository.findAll();
             for (int i = 0; i < districtRepositoryAll.size(); i++) {
-                String name = names.get(new Random().nextInt(998)+1);
-                String surname = names.get(new Random().nextInt(998)+1) + "as";
-                saveRep(districtRepositoryAll.get(i),name,surname);
+                String name = names.get(new Random().nextInt(998) + 1) + "as";
+                String surname = names.get(new Random().nextInt(998) + 1) + "evičius";
+                saveRep(districtRepositoryAll.get(i), name, surname);
 
             }
         } catch (FileNotFoundException e) {
@@ -212,7 +175,7 @@ public class DataPreloader {
         return rep;
     }
 
-    private DistrictEntity saveDistrict(CountyEntity ces, String name, String adress ) {
+    private DistrictEntity saveDistrict(CountyEntity ces, String name, String adress) {
         DistrictEntity de = new DistrictEntity();
         de.setName(name);
         de.setCounty(ces);
@@ -221,12 +184,13 @@ public class DataPreloader {
         return districtService.save(de);
     }
 
-    public void loadParties(){
+    public void loadParties() {
+        System.out.println("Starting loadParties");
         final MultipartFile file1 = parseToMultiPart("test-csv/big/big-party-100.csv");
-        partyService.save("Balvanu Partija", 1, file1);
+        partyService.save("Statybininkų Partija", 1, file1);
 
         final MultipartFile file2 = parseToMultiPart("test-csv/big/p50-1.csv");
-        partyService.save("Ereliu Partija", 2, file2);
+        partyService.save("Teisininkų Partija", 2, file2);
 
         final MultipartFile file3 = parseToMultiPart("test-csv/big/p50-2.csv");
         partyService.save("IT Partija", 3, file3);
@@ -247,24 +211,12 @@ public class DataPreloader {
         partyService.save("Kolūkininkai", 8, file8);
 
         final MultipartFile file9 = parseToMultiPart("test-csv/big/p50-8.csv");
-        partyService.save("Šventųjų Matronų partija", 9, file9);
+        partyService.save("Šventųjų partija", 9, file9);
 
         final MultipartFile file10 = parseToMultiPart("test-csv/big/p50-9.csv");
         partyService.save("Laisvės Partija", 10, file10);
 
 
-
-    }
-
-    private void createCandidate(CountyEntity ces, String name, String surname, String desc) {
-        CandidateEntity can = new CandidateEntity();
-        can.setBirthDate(new Date());
-        can.setName(name);
-        can.setSurname(surname);
-        can.setDescription(desc);
-        can.setCounty(ces);
-        can.setMultiList(false);
-        service.save(can);
     }
 
     private MultipartFile parseToMultiPart(String pathToFile) {
@@ -281,6 +233,7 @@ public class DataPreloader {
     }
 
     public void createDistricts() {
+        System.out.println("Starting createDistricts");
         try {
             FileInputStream fis = new FileInputStream(new File("test-csv/big/districts.txt"));
             InputStreamReader isr = new InputStreamReader(fis);
@@ -290,13 +243,13 @@ public class DataPreloader {
                 DistrictEntity districtEntity = new DistrictEntity();
                 List<CountyEntity> allCounties = countyRepository.findAll();
 
-                Long index = (long)((i / 28.22));
+                Long index = (long) ((i / 28.22));
                 if (index >= 71) {
                     index = ((long) new Random().nextInt(70));
                 }
                 districtEntity.setName(districtsFromFile.get(i));
                 districtEntity.setCounty(allCounties.get(index.intValue()));
-                districtEntity.setNumberOfElectors(new Random().nextInt(5000)+1000L);
+                districtEntity.setNumberOfElectors(new Random().nextInt(5000) + 1000L);
                 districtEntity.setAdress("Adresas g. 1");
                 districtService.save(districtEntity);
             }
@@ -309,10 +262,23 @@ public class DataPreloader {
     }
 
     public void votesSingle() {
+        System.out.println("Starting votes single");
         List<CandidateEntity> candidatesList = candidateRepository.getCandidatesList();
+        Collections.shuffle(candidatesList);
         List<DistrictEntity> all = districtRepository.findAll();
-        all.stream().forEach(dis->{
-            if (dis.getId() != 5L){
+        List<CountyEntity> countyAll = countyRepository.findAll();
+        countyAll.forEach(c -> {
+            List<CandidateEntity> cList = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                candidatesList.get(i).setCounty(c);
+                candidateService.save(candidatesList.get(i));
+                cList.add(candidatesList.get(i));
+            }
+            candidatesList.removeAll(cList);
+        });
+
+        all.stream().forEach(dis -> {
+            if (dis.getId() != 5L) {
                 List<ResultSingleEntity> resultSingleEntities = new ArrayList<>();
                 CandidateEntity spc = new CandidateEntity();
                 spc.setId(-1991L);
@@ -322,7 +288,7 @@ public class DataPreloader {
                 spoiled.setDistrict(dis);
                 resultSingleEntities.add(spoiled);
                 for (int i = 0; i < 10; i++) {
-                    CandidateEntity candidateEntity = candidatesList.get(new Random().nextInt(candidatesList.size()));
+                    CandidateEntity candidateEntity = candidateRepository.findByCounty(dis.getCounty()).get(i);
                     ResultSingleEntity res = new ResultSingleEntity();
                     res.setDistrict(dis);
                     res.setCandidate(candidateEntity);
@@ -333,15 +299,85 @@ public class DataPreloader {
                     res.setDatePublished(new Date());
                 }
                 resultSingleService.save(resultSingleEntities);
-            } else {
-                for (int i = 0; i < 10; i++) {
-                    CandidateEntity candidateEntity = candidatesList.get(new Random().nextInt(candidatesList.size()));
-                    candidateEntity.setCounty(dis.getCounty());
-                    candidateService.save(candidateEntity);
-                }
             }
+        });
+    }
 
+    public void votesMulti() {
+        System.out.println("Starting votes multi");
+        List<DistrictEntity> districtsAll = districtRepository.findAll();
+        List<PartyEntity> partyAll = partyRepository.findAll();
+        districtsAll.stream().forEach(dis -> {
+            if (dis.getId() != 5L) {
+                List<Integer> singleResults = dis.getResultSingleEntity().stream().mapToInt(r -> r.getVotes().intValue()).boxed().collect(Collectors.toList());
+                List<ResultMultiEntity> votes = new ArrayList<>();
+                //Spoiled ballots
+                ResultMultiEntity spoiled = new ResultMultiEntity();
+                spoiled.setVotes(dis.getSpoiledSingle().longValue());
+                PartyEntity sp = new PartyEntity();
+                sp.setId(-1991L);
+                spoiled.setParty(sp);
+                spoiled.setDistrict(dis);
+                votes.add(spoiled);
+
+                partyAll.stream().forEach(par -> {
+                    List<RatingEntity> ratings = new ArrayList<>();
+                    Integer partyVotes = singleResults.get(partyAll.indexOf(par));
+                    //ratings loop
+                    for (int i = new Random().nextInt(20); i < (20 + new Random().nextInt(30)); i++) {
+                        RatingEntity rating = new RatingEntity();
+                        CandidateEntity cand = par.getMembers().get(i);
+                        rating.setCandidate(cand);
+                        rating.setPoints(new Random().nextInt(partyVotes.intValue() + 1));
+                        ratings.add(rating);
+                    }
+                    votes.add(getResMulti(dis, par, partyVotes, ratings));
+                });
+                resultMultiService.save(votes);
+            }
         });
 
+    }
+
+    private ResultMultiEntity getResMulti(DistrictEntity dis, PartyEntity par, long votes, List<RatingEntity> ratings) {
+        ResultMultiEntity res = new ResultMultiEntity();
+        res.setApproved(true);
+        res.setDatePublished(new Date());
+        res.setDistrict(dis);
+        res.setParty(par);
+        res.setVotes(votes);
+        res.setRating(ratings);
+        return res;
+    }
+
+    public void createNonPartyCandidates() {
+        System.out.println("Starting createNonPartyCandidates");
+        try {
+            FileInputStream fis = new FileInputStream(new File("test-csv/big/names.txt"));
+            InputStreamReader isr = new InputStreamReader(fis);
+            final BufferedReader bufferedReader = new BufferedReader(isr);
+            final List<String> names = bufferedReader.lines().collect(Collectors.toList());
+            for (int i = 0; i < 200; i++) {
+                String name = names.get(new Random().nextInt(998) + 1);
+                String surname = names.get(new Random().nextInt(998) + 1) + "avičius";
+                createCandidate(null, name, surname, "Single Mandate Cnadidate");
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void createCandidate(CountyEntity ces, String name, String surname, String desc) {
+        CandidateEntity can = new CandidateEntity();
+        can.setBirthDate(new Date());
+        can.setName(name);
+        can.setSurname(surname);
+        can.setDescription(desc);
+        can.setCounty(ces);
+        can.setMultiList(false);
+        service.save(can);
     }
 }
