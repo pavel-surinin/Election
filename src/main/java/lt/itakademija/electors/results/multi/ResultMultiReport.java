@@ -14,13 +14,15 @@ public class ResultMultiReport {
 
     private ResultMultiEntity result;
     private Long id;
+    private Integer partyNumber;
     private String party;
     private Long votes;
     private List<RatingReport> rating;
 
     public ResultMultiReport(ResultMultiEntity result) {
         this.id = result.getId();
-        this.party = result.getParty().getPartyNumber() + " " + result.getParty().getName();
+        this.partyNumber = result.getParty().getPartyNumber();
+        this.party = result.getParty().getName();
         this.votes = result.getVotes();
         this.rating = result.getRating()
                 .stream()
@@ -30,6 +32,14 @@ public class ResultMultiReport {
     }
 
     public ResultMultiReport() {
+    }
+
+    public Integer getPartyNumber() {
+        return partyNumber;
+    }
+
+    public void setPartyNumber(Integer partyNumber) {
+        this.partyNumber = partyNumber;
     }
 
     public Long getId() {

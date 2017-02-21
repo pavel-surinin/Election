@@ -2,19 +2,6 @@ var errorMesages = [];
 var list = {};
 var postArray =[];
 var ratings = [];
-
-function getDistrictIdLogged(self) {
-  axios
-    .get('/users/logged/district')
-    .then(function(response){
-      self.setState({
-        districtId :  response.data,
-      });
-    })
-    .catch(function(err){
-      console.error('componentWillMount.axios.get.districtId', err);
-    });
-}
 function RatingnegativeValuesException(message) {
   this.message = message;
   this.name = 'RatingnegativeValuesException';
@@ -40,6 +27,7 @@ function getDistrict(self,id) {
         isLoading : false,
       });
       if (response.data.resultMultiRegistered) {
+        ratings = [];
         self.setState({isVotesRegistered : true});
       }
     })
@@ -80,6 +68,7 @@ function getRatings(self,arr,pid) {
             errorMesages.push('Reitingo laukai negali turėti neigiamų reikšmių');
             self.setState({errorMesages : errorMesages});
             throw new RatingnegativeValuesException('Reitingo laukai negali turėti neigiamų reikšmių');}
+            console.log('irasau i reitingus', arr[i].members[j].key, arr[i].members[j].value);
           list.push(
             {
               candidate :
@@ -90,6 +79,7 @@ function getRatings(self,arr,pid) {
       }
     }
   }
+  console.log('Rating for party ' + pid,list);
   return list;
 }
 var MultiResultContainer = React.createClass({
@@ -105,7 +95,6 @@ var MultiResultContainer = React.createClass({
     };
   },
   componentWillMount: function() {
-    getDistrictIdLogged(this);
     getParties(this);
     getDistrict(this,this.state.districtId);
   },
@@ -116,6 +105,7 @@ var MultiResultContainer = React.createClass({
     );
   },
   onChangePartyRating : function(pid,cid,points){
+    console.log('onPartyReatingChange', pid,cid,points);
     if (ratings.length == 0) {
       this.state.partyList.forEach(function(p) {
         ratings.push(
@@ -168,7 +158,7 @@ var MultiResultContainer = React.createClass({
           );
         }
       }
-      ratings = [];
+      console.log('post array',postArray);
       axios
       .post('/result-multi', postArray)
       .then(function(response){

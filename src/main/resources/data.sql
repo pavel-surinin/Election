@@ -1,11 +1,1 @@
 insert into users (id, username, password, district_id) values (null, 'admin', 'admin',6);
-insert into county_entity (county_id, name) values (null, 'Vilniaus');
-insert into county_entity (county_id, name) values (null, 'Kauno');
-insert into district_entity (district_id, adress, county_id, name, number_of_electors) values (null, 'Gedimino g. 9', 1, 'Centro', 1000);
-insert into district_entity (district_id, adress, county_id, name, number_of_electors) values (null, 'Panerių g. 55', 1, 'Panarų', 2000);
-insert into district_entity (district_id, adress, county_id, name, number_of_electors) values (null, 'Žaliakalnio g. 1', 2, 'Žaliakalnio', 1500);
-insert into district_entity (district_id, adress, county_id, name, number_of_electors) values (null, 'Kalhozo g. 9', 2, 'Kaimo', 2000);
-insert into district_representative_entity (id, district_id, name, surname) values (null, 1, 'Marek', 'Visluhij');
-insert into district_representative_entity (id, district_id, name, surname) values (null, 2, 'Ponas', 'Binas');
-insert into district_representative_entity (id, district_id, name, surname) values (null, 3, 'Aliukas', 'Brolis');
-insert into district_representative_entity (id, district_id, name, surname) values (null, 4, 'Kaimo', 'Jurgis');
