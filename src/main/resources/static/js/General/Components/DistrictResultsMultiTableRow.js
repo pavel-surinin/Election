@@ -13,7 +13,7 @@ var DistrictResultsMultiTableRow = React.createClass({
         </a>
         <div id={'ratingModal' + p.id} className="modal fade" role="dialog">
           <div className="modal-dialog">
-            <div className="modal-content">
+            <div className="modal-content" style={{margin : 'auto'}}>
               <div className="modal-header">
                 <button type="button" className="close" data-dismiss="modal">&times;</button>
                 <h4 className="modal-title">Reitingai - {p.party}</h4>

@@ -32,7 +32,8 @@ public class DistrictService {
 				return repository.save(apylinke);
 			}
 		}
-        throw new DistrictCloneException("This district is already registered");
+        System.out.println("\n"+findByNameAndAdress.get(0).getName() + " " + findByNameAndAdress.get(0).getCounty().getName());
+        throw new DistrictCloneException("This district is already registered " + apylinke.getName() +" county "+ apylinke.getCounty().getName());
     }
 
     @Transactional
