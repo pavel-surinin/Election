@@ -96,6 +96,12 @@ public class ResultSingleControllerTest {
     @Before
     public void setUp() throws Exception {
 
+        districtRepository.findAll().stream().forEach(c -> resultSingleService.delete(c.getId()));
+        candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
+        districtRepository.findAll().stream().forEach(d -> districtService.delete(d.getId()));
+        partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
+        countyRepository.findAll().stream().forEach(c -> countyService.delete(c.getId()));
+
         String vilniusString = MyUtils.getCountyJson(null, "Vilniaus");
         ResponseEntity<CountyEntity> countyEntityResponseEntity = rest.postForEntity("/county", MyUtils.parseStringToJson(vilniusString), CountyEntity.class);
         Long countyId = countyEntityResponseEntity.getBody().getId();

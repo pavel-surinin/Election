@@ -17,8 +17,10 @@ public class Application {
             loader.createCounties();
             loader.createDistricts();
             loader.loadParties();
+            loader.createNonPartyCandidates();
             loader.createRepresentatives();
             loader.votesSingle();
+            loader.votesMulti();
         };
 
     }

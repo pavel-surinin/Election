@@ -90,4 +90,8 @@ public class CandidateService {
                 .map(c-> new CandidateReport(c))
                 .collect(Collectors.toList());
     }
+
+    public List<CandidateEntity> getCandidatesByCounty(CountyEntity county){
+        return repository.findByCounty(county);
+    }
 }

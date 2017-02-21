@@ -28,14 +28,14 @@ public class DistrictEntity {
     @NotNull
     private Long numberOfElectors;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(nullable = true, name= "COUNTY_ID")
     private CountyEntity county;
 
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "district")
     private DistrictRepresentativeEntity representative;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "district")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "district", fetch = FetchType.EAGER)
     private List<ResultSingleEntity> resultSingleEntity;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "district")
