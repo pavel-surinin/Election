@@ -11,7 +11,6 @@ var ResultsMultiListRowComponent = React.createClass({
   componentDidMount: function () {
     $(this.refs.approve).tooltip();
     $(this.refs.delete).tooltip();
-    setInterval(1000,(addMinutes(time, 2) - new Date()) < 0);
   },
   approve : function(){
     this.props.onHandleApprove(this.props.info.id,'multi',this.props.info.name);
@@ -42,7 +41,6 @@ var ResultsMultiListRowComponent = React.createClass({
                 title="Patvirtinti"
                 type="button"
                 className="btn btn-success btn-sm fa fa-check"
-                disabled={true}
               ></button>
             &nbsp;
             <button data-target={"#confirmationModal" + this.props.id} ref="delete" title="Ištrinti" type="button" id={'confirm-delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"></button>

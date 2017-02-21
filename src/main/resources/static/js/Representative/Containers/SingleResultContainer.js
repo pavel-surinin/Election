@@ -79,10 +79,8 @@ var SingleResultContainer = React.createClass({
     };
   },
   componentWillMount: function() {
-    getDistrictIdLogged(this);
     getCandidates(this,this.state.districtId);
     getDistrict(this,this.state.districtId);
-    console.log(this.state);
   },
   registerVotes :function(id,votes){
     list[id]=votes;

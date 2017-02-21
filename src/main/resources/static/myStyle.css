@@ -44,6 +44,12 @@
     border-radius: 2px;
 }
 
+.modal-content .ratings{
+    position: relative;
+    width: 90vw;
+    border-radius: 2px;
+}
+
 body {
   background-color: rgba(141, 141, 215, 0.28);
   background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
@@ -56,6 +62,7 @@ body {
   right: 10px;
   bottom: 3px;
 }
+/*RESULTS FOR NON REGISTERED USERS START*/
 #exTab1 .tab-content {
   color : #428bca;
   background-color: white;
@@ -67,6 +74,18 @@ body {
   background-color: #d3d2d4;
   padding : 20px;
   border-radius: 1px;
+  -webkit-transition: all 0.5s ease; /* Safari */
+  stransition: all 0.5s ease;
+}
+
+#exTab1 .nav-pills > li > a:hover{
+  background-color: #e2e2e2;
+  -webkit-transition: all 0.5s ease; /* Safari */
+  stransition: all 0.5s ease;
+}
+
+#exTab1 .nav-pills > li.disabled{
+  display: none;
 }
 
 #exTab1 .nav-pills > li.active a  {
@@ -74,6 +93,8 @@ body {
   background-color: white;
   padding : 20px;
   border-radius: 1px;
+  -webkit-transition: all 0.5s ease; /* Safari */
+  stransition: all 0.5s ease;
 }
 
 .vytis{
@@ -82,3 +103,4 @@ body {
   background-size: 62px 70px;
   background-repeat: no-repeat;
 }
+/*RESULTS FOR NON REGISTERED USERS END*/

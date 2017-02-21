@@ -27,8 +27,8 @@ public class ResultDistrictReport {
     private String registrationMulti;
 
     public ResultDistrictReport(final DistrictEntity district) {
-        final List<ResultMultiEntity> resultsMulti = district.getResultMultiEntity();
-        final List<ResultSingleEntity> resultSingle = district.getResultSingleEntity();
+        final List<ResultMultiEntity> resultsMulti = district.getResultMultiEntity().stream().filter(r->r.isApproved()).collect(Collectors.toList());
+        final List<ResultSingleEntity> resultSingle = district.getResultSingleEntity().stream().filter(r->r.isApproved()).collect(Collectors.toList());
         this.voters = district.getNumberOfElectors().intValue();
         if (resultsMulti.size() != 0) {
             this.votesByParty = resultsMulti

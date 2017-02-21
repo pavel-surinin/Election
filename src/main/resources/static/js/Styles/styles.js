@@ -22,6 +22,14 @@ var styles = {
     } else {
       return {background : 'none'};
     }
+  },
+  toggleResultNav :
+  function(bool){
+    if (bool != undefined) {
+      return {display : 'inherit'};
+    } else {
+      return {display : 'none'};
+    }
   }
 
 
