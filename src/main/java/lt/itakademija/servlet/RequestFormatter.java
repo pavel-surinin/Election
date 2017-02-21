@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by lenovo on 2/20/2017.
  */
+@Service
 public final class RequestFormatter {
     /**
      * Returns a string representation of a http request.
@@ -16,6 +18,7 @@ public final class RequestFormatter {
      * @return http request formatted as a string
      * @throws IOException
      */
+
     public String formatForLog(final HttpServletRequest request) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append("(");
@@ -47,7 +50,9 @@ public final class RequestFormatter {
         }
         sb.append("]");
         sb.append(", ");
-        sb.append("BODY: ").append(IOUtils.toString(request.getReader()));
+        if(request.getRequestURI().equals("'/users/login'") && request.getMethod().equals("POST")){
+            sb.append("Body: )");
+        } else sb.append("BODY: ").append(IOUtils.toString(request.getReader()));
 
         sb.append(")");
 

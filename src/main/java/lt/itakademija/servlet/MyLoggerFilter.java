@@ -22,6 +22,7 @@ public class MyLoggerFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         Logger logger = LoggerFactory.getLogger(MyLoggerFilter.class);
         logger.info(requestFormatter.formatForLog(request));
+        System.out.println("\n");
         chain.doFilter(request, response);
     }
 }
