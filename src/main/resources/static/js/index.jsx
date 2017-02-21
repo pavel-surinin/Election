@@ -23,8 +23,8 @@ var App = React.createClass({
               <ul className="nav navbar-nav">
                 <li><a href="#/">Pradinis</a></li>
                 <li><a href="#/login">Prisijungti</a></li>
-                <li><a href="#/candidates">Kandidatai</a></li>
                 <li><a href="#/representative">Atstovas</a></li>
+                <li><a href="#/candidates">Kandidatai</a></li>
                   <li className="dropdown">
                     <a className="dropdown-toggle" data-toggle="dropdown">Results district
                     <span className="caret"></span></a>
@@ -106,8 +106,8 @@ ReactDOM.render((
     <Route path="/" component={App}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
+      <Route path="/candidates" component={CandidatesList} />
       <Route path="/results/district/:id" component={DistrictResultsContainer} />
-      <Route path="/candidates" Component={CandidatesList} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
