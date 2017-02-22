@@ -16,7 +16,8 @@ var App = React.createClass({
     });
   },
   render: function() {
-    return (
+      console.log('this index:',this);
+      return (
       <div style={{ paddingTop: '20px' }}>
         <nav className="navbar navbar-default">
           <div className="container-fluid">
@@ -103,7 +104,14 @@ ReactDOM.render((
     <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
+      <Route path="/candidates" component={EmptyComponent} />
+      <Route path="/parties" component={EmptyComponent} />
+      <Route path="/counties" component={CountiesContainer}/>
+      <Route path="/counties/:county" component={CountyResultsContainer}/>
+      <Route path="/counties/:county/:id" component={DistrictResultsContainer}/>
 
+      <Route path="/results" component={EmptyComponent} />
+      <Route path="/contacts" component={EmptyComponent} />
       <Route path="/results/district/:id" component={DistrictResultsContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>

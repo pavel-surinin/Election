@@ -36,7 +36,7 @@ var CountyListViewComponent = React.createClass({
                 </a>
               </div>
 		        </div>
-		          <div className="panel-body">
+                <div className="panel-body">
                 {succesCreateMessage}
                 {deletedCountyMessage}
 		          </div>
