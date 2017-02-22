@@ -51,10 +51,12 @@
 }
 #searchable-table_length {
     padding-left: 30px;
+    margin-top: 10px;
     display: inline-flex;
 }
 #searchable-table_filter {
     padding-right: 30px;
+    margin-top:10px;
     padding-left: 30px;
 }
 #searchable-table_length > label{

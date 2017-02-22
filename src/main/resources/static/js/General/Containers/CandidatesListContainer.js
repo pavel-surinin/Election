@@ -27,6 +27,7 @@ var CandidatesListContainer = React.createClass({
   },
 
   render: function() {
+
     if (this.state.isLoading) {
       return (
         <div>
