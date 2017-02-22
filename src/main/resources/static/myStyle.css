@@ -29,6 +29,27 @@
 
 #result-refresh.text-success {cursor:pointer;}
 
+.modal-footer {
+    text-align:center;}
+
+.modal-body {
+    text-align:center;}
+
+.modal-content {
+    position: relative;
+    width: auto;
+    margin-top: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    border-radius: 2px;
+}
+
+.modal-content .ratings{
+    position: relative;
+    width: 90vw;
+    border-radius: 2px;
+}
+
 body {
   background-color: rgba(141, 141, 215, 0.28);
   background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
@@ -43,6 +64,7 @@ body {
   right: 10px;
   bottom: 3px;
 }
+/*RESULTS FOR NON REGISTERED USERS START*/
 #exTab1 .tab-content {
   color : #428bca;
   background-color: white;
@@ -54,6 +76,18 @@ body {
   background-color: #d3d2d4;
   padding : 20px;
   border-radius: 1px;
+  -webkit-transition: all 0.5s ease; /* Safari */
+  stransition: all 0.5s ease;
+}
+
+#exTab1 .nav-pills > li > a:hover{
+  background-color: #e2e2e2;
+  -webkit-transition: all 0.5s ease; /* Safari */
+  stransition: all 0.5s ease;
+}
+
+#exTab1 .nav-pills > li.disabled{
+  display: none;
 }
 
 #exTab1 .nav-pills > li.active a  {
@@ -61,6 +95,8 @@ body {
   background-color: white;
   padding : 20px;
   border-radius: 1px;
+  -webkit-transition: all 0.5s ease; /* Safari */
+  stransition: all 0.5s ease;
 }
 
 .vytis{
@@ -75,19 +111,21 @@ body {
   padding-left:0;
   padding-right:0;
   width:100vw;
-
 }
+
 .container{
   width: 100%;
 }
+
 .menu-container{
   margin:0;
   padding:0;
-
 }
+
 .children{
     position:initial;
 }
+
 .main-menu{
   z-index: 10;
 }
@@ -95,3 +133,6 @@ body {
 .root > .affix {
   top:50px;
 }
+
+/*RESULTS FOR NON REGISTERED USERS END*/
+

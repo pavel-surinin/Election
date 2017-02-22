@@ -44,16 +44,24 @@ var  PartyListViewRowComponent= React.createClass({
                   className="btn btn-primary btn-sm fa fa-pencil">
                 </a>
                 &nbsp;
-                <button
-                  onClick={this.delete}
-                  id={'delete-button' + this.props.id}
-                  className='btn btn-danger btn-sm fa fa-trash-o'
-                  ref="delete"
-                  title="Ištrinti"
-                  role='button'
-                  >
-                </button>
-
+                <a href={"#confirmationModal" + this.props.id}  data-toggle="tooltip1" ref="delete" title="Ištrinti" type="button" id={'confirm-delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"></a>
+                  <div id={'confirmationModal' + this.props.id} className="modal fade" role="dialog">
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-body">
+                          <h4 className="modal-title">Ar tikrai norite ištrinti {this.props.name} partiją?</h4>
+                        </div>
+                        <div className="modal-footer">
+                          <div className="btn-group">
+                            <button
+                                type="button" onClick={this.delete} id={'delete-button-' + this.props.id} className="btn btn-primary btn-outline" data-dismiss="modal">Taip
+                            </button>
+                            <button type="button" id="close-button"  className="btn btn-primary btn-outline" data-dismiss="modal">Ne</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </td>
             </tr>
     );

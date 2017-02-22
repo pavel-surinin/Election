@@ -1,5 +1,6 @@
 package lt.itakademija.electors.candidate;
 
+import lt.itakademija.electors.county.CountyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
@@ -53,5 +54,12 @@ public class CandidateRepository {
 
     public Long getCandidatesCount(){
         return em.createQuery("SELECT COUNT(c) FROM CandidateEntity c", Long.class).getSingleResult();
+    }
+
+    public List<CandidateEntity> findByCounty(CountyEntity county) {
+        List<CandidateEntity> list = em.createQuery("SELECT c FROM CandidateEntity c WHERE c.county = :cName")
+                .setParameter("cName", county)
+                .getResultList();
+        return list;
     }
 }
