@@ -1,6 +1,7 @@
 package lt.itakademija.electors.party;
 
 import lt.itakademija.electors.candidate.CandidateReport;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,6 +32,12 @@ public class PartyReport {
     }
 
     public PartyReport() {
+    }
+
+    public PartyReport(String name, Integer partyNumber, Long id) {
+        this.name = name;
+        this.partyNumber = partyNumber;
+        this.id=id;
     }
 
     public Long getId() {

@@ -3,6 +3,7 @@ package lt.itakademija.electors.candidate;
 import lt.itakademija.electors.county.CountyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class CandidateRepository {
         return true;
     }
 
-    public CandidateEntity finById(Long id){
+    public CandidateEntity finById(Long id) {
         return em.find(CandidateEntity.class, id);
     }
 
@@ -48,11 +49,13 @@ public class CandidateRepository {
                 .setParameter("cNum", can.getNumberInParty())
                 .setParameter("cPar", can.getPartyDependencies())
                 .getResultList();
-        if (list.size() != 0) {return list.get(0);}
+        if (list.size() != 0) {
+            return list.get(0);
+        }
         return null;
     }
 
-    public Long getCandidatesCount(){
+    public Long getCandidatesCount() {
         return em.createQuery("SELECT COUNT(c) FROM CandidateEntity c", Long.class).getSingleResult();
     }
 
@@ -61,5 +64,9 @@ public class CandidateRepository {
                 .setParameter("cName", county)
                 .getResultList();
         return list;
+    }
+
+    public void deleteAll(List<CandidateEntity> memberToDelete) {
+        memberToDelete.stream().forEach(m -> em.remove(m));
     }
 }
