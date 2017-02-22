@@ -42,14 +42,14 @@
                            <button type="button" id="modal-close-button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div className="modal-body">
-                          <h4 className="modal-title">Ar tikrai norite ištrinti {this.props.name} apygardą?</h4>
+                          <h5 className="modal-title">Ar tikrai norite ištrinti {this.props.name} apygardą?</h5>
                         </div>
                         <div className="modal-footer">
                            <div className="btn-group">
                               <button
-                                type="button" onClick={this.onHandleDeleteClick} id={'delete-district-' + this.props.id} className="btn btn-default btn-sm" data-dismiss="modal">Taip
+                                type="button" onClick={this.onHandleDeleteClick} id={'delete-district-' + this.props.id} className="btn btn-default" data-dismiss="modal">Taip
                               </button>
-                              <button type="button" id="close-button"  className="btn btn-default btn-sm" data-dismiss="modal">Ne</button>
+                              <button type="button" id="close-button"  className="btn btn-default" data-dismiss="modal">Ne</button>
                            </div>
                         </div>
                       </div>
