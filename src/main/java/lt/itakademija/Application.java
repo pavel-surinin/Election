@@ -14,8 +14,13 @@ public class Application {
     @Bean
     CommandLineRunner init(DataPreloader loader) {
         return (args) -> {
+            loader.createCounties();
+            loader.createDistricts();
             loader.loadParties();
-            loader.loadCandidates();
+            loader.createNonPartyCandidates();
+            loader.createRepresentatives();
+            loader.votesSingle();
+            loader.votesMulti();
         };
 
     }

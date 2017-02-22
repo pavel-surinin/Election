@@ -39,6 +39,7 @@ var DistrictResultsContainer  = React.createClass({
     };
   },
   componentDidMount: function() {
+    console.log(this);
     getResults(this,this.props.params.id);
     getDistrictInfo(this,this.props.params.id);
 
