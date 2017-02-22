@@ -31,6 +31,8 @@ var App = React.createClass({
                       <li><a href="#/results/district/1">Page Results district 1</a></li>
                       <li><a href="#/results/district/2">Page Results district 2</a></li>
                       <li><a href="#/results/district/3">Page Results district 3</a></li>
+                      <li><a href="#/results/district/4">Page Results district 4</a></li>
+                      <li><a href="#/results/district/5">Page Results district 5</a></li>
                     </ul>
                   </li>
 

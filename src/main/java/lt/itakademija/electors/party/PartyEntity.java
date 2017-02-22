@@ -21,7 +21,7 @@ public class PartyEntity {
     @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy="partyDependencies", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="partyDependencies", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CandidateEntity> members;
 
     @NotNull

@@ -39,7 +39,7 @@ public class ResultMultiService {
         final ResultMultiEntity spoiled = results.stream().filter(res -> res.getParty().getId() == -1991L).findAny().get();
         DistrictEntity district = spoiled.getDistrict();
         final DistrictEntity districtEnt = districtRepository.findById(district.getId());
-        validateEqualVotersSum(results,district);
+        validateEqualVotersSum(results,districtEnt);
         districtEnt.setSpoiledMulti(spoiled.getVotes().intValue());
         districtService.save(districtEnt);
         results.remove(spoiled);
@@ -56,9 +56,9 @@ public class ResultMultiService {
         final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
         final List<ResultSingleEntity> resultsSingle = resultSingleRepository.getResultsByDistrictId(district);
         if (resultsSingle.size() != 0){
-            final long votesSumMulti = resultsSingle.stream().mapToLong(r -> r.getVotes()).sum();
+            final long votesSumMulti = resultsSingle.stream().mapToLong(r -> r.getVotes()).sum() + district.getSpoiledSingle();
             if (votesSumMulti != sumOfVotes){
-                throw new NotEqualVotersSumException("Not equal voters sum. SingleResults sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
+                throw new NotEqualVotersSumException("Not equal voters sum. SingleResults sum is " + votesSumMulti + " .MultiResults entered " + sumOfVotes);
             }
         }
     }

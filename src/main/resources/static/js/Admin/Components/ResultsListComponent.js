@@ -40,7 +40,12 @@ var ResultsListComponent = React.createClass({
               <div className="tab-content">
                 <div id="results0" className="tab-pane fade in active">
                   <h3>Rezultatų patvirtinimo tvarka</h3>
-                  <p>Rezultatai patvirtinami, tik tada</p>
+                  <p>1. Suskaičiavę balsus, apylinkių atstovai įveda rezultatus į sistemą</p>
+                  <p>2. Rezultatai įvedami tik vieną kartą</p>
+                  <p>3. Rezultatus tvirtina arba ištrina sistemos administratorius</p>
+                  {/*<p>4. Rezultatai negali būti tvirtinami 5 min. nuo įvedimo, siekiant išvengti klaidingų duomenų paskelbimo</p>*/}
+                  <p>4. Ištrinus rezultatus, apylinkių atstovai gali juos įvesti iš naujo</p>
+                  <p>5. Patvirtinti rezultatai tampa matomi visuomenei</p>
                 </div>
                 <div id="results1" className="tab-pane fade">
                   <h3>Vienmandatės rezultatai</h3>
