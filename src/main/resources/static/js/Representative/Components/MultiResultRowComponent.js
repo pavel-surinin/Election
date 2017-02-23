@@ -37,7 +37,7 @@ var MultiResultRowComponent = React.createClass({
             Reitinguok
           </button>
           <div id={'rating' + p.id} className='modal fade' role='dialog'>
-          <div className='modal-dialog'>
+          <div style={{width:'95%'}} className='modal-dialog'>
 
           <div style={{margin: 'auto'}} className='modal-content'>
           <div className='modal-header'>
@@ -47,11 +47,9 @@ var MultiResultRowComponent = React.createClass({
             <h4 className='modal-title'>{p.partyNumber} {p.name}
             </h4>
           </div>
-          <div className='modal-body'>
-          {candidates}
-          </div>
           <div className='modal-footer'>
-          <button type='button' className='btn btn-default' data-dismiss='modal'>Close</button>
+          {candidates}
+          <br/>
           </div>
           </div>
 
