@@ -1,6 +1,8 @@
 package lt.itakademija.electors.results.multi;
 
+import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.district.DistrictEntity;
+import lt.itakademija.electors.party.PartyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
@@ -38,6 +40,13 @@ public class ResultMultiRepository {
     public List<ResultMultiEntity> findAll() {
         List list = em
                 .createQuery("SELECT r FROM ResultMultiEntity r")
+                .getResultList();
+        return list;
+    }
+
+    public List<ResultMultiEntity> findByParty(PartyEntity party) {
+        List<ResultMultiEntity> list = em.createQuery("SELECT v FROM ResultMultiEntity v WHERE v.party = :party")
+                .setParameter("party", party)
                 .getResultList();
         return list;
     }

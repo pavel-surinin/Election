@@ -1,5 +1,15 @@
 ﻿
 var CountyListViewComponent = React.createClass({
+    componentDidMount: function(){
+      $(document).ready(function() {
+        $('#searchable-table').DataTable({
+          language: {
+            url: 'lithuanian.json'
+          },
+          responsive: true
+        });
+      });
+    },
   render: function() {
     var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
     var deletedCountyMessage = alerts.showDangerFixed(this.props.deletedCountyName);
@@ -36,12 +46,12 @@ var CountyListViewComponent = React.createClass({
                 </a>
               </div>
 		        </div>
-		          <div className="panel-body">
+                <div className="panel-body">
                 {succesCreateMessage}
                 {deletedCountyMessage}
 		          </div>
 
-		            <table width="100%" className="table table-striped table-hover" id="dataTables-example">
+		            <table width="100%" className="table table-striped table-hover" id="searchable-table">
 		              <thead>
 		                <tr>
 		                  <th> Nr. </th>
