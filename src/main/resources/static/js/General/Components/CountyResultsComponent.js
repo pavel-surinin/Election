@@ -1,9 +1,63 @@
 /**
  * Created by nevyt on 2/21/2017.
+ *
  */
+function getSingleTable(self) {
+    var singleTable = [];
+    if (self.props.results.candidatesVotesSummary) {
+        singleTable = self.props.results.candidatesVotesSummary.map(function (cid, index) {
+            return (
+                <tr key={index} className='small'>
+                    <td>{cid.candidate.name + ' ' + cid.candidate.surname}</td>
+                    <td>{cid.candidate.partijosPavadinimas}</td>
+                    <td>{cid.count}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            );
+        });
+    }
+    return singleTable;
+}
+
+function getMultiTable(self) {
+    if (self.props.results.partiesVotesSummary) {
+        var multiTable = self.props.results.partiesVotesSummary.map(function(p,index){
+            if (self.props.results.partiesVotesSummary) {
+                return(
+                    <tr key={index}>
+                        <td></td>
+                        <td>{p.par.name}</td>
+                        <td></td>
+                        <td>{p.par.count}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>);
+            }});
+        return multiTable;
+    }
+}
+
+function prepareCanvas(chartType,electionType){
+    var sp1 = document.createElement('canvas');
+    sp1.id = 'canvas' + chartType + electionType;
+    var parentDiv = document.getElementById('parent' + chartType + electionType);
+    parentDiv.removeChild(document.getElementById('canvas' + chartType + electionType));
+    parentDiv.appendChild(sp1);
+}
+
 var CountyResultsComponent = React.createClass({
+    loadSingle : function() {
+        prepareCanvas('Pie','Single');
+        prepareCanvas('Bar','Single');
+        chartss.pie(document.getElementById('canvasPieSingle'), this.props.results, 'Single');
+        chartss.bar('horizontalBar',document.getElementById('canvasBarSingle'), this.props.results,'Single');
+    },
+
     render: function(){
         console.log('this from countyresults:',this);
+        var singleTable = getSingleTable(this);
+        var multiTable = getMultiTable(this);
         var self = this;
         var districts = this.props.county.districts.map(function(district,index){
             return(
@@ -20,7 +74,9 @@ var CountyResultsComponent = React.createClass({
         var countyInfo = [];
         if (county.name) { countyInfo.push(<tr><td>{county.name} apygarda</td></tr>);}
         if (countyResults.districtsCount){countyInfo.push(<tr><td>Apylinkių skaičius: {countyResults.districtsCount}</td></tr>)}
-        if(countyResults.singleMandateWinner){countyInfo.push(<tr><td>Vienmandatės nugalėtojas: {countyResults.singleMandateWinner.name} {countyResults.singleMandateWinner.surname}</td></tr>)}
+        if (countyResults.districtsVotedSingle){countyInfo.push(<tr><td>Vienmandatėje prabalsavo apylinkių: {countyResults.districtsVotedSingle} </td></tr>)}
+        if (countyResults.singleMandateWinner){countyInfo.push(<tr><td>Vienmandatės nugalėtojas: {countyResults.singleMandateWinner.name} {countyResults.singleMandateWinner.surname}</td></tr>)}
+        if (countyResults.districtsVotedMulti){countyInfo.push(<tr><td>Daugiamandatėje prabalsavo apylinkių: {countyResults.districtsVotedMulti} </td></tr>)}
 
         return (
             <div className="col-md-12">
@@ -40,7 +96,7 @@ var CountyResultsComponent = React.createClass({
                             <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
                         </li>
                     </ul>
-
+                    {/* General info here */}
                     <div className="tab-content clearfix">
                         <div className="tab-pane active" id="1a">
                             <table className="table table-striped">
@@ -54,16 +110,51 @@ var CountyResultsComponent = React.createClass({
                                 </tbody>
                             </table>
                         </div>
-
+                        {/*Single graphs here*/}
                         <div className="tab-pane vytis" id="2a">
-                            <h3>Super vienmandates rezultatai ir grafikeliai [][][][][][][--=-=0-=0[][]]</h3>
+                            <h3></h3>
+                            <div className='col-md-7'>
+                                <table className="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th className='col-md-4 col-sm-4'>Kandidatas</th>
+                                        <th className='col-md-3 col-sm-3'>Partija</th>
+                                        <th className='col-md-2 col-sm-2'>Balsai</th>
+                                        <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
+                                        <th className='col-md-1 col-sm-2'>% nuo visų</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {singleTable}
+                                    </tbody>
+                                </table>
+                                {/*chart pie*/}
+                            </div>
+                            <div className='chartContainer col-md-5' id='parentPieSingle'>
+                                <canvas id='canvasPieSingle'></canvas>
+                            </div>
+
                         </div>
 
                         <div className="tab-pane" id="3a">
-                            <h3>Super daugiamandates rezultatai ir grafikeliai [][][][][][][--=-=0-=0[][]]</h3>
+                            <table className="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th className='col-md-1 col-sm-1'>Nr.</th>
+                                    <th className='col-md-5 col-sm-3'>Partija</th>
+                                    <th className='col-md-2 col-sm-2'>Retingai</th>
+                                    <th className='col-md-2 col-sm-2'>Balsai</th>
+                                    <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
+                                    <th className='col-md-2 col-sm-2'>% nuo visų</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {multiTable}
+                                </tbody>
+                            </table>
                         </div>
                         <div className="tab-pane" id="4a">
-                            <h3>Sarasiukas districtu</h3>
+                            <h3>{this.props.county.name} apygardos apylinkės</h3>
                             <table className="table table-striped">
                                 <thead>
                                 <tr>
