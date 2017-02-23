@@ -41,7 +41,7 @@ var MenuComponent = React.createClass({
                      <div className="collapse navbar-collapse" id="navbar-collapse-1">
                          <ul className="nav navbar-nav">
                              <li><a href="#">Pradinis</a></li>
-                             <li><a href="#/candidates">Kandidatai</a></li>
+                             <li><a href="#/candidate">Kandidatai</a></li>
                              <li><a href="#/parties">Partijos</a></li>
                              <li><a href="#/counties">Apygardos</a></li>
                              <li><a href="#/results">Rezultatai</a></li>

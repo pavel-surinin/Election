@@ -1,14 +1,9 @@
 package lt.itakademija.electors.results.reports;
 
-import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.candidate.CandidateReport;
-import lt.itakademija.electors.county.CountyEntity;
 import lt.itakademija.electors.county.CountyReport;
-import lt.itakademija.electors.district.DistrictEntity;
-import lt.itakademija.electors.party.PartyReport;
 import lt.itakademija.electors.results.reports.dto.CandidateIntDTO;
 import lt.itakademija.electors.results.reports.dto.PartyIntDTO;
-import lt.itakademija.electors.results.single.ResultSingleEntity;
 
 import java.util.List;
 
@@ -17,10 +12,12 @@ import java.util.List;
  */
 public class ResultCountyReport {
 
+    private Integer votersCount;
+    private Integer validCount;
     private CountyReport county;
-    private List<CandidateIntDTO> candidatesVotesSummary;
     private CandidateReport singleMandateWinner;
-    private List<PartyIntDTO> partiesVotesSummary;
+    private List<CandidateIntDTO> votesByCandidate;
+    private List<PartyIntDTO> votesByParty;
     private Integer spoiledSingle;
     private Integer spoiledMulti;
     private Integer districtsVotedSingle;
@@ -28,6 +25,22 @@ public class ResultCountyReport {
     private Integer districtsCount;
     private List<PartyIntDTO> reorderedPartyMembersParties;
     public ResultCountyReport() {
+    }
+
+    public Integer getValidCount() {
+        return validCount;
+    }
+
+    public void setValidCount(Integer validCount) {
+        this.validCount = validCount;
+    }
+
+    public Integer getVotersCount() {
+        return votersCount;
+    }
+
+    public void setVotersCount(Integer votersCount) {
+        this.votersCount = votersCount;
     }
 
     public CountyReport getCounty() {
@@ -70,12 +83,12 @@ public class ResultCountyReport {
         this.districtsVotedMulti = districtsVotedMulti;
     }
 
-    public List<PartyIntDTO> getPartiesVotesSummary() {
-        return partiesVotesSummary;
+    public List<PartyIntDTO> getVotesByParty() {
+        return votesByParty;
     }
 
-    public void setPartiesVotesSummary(List<PartyIntDTO> partiesVotesSummary) {
-        this.partiesVotesSummary = partiesVotesSummary;
+    public void setVotesByParty(List<PartyIntDTO> votesByParty) {
+        this.votesByParty = votesByParty;
     }
 
     public CandidateReport getSingleMandateWinner() {
@@ -86,12 +99,12 @@ public class ResultCountyReport {
         this.singleMandateWinner = singleMandateWinner;
     }
 
-    public List<CandidateIntDTO> getCandidatesVotesSummary() {
-        return candidatesVotesSummary;
+    public List<CandidateIntDTO> getVotesByCandidate() {
+        return votesByCandidate;
     }
 
-    public void setCandidatesVotesSummary(List<CandidateIntDTO> candidatesVotesSummary) {
-        this.candidatesVotesSummary = candidatesVotesSummary;
+    public void setVotesByCandidate(List<CandidateIntDTO> votesByCandidate) {
+        this.votesByCandidate = votesByCandidate;
     }
 
     public Integer getSpoiledSingle() {
