@@ -29,6 +29,6 @@ public class ResultsController {
 
     @GetMapping("results/general")
     public ResultsGeneralReport getGeneralResults(){
-        return service.getGeneralResults();
+        return service.getGeneralReport();
     }
 }

@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/data.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/h2/database-dev.lock.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/h2/database-dev.mv.db" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/DataPreloader.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/DataPreLoader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateRepository.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyRepository.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyReport.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyReport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/GeneralConditions.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/GeneralConditions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiRepository.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/PartyIntDTO.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/PartyIntDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/h2/database-dev.lock.db" afterPath="$PROJECT_DIR$/src/main/resources/h2/database-dev.lock.db" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,12 +38,14 @@
       <file leaf-file-name="ResultsService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="315" column="0" lean-forward="false" selection-start-line="315" selection-start-column="0" selection-end-line="315" selection-end-column="0" />
+            <state relative-caret-position="164">
+              <caret line="68" column="63" lean-forward="true" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2026#2027#0" expanded="true" />
+                <element signature="e#2062#2063#0" expanded="true" />
+                <element signature="e#2134#2135#0" expanded="true" />
+                <element signature="e#2184#2185#0" expanded="true" />
                 <element signature="method#saveCountyResults#0;class#ResultsService#0" expanded="false" />
-                <element signature="method#formOrGetCountyResults#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getDistrictResults#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getCountyResults#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getSpoiledMulti#0;class#ResultsService#0" expanded="false" />
@@ -61,57 +55,60 @@
                 <element signature="method#getPartiesVotesSummary#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getCountyRatings#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getCountyMultiResults#0;class#ResultsService#0" expanded="false" />
+                <element signature="method#getCandidatesResults#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getCandidatesIntDtoSet#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getCountySingleResultList#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getNumDistrictsVotedMulti#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getNumDistrictsVotedSingle#0;class#ResultsService#0" expanded="false" />
+                <element signature="method#formGeneralResults#0;class#ResultsService#0" expanded="false" />
+                <element signature="method#getMandatesPerParty#0;class#ResultsService#0" expanded="false" />
+                <element signature="method#getPartiesOverMinimumLine#0;class#ResultsService#0" expanded="false" />
                 <element signature="method#getSingleWinners#0;class#ResultsService#0" expanded="false" />
-                <element signature="e#16099#16116#0" expanded="true" />
                 <element signature="method#countPartiesVotesRatings#0;class#ResultsService#0" expanded="false" />
-                <element signature="e#17313#17327#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PartyReport.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyReport.java">
+      <file leaf-file-name="CandidateEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+            <state relative-caret-position="307">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GeneralConditions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/GeneralConditions.java">
+      <file leaf-file-name="ResultsController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="14" column="46" lean-forward="false" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+            <state relative-caret-position="163">
+              <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
               <folding>
-                <element signature="e#532#533#0" expanded="true" />
-                <element signature="e#571#572#0" expanded="true" />
-                <element signature="e#628#629#0" expanded="true" />
-                <element signature="e#689#690#0" expanded="true" />
+                <element signature="e#1056#1057#0" expanded="true" />
+                <element signature="e#1105#1106#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResultsGeneralReport.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultsGeneralReport.java">
+      <file leaf-file-name="ResultSingleService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#793#794#0" expanded="true" />
-                <element signature="e#848#849#0" expanded="true" />
-                <element signature="e#894#895#0" expanded="true" />
-                <element signature="e#954#955#0" expanded="true" />
-                <element signature="e#999#1000#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="205">
+              <caret line="66" column="8" lean-forward="true" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ResultMultiService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="63" column="5" lean-forward="true" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,14 +161,11 @@
         <option value="$PROJECT_DIR$/src/main/resources/data.sql" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" />
         <option value="$PROJECT_DIR$/test-csv/big/districts.txt" />
         <option value="$PROJECT_DIR$/src/test/java/lt/itakademija/electors/results/single/ResultSingleControllerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/district/DistrictEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/county/CountyEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsGeneralReport.java" />
-        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/rating/RatingRepositroy.java" />
@@ -188,7 +182,11 @@
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/PartyIntDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyReport.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/GeneralConditions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/GeneralResultsReportService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java" />
       </list>
     </option>
   </component>
@@ -223,9 +221,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -372,8 +367,155 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="results" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="results" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="single" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="results" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Election" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itakademija" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="electors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="candidate" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -381,11 +523,11 @@
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="lt.itakademija.electors.results" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Pavel\workspace\election\Election\test-csv\big" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="lt.itakademija.electors.results" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Application">
@@ -823,42 +965,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultCountyReport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="40" column="64" lean-forward="false" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#2303#2304#0" expanded="false" />
-            <element signature="e#2345#2346#0" expanded="false" />
-            <element signature="e#2790#2791#0" expanded="false" />
-            <element signature="e#2835#2836#0" expanded="false" />
-            <element signature="e#3035#3036#0" expanded="false" />
-            <element signature="e#3071#3072#0" expanded="false" />
-            <element signature="e#3130#3131#0" expanded="false" />
-            <element signature="e#3180#3181#0" expanded="false" />
-            <element signature="e#3220#3221#0" expanded="false" />
-            <element signature="e#3255#3256#0" expanded="false" />
-            <element signature="e#3312#3313#0" expanded="false" />
-            <element signature="e#3360#3361#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/dto/CandidateIntDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -972,26 +1078,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/adata.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/adata.sql" />
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiReport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="30" column="25" lean-forward="true" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="65" column="34" lean-forward="true" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -999,15 +1090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
           <caret line="25" column="37" lean-forward="false" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1015,7 +1097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="46" column="67" lean-forward="true" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1023,7 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="13" column="13" lean-forward="false" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1031,7 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="15" lean-forward="false" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1039,9 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1049,7 +1125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="77" column="0" lean-forward="false" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1057,7 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
           <caret line="36" column="0" lean-forward="false" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1065,7 +1139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="478" column="7" lean-forward="true" selection-start-line="478" selection-start-column="7" selection-end-line="478" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1073,10 +1146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#844#845#0" expanded="true" />
-            <element signature="e#882#883#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1084,10 +1153,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
           <caret line="96" column="23" lean-forward="true" selection-start-line="96" selection-start-column="23" selection-end-line="96" selection-end-column="23" />
-          <folding>
-            <element signature="e#3548#3549#0" expanded="false" />
-            <element signature="e#3594#3595#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1095,7 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
           <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1103,7 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="48" column="6" lean-forward="false" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,28 +1174,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="45" column="0" lean-forward="false" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
-          <folding>
-            <element signature="e#1170#1171#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="31" column="30" lean-forward="true" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
-          <folding>
-            <element signature="e#1056#1057#0" expanded="true" />
-            <element signature="e#1106#1107#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="107" column="14" lean-forward="true" selection-start-line="107" selection-start-column="14" selection-end-line="107" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1140,7 +1181,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="64" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1148,10 +1188,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="42" column="53" lean-forward="false" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
-          <folding>
-            <element signature="e#1220#1221#0" expanded="false" />
-            <element signature="e#1280#1281#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1159,7 +1195,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1167,22 +1202,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="222">
           <caret line="23" column="19" lean-forward="true" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="68" column="23" lean-forward="false" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
-          <folding>
-            <element signature="e#1057#1058#0" expanded="true" />
-            <element signature="method#findByNumberInPartyNameSurnameParty#0;class#CandidateRepository#0" expanded="false" />
-            <element signature="method#getCandidatesCount#0;class#CandidateRepository#0" expanded="false" />
-            <element signature="method#findByCounty#0;class#CandidateRepository#0" expanded="false" />
-            <element signature="e#2296#2297#0" expanded="true" />
-            <element signature="e#2362#2363#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1190,7 +1209,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
           <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1198,18 +1216,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="324" column="13" lean-forward="true" selection-start-line="324" selection-start-column="13" selection-end-line="324" selection-end-column="13" />
-          <folding>
-            <element signature="method#createCounties#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#saveRep#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#saveDistrict#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#loadParties#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#parseToMultiPart#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#createDistricts#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#votesSingle#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#getResMulti#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#createNonPartyCandidates#0;class#DataPreLoader#0" expanded="false" />
-            <element signature="method#createCandidate#0;class#DataPreLoader#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1217,21 +1223,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="17" column="38" lean-forward="true" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultsGeneralReport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="323">
           <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#848#849#0" expanded="true" />
-            <element signature="e#894#895#0" expanded="true" />
-            <element signature="e#954#955#0" expanded="true" />
-            <element signature="e#999#1000#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1240,39 +1240,110 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="307">
           <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/party/PartyReport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+        <state relative-caret-position="221">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/GeneralResultsReportService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/users/UsersService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="82" column="49" lean-forward="false" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/users/UsersController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="38" column="30" lean-forward="true" selection-start-line="38" selection-start-column="30" selection-end-line="38" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="63" column="46" lean-forward="true" selection-start-line="62" selection-start-column="85" selection-end-line="63" selection-end-column="46" />
+          <folding>
+            <element signature="e#2296#2297#0" expanded="true" />
+            <element signature="e#2362#2363#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/candidate/CandidateEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/GeneralConditions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="14" column="46" lean-forward="false" selection-start-line="14" selection-start-column="46" selection-end-line="14" selection-end-column="46" />
+        <state relative-caret-position="307">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
-            <element signature="e#532#533#0" expanded="true" />
-            <element signature="e#571#572#0" expanded="true" />
-            <element signature="e#628#629#0" expanded="true" />
-            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
+            <element signature="e#572#573#0" expanded="true" />
+            <element signature="e#852#853#0" expanded="true" />
+            <element signature="e#904#905#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/single/ResultSingleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="66" column="8" lean-forward="true" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/multi/ResultMultiService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="63" column="5" lean-forward="true" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+          <folding>
+            <element signature="e#1056#1057#0" expanded="true" />
+            <element signature="e#1105#1106#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="315" column="0" lean-forward="false" selection-start-line="315" selection-start-column="0" selection-end-line="315" selection-end-column="0" />
+        <state relative-caret-position="164">
+          <caret line="68" column="63" lean-forward="true" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#2026#2027#0" expanded="true" />
+            <element signature="e#2062#2063#0" expanded="true" />
+            <element signature="e#2134#2135#0" expanded="true" />
+            <element signature="e#2184#2185#0" expanded="true" />
             <element signature="method#saveCountyResults#0;class#ResultsService#0" expanded="false" />
-            <element signature="method#formOrGetCountyResults#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getDistrictResults#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getCountyResults#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getSpoiledMulti#0;class#ResultsService#0" expanded="false" />
@@ -1282,14 +1353,16 @@
             <element signature="method#getPartiesVotesSummary#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getCountyRatings#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getCountyMultiResults#0;class#ResultsService#0" expanded="false" />
+            <element signature="method#getCandidatesResults#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getCandidatesIntDtoSet#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getCountySingleResultList#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getNumDistrictsVotedMulti#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getNumDistrictsVotedSingle#0;class#ResultsService#0" expanded="false" />
+            <element signature="method#formGeneralResults#0;class#ResultsService#0" expanded="false" />
+            <element signature="method#getMandatesPerParty#0;class#ResultsService#0" expanded="false" />
+            <element signature="method#getPartiesOverMinimumLine#0;class#ResultsService#0" expanded="false" />
             <element signature="method#getSingleWinners#0;class#ResultsService#0" expanded="false" />
-            <element signature="e#16099#16116#0" expanded="true" />
             <element signature="method#countPartiesVotesRatings#0;class#ResultsService#0" expanded="false" />
-            <element signature="e#17313#17327#0" expanded="true" />
           </folding>
         </state>
       </provider>

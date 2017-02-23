@@ -8,6 +8,7 @@ public class GeneralConditions {
     private static Integer numberOfCandidatesInParlament = 141;
     private static boolean isAllCountiesVoted = false;
     private static Integer multiGetMandates = 70;
+
     public static void setIsAllCountiesVoted(boolean isAllCountiesVoted) {
         GeneralConditions.isAllCountiesVoted = isAllCountiesVoted;
     }
