@@ -14,6 +14,7 @@ public class Application {
     @Bean
     CommandLineRunner init(DataPreLoader loader) {
         return (args) -> {
+
 //            loader.createAdmin();
 //            loader.createCounties();
 //            loader.createDistricts();
