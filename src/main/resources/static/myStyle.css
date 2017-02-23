@@ -115,6 +115,7 @@ body {
   position: fixed;
   right: 10px;
   bottom: 3px;
+  z-index: 15;
 }
 /*RESULTS FOR NON REGISTERED USERS START*/
 #exTab1 .tab-content {
@@ -162,7 +163,6 @@ body {
   margin:0px;
   padding-left:0;
   padding-right:0;
-  width:100vw;
 }
 
 .container{
