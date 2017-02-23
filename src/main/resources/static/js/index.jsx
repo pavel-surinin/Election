@@ -33,6 +33,7 @@ var App = React.createClass({
                       <li><a href="#/results/district/3">Page Results district 3</a></li>
                       <li><a href="#/results/district/4">Page Results district 4</a></li>
                       <li><a href="#/results/district/5">Page Results district 5</a></li>
+                      <li><a href="#/party">Party</a></li>
                     </ul>
                   </li>
 
@@ -106,6 +107,8 @@ ReactDOM.render((
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
       <Route path="/results/district/:id" component={DistrictResultsContainer} />
+      <Route path="/party" component={PartyViewContainer} />
+      <Route path="/party/:id" component={PartyDetailContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
