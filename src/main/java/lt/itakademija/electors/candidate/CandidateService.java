@@ -1,10 +1,12 @@
 package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.county.CountyEntity;
+import lt.itakademija.electors.county.CountyRepository;
 import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyService;
+import lt.itakademija.electors.results.single.ResultSingleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +21,16 @@ public class CandidateService {
 
     @Autowired
     CandidateRepository repository;
-
     @Autowired
     PartyService partyService;
-
     @Autowired
     CountyService countyService;
-
     @Autowired
     DistrictRepository districtRepository;
+    @Autowired
+    CountyRepository countyRepository;
+    @Autowired
+    ResultSingleRepository resultSingleRepository;
 
     @Transactional
     public CandidateEntity save(CandidateEntity can) {
@@ -49,15 +52,19 @@ public class CandidateService {
 
     @Transactional
     public boolean deleteCandidatesByPartyId(Long id) {
-        PartyEntity partyEntity = partyService.getPartyEntityById(id);
-        List<CandidateReport> candidates = partyService.getPartyById(id).getMembers();
-        partyService.detach(partyEntity);
-        for (CandidateReport candidate : candidates) {
-            if (candidate.isMultiList() == true) {
-                repository.delete(candidate.getId());
-            }
-        }
-    return true;
+        PartyEntity party = partyService.getPartyEntityById(id);
+        partyService.detach(party);
+//        party.getMembers()
+//                .stream()
+//                .filter(CandidateEntity::isMultiList)
+//                .forEach(m->repository.delete(m.getId()));
+        List<CandidateEntity> membersToDelete = party.getMembers()
+                .stream()
+                .filter(CandidateEntity::isMultiList)
+                .collect(Collectors.toList());
+        repository.deleteAll(membersToDelete);
+
+        return true;
     }
 
     public CandidateEntity getCandidateByNameSurnameNumberParty(CandidateEntity can){

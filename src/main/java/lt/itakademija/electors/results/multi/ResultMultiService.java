@@ -69,6 +69,7 @@ public class ResultMultiService {
         results.forEach(res -> res.setApproved(true));
         results.stream().forEach(res -> repository.save(res));
         resultsService.saveCountyResults(districtRepository.findById(id).getCounty().getId());
+        resultsService.formGeneralResults();
         return "Votes Approved";
     }
 

@@ -16,7 +16,8 @@ var App = React.createClass({
     });
   },
   render: function() {
-    return (
+      console.log('this index:',this);
+      return (
       <div style={{ paddingTop: '20px' }}>
         <nav className="navbar navbar-default">
           <div className="container-fluid">
@@ -24,6 +25,7 @@ var App = React.createClass({
                 <li><a href="#/">Pradinis</a></li>
                 <li><a href="#/login">Prisijungti</a></li>
                 <li><a href="#/representative">Atstovas</a></li>
+                <li><a href="#/candidate">Kandidatai</a></li>
                   <li className="dropdown">
                     <a className="dropdown-toggle" data-toggle="dropdown">Results district
                     <span className="caret"></span></a>
@@ -103,12 +105,18 @@ ReactDOM.render((
       <Route path="*" component={NoMatch}/>
     </Route>
 
-    <Route path="/" component={App}>
+    <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
-      <Route path="/results/district/:id" component={DistrictResultsContainer} />
-      <Route path="/party" component={PartyViewContainer} />
-      <Route path="/party/:id" component={PartyDetailContainer} />
+      <Route path="/candidates" component={CandidatesListContainer} />
+      <Route path="/parties" component={PartyViewContainer} />
+      <Route path="/parties/:id" component={PartyDetailContainer} />
+      <Route path="/counties" component={CountiesContainer}/>
+      <Route path="/counties/:county" component={CountyResultsContainer}/>
+      <Route path="/counties/:county/:id" component={DistrictResultsContainer}/>
+
+      <Route path="/results" component={EmptyComponent} />
+      <Route path="/contacts" component={EmptyComponent} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>

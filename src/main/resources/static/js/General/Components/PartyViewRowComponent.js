@@ -2,7 +2,7 @@ var PartyViewRowComponent = React.createClass({
   handleDetailsClick: function(id){
     var self = this;
     return function() {
-      self.context.router.push('party/' + id);
+      self.context.router.push('parties/' + id);
     };
   },
 render: function() {
@@ -12,7 +12,7 @@ render: function() {
               {this.props.partyNumber}
             </td>
             <td className="small">
-            <a href={`#/party/${this.props.id}`}>  {this.props.name} </a>
+            <a href={`#/parties/${this.props.id}`}>  {this.props.name} </a>
             </td>
             <td>
               {this.props.members}

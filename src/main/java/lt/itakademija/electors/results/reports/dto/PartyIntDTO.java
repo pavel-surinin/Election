@@ -25,6 +25,12 @@ public class PartyIntDTO {
         this.ratings = ratingsEnt.stream().map(r -> new CandidateIntDTO(r.getCandidate(),r.getPoints())).collect(Collectors.toList());
     }
 
+    public PartyIntDTO(PartyReport par, Integer multiGetMandates) {
+        this.par = par;
+        this.count = multiGetMandates;
+    }
+
+
     public List<CandidateIntDTO> getRatings() {
         return ratings;
     }

@@ -1,4 +1,14 @@
 var PartyListViewComponent = React.createClass({
+    componentDidMount: function(){
+      $(document).ready(function() {
+        $('#searchable-table').DataTable({
+          language: {
+            url: 'lithuanian.json'
+          },
+          responsive: true
+        });
+      });
+    },
   render: function() {
     var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
     var deletePartyMessage = alerts.showDangerFixed(this.props.deletedPartyText);
@@ -31,7 +41,7 @@ var PartyListViewComponent = React.createClass({
                 {succesCreateMessage}
                 {deletePartyMessage}
               </div>
-                <table className="table table-striped table-hover">
+                <table className="table table-striped table-hover" id="searchable-table">
                   <thead>
                     <tr>
                       <th>
