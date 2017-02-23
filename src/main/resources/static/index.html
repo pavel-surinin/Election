@@ -18,6 +18,8 @@
     <link href="/dist/css/sb-admin-2.css" rel="stylesheet">
     <!-- Morris Charts CSS -->
     <link href="/vendor/morrisjs/morris.css" rel="stylesheet">
+    <!--DataTables JavaScript -->
+    <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="fa/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -42,6 +44,9 @@
   <script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
   <script src="/js/Helpers/charts/moment.js"></script>
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
 
   <script type="text/babel" src="/js/Styles/styles.js"></script>
   <script type="text/babel" src="/js/Helpers/validation.js"></script>
@@ -128,13 +133,14 @@
   <!-- non register user -->
   <script type="text/babel" src="/js/General/Containers/DistrictResultsContainer.js"></script>
   <script type="text/babel" src="/js/General/Components/DistrictResults.js"></script>
+  <script type="text/babel" src="/js/General/Components/CandidatesList.js"></script>
+  <script type="text/babel" src="/js/General/Containers/CandidatesListContainer.js"></script>
   <script type="text/babel" src="/js/General/Components/DistrictResultsMultiTableRow.js"></script>
 
       <!-- side nav menu -->
       <script type="text/babel" src="/js/Menu/Components/MenuComponent.js"></script>
       <!-- non-reg users pages -->
       <script type="text/babel" src="/js/General/Components/CountiesListComponent.js"></script>
-      <script type="text/babel" src="/js/General/Components/CountiesListRowComponent.js"></script>
       <script type="text/babel" src="/js/General/Containers/CountiesContainer.js"></script>
       <script type="text/babel" src="/js/General/Containers/CountyResultsContainer.js"></script>
       <script type="text/babel" src="/js/General/Components/CountyResultsComponent.js"></script>

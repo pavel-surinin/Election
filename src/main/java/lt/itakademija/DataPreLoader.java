@@ -19,9 +19,12 @@ import lt.itakademija.electors.results.multi.ResultMultiService;
 import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleService;
+import lt.itakademija.users.UsersEntity;
+import lt.itakademija.users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.*;
@@ -36,7 +39,7 @@ import java.util.stream.Collectors;
  * Created by Pavel on 2017-02-07.
  */
 @Service
-public class DataPreloader {
+public class DataPreLoader {
 
     @Autowired
     CandidateService service;
@@ -62,6 +65,8 @@ public class DataPreloader {
     PartyRepository partyRepository;
     @Autowired
     ResultMultiService resultMultiService;
+    @Autowired
+    UsersRepository usersRepository;
 
     public void createCounties() {
         System.out.println("Starting createCounties");
@@ -379,5 +384,13 @@ public class DataPreloader {
         can.setCounty(ces);
         can.setMultiList(false);
         service.save(can);
+    }
+
+    @Transactional
+    public void createAdmin() {
+        UsersEntity admin = new UsersEntity();
+        admin.setPassword("admin");
+        admin.setUsername("admin");
+        usersRepository.save(admin);
     }
 }

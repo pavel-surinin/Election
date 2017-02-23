@@ -1,5 +1,17 @@
 var CandidatesListViewComponent = React.createClass({
 
+    componentDidMount: function(){
+        $(document).ready(function() {
+          $('#searchable-table').DataTable({
+            language: {
+                url: 'lithuanian.json'
+            },
+            responsive: true
+          });
+//            $('#searchable-table_length').css("background-color", "yellow");
+        });
+    },
+
   render: function() {
 	      var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
 	      var array = [];
@@ -26,7 +38,7 @@ var CandidatesListViewComponent = React.createClass({
           </div>
           <div className="panel-body">
           </div>
-            <table width="100%" className="table table-striped" id="dataTables-example">
+            <table width="100%" className="table table-striped" id="searchable-table">
              <thead>
               <tr>
                 <th>Nr.</th>
@@ -42,18 +54,6 @@ var CandidatesListViewComponent = React.createClass({
             </tbody>
           </table>
           {succesCreateMessage}
-        <script src="../vendor/jquery/jquery.min.js"></script>
-
-          <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-
-          <script src="../vendor/metisMenu/metisMenu.min.js"></script>
-
-          <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-          <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-          <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
-
-          <script src="../dist/js/sb-admin-2.js"></script>
-
       </div>
 
 

@@ -29,6 +29,42 @@
 
 #result-refresh.text-success {cursor:pointer;}
 
+.form-control.input-sm {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+#searchable-table_info {
+    padding-left: 30px;
+    margin-top: 10px;
+}
+#searchable-table_paginate{
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-top: 10px;
+}
+.pagination{
+    margin-top:3px;
+}
+.col-sm-6{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+#searchable-table_length {
+    padding-left: 30px;
+    margin-top: 10px;
+    display: inline-flex;
+}
+#searchable-table_filter {
+    padding-right: 30px;
+    margin-top:10px;
+    padding-left: 30px;
+}
+#searchable-table_length > label{
+    display: inline-flex;
+}
+#searchable-table_filter > label{
+    display: inline-flex;
+}
 .modal-footer {
     text-align:center;}
 

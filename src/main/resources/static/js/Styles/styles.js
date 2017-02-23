@@ -30,8 +30,7 @@ var styles = {
     } else {
       return {display : 'none'};
     }
-  }
-
+  },
 
 };
 

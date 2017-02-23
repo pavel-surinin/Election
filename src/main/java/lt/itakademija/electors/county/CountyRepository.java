@@ -41,4 +41,8 @@ public class CountyRepository {
     public Long getCountiesCount(){
         return em.createQuery("SELECT COUNT(c) FROM CountyEntity c", Long.class).getSingleResult();
     }
+
+    public void detach(CountyEntity county) {
+        em.detach(county);
+    }
 }
