@@ -41,7 +41,7 @@ var chartDataMapper = {
   function(results){
     if (results.votesByParty) {
       var labels = results.votesByParty.map(function(pid){
-        return pid.party;
+        return pid.name;
       });
       var votes = results.votesByParty.map(function(pid){
         return pid.votes;
@@ -51,6 +51,20 @@ var chartDataMapper = {
       return null;
     }
   },
+  getDataCountyMulti :
+      function(results){
+          if (results.votesByParty) {
+              var labels = results.votesByParty.map(function(pid){
+                  return pid.par.name;
+              });
+              var votes = results.votesByParty.map(function(pid){
+                  return pid.votes;
+              });
+              return {labels : labels, votes : votes};
+          } else {
+              return null;
+          }
+      },
   getDataSingle :
   function(results){
     if (results.votesByCandidate) {
@@ -70,7 +84,11 @@ var chartDataMapper = {
 var chartss = {
   bar : function(alignment,ctx,data,electionType){
     //bar or horizontalBar
-    var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
+    //var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
+      var mdata =[];
+      if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
+      if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
+      if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
     var myChart = new Chart(ctx, {
       type: alignment,
       data: {
@@ -96,7 +114,10 @@ var chartss = {
     return myChart;
   },
   pie : function(ctx,data,electionType){
-    var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
+    var mdata =[];
+      if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
+      if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
+      if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
     var myChart = new Chart(ctx,{
       type: 'pie',
       data: {

@@ -41,10 +41,10 @@ ReactDOM.render((
       <Route path="/admin/county/create" component={CountyCreateContainer} />
       <Route path="/admin/county/edit/:id" component={CountyEditContainer} />
       <Route path="/admin/county/:id" component={CountyDetailViewContainer} />
-      <Route path="/admin/party" component={PartyContainer} />
-      <Route path="/admin/party/create" component={PartyCreateContainer} />
-      <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
-      <Route path="/admin/party/edit/:id" component={PartyEditContainer} />
+      <Route path="/admin/name" component={PartyContainer} />
+      <Route path="/admin/name/create" component={PartyCreateContainer} />
+      <Route path="/admin/name/:id" component={PartyDetailViewContainer} />
+      <Route path="/admin/name/edit/:id" component={PartyEditContainer} />
       <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>

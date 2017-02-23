@@ -29,6 +29,7 @@ function getSingleTable(self){
   }
   return singleTable;
 }
+
 function getMultiTable(self) {
   if (self.props.results.votesByParty) {
     var multiTable = self.props.results.votesByParty.map(function(p,index){
@@ -79,6 +80,7 @@ var DistrictResults  = React.createClass({
     var multiTable = getMultiTable(this);
     var singleStyle = styles.toggleResultNav(this.props.results.votesByCandidate);
     var multiStyle = styles.toggleResultNav(this.props.results.votesByParty);
+    console.log("this from districtResults",this);
     return (
       <div>
         <div className="container"><h1>{this.props.district.name} rinkimų apylinkė</h1></div>

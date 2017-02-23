@@ -1,4 +1,4 @@
-name,surname,birth-date,party,number-in-party,description
+name,surname,birth-date,name,number-in-name,description
 Antonas,Antonovic,1967-05-05,1,2,Kietas
 Petras,Grazulis,1976-08-06,1,3,Už Lietuvą vyrai!!!
 Jonas, Klebonas,1981-01-04,null,null,Fizikas
