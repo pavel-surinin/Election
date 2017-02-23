@@ -31,7 +31,7 @@ var alerts = {
       return null;
     } else {
       return (
-        <div className="alert alert-success fade in alert-dismissable notification" id="alert-success-fixed" style={{marginTop : '18px'}}>
+        <div className="alert alert-success fade in alert-dismissable notification " id="alert-success-fixed" style={{marginTop : '18px'}}>
           <a href="#" className="close" data-dismiss="alert" aria-label="close" title="close">×</a>
           {text}
         </div>
