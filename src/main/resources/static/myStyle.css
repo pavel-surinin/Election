@@ -1,3 +1,8 @@
+body {
+  background-color: rgba(141, 141, 215, 0.28);
+  background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
+  font-family: 'Raleway', sans-serif;}
+
 /* leave this part out */
 .clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
 .clearfix:after{clear:both;}
@@ -25,9 +30,31 @@
 .panel > .panel-heading { text-transform: uppercase;
   }
 
+  /*SEARCH TABLE START*/
+  @media screen and (min-width: 768px) {
+      #searchable-table_filter > label {
+          float: right;
+          margin-right: -29px;
+      }
+  }
+
 #register-button {text-transform: capitalize;}
 
 #result-refresh.text-success {cursor:pointer;}
+
+#page-wrapper > div > div > div:nth-child(1) > div.panel-body{
+  padding: 3px;
+}
+#searchable-table_filter > label > input {
+  margin-top: -5px;
+}
+#searchable-table_length > label{
+  padding-right: 3px;
+}
+
+#searchable-table_length > label > select{
+  margin-top: -5px;
+}
 
 .form-control.input-sm {
     margin-left: 5px;
@@ -45,10 +72,6 @@
 .pagination{
     margin-top:3px;
 }
-.col-sm-6{
-    padding-right: 0px;
-    padding-left: 0px;
-}
 #searchable-table_length {
     padding-left: 30px;
     margin-top: 10px;
@@ -65,12 +88,13 @@
 #searchable-table_filter > label{
     display: inline-flex;
 }
+/*SEARCH TABLE END*/
+
+/*MODAL START*/
 .modal-footer {
     text-align:center;}
-
 .modal-body {
     text-align:center;}
-
 .modal-content {
     position: relative;
     width: auto;
@@ -79,17 +103,12 @@
     margin-right: 30%;
     border-radius: 2px;
 }
-
 .modal-content .ratings{
     position: relative;
     width: 90vw;
     border-radius: 2px;
 }
-
-body {
-  background-color: rgba(141, 141, 215, 0.28);
-  background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
-  font-family: 'Raleway', sans-serif;}
+/*MODAL END*/
 
 #wrapper {background-color: #fff; border-left: 1px solid #ccc;  border-right: 1px solid #ccc;}
 
