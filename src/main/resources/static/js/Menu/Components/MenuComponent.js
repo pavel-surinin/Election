@@ -1,4 +1,3 @@
-$('#nav-wrapper').height($("#navbar").height());
 var MenuComponent = React.createClass({
   render: function() {
     return (
@@ -26,7 +25,9 @@ var MenuComponent = React.createClass({
                  </div>
              </div>
          </div>
-             <nav className="navbar navbar-default main-menu affix affix-top" data-spy="affix" data-offset-top="225" style={{top:'0px',left:'0px',width:'100%',borderRadius:'0px'}}>
+             <nav
+              className="navbar navbar-default">
+
                  <div className="container">
                      <div className="navbar-header">
                          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -50,6 +51,10 @@ var MenuComponent = React.createClass({
                      </div>
                  </div>
              </nav>
+
+
+
+
              <div className="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 children">
                  {this.props.children}
              </div>

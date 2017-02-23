@@ -1,7 +1,10 @@
 body {
   background-color: rgba(141, 141, 215, 0.28);
   background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
-  font-family: 'Raleway', sans-serif;}
+  font-family: 'Raleway', sans-serif;
+  position: relative;
+}
+
 
 /* leave this part out */
 .clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
@@ -34,7 +37,9 @@ body {
   @media screen and (min-width: 768px) {
       #searchable-table_filter > label {
           float: right;
-          margin-right: -29px;
+      }
+      #searchable-table_paginate > ul{
+        float: right;
       }
   }
 
@@ -182,7 +187,4 @@ body {
   z-index: 10;
 }
 
-.root > .affix {
-  top:50px;
-}
 /*RESULTS FOR NON REGISTERED USERS END*/
