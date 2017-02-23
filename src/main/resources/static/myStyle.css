@@ -109,7 +109,6 @@ body {
     border-radius: 2px;
 }
 /*MODAL END*/
-
 #wrapper {background-color: #fff; border-left: 1px solid #ccc;  border-right: 1px solid #ccc;}
 
 .notification{
@@ -157,5 +156,33 @@ body {
   background-position: top right;
   background-size: 62px 70px;
   background-repeat: no-repeat;
+}
+
+#root{
+  margin:0px;
+  padding-left:0;
+  padding-right:0;
+  width:100vw;
+}
+
+.container{
+  width: 100%;
+}
+
+.menu-container{
+  margin:0;
+  padding:0;
+}
+
+.children{
+    position:initial;
+}
+
+.main-menu{
+  z-index: 10;
+}
+
+.root > .affix {
+  top:50px;
 }
 /*RESULTS FOR NON REGISTERED USERS END*/
