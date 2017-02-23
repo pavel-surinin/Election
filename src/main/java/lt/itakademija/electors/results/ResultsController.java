@@ -2,6 +2,7 @@ package lt.itakademija.electors.results;
 
 import lt.itakademija.electors.results.reports.ResultCountyReport;
 import lt.itakademija.electors.results.reports.ResultDistrictReport;
+import lt.itakademija.electors.results.reports.ResultsGeneralReport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,4 +27,8 @@ public class ResultsController {
         return service.formOrGetCountyResults(id);
     }
 
+    @GetMapping("results/general")
+    public ResultsGeneralReport getGeneralResults(){
+        return service.getGeneralResults();
+    }
 }

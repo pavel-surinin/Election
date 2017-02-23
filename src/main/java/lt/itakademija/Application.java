@@ -12,8 +12,10 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner init(DataPreloader loader) {
+    CommandLineRunner init(DataPreLoader loader) {
         return (args) -> {
+
+//            loader.createAdmin();
 //            loader.createCounties();
 //            loader.createDistricts();
 //            loader.loadParties();
@@ -22,6 +24,7 @@ public class Application {
 //            loader.votesSingle();
 //            loader.votesMulti();
         };
-
     }
+
 }
+
