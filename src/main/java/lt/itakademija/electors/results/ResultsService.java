@@ -83,6 +83,17 @@ public class ResultsService {
         final CountyEntity county = countyRepository.findById(id);
         ResultCountyReport report = new ResultCountyReport();
 
+        int votersCount = county.getDistricts().stream().mapToInt(d -> d.getNumberOfElectors().intValue()).sum();
+        report.setVotersCount(votersCount);
+
+        int validCount = county.getDistricts()
+                .stream().filter(f -> f.getResultMultiEntity().size() !=0)
+                .mapToInt(d -> d.getResultMultiEntity()
+                        .stream()
+                        .mapToInt(r -> r.getVotes().intValue())
+                        .sum() + d.getSpoiledMulti()).sum();
+        report.setValidCount(validCount);
+
         int spoiledSingle = getSpoiledSingle(county);
         report.setSpoiledSingle(spoiledSingle);
 
@@ -102,7 +113,7 @@ public class ResultsService {
         List<ResultSingleEntity> allSingleResults = getCountySingleResultList(county);
         Set<CandidateIntDTO> candidatesIntDtoSet = getCandidatesIntDtoSet(allSingleResults);
         List<CandidateIntDTO> candidatesResultList = getCandidatesResults(allSingleResults, candidatesIntDtoSet);
-        report.setCandidatesVotesSummary(candidatesResultList);
+        report.setVotesByCandidate(candidatesResultList);
         if (!candidatesResultList.isEmpty()) {
             report.setSingleMandateWinner(candidatesResultList.get(0).getCandidate());
         }
@@ -127,17 +138,17 @@ public class ResultsService {
             collect.forEach((key, value) -> {
                 ratings.add(new CandidateIntDTO(key, value
                         .stream()
-                        .mapToInt(CandidateIntDTO::getCount)
+                        .mapToInt(CandidateIntDTO::getVotes)
                         .sum()));
             });
 
             List<CandidateIntDTO> sortedRatings = ratings
                     .stream()
-                    .sorted((ra1, ra2) -> ra2.getCount().compareTo(ra1.getCount()))
+                    .sorted((ra1, ra2) -> ra2.getVotes().compareTo(ra1.getVotes()))
                     .collect(Collectors.toList());
             partyIntDTO.setRatings(sortedRatings);
         }
-        report.setPartiesVotesSummary(partiesVotesSummary);
+        report.setVotesByParty(partiesVotesSummary);
 
 
         List<PartyIntDTO> partyIntDTOS = sortMemberByRatingAndPartyNumber(report);
@@ -166,7 +177,7 @@ public class ResultsService {
 
     private List<PartyIntDTO> sortMemberByRatingAndPartyNumber(final ResultCountyReport report) {
         List<PartyIntDTO> list = new ArrayList<>();
-        final List<PartyIntDTO> partiesVotesSummary = report.getPartiesVotesSummary();
+        final List<PartyIntDTO> partiesVotesSummary = report.getVotesByParty();
         for (PartyIntDTO partyIntDTO : partiesVotesSummary) {
             List<CandidateReport> membersOriginal = partyIntDTO.getPar().getMembers()
                     .stream()
@@ -177,7 +188,7 @@ public class ResultsService {
             }
             List<CandidateReport> membersWithRating = partyIntDTO.getRatings()
                     .stream()
-                    .sorted((r1, r2) -> r2.getCount().compareTo(r1.getCount()))
+                    .sorted((r1, r2) -> r2.getVotes().compareTo(r1.getVotes()))
                     .map(r -> r.getCandidate())
                     .collect(Collectors.toList());
             for (int i = 0; i < membersWithRating.size(); i++) {
@@ -214,12 +225,12 @@ public class ResultsService {
                             .stream()
                             .filter(result -> result.getParty().getId().equals(partyDto.getPar().getId()))
                             .forEach(result -> {
-                                partyDto.setCount(partyDto.getCount() + result.getVotes().intValue());
+                                partyDto.setVotes(partyDto.getVotes() + result.getVotes().intValue());
                             });
 
                     return partyDto;
                 })
-                .sorted((r1, r2) -> r2.getCount().compareTo(r1.getCount()))
+                .sorted((r1, r2) -> r2.getVotes().compareTo(r1.getVotes()))
                 .collect(Collectors.toList());
     }
 
@@ -247,10 +258,10 @@ public class ResultsService {
                     allSingleResults
                             .stream()
                             .filter(r -> r.getCandidate().getId().equals(cid.getCandidate().getId()))
-                            .forEach(r -> cid.setCount((cid.getCount() + r.getVotes().intValue())));
+                            .forEach(r -> cid.setVotes((cid.getVotes() + r.getVotes().intValue())));
                     return cid;
                 })
-                .sorted((r1, r2) -> r2.getCount().compareTo(r1.getCount()))
+                .sorted((r1, r2) -> r2.getVotes().compareTo(r1.getVotes()))
                 .collect(Collectors.toList());
     }
 
@@ -307,20 +318,20 @@ public class ResultsService {
         List<PartyIntDTO> partiesOverMinimumLine = getPartiesOverMinimumLine(report, sumOfVotes);
         report.setPartiesOverMinimumLine(partiesOverMinimumLine);
 
-        int sumPartyVotesOverLine = partiesOverMinimumLine.stream().mapToInt(PartyIntDTO::getCount).sum();
+        int sumPartyVotesOverLine = partiesOverMinimumLine.stream().mapToInt(PartyIntDTO::getVotes).sum();
         List<PartyIntDTO> mandatesPerParty = getMandatesPerParty(partiesOverMinimumLine, sumPartyVotesOverLine);
         report.setMandatesPerParty(mandatesPerParty);
 
         List<CandidateReport> multiWinnersList = mandatesPerParty.stream().map(m -> votesInMulti.stream()
                 .filter(v -> v.getPar().getId() == m.getPar().getId())
                 .findFirst()
-                .map(v->{
+                .map(v -> {
                     List<CandidateReport> members = v.getPar().getMembers();
                     List<CandidateReport> winnersList = singleWinners.stream().map(dto -> dto.getCandidate()).collect(Collectors.toList());
                     members.removeAll(winnersList);
                     return members;
                 })
-                .map(v -> v.subList(0, m.getCount() - 1))
+                .map(v -> v.subList(0, m.getVotes() - 1))
                 .get()).flatMap(Collection::stream).collect(Collectors.toList());
         report.setMultiWinners(multiWinnersList);
         setGeneralReport(report);
@@ -332,13 +343,13 @@ public class ResultsService {
         List<PartyIntDTO> mandatesPerParty = new ArrayList<>();
         for (int i = 0; i < partiesOverMinimumLine.size(); i++) {
             PartyReport par = new PartyReport(partiesOverMinimumLine.get(i).getPar().getName(), partiesOverMinimumLine.get(i).getPar().getPartyNumber(), partiesOverMinimumLine.get(i).getPar().getId());
-            if (i != partiesOverMinimumLine.size()-1){
-                Float percent = 1.0F *partiesOverMinimumLine.get(i).getCount() / sumPartyVotesOverLine;
-                partiesOverMinimumLine.get(i).setCount(GeneralConditions.countMandates(percent));
-                mandatesPerParty.add(new PartyIntDTO(par,GeneralConditions.countMandates(percent)));
+            if (i != partiesOverMinimumLine.size() - 1) {
+                Float percent = 1.0F * partiesOverMinimumLine.get(i).getVotes() / sumPartyVotesOverLine;
+                partiesOverMinimumLine.get(i).setVotes(GeneralConditions.countMandates(percent));
+                mandatesPerParty.add(new PartyIntDTO(par, GeneralConditions.countMandates(percent)));
                 count = count + GeneralConditions.countMandates(percent);
             } else {
-                mandatesPerParty.add(new PartyIntDTO(par,GeneralConditions.getMultiGetMandates()-count));
+                mandatesPerParty.add(new PartyIntDTO(par, GeneralConditions.getMultiGetMandates() - count));
             }
         }
         return mandatesPerParty;
@@ -347,9 +358,9 @@ public class ResultsService {
     private List<PartyIntDTO> getPartiesOverMinimumLine(ResultsGeneralReport report, int sumOfVotes) {
         return report.getVotesInMulti()
                 .stream()
-                .filter(o -> (1.0 * o.getCount() / sumOfVotes) * 100 >= GeneralConditions.getMinimumPercentInMulti())
-                .map(o->{
-                    PartyIntDTO partyIntDTO = new PartyIntDTO(new PartyReport(o.getPar().getName(), o.getPar().getPartyNumber(), o.getPar().getId()), o.getCount());
+                .filter(o -> (1.0 * o.getVotes() / sumOfVotes) * 100 >= GeneralConditions.getMinimumPercentInMulti())
+                .map(o -> {
+                    PartyIntDTO partyIntDTO = new PartyIntDTO(new PartyReport(o.getPar().getName(), o.getPar().getPartyNumber(), o.getPar().getId()), o.getVotes());
                     return partyIntDTO;
                 })
                 .collect(Collectors.toList());
@@ -372,7 +383,7 @@ public class ResultsService {
                         Long sum = resultSingleEntities.stream().mapToLong(ResultSingleEntity::getVotes).sum();
                         list.add(new CandidateIntDTO(candidateEntity, sum.intValue()));
                     });
-                    List<CandidateIntDTO> sortedList = list.stream().sorted((d1, d2) -> d2.getCount().compareTo(d1.getCount())).collect(Collectors.toList());
+                    List<CandidateIntDTO> sortedList = list.stream().sorted((d1, d2) -> d2.getVotes().compareTo(d1.getVotes())).collect(Collectors.toList());
 
                     return sortedList.get(0);
                 }).collect(Collectors.toList());
@@ -396,7 +407,7 @@ public class ResultsService {
                                 RatingEntity rating = new RatingEntity();
                                 rating.setCandidate(candidate);
                                 rating.setPoints(integer);
-                                if (integer > candidate.getPartyDependencies().getMembers().stream().filter(CandidateEntity::isMultiList).count()){
+                                if (integer > candidate.getPartyDependencies().getMembers().stream().filter(CandidateEntity::isMultiList).count()) {
                                     partyRatings.add(rating);
                                 }
                             }));
@@ -419,7 +430,7 @@ public class ResultsService {
 
                     return new PartyIntDTO(tp, sum, sortedRatings);
                 })
-                .sorted((v1, v2) -> v2.getCount().compareTo(v1.getCount()))
+                .sorted((v1, v2) -> v2.getVotes().compareTo(v1.getVotes()))
                 .collect(Collectors.toList());
     }
 }

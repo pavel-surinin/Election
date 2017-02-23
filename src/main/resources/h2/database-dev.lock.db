@@ -1,0 +1,6 @@
+#FileLock
+#Thu Feb 23 15:21:30 EET 2017
+hostName=192.168.30.76
+id=15a6b22356d038e0d9a11dd0a7742ee31da4d01f676
+method=file
+server=192.168.30.76\:52557

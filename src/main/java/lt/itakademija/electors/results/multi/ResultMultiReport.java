@@ -1,9 +1,7 @@
 package lt.itakademija.electors.results.multi;
 
-import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.multi.rating.RatingReport;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,14 +13,14 @@ public class ResultMultiReport {
     private ResultMultiEntity result;
     private Long id;
     private Integer partyNumber;
-    private String party;
+    private String name;
     private Long votes;
     private List<RatingReport> rating;
 
     public ResultMultiReport(ResultMultiEntity result) {
         this.id = result.getId();
         this.partyNumber = result.getParty().getPartyNumber();
-        this.party = result.getParty().getName();
+        this.name = result.getParty().getName();
         this.votes = result.getVotes();
         this.rating = result.getRating()
                 .stream()
@@ -50,12 +48,12 @@ public class ResultMultiReport {
         this.id = id;
     }
 
-    public String getParty() {
-        return party;
+    public String getName() {
+        return name;
     }
 
-    public void setParty(String party) {
-        this.party = party;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getVotes() {
