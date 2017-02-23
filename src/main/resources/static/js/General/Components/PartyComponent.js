@@ -1,6 +1,19 @@
 var PartyComponent = React.createClass({
   render: function() {
-
+    var partyMembersList = [];
+    this.props.partyDetails.members.map(function(member,index) {
+      partyMembersList.push(
+        <PartyDetailListRowViewComponent
+          id={member.id}
+          key={index}
+          name={member.name}
+          surname={member.surname}
+          birthDate={member.birthDate}
+          description={member.description}
+          numberInParty={member.numberInParty}
+        />
+      );
+    });
     return (
       <div>
         <div className="container"><h1>Partija: {this.props.partyDetails.name}</h1></div>
@@ -41,14 +54,14 @@ var PartyComponent = React.createClass({
                       <thead>
                         <tr>
                           <th className='col-md-1 col-sm-1'>Nr.</th>
-                          <th className='col-md-3 col-sm-3'>Vardas</th>
-                          <th className='col-md-2 col-sm-2'>Pavardė</th>
+                          <th className='col-md-2 col-sm-2'>Vardas</th>
+                          <th className='col-md-3 col-sm-3'>Pavardė</th>
                           <th className='col-md-2 col-sm-2'>Gimimo data</th>
                           <th className='col-md-2 col-sm-1'>Aprašymas</th>
                         </tr>
                       </thead>
                       <tbody>
-
+                        {partyMembersList}
                       </tbody>
                     </table>
                   </div>
