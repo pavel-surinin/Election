@@ -1,6 +1,47 @@
+.shadow {
+  border: 20px solid transparent;
+  padding: 0px;
+  -webkit-border-image: url('images/border.png') 39 round;
+  -o-border-image: url('images/border.png') 39 round;
+  border-image: url('images/border.png') 39 round;
+}
+
+.secondmenu{
+  padding-left: 20px;
+  margin-bottom: -20px;
+}
+
+ul.secondmenu > li.active:active{
+  background-color: white;
+  color: #ed1c24;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+  color: #ed1c24;
+  background-color: white;
+}
+/*ul.secondmenu > li{
+  z-index: -1;
+}
+
+ul.secondmenu > li.active{
+  z-index: 1;
+}*/
+
+h1.yellow{
+  color: yellow;
+  text-transform: uppercase;
+  text-align: center;
+  padding-bottom: 7px;
+  font-weight: 800;
+  -webkit-transition: all 2s ease; /* Safari */
+  stransition: all 2s ease;
+}
+
 body {
-  background-color: rgba(141, 141, 215, 0.28);
-  background-image: url("https://www.transparenttextures.com/patterns/climpek.png");
+  background-color: rgba(16, 16, 19, 0.55);
+  background-image: url("Images/bg.jpg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   font-family: 'Raleway', sans-serif;
   position: relative;
 }
@@ -33,7 +74,7 @@ body {
 .panel > .panel-heading { text-transform: uppercase;
   }
 
-  /*SEARCH TABLE START*/
+/*SEARCH TABLE START*/
   @media screen and (min-width: 768px) {
       #searchable-table_filter > label {
           float: right;
@@ -129,7 +170,7 @@ body {
   padding : 5px 15px;
 }
 
-#exTab1 .nav-pills > li > a {
+.nav-pills > li > a {
   color : #0c4373;
   background-color: #d3d2d4;
   padding : 20px;
@@ -138,17 +179,17 @@ body {
   stransition: all 0.5s ease;
 }
 
-#exTab1 .nav-pills > li > a:hover{
+.nav-pills > li > a:hover{
   background-color: #e2e2e2;
   -webkit-transition: all 0.5s ease; /* Safari */
   stransition: all 0.5s ease;
 }
 
-#exTab1 .nav-pills > li.disabled{
+.nav-pills > li.disabled{
   display: none;
 }
 
-#exTab1 .nav-pills > li.active a  {
+.nav-pills > li.active a  {
   color : #428bca;
   background-color: white;
   padding : 20px;
@@ -186,5 +227,31 @@ body {
 .main-menu{
   z-index: 10;
 }
+
+.fadetest{
+  -webkit-transition: all 2s ease; /* Safari */
+  stransition: all 2s ease;
+}
+
+
+body {
+    position: relative;
+}
+
+#root > div > nav{
+  background-color :rgba(37, 36, 36, 0.89);
+  border-color: rgba(255, 240, 0, 0.84);
+  border-bottom-width: :2;
+}
+
+#root > div > nav > div > ul > li.active > a{
+  padding: 15px 25px;
+  font-size: 17px;
+}
+
+#root > div > nav > div > div > a > i{
+  color: gold;
+}
+
 
 /*RESULTS FOR NON REGISTERED USERS END*/
