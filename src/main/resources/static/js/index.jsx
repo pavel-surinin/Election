@@ -11,6 +11,7 @@ window.EmptyComponent = EmptyComponent;
 
 var NoMatch = React.createClass({
   render: function() {
+    document.title='Puslapis nerastas. 404 klaida';
     return <div>404 klaida, puslapis nerastas</div>;
   }
 });
