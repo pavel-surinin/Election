@@ -58,6 +58,7 @@ var AdminComponent = React.createClass({
 
 
   render: function() {
+    document.title = 'Administratoriaus vaizdas - Rinkimai 2017';
     if (this.state.adminIsLogged == false) {
       return <div><img src='./Images/loading.gif'/></div>;
     }

@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/h2/database-dev.mv.db" afterPath="$PROJECT_DIR$/src/main/resources/h2/database-dev.mv.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/h2/database-dev.lock.db" afterPath="$PROJECT_DIR$/src/main/resources/h2/database-dev.lock.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListRowViewComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/CountyListViewComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Menu/Components/MenuComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Menu/Components/MenuComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/AdminComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/AdminComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsSingleListRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/ResultsSingleListRowComponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/RepresentativeComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Representative/Components/RepresentativeComponent.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/index.jsx" afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/myStyle.css" afterPath="$PROJECT_DIR$/src/main/resources/static/myStyle.css" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,10 +40,10 @@
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1488177449844" expanded="true" signature="59:80074" ph="..." />
-                <marker date="1488177449844" expanded="true" signature="98:192" ph="..." />
-                <marker date="1488177449844" expanded="true" signature="79498:79608" ph="..." />
-                <marker date="1488177449844" expanded="true" signature="79498:80063" ph="..." />
+                <marker date="1488179695452" expanded="true" signature="59:80055" ph="..." />
+                <marker date="1488179695452" expanded="true" signature="98:192" ph="..." />
+                <marker date="1488179695452" expanded="true" signature="79479:79589" ph="..." />
+                <marker date="1488179695452" expanded="true" signature="79479:80044" ph="..." />
               </folding>
             </state>
           </provider>
@@ -568,7 +566,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1003,10 +1001,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1488177449844" expanded="true" signature="59:80074" ph="..." />
-            <marker date="1488177449844" expanded="true" signature="98:192" ph="..." />
-            <marker date="1488177449844" expanded="true" signature="79498:79608" ph="..." />
-            <marker date="1488177449844" expanded="true" signature="79498:80063" ph="..." />
+            <marker date="1488179695452" expanded="true" signature="59:80055" ph="..." />
+            <marker date="1488179695452" expanded="true" signature="98:192" ph="..." />
+            <marker date="1488179695452" expanded="true" signature="79479:79589" ph="..." />
+            <marker date="1488179695452" expanded="true" signature="79479:80044" ph="..." />
           </folding>
         </state>
       </provider>

@@ -12,7 +12,13 @@ window.EmptyComponent = EmptyComponent;
 var NoMatch = React.createClass({
   render: function() {
     document.title='Puslapis nerastas. 404 klaida';
-    return <div>404 klaida, puslapis nerastas</div>;
+    return(
+      <div>
+      <div style={{marginTop: '50px'}} className="jumbotron alert alert-danger erpage">
+        <h1><i className="fa fa-meh-o" aria-hidden="true"></i> Puslapis nerastas</h1>
+        <p>Įvestas puslapio adresas nerastas.</p>
+      </div>
+    </div>);
   }
 });
 
