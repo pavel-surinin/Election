@@ -24,6 +24,5 @@ public class Application {
 //            loader.votesMulti();
         };
     }
-
 }
 
