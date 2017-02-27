@@ -20,11 +20,26 @@ var ResultsSingleListRowComponent = React.createClass({
         </td>
         <td>
           <div>
-              &nbsp;
-              <button onClick={this.approve} ref="confirm" data-toggle="tooltip1" title="Patvirtinti" type="button" className="btn btn-success btn-sm fa fa-check"></button>
-              &nbsp;
-            <button data-target={"#confirmationModal" + this.props.info.type + this.props.info.id} ref="delete" title="Ištrinti" type="button" id={'confirm-delete-button-' + this.props.info.type + this.props.info.id} className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"></button>
-            <div id={'confirmationModal' + this.props.info.type + this.props.info.id} className="modal fade" role="dialog">
+            &nbsp;
+            <button
+              onClick={this.approve}
+              ref="confirm"
+              data-toggle="tooltip1"
+              title="Patvirtinti"
+              type="button"
+              className="btn btn-success btn-sm fa fa-check">
+            </button>
+            &nbsp;
+            <button
+              data-target={'#confirmationModalSingle' + this.props.info.id}
+              ref="delete" title="Ištrinti"
+              type="button"
+              id={'confirm-delete-button-' + this.props.info.id}
+              className="btn btn-danger btn-sm fa fa-trash"
+              data-toggle="modal">
+            </button>
+
+            <div id={'confirmationModalSingle' + this.props.info.id} className="modal fade" role="dialog">
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header">

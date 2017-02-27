@@ -1,7 +1,7 @@
-name,surname,birth-date,party,number-in-party,description
+name,surname,birth-date,name,number-in-name,description
 Antonas,Antonovic,1967-05-05,1,1,Kietas
 Petras,Grazulis,1976-08-06,1,2,Už Lietuvą vyrai!!!
 Jonas, Klebonas,1981-01-04,null,null,Fizikas
-Vaidas,Petravi�ius,1977-02-27,null,null, Patriotas iš didžiosios P
+Vaidas,Petravi�ius,1977-02-27,null,null, Patriotas iš didžiosios P
 Redas, Raudonasis,1961-01-04,2,3, Raudonas kaip pomidoras
 Tadeus,Juzel,1990-04-06,2,5, Beveik Tadas

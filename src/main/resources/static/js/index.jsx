@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -53,8 +54,9 @@ var App = React.createClass({
 
 window.App = App;
 
+=======
+>>>>>>> 63f00e33c0f2aec8adced5224dacbbe7d9b85689
 var EmptyComponent = React.createClass({
-
   render: function() {
     return (
       <div />
@@ -67,7 +69,14 @@ window.EmptyComponent = EmptyComponent;
 
 var NoMatch = React.createClass({
   render: function() {
-    return <div>Route did not match</div>;
+    document.title='Puslapis nerastas. 404 klaida';
+    return(
+      <div>
+      <div style={{marginTop: '50px'}} className="jumbotron alert alert-danger erpage">
+        <h1><i className="fa fa-meh-o" aria-hidden="true"></i> Puslapis nerastas</h1>
+        <p>Įvestas puslapio adresas nerastas.</p>
+      </div>
+    </div>);
   }
 });
 
@@ -102,21 +111,29 @@ ReactDOM.render((
       <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
       <Route path="/admin/party/edit/:id" component={PartyEditContainer} />
       <Route path="/admin/results" component={ResultsListContainer} />
+      <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
 
     <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
+<<<<<<< HEAD
       <Route path="/candidates" component={CandidatesListContainer} />
       <Route path="/parties" component={PartyViewContainer} />
       <Route path="/parties/:id" component={PartyDetailContainer} />
+=======
+      <Route path="/parties" component={EmptyComponent} />
+>>>>>>> 63f00e33c0f2aec8adced5224dacbbe7d9b85689
       <Route path="/counties" component={CountiesContainer}/>
       <Route path="/counties/:county" component={CountyResultsContainer}/>
       <Route path="/counties/:county/:id" component={DistrictResultsContainer}/>
-
-      <Route path="/results" component={EmptyComponent} />
+      <Route path="/results" component={GeneralResultsContainer} />
       <Route path="/contacts" component={EmptyComponent} />
+<<<<<<< HEAD
+=======
+      <Route path="/candidates" component={CandidatesListContainer} />
+>>>>>>> 63f00e33c0f2aec8adced5224dacbbe7d9b85689
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
