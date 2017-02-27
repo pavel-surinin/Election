@@ -29,6 +29,7 @@ function getSingleTable(self){
   }
   return singleTable;
 }
+
 function getMultiTable(self) {
   if (self.props.results.votesByParty) {
     var multiTable = self.props.results.votesByParty.map(function(p,index){
@@ -79,22 +80,24 @@ var DistrictResults  = React.createClass({
     var multiTable = getMultiTable(this);
     var singleStyle = styles.toggleResultNav(this.props.results.votesByCandidate);
     var multiStyle = styles.toggleResultNav(this.props.results.votesByParty);
+    console.log("this from districtResults",this);
     return (
       <div>
-        <div className="container"><h1>{this.props.district.name} rinkimų apylinkė</h1></div>
-          <div id="exTab1" className="container">
-          {/* nav-pills  */}
-            <ul  className="nav nav-pills">
-              <li className="active">
-                <a  href="#1a" data-toggle="tab">Apylinkės Informacija</a>
-              </li>
-              <li style={singleStyle}>
-                <a onClick={this.loadSingle} href="#2a" data-toggle="tab">Vienmandatės rezultatai</a>
-              </li>
-              <li style={multiStyle}>
-                <a onClick={this.loadMulti} href="#3a" data-toggle="tab">Daugiamandatės rezultaitai</a>
-              </li>
-            </ul>
+        <div className="container">
+        <h1 className='yellow'>{this.props.district.name} rinkimų apylinkė</h1></div>
+        {/* nav-pills  */}
+        <ul  className="nav nav-pills secondmenu">
+        <li className="active">
+        <a  href="#1a" data-toggle="tab">Apylinkės Informacija</a>
+        </li>
+        <li style={singleStyle}>
+        <a onClick={this.loadSingle} href="#2a" data-toggle="tab">Vienmandatės rezultatai</a>
+        </li>
+        <li style={multiStyle}>
+        <a onClick={this.loadMulti} href="#3a" data-toggle="tab">Daugiamandatės rezultaitai</a>
+        </li>
+        </ul>
+          <div id="exTab1" className="container shadow">
             <div className="tab-content clearfix">
               {/* General info tab-1 */}
               <div className="tab-pane active" id="1a">

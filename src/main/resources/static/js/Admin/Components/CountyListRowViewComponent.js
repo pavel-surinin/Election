@@ -78,12 +78,17 @@ var CountyListRowViewComponent = React.createClass({
                         <div className='modal-footer'>
                           <div className='btn-group'>
                               <button
-                                type='button' onClick={this.onHandleDeleteClick} id={'delete-button-' + this.props.id} className='btn btn-default' data-dismiss='modal'>Taip
+                                type='button'
+                                onClick={this.onHandleDeleteClick}
+                                id={'delete-button-' + this.props.id}
+                                className='btn btn-default'
+                                data-dismiss='modal'>Taip
                               </button>
                               <button type='button' id='close-button'  className='btn btn-default' data-dismiss='modal'>Ne</button>
                           </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 &nbsp;

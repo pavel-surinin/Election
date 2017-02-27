@@ -1,7 +1,4 @@
 var MultiResultRowModalRowComponent = React.createClass({
-  componentDidMount: function () {
-    $(this.refs.namep).tooltip();
-  },
   onInputChange : function(event){
     var pid = this.props.info.partijosId;
     var cid = this.props.info.id;
@@ -12,14 +9,18 @@ var MultiResultRowModalRowComponent = React.createClass({
     var info = this.props.info;
     return (
       <div>
-        <div style={{float : 'left',padding:'2px'}} className="input-group col-xs-6 col-sm-3 col-lg-2">
-          <span ref='namep' title={info.name + ' ' + info.surname} className="input-group-addon">{info.numberInParty}</span>
+        <div style={{float : 'left',paddingTop:'10px',paddingRight:'2px',paddingLeft:'2px'}} className="col-xs-6 col-sm-4 col-lg-3">
+          <div>
+          {info.numberInParty + '. ' + info.name + ' ' + info.surname}
+          </div>
+          <div>
           <input
             onChange={this.onInputChange}
             id={'rating-points-input-' + this.props.info.id}
             type="number"
             className="form-control"
           />
+          </div>
         </div>
       </div>
     );

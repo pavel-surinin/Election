@@ -10,27 +10,27 @@ import java.util.Objects;
  */
 public class CandidateIntDTO {
     private CandidateReport candidate;
-    private Integer count;
+    private Integer votes;
 
     public CandidateIntDTO(CandidateEntity candidate, Integer count) {
         this.candidate = new CandidateReport(candidate);
-        this.count = count;
+        this.votes = count;
     }
 
     public CandidateIntDTO(CandidateReport candidate, Integer count) {
         this.candidate = candidate;
-        this.count = count;
+        this.votes = count;
     }
 
     public CandidateIntDTO() {
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getVotes() {
+        return votes;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setVotes(Integer votes) {
+        this.votes = votes;
     }
 
     public CandidateReport getCandidate() {
@@ -47,11 +47,11 @@ public class CandidateIntDTO {
         if (o == null || getClass() != o.getClass()) return false;
         CandidateIntDTO that = (CandidateIntDTO) o;
         return Objects.equals(candidate, that.candidate) &&
-                Objects.equals(count, that.count);
+                Objects.equals(votes, that.votes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(candidate, count);
+        return Objects.hash(candidate, votes);
     }
 }

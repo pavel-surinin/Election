@@ -1,18 +1,14 @@
-/**
- * Created by nevyt on 2/21/2017.
- *
- */
 function getSingleTable(self) {
     var singleTable = [];
-    if (self.props.results.candidatesVotesSummary) {
-        singleTable = self.props.results.candidatesVotesSummary.map(function (cid, index) {
+    if (self.props.results.votesByCandidate) {
+        singleTable = self.props.results.votesByCandidate.map(function (cid, index) {
             return (
                 <tr key={index} className='small'>
                     <td>{cid.candidate.name + ' ' + cid.candidate.surname}</td>
                     <td>{cid.candidate.partijosPavadinimas}</td>
-                    <td>{cid.count}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{cid.votes}</td>
+                    <td>{Math.round(cid.votes/self.props.results.validCount*100)}%</td>
+                    <td>{Math.round(cid.votes/self.props.results.votersCount*100)}%</td>
                 </tr>
             );
         });
@@ -21,19 +17,21 @@ function getSingleTable(self) {
 }
 
 function getMultiTable(self) {
-    if (self.props.results.partiesVotesSummary) {
-        var multiTable = self.props.results.partiesVotesSummary.map(function(p,index){
-            if (self.props.results.partiesVotesSummary) {
+    if (self.props.results.votesByParty) {
+        var multiTable = self.props.results.votesByParty.map(function(p,index){
+            var rating = <CountyResultsMultiTableRow info={p} />;
+            if (self.props.results.votesByParty) {
                 return(
                     <tr key={index}>
-                        <td></td>
+                        <td>{p.par.partyNumber}</td>
                         <td>{p.par.name}</td>
-                        <td></td>
-                        <td>{p.par.count}</td>
-                        <td></td>
-                        <td></td>
+                        <td>{rating}</td>
+                        <td>{p.votes}</td>
+                        <td>{Math.round(p.votes/self.props.results.validCount*100)}%</td>
+                        <td>{Math.round(p.votes/self.props.results.votersCount*100)}%</td>
                     </tr>);
             }});
+
         return multiTable;
     }
 }
@@ -52,6 +50,13 @@ var CountyResultsComponent = React.createClass({
         prepareCanvas('Bar','Single');
         chartss.pie(document.getElementById('canvasPieSingle'), this.props.results, 'Single');
         chartss.bar('horizontalBar',document.getElementById('canvasBarSingle'), this.props.results,'Single');
+    },
+
+    loadMulti : function() {
+        prepareCanvas('Pie','MultiCounty');
+        prepareCanvas('Bar','MultiCounty');
+        chartss.pie(document.getElementById('canvasPieMultiCounty'), this.props.results, 'MultiCounty');
+        chartss.bar('bar',document.getElementById('canvasBarMultiCounty'), this.props.results, 'MultiCounty');
     },
 
     render: function(){
@@ -80,22 +85,23 @@ var CountyResultsComponent = React.createClass({
 
         return (
             <div className="col-md-12">
-                <div className="container"><h1>{this.props.county.name} rinkimų apygarda</h1></div>
-                <div id="exTab1" className="container">
-                    <ul  className="nav nav-pills">
-                        <li className="active">
-                            <a  href="#1a" data-toggle="tab">Apygardos Informacija</a>
-                        </li>
-                        <li>
-                            <a href="#2a" data-toggle="tab">Vienmandatės rezultatai</a>
-                        </li>
-                        <li>
-                            <a href="#3a" data-toggle="tab">Daugiamandatės rezultaitai</a>
-                        </li>
-                        <li>
-                            <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
-                        </li>
-                    </ul>
+                <div className="container">
+                <h1 className='yellow'>{this.props.county.name} rinkimų apygarda</h1></div>
+                <ul  className="nav nav-pills secondmenu">
+                <li className="active">
+                <a  href="#1a" data-toggle="tab">Apygardos Informacija</a>
+                </li>
+                <li>
+                <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
+                </li>
+                <li>
+                <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
+                </li>
+                <li>
+                <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
+                </li>
+                </ul>
+                <div id="exTab1" className="container shadow">
                     {/* General info here */}
                     <div className="tab-content clearfix">
                         <div className="tab-pane active" id="1a">
@@ -133,26 +139,40 @@ var CountyResultsComponent = React.createClass({
                             <div className='chartContainer col-md-5' id='parentPieSingle'>
                                 <canvas id='canvasPieSingle'></canvas>
                             </div>
+                            {/*chart bar*/}
+                            <div className='chartContainer col-md-12' id='parentBarSingle'>
+                                <canvas id='canvasBarSingle'></canvas>
+                            </div>
 
                         </div>
 
-                        <div className="tab-pane" id="3a">
-                            <table className="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th className='col-md-1 col-sm-1'>Nr.</th>
-                                    <th className='col-md-5 col-sm-3'>Partija</th>
-                                    <th className='col-md-2 col-sm-2'>Retingai</th>
-                                    <th className='col-md-2 col-sm-2'>Balsai</th>
-                                    <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
-                                    <th className='col-md-2 col-sm-2'>% nuo visų</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {multiTable}
-                                </tbody>
-                            </table>
-                        </div>
+                            <div className="tab-pane" id="3a">
+                                <div className='col-md-7'>
+                                    <table className="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th className='col-md-1 col-sm-1'>Nr.</th>
+                                            <th className='col-md-5 col-sm-3'>Partija</th>
+                                            <th className='col-md-2 col-sm-2'>Retingai</th>
+                                            <th className='col-md-2 col-sm-2'>Balsai</th>
+                                            <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
+                                            <th className='col-md-2 col-sm-2'>% nuo visų</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {multiTable}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div className='chartContainer col-md-5' id='parentPieMultiCounty'>
+                                    <canvas id='canvasPieMultiCounty'></canvas>
+                                </div>
+                                {/*chart bar*/}
+                                <div className='chartContainer col-md-12' id='parentBarMultiCounty'>
+                                    <canvas id='canvasBarMultiCounty'></canvas>
+                                </div>
+                            </div>
                         <div className="tab-pane" id="4a">
                             <h3>{this.props.county.name} apygardos apylinkės</h3>
                             <table className="table table-striped">
