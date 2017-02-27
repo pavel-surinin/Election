@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var App = React.createClass({
   getInitialState: function() {
     return {
@@ -54,8 +53,6 @@ var App = React.createClass({
 
 window.App = App;
 
-=======
->>>>>>> 63f00e33c0f2aec8adced5224dacbbe7d9b85689
 var EmptyComponent = React.createClass({
   render: function() {
     return (
@@ -118,22 +115,14 @@ ReactDOM.render((
     <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
-<<<<<<< HEAD
       <Route path="/candidates" component={CandidatesListContainer} />
       <Route path="/parties" component={PartyViewContainer} />
       <Route path="/parties/:id" component={PartyDetailContainer} />
-=======
-      <Route path="/parties" component={EmptyComponent} />
->>>>>>> 63f00e33c0f2aec8adced5224dacbbe7d9b85689
       <Route path="/counties" component={CountiesContainer}/>
       <Route path="/counties/:county" component={CountyResultsContainer}/>
       <Route path="/counties/:county/:id" component={DistrictResultsContainer}/>
       <Route path="/results" component={GeneralResultsContainer} />
       <Route path="/contacts" component={EmptyComponent} />
-<<<<<<< HEAD
-=======
-      <Route path="/candidates" component={CandidatesListContainer} />
->>>>>>> 63f00e33c0f2aec8adced5224dacbbe7d9b85689
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>

@@ -1,14 +1,6 @@
 #FileLock
-<<<<<<< HEAD
-#Mon Feb 27 10:43:01 EET 2017
+#Mon Feb 27 11:35:22 EET 2017
 hostName=Alxemic
-id=15a7ebc9c8d5339da68679e79f449d2279e36a851b3
+id=15a7eec8cf38a71668c9cc978d43999a18f752e60a7
 method=file
-server=192.168.56.1\:64738
-=======
-#Mon Feb 27 09:15:07 EET 2017
-hostName=DESKTOP-QE51T8U
-id=15a7e6c36412348b361b6f13b27c078c103a241f39e
-method=file
-server=192.168.56.1\:54235
->>>>>>> 63f00e33c0f2aec8adced5224dacbbe7d9b85689
+server=192.168.56.1\:54106

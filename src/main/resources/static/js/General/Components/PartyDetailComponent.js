@@ -125,11 +125,11 @@ var PartyDetailComponent = React.createClass({
     var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
     var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
     return (
-      <div>
-        <div className="container"><h1>Partija: {this.props.partyDetails.name}</h1></div>
-          <div id="exTab1" className="container">
+      <div className="col-md-12">
+        <div className="container"><h1 className='yellow'>Partija: {this.props.partyDetails.name}</h1>
+        </div>
             {/* nav-pills  */}
-            <ul  className="nav nav-pills">
+            <ul  className="nav nav-pills secondmenu">
               <li className="active">
                 <a  href="#1a" data-toggle="tab">Partijos Informacija</a>
               </li>
@@ -140,6 +140,7 @@ var PartyDetailComponent = React.createClass({
                 <a  href="#3a" data-toggle="tab">Sureitinguotas Partijos narių sąrašas</a>
               </li>
             </ul>
+            <div id="exTab1" className="container shadow">
               <div className="tab-content clearfix">
                 {/* General info tab-1 */}
                 <div className="tab-pane active" id="1a">
@@ -190,7 +191,7 @@ var PartyDetailComponent = React.createClass({
                 {/* Party members list tab-2 */}
                 <div className="tab-pane" id="2a">
                   <h3>Partijos narių sąrašas prieš rinkimus</h3>
-                  <div className='col-md-7'>
+                  <div className='col-md-12'>
                     <table className="table table-striped">
                       <thead>
                         <tr>
@@ -211,7 +212,7 @@ var PartyDetailComponent = React.createClass({
                 {/* Single candidates list tab-3 */}
                 <div className="tab-pane" id="3a">
                   <h3>Partijos narių sąrašas pagal gautus reitingų rezultatus</h3>
-                  <div className='col-md-7'>
+                  <div className='col-md-12'>
                     <table className="table table-striped">
                       <thead>
                         <tr>
@@ -230,7 +231,7 @@ var PartyDetailComponent = React.createClass({
                   </div>
                 </div>
               </div>
-          </div>
+            </div>
       </div>
     );
   },

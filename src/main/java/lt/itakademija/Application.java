@@ -11,9 +11,9 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean
-    CommandLineRunner init(DataPreLoader loader) {
-        return (args) -> {
+//    @Bean
+//    CommandLineRunner init(DataPreLoader loader) {
+//        return (args) -> {
 //            loader.createAdmin();
 //            loader.createCounties();
 //            loader.createDistricts();
@@ -23,8 +23,8 @@ public class Application {
 //            loader.votesSingle();
 //            loader.votesMulti();
 //
-        };
-    }
+//        };
+//    }
 
 }
 
