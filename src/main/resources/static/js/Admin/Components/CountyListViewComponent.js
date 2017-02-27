@@ -44,9 +44,8 @@ var CountyListViewComponent = React.createClass({
                 <table width="100%" className="table table-striped table-hover">
                   <thead>
                     <tr>
-                      <th> Nr. </th>
-                      <th> Apygarda </th>
-                      <th> Veiksmai </th>
+                      <th className='col-xs-9'> Apygarda </th>
+                      <th className='col-xs-3'> Veiksmai </th>
                     </tr>
                   </thead>
                   <tbody>
