@@ -9,11 +9,11 @@ import javax.servlet.Filter;
 /**
  * Created by lenovo on 2/20/2017.
  */
-@Configuration
-public class WebConfig {
-
-    @Bean
-    public Filter MyLoggerFilter() {
-        return new MyLoggerFilter();
-    }
-}
+//@Configuration
+//public class WebConfig {
+//
+//    @Bean
+//    public Filter MyLoggerFilter() {
+//        return new MyLoggerFilter();
+//    }
+//}

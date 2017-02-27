@@ -27,6 +27,8 @@ public class CandidateReport {
 
     private Long countyId;
 
+    private String countyName;
+
     private boolean isMultiList;
 
     private String birthDate;
@@ -48,6 +50,7 @@ public class CandidateReport {
         }
         if (candidateEntity.getCounty() != null) {
             this.setCountyId(candidateEntity.getCounty().getId());
+            this.setCountyName(candidateEntity.getCounty().getName());
         }
     }
 
@@ -150,5 +153,13 @@ public class CandidateReport {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, surname);
+    }
+
+    public String getCountyName() {
+        return countyName;
+    }
+
+    public void setCountyName(String countName) {
+        this.countyName = countName;
     }
 }
