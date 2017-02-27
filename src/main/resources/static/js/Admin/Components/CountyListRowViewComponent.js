@@ -28,7 +28,7 @@ var CountyListRowViewComponent = React.createClass({
             <td>
             {this.props.name}
             </td>
-              <td style={{float:'right'}}>
+              <td>
                 <a
                   href={'#/admin/county/' + this.props.id}
                   ref='info'
