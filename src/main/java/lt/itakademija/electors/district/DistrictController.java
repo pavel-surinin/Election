@@ -49,6 +49,11 @@ public class DistrictController {
         return service.getDistictsByPage(page);
     }
 
+    @GetMapping("/district/all")
+    public Integer getNumberOfDistricts(){
+        return service.getNumberOfDistricts();
+    }
+
     @PostMapping("/district")
     public DistrictEntity save(@RequestBody DistrictEntity district){
         return service.save(district);

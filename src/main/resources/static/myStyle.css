@@ -264,13 +264,13 @@ body {
   font-style: oblique;
   color: #2ec5a6;
   display: inline-block;
-  -webkit-transition: all 0.7 ease; /* Safari */
+  -webkit-transition: all 0.7s ease; /* Safari */
   transition: all 0.7s ease;
 }
 
 #bs-example-navbar-collapse-1 > ul > li > a:hover{
   color: #ff6e21;
-  -webkit-transition: all 0.7 ease; /* Safari */
+  -webkit-transition: all 0.7s ease; /* Safari */
   transition: all 0.7s ease;
 }
 
@@ -278,12 +278,25 @@ body {
   font-size: 15px;
   font-style: oblique;
   color: yellow;
-  -webkit-transition: all 0.7 ease; /* Safari */
+  -webkit-transition: all 0.7s ease; /* Safari */
   transition: all 0.7s ease;
 }
 #bs-example-navbar-collapse-1 > ul > li.active > a:hover {
   color: ff6e21;
-  -webkit-transition: all 0.7 ease; /* Safari */
+  -webkit-transition: all 0.7s ease; /* Safari */
   transition: all 0.7s ease;
 }
-/*MAIN MENU*/
+/*MAIN MENU END*/
+
+/* PAGINATION */
+.paginatorCustom{
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.paginatorCustom > ul{
+  margin: 20px auto;
+}
+
+/* PAGINATION END*/

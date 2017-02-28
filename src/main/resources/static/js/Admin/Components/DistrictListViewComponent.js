@@ -28,8 +28,12 @@ function mod(self){
       );
     });
     var pagination = [];
-    for (var i = 0; i < Math.round(this.props.districtList.length/100) + mod(this); i++) {
-      pagination.push(<li><a href="#">{i+1}</a></li>);
+    for (var i = 0; i < Math.round(this.props.districtsCount/100) + mod(this); i++) {
+      if (i == this.props.currentPage) {
+        pagination.push(<li className='active'><a href={'#/admin/district/?page=' + i}>{i+1}</a></li>);
+      } else {
+        pagination.push(<li><a href={'#/admin/district/?page=' + i}>{i+1}</a></li>);
+      }
     }
     return (
           <div className='panel panel-default'>
@@ -74,7 +78,7 @@ function mod(self){
                   {array}
                 </tbody>
               </table>
-              <div>
+              <div className='paginatorCustom'>
                 <ul className="pagination pagination-sm">
                   {pagination}
                 </ul>
