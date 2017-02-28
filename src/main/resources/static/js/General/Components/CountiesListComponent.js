@@ -8,7 +8,7 @@ var CountiesListComponent = React.createClass({
       return(
           <tr>
               <td>{county.id}</td>
-              <td><a href={'#/counties/'+ county.id}>{county.name}</a></td>
+              <td><a href={'#/county/'+ county.id}>{county.name}</a></td>
           </tr>
       );
     });

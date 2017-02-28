@@ -129,4 +129,8 @@ public class PartyService {
     public void delete(Long id) {
         repository.delete(id);
     }
+
+    public String getNameById(Long id) {
+        return repository.getById(id).getName();
+    }
 }

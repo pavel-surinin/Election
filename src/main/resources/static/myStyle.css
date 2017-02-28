@@ -44,7 +44,7 @@ h1.yellow{
   padding-bottom: 7px;
   font-weight: 800;
   -webkit-transition: all 2s ease; /* Safari */
-  stransition: all 2s ease;
+  transition: all 2s ease;
 }
 
 body {
@@ -186,13 +186,13 @@ body {
   padding : 20px;
   border-radius: 1px;
   -webkit-transition: all 0.5s ease; /* Safari */
-  stransition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .nav-pills > li > a:hover{
   background-color: #e2e2e2;
   -webkit-transition: all 0.5s ease; /* Safari */
-  stransition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .nav-pills > li.disabled{
@@ -205,7 +205,7 @@ body {
   padding : 20px;
   border-radius: 1px;
   -webkit-transition: all 0.5s ease; /* Safari */
-  stransition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .vytis{
@@ -240,7 +240,7 @@ body {
 
 .fadetest{
   -webkit-transition: all 2s ease; /* Safari */
-  stransition: all 2s ease;
+  transition: all 2s ease;
 }
 
 
@@ -254,14 +254,36 @@ body {
   border-bottom-width: :2;
 }
 
-#root > div > nav > div > ul > li.active > a{
-  padding: 15px 25px;
-  font-size: 17px;
-}
-
-#root > div > nav > div > div > a > i{
-  color: gold;
-}
 
 
 /*RESULTS FOR NON REGISTERED USERS END*/
+
+/*MAIN MENU*/
+#bs-example-navbar-collapse-1 > ul > li > a{
+  font-size: 15px;
+  font-style: oblique;
+  color: #2ec5a6;
+  display: inline-block;
+  -webkit-transition: all 0.7 ease; /* Safari */
+  transition: all 0.7s ease;
+}
+
+#bs-example-navbar-collapse-1 > ul > li > a:hover{
+  color: #ff6e21;
+  -webkit-transition: all 0.7 ease; /* Safari */
+  transition: all 0.7s ease;
+}
+
+#bs-example-navbar-collapse-1 > ul > li.active > a {
+  font-size: 15px;
+  font-style: oblique;
+  color: yellow;
+  -webkit-transition: all 0.7 ease; /* Safari */
+  transition: all 0.7s ease;
+}
+#bs-example-navbar-collapse-1 > ul > li.active > a:hover {
+  color: ff6e21;
+  -webkit-transition: all 0.7 ease; /* Safari */
+  transition: all 0.7s ease;
+}
+/*MAIN MENU*/

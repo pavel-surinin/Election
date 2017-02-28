@@ -17,7 +17,6 @@ var CandidatesListContainer = React.createClass({
         self.setState({
           candidateList :  response.data,
           isLoading : false,
-          fade : {backgroundColor : 'red'},
         });
       })
       .catch(function(err){

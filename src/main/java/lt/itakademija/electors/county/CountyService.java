@@ -71,9 +71,14 @@ public class CountyService {
             county.getCandidates()
                     .stream().map(c -> {
                 c.setCounty(null);
-                candidateService.save(c);
+//                candidateService.save(c);
                 return c;
-            }).filter(c -> !c.isMultiList()).forEach(c->candidateService.delete(c.getId()));
+            }).filter(c -> !c.isMultiList()).forEach(c->{
+                System.out.println("Deleting candidate " + c.getId() + c.getName());
+                c.setNumberInParty(null);
+                c.setPartyDependencies(null);
+                candidateService.delete(c);
+            });
         }
         repository.delete(id);
         return true;
@@ -157,6 +162,9 @@ public class CountyService {
                 .collect(Collectors.toList());
     }
 
+    public String getNameById(Long id) {
+        return repository.findById(id).getName();
+    }
 }
 
 

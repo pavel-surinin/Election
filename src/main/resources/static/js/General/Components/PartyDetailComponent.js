@@ -1,20 +1,20 @@
 function getPartyMembersList(self) {
-    var partyMembersList = [];
-    self.props.partyDetails.members.map(function(member,index) {
-      partyMembersList.push(
-        <PartyDetailRowViewComponent
-          id={member.id}
-          key={index}
-          name={member.name}
-          surname={member.surname}
-          birthDate={member.birthDate}
-          description={member.description}
-          numberInParty={member.numberInParty}
-          countyName={member.countyName}
-        />
-      );
+  var partyMembersList = [];
+  self.props.partyDetails.members.map(function(member,index) {
+    partyMembersList.push(
+      <PartyDetailRowViewComponent
+        id={member.id}
+        key={index}
+        name={member.name}
+        surname={member.surname}
+        birthDate={member.birthDate}
+        description={member.description}
+        numberInParty={member.numberInParty}
+        countyName={member.countyName}
+      />
+    );
   });
-    return partyMembersList;
+  return partyMembersList;
 }
 function getRatedPartyMembersList(self) {
   if (self.props.generalResults.votesInMulti != undefined) {
@@ -41,7 +41,6 @@ function getRatedPartyMembersList(self) {
               />
             );
           });
-
           }
         });
     return ratedMembersList;
