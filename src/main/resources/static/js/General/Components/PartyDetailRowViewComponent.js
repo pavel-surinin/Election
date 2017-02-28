@@ -1,5 +1,7 @@
 var PartyDetailRowViewComponent = React.createClass({
-
+  componentDidMount: function () {
+    $(this.refs.info).tooltip();
+  },
   render: function() {
     return (
       <tr className="small">
@@ -7,23 +9,22 @@ var PartyDetailRowViewComponent = React.createClass({
           {this.props.numberInParty}
         </td>
         <td>
-          {this.props.name}
-        </td>
-        <td>
-          {this.props.surname}
-        </td>
-        <td>
-          {this.props.birthDate}
-        </td>
-        <td>
-          <button type="button" ref="info" title="Aprašymas" id={'description-button-' + this.props.id} className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + this.props.id}>
-          </button>
-            <div className="modal fade" id={this.props.id} tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <a href="#"
+            ref="info"
+            title="Kandidato aprašymas"
+            data-toggle="tooltip"
+            data-placement="right"
+            data-toggle="modal"
+            id={'description-button-' + this.props.id}
+            data-target={'#' + this.props.listType + this.props.id}>
+            {this.props.name} {this.props.surname}
+          </a>
+            <div className="modal fade" id={this.props.listType + this.props.id} tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div className="modal-dialog" role="document">
                 <div className="modal-content">
                   <div className="modal-header">
                     <button type="button" id="modal-close-button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 className="modal-title" id={this.props.id} >{this.props.name} {this.props.surname}</h4>
+                    <h4 className="modal-title">{this.props.name} {this.props.surname}</h4>
                   </div>
                   <div className="modal-body">
                     {this.props.description}
@@ -35,6 +36,10 @@ var PartyDetailRowViewComponent = React.createClass({
               </div>
             </div>
         </td>
+        <td>
+          {this.props.birthDate}
+        </td>
+
         <td>
           {this.props.countyName}
         </td>

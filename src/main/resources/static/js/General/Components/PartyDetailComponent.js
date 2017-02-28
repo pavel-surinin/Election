@@ -11,6 +11,7 @@ function getPartyMembersList(self) {
         description={member.description}
         numberInParty={member.numberInParty}
         countyName={member.countyName}
+        listType='membersList'
       />
     );
   });
@@ -33,6 +34,7 @@ function getRatedPartyMembersList(self) {
               description={member.description}
               numberInParty={member.numberInParty}
               countyName={member.countyName}
+              listType='ratedList'
               />
             );
           });
@@ -59,6 +61,7 @@ function getSingleWinnersByPartyList(self) {
               description={member.description}
               numberInParty={member.numberInParty}
               countyName={member.countyName}
+              listType='singleWinnersList'
               />
             );
           });
@@ -90,6 +93,7 @@ function getpartyWinnersMembersList(self, numberOfWinners) {
                   description={member.description}
                   numberInParty={member.numberInParty}
                   countyName={member.countyName}
+                  listType='multiWinnersList'
                   />
                 );
             });
@@ -145,23 +149,19 @@ var PartyDetailComponent = React.createClass({
                 {/* Party members list tab-1 */}
                 <div className="tab-pane active" id="1a">
                   <h3>Partijos narių sąrašas prieš rinkimus</h3>
-                  <div className='col-md-12'>
                     <table className="table table-striped">
                       <thead>
                         <tr>
                           <th className='col-md-1 col-sm-1'>Nr.</th>
-                          <th className='col-md-2 col-sm-2'>Vardas</th>
-                          <th className='col-md-2 col-sm-2'>Pavardė</th>
+                          <th className='col-md-5 col-sm-5'>Kandidatas</th>
                           <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                          <th className='col-md-2 col-sm-1'>Aprašymas</th>
-                          <th className='col-md-3 col-sm-3'>Apygarda</th>
+                          <th className='col-md-4 col-sm-4'>Apygarda</th>
                         </tr>
                       </thead>
                       <tbody>
                         {partyMembersList}
                       </tbody>
                     </table>
-                  </div>
                 </div>
                 {/* General info tab-2 */}
                 <div className="tab-pane" id="2a">
@@ -171,11 +171,9 @@ var PartyDetailComponent = React.createClass({
                         <thead>
                           <tr>
                             <th className='col-md-1 col-sm-1'>Nr.</th>
-                            <th className='col-md-2 col-sm-2'>Vardas</th>
-                            <th className='col-md-2 col-sm-2'>Pavardė</th>
+                            <th className='col-md-5 col-sm-5'>Kandidatas</th>
                             <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                            <th className='col-md-2 col-sm-2'>Aprašymas</th>
-                            <th className='col-md-3 col-sm-3'>Apygarda</th>
+                            <th className='col-md-4 col-sm-4'>Apygarda</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -189,11 +187,9 @@ var PartyDetailComponent = React.createClass({
                           <thead>
                             <tr>
                               <th className='col-md-1 col-sm-1'>Nr.</th>
-                              <th className='col-md-2 col-sm-2'>Vardas</th>
-                              <th className='col-md-2 col-sm-2'>Pavardė</th>
+                              <th className='col-md-5 col-sm-5'>Kandidatas</th>
                               <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                              <th className='col-md-2 col-sm-2'>Aprašymas</th>
-                              <th className='col-md-3 col-sm-3'>Apygarda</th>
+                              <th className='col-md-4 col-sm-4'>Apygarda</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -206,23 +202,19 @@ var PartyDetailComponent = React.createClass({
                 {/* Single candidates list tab-3 */}
                 <div className="tab-pane" id="3a">
                   <h3>Narių sąrašas pagal reitingų rezultatus</h3>
-                  <div className='col-md-12'>
                     <table className="table table-striped">
                       <thead>
                         <tr>
                           <th className='col-md-1 col-sm-1'>Nr.</th>
-                          <th className='col-md-3 col-sm-3'>Vardas</th>
-                          <th className='col-md-4 col-sm-4'>Pavardė</th>
+                          <th className='col-md-5 col-sm-5'>Kandidatas</th>
                           <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                          <th className='col-md-2 col-sm-2'>Aprašymas</th>
-                          <th className='col-md-2 col-sm-2'>Apygarda</th>
+                          <th className='col-md-4 col-sm-4'>Apygarda</th>
                         </tr>
                       </thead>
                       <tbody>
                         {ratedMembersList}
                       </tbody>
                     </table>
-                  </div>
                 </div>
               </div>
             </div>
