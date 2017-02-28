@@ -13,6 +13,10 @@ public class CountyReport {
 
     private Integer candidatesCount;
 
+    private Integer districtsCount;
+
+    private Long votersCount;
+
     public CountyReport(CountyEntity ent) {
         this.id = ent.getId();
         this.name = ent.getName();
@@ -21,9 +25,39 @@ public class CountyReport {
         } else {
             this.candidatesCount = 0;
         }
+        if (ent.getDistricts() != null){
+            this.districtsCount = ent.getDistricts().size();
+        } else {
+            this.districtsCount =0;
+        }
+        this.votersCount = ent.getDistricts().stream().mapToLong(d -> d.getNumberOfElectors()).sum();
     }
 
     public CountyReport() {
+    }
+
+    public Long getVotersCount() {
+        return votersCount;
+    }
+
+    public void setVotersCount(Long votersCount) {
+        this.votersCount = votersCount;
+    }
+
+    public CountyEntity getCountyEntity() {
+        return countyEntity;
+    }
+
+    public void setCountyEntity(CountyEntity countyEntity) {
+        this.countyEntity = countyEntity;
+    }
+
+    public Integer getDistrictsCount() {
+        return districtsCount;
+    }
+
+    public void setDistrictsCount(Integer districtsCount) {
+        this.districtsCount = districtsCount;
     }
 
     public Integer getCandidatesCount() {
