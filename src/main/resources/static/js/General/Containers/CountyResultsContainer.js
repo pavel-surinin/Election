@@ -37,7 +37,6 @@ var CountyResultsContainer  = React.createClass({
         getCountyResults(this,this.props.params.county);
     },
     render: function() {
-        console.log('this from countyresultscontainer:',this);
         if (this.state.isLoading) {
             return <div><img src='images/loading.gif'/></div>;
         }

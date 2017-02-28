@@ -65,11 +65,14 @@ var CountyResultsComponent = React.createClass({
         var self = this;
         var districts = this.props.county.districts.map(function(district,index){
             return(
-                <tr>
-                    <td><a href={"#/county/" + self.props.countyId + "/" + district.id}>{district.name}</a></td>
-                    <td>{district.adress}</td>
-                    <td>{district.numberOfElectors}</td>
-                </tr>
+              <tr>
+                <td className="text-info"><a href={"#/county/" + self.props.countyId + "/" + district.id}>
+                  <i className="fa fa-angle-right" aria-hidden="true"></i> {district.name}</a></td>
+                <td className="text-info"><i className="fa fa-address-book "
+                                             aria-hidden="true"></i> {district.representativeName}</td>
+                <td className="text-info"><i className="fa fa-map-o" aria-hidden="true"></i> {district.adress}</td>
+                <td className="text-info"><i className="fa fa-users" aria-hidden="true"></i> {district.numberOfElectors}</td>
+              </tr>
 
             );
         });
@@ -85,21 +88,21 @@ var CountyResultsComponent = React.createClass({
         return (
             <div className="col-md-12">
                 <div className="container">
-                <h1 className='yellow'>{this.props.county.name} rinkimų apygarda</h1></div>
-                <ul  className="nav nav-pills secondmenu">
-                <li className="active">
-                <a  href="#1a" data-toggle="tab">Apygardos Informacija</a>
-                </li>
-                <li>
-                <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
-                </li>
-                <li>
-                <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
-                </li>
-                <li>
-                <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
-                </li>
-                </ul>
+                  <h1 className='yellow'>{this.props.county.name} rinkimų apygarda</h1></div>
+                  <ul  className="nav nav-pills secondmenu">
+                  <li className="active">
+                  <a  href="#1a" data-toggle="tab">Apygardos Informacija</a>
+                  </li>
+                  <li>
+                  <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
+                  </li>
+                  <li>
+                  <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
+                  </li>
+                  <li>
+                  <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
+                  </li>
+                  </ul>
                 <div id="exTab1" className="container shadow">
                     {/* General info here */}
                     <div className="tab-content clearfix">
@@ -117,7 +120,8 @@ var CountyResultsComponent = React.createClass({
                         </div>
                         {/*Single graphs here*/}
                         <div className="tab-pane vytis" id="2a">
-                            <h3></h3>
+                          <h3>Rinkėjų aktyvumas: {this.props.results.validCount} balsavusių iš {this.props.results.votersCount}, {Math.round(this.props.results.validCount / this.props.results.votersCount *100,2)}%</h3>
+                          <h3>Sugadintų biuletenių skaičius vienmandatėje: {this.props.results.spoiledSingle}</h3>
                             <div className='col-md-7'>
                                 <table className="table table-striped">
                                     <thead>
@@ -145,7 +149,9 @@ var CountyResultsComponent = React.createClass({
 
                         </div>
 
-                            <div className="tab-pane" id="3a">
+                            <div className="tab-pane vytis" id="3a">
+                              <h3>Rinkėjų aktyvumas: {this.props.results.validCount} balsavusių iš {this.props.results.votersCount}, {Math.round(this.props.results.validCount / this.props.results.votersCount *100,2)}%</h3>
+                              <h3>Sugadintų biuletenių skaičius daugiamandatėje: {this.props.results.spoiledMulti}</h3>
                                 <div className='col-md-7'>
                                     <table className="table table-striped">
                                         <thead>
@@ -177,8 +183,9 @@ var CountyResultsComponent = React.createClass({
                             <table className="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th className='col-md-4 col-sm-5'>Pavadinimas</th>
-                                    <th className='col-md-4 col-sm-5'>Adresas</th>
+                                    <th className='col-md-4 col-sm-4'>Pavadinimas</th>
+                                    <th className='col-md-3 col-sm-3'>Atstovas</th>
+                                    <th className='col-md-4 col-sm-3'>Adresas</th>
                                     <th className='col-md-2 col-sm-2'>Rinkeju skaicius</th>
 
                                 </tr>

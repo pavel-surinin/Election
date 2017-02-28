@@ -25,6 +25,7 @@ var PartyViewContainer = React.createClass({
     getParties(this);
   },
   render: function() {
+    document.title='Partijos Rinkimai 2017';
     if (this.state.isLoading) {
       return (
         <div>

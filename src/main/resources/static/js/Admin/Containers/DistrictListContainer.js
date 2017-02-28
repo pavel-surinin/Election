@@ -74,6 +74,7 @@ var DistrictListContainer = React.createClass({
   },
 
   render: function() {
+    document.title='Administratoriaus Apylinkės Vaizdas Rinkimai 2017';
     if (this.state.isLoading) {
       return (
         <div>
