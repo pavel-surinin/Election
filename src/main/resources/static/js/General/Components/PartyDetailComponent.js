@@ -132,8 +132,9 @@ var PartyDetailComponent = React.createClass({
       var noWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList && partyWinnersMembersList);
 
     return (
-      <div className="col-md-12">
-        <div className="container"><h1 className='yellow'>Partija Nr: {this.props.partyDetails.partyNumber} - {this.props.partyDetails.name}  </h1>
+      <div>
+        <div className="container">
+          <h1 className='yellow'>Partija Nr: {this.props.partyDetails.partyNumber} - {this.props.partyDetails.name}  </h1>
         </div>
             {/* nav-pills  */}
             <ul  className="nav nav-pills secondmenu">
