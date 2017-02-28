@@ -23,6 +23,11 @@ public class DistrictController {
         return service.getDistrictById(id);
     }
 
+    @GetMapping("/district/{id}/name")
+    public String getNameById(@PathVariable Long id){
+        return service.getNameById(id);
+    }
+
     @GetMapping("/district/nonerepresentatives")
     public List getDistrictsWithNullRepresentativesList(){
         return service.getDistrictsWithNullRepresentativesList();

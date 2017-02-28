@@ -6,6 +6,7 @@ var RepresentativeComponent = React.createClass({
     });
   },
   render: function() {
+    document.title = 'Atstovo vaizdas - Rinkimai 2017';
     return (
       <div>
       <div id="wrapper">

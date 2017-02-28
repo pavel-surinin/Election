@@ -30,8 +30,8 @@ public class CandidateEntity {
     @NotNull
     private Date birthDate;
 
-    @ManyToOne
-    @JoinColumn(nullable = true, name= "PARTY_ID")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name= "PARTY_ID")
     private PartyEntity partyDependencies;
 
     @Column(name = "NUMBER_IN_PARTY")
@@ -39,17 +39,17 @@ public class CandidateEntity {
 
     private String description;
 
-    @ManyToOne
-    @JoinColumn(nullable = true, name= "COUNTY_ID")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name= "COUNTY_ID")
     private CountyEntity county;
 
     @Column(nullable=false)
     private boolean isMultiList = true;
 
-    @OneToMany(mappedBy="candidate", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy="candidate", cascade = CascadeType.ALL)
     private List<ResultSingleEntity> results;
 
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<RatingEntity> ratingPoints;
 
     public List<RatingEntity> getRatingPoints() {

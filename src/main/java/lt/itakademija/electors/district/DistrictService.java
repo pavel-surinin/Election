@@ -77,4 +77,8 @@ public class DistrictService {
                 .collect(Collectors.toList());
 
     }
+
+    public String getNameById(Long id) {
+        return repository.findById(id).getName();
+    }
 }

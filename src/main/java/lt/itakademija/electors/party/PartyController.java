@@ -49,6 +49,11 @@ public class PartyController {
         return service.getPartyById(id);
     }
 
+    @GetMapping("/party/{id}/name")
+    public String getPartyName(@PathVariable Long id){
+        return service.getNameById(id);
+    }
+
     @PutMapping("/party")
     public PartyEntity save(@RequestBody PartyEntity partyEntity) {
         return service.save(partyEntity);

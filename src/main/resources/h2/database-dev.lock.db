@@ -1,6 +1,0 @@
-#FileLock
-#Fri Feb 24 16:41:27 EET 2017
-hostName=192.168.0.104
-id=15a7091c2bb5928a00fc75e9811ee117b6874048a4e
-method=file
-server=192.168.0.104\:55712

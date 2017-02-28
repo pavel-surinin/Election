@@ -60,24 +60,21 @@ var CountyResultsComponent = React.createClass({
     chartss.bar('bar', document.getElementById('canvasBarMultiCounty'), this.props.results, 'MultiCounty');
   },
 
-  render: function () {
-    console.log('this from countyresults:', this);
-    var singleTable = getSingleTable(this);
-    var multiTable = getMultiTable(this);
-    var self = this;
-    var districts = this.props.county.districts.map(function (district, index) {
-      return (
-        <tr>
-          <td className="text-info"><b><a
-            href={"#/counties/" + self.props.countyId + "/" + district.id}> {district.name}</a></b></td>
-          <td className="text-info"><i className="fa fa-address-book "
-                                       aria-hidden="true"></i> {district.representativeName}</td>
-          <td className="text-info"><i className="fa fa-map-o" aria-hidden="true"></i> {district.adress}</td>
-          <td className="text-info"><i className="fa fa-users" aria-hidden="true"></i> {district.numberOfElectors}</td>
-        </tr>
+  render: function(){
+      var singleTable = getSingleTable(this);
+      var multiTable = getMultiTable(this);
+      var self = this;
+      var districts = this.props.county.districts.map(function(district,index){
+          return(
+              <tr>
+                  <td><a href={"#/county/" + self.props.countyId + "/" + district.id}>{district.name}</a></td>
+                  <td>{district.adress}</td>
+                  <td>{district.numberOfElectors}</td>
+              </tr>
 
-      );
-    });
+
+    );
+  });
     var county = this.props.county;
     var countyResults = this.props.results;
     var countyInfo = [];
@@ -113,116 +110,119 @@ var CountyResultsComponent = React.createClass({
       </tr>)
     }
 
+
     return (
-      <div className="col-md-12">
-        <div className="container"><h1>{this.props.county.name} rinkimų apygarda</h1></div>
-        <div id="exTab1" className="container">
-          <ul className="nav nav-pills">
+        <div className="col-md-12">
+            <div className="container">
+            <h1 className='yellow'>{this.props.county.name} rinkimų apygarda</h1></div>
+            <ul  className="nav nav-pills secondmenu">
             <li className="active">
-              <a href="#1a" data-toggle="tab">Apygardos Informacija</a>
+            <a  href="#1a" data-toggle="tab">Apygardos Informacija</a>
             </li>
             <li>
-              <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
+            <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
             </li>
             <li>
-              <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
+            <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
             </li>
             <li>
-              <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
+            <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
             </li>
-          </ul>
-          {/* General info here */}
-          <div className="tab-content clearfix">
-            <div className="tab-pane active" id="1a">
-              <table className="table table-striped">
-                <thead>
-                <tr>
-                  <th className='col-md-10 col-sm-10'>Bendra Informacija</th>
-                </tr>
-                </thead>
-                <tbody>
-                {countyInfo}
-                </tbody>
-              </table>
-            </div>
-            {/*Single graphs here*/}
-            <div className="tab-pane vytis" id="2a">
-              <h3></h3>
-              <div className='col-md-7'>
-                <table className="table table-striped">
-                  <thead>
-                  <tr>
-                    <th className='col-md-4 col-sm-4'>Kandidatas</th>
-                    <th className='col-md-3 col-sm-3'>Partija</th>
-                    <th className='col-md-2 col-sm-2'>Balsai</th>
-                    <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
-                    <th className='col-md-1 col-sm-2'>% nuo visų</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {singleTable}
-                  </tbody>
-                </table>
-                {/*chart pie*/}
-              </div>
-              <div className='chartContainer col-md-5' id='parentPieSingle'>
-                <canvas id='canvasPieSingle'></canvas>
-              </div>
-              {/*chart bar*/}
-              <div className='chartContainer col-md-12' id='parentBarSingle'>
-                <canvas id='canvasBarSingle'></canvas>
-              </div>
+            </ul>
+            <div id="exTab1" className="container shadow">
+                {/* General info here */}
+                <div className="tab-content clearfix">
+                    <div className="tab-pane active" id="1a">
+                        <table className="table table-striped">
+                            <thead>
+                            <tr>
+                                <th className='col-md-10 col-sm-10'>Bendra Informacija</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {countyInfo}
+                            </tbody>
+                        </table>
+                    </div>
+                    {/*Single graphs here*/}
+                    <div className="tab-pane vytis" id="2a">
+                        <h3></h3>
+                        <div className='col-md-7'>
+                            <table className="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th className='col-md-4 col-sm-4'>Kandidatas</th>
+                                    <th className='col-md-3 col-sm-3'>Partija</th>
+                                    <th className='col-md-2 col-sm-2'>Balsai</th>
+                                    <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
+                                    <th className='col-md-1 col-sm-2'>% nuo visų</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {singleTable}
+                                </tbody>
+                            </table>
+                            {/*chart pie*/}
+                        </div>
+                        <div className='chartContainer col-md-5' id='parentPieSingle'>
+                            <canvas id='canvasPieSingle'></canvas>
+                        </div>
+                        {/*chart bar*/}
+                        <div className='chartContainer col-md-12' id='parentBarSingle'>
+                            <canvas id='canvasBarSingle'></canvas>
+                        </div>
 
-            </div>
 
-            <div className="tab-pane" id="3a">
-              <div className='col-md-7'>
-                <table className="table table-striped">
-                  <thead>
-                  <tr>
-                    <th className='col-md-1 col-sm-1'>Nr.</th>
-                    <th className='col-md-5 col-sm-3'>Partija</th>
-                    <th className='col-md-2 col-sm-2'>Retingai</th>
-                    <th className='col-md-2 col-sm-2'>Balsai</th>
-                    <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
-                    <th className='col-md-2 col-sm-2'>% nuo visų</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {multiTable}
-                  </tbody>
-                </table>
-              </div>
+        </div>
 
-              <div className='chartContainer col-md-5' id='parentPieMultiCounty'>
-                <canvas id='canvasPieMultiCounty'></canvas>
-              </div>
-              {/*chart bar*/}
-              <div className='chartContainer col-md-12' id='parentBarMultiCounty'>
-                <canvas id='canvasBarMultiCounty'></canvas>
-              </div>
-            </div>
-            <div className="tab-pane" id="4a">
-              <h3>{this.props.county.name} apygardos apylinkės</h3>
-              <table className="table table-striped">
-                <thead>
-                <tr>
-                  <th className='col-md-3 col-sm-3'>Pavadinimas</th>
-                  <th className='col-md-4 col-sm-4'>Atstovas</th>
-                  <th className='col-md-3 col-sm-3'>Adresas</th>
-                  <th className='col-md-2 col-sm-2'>Rinkeju skaicius</th>
+        <div className="tab-pane" id="3a">
+          <div className='col-md-7'>
+            <table className="table table-striped">
+              <thead>
+              <tr>
+                <th className='col-md-1 col-sm-1'>Nr.</th>
+                <th className='col-md-5 col-sm-3'>Partija</th>
+                <th className='col-md-2 col-sm-2'>Retingai</th>
+                <th className='col-md-2 col-sm-2'>Balsai</th>
+                <th className='col-md-2 col-sm-2'>% nuo galiojančių</th>
+                <th className='col-md-2 col-sm-2'>% nuo visų</th>
+              </tr>
+              </thead>
+              <tbody>
+              {multiTable}
+              </tbody>
+            </table>
+          </div>
 
-                </tr>
-                </thead>
-                <tbody>
-                {districts}
-                </tbody>
-              </table>
-
-            </div>
+          <div className='chartContainer col-md-5' id='parentPieMultiCounty'>
+            <canvas id='canvasPieMultiCounty'></canvas>
+          </div>
+          {/*chart bar*/}
+          <div className='chartContainer col-md-12' id='parentBarMultiCounty'>
+            <canvas id='canvasBarMultiCounty'></canvas>
           </div>
         </div>
+        <div className="tab-pane" id="4a">
+          <h3>{this.props.county.name} apygardos apylinkės</h3>
+          <table className="table table-striped">
+            <thead>
+            <tr>
+              <th className='col-md-3 col-sm-3'>Pavadinimas</th>
+              <th className='col-md-4 col-sm-4'>Atstovas</th>
+              <th className='col-md-3 col-sm-3'>Adresas</th>
+              <th className='col-md-2 col-sm-2'>Rinkeju skaicius</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {districts}
+            </tbody>
+          </table>
+
+        </div>
       </div>
+    </div>
+  </div>
 
     );
   },

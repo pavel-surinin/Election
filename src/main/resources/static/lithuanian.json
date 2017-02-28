@@ -14,9 +14,9 @@
   "sZeroRecords":     "Įrašų nerasta",
 
   "oPaginate": {
-    "sFirst": "Pirmas",
-    "sPrevious": "Ankstesnis",
-    "sNext": "Tolimesnis",
-    "sLast": "Paskutinis"
+    "sFirst": "<<",
+    "sPrevious": "←",
+    "sNext": "→",
+    "sLast": ">>"
   }
 }

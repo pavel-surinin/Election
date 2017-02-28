@@ -25,7 +25,7 @@ var App = React.createClass({
                 <li><a href="#/">Pradinis</a></li>
                 <li><a href="#/login">Prisijungti</a></li>
                 <li><a href="#/representative">Atstovas</a></li>
-                <li><a href="#/candidates">Kandidatai</a></li>
+                <li><a href="#/candidate">Kandidatai</a></li>
                   <li className="dropdown">
                     <a className="dropdown-toggle" data-toggle="dropdown">Results district
                     <span className="caret"></span></a>
@@ -35,6 +35,7 @@ var App = React.createClass({
                       <li><a href="#/results/district/3">Page Results district 3</a></li>
                       <li><a href="#/results/district/4">Page Results district 4</a></li>
                       <li><a href="#/results/district/5">Page Results district 5</a></li>
+                      <li><a href="#/party">Party</a></li>
                     </ul>
                   </li>
 
@@ -53,7 +54,6 @@ var App = React.createClass({
 window.App = App;
 
 var EmptyComponent = React.createClass({
-
   render: function() {
     return (
       <div />
@@ -66,7 +66,14 @@ window.EmptyComponent = EmptyComponent;
 
 var NoMatch = React.createClass({
   render: function() {
-    return <div>Route did not match</div>;
+    document.title='Puslapis nerastas. 404 klaida';
+    return(
+      <div>
+      <div style={{marginTop: '50px'}} className="jumbotron alert alert-danger erpage">
+        <h1><i className="fa fa-meh-o" aria-hidden="true"></i> Puslapis nerastas</h1>
+        <p>Įvestas puslapio adresas nerastas.</p>
+      </div>
+    </div>);
   }
 });
 
@@ -96,10 +103,11 @@ ReactDOM.render((
       <Route path="/admin/county/create" component={CountyCreateContainer} />
       <Route path="/admin/county/edit/:id" component={CountyEditContainer} />
       <Route path="/admin/county/:id" component={CountyDetailViewContainer} />
-      <Route path="/admin/name" component={PartyContainer} />
-      <Route path="/admin/name/create" component={PartyCreateContainer} />
-      <Route path="/admin/name/:id" component={PartyDetailViewContainer} />
-      <Route path="/admin/name/edit/:id" component={PartyEditContainer} />
+      <Route path="/admin/party" component={PartyContainer} />
+      <Route path="/admin/party/create" component={PartyCreateContainer} />
+      <Route path="/admin/party/:id" component={PartyDetailViewContainer} />
+      <Route path="/admin/party/edit/:id" component={PartyEditContainer} />
+      <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="/admin/results" component={ResultsListContainer} />
       <Route path="*" component={NoMatch}/>
     </Route>
@@ -107,13 +115,14 @@ ReactDOM.render((
     <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
-      <Route path="/parties" component={EmptyComponent} />
-      <Route path="/counties" component={CountiesContainer}/>
-      <Route path="/counties/:county" component={CountyResultsContainer}/>
-      <Route path="/counties/:county/:id" component={DistrictResultsContainer}/>
-      <Route path="/results" component={EmptyComponent} />
-      <Route path="/contacts" component={EmptyComponent} />
       <Route path="/candidates" component={CandidatesListContainer} />
+      <Route path="/party" component={PartyViewContainer} />
+      <Route path="/party/:id" component={PartyDetailContainer} />
+      <Route path="/county" component={CountiesContainer}/>
+      <Route path="/county/:county" component={CountyResultsContainer}/>
+      <Route path="/county/:county/:id" component={DistrictResultsContainer}/>
+      <Route path="/results" component={GeneralResultsContainer} />
+      <Route path="/contacts" component={EmptyComponent} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
