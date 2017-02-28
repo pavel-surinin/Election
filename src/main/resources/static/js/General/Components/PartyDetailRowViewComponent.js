@@ -21,7 +21,7 @@ var PartyDetailRowViewComponent = React.createClass({
           </a>
             <div className="modal fade" id={this.props.listType + this.props.id} tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div className="modal-dialog" role="document">
-                <div className="modal-content">
+                <div className="modal-content" style={{margin : 'auto'}}>
                   <div className="modal-header">
                     <button type="button" id="modal-close-button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 className="modal-title">{this.props.name} {this.props.surname}</h4>
