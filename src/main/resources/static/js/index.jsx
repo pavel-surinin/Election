@@ -16,6 +16,7 @@ var App = React.createClass({
     });
   },
   render: function() {
+      document.title='Rinkimai 2017';
       console.log('this index:',this);
       return (
       <div style={{ paddingTop: '20px' }}>

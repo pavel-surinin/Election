@@ -26,6 +26,7 @@ var GeneralResultsContainer = React.createClass({
     getGeneralResults(this);
   },
   render: function() {
+    document.title='Rezultatai Rinkimai 2017';
     if (this.state.isLoading) {
       return <div><img src='images/loading.gif'/></div>;
     }

@@ -106,6 +106,7 @@ var CountyContainer = React.createClass({
   },
 
   render: function() {
+    document.title='Administratoriaus Apygardų Vaizdas Rinkimai 2017';
     if (this.state.isLoading) {
       return (
         <div>
