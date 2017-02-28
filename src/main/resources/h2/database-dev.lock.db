@@ -1,6 +1,6 @@
 #FileLock
-#Thu Feb 23 13:46:50 EET 2017
-hostName=DESKTOP-QE51T8U
-id=15a6acb793a1c5395efec215aa78df168012ec8d053
+#Fri Feb 24 16:41:27 EET 2017
+hostName=192.168.0.104
+id=15a7091c2bb5928a00fc75e9811ee117b6874048a4e
 method=file
-server=192.168.56.1\:54191
+server=192.168.0.104\:55712

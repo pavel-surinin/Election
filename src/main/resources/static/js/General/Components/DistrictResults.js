@@ -38,7 +38,7 @@ function getMultiTable(self) {
         return(
           <tr key={index}>
           <td>{p.partyNumber}</td>
-          <td>{p.party}</td>
+          <td>{p.name}</td>
           <td>{rating}</td>
           <td>{p.votes}</td>
           <td>{Math.round(p.votes/self.props.results.valid*100,2)}%</td>
