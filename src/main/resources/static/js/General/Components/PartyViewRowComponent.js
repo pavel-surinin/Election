@@ -17,17 +17,6 @@ render: function() {
             <td>
               {this.props.members}
             </td>
-            <td className="small">
-                <button
-                  onClick={this.handleDetailsClick(this.props.id)}
-                  id={'details-button-' + this.props.id}
-                  className='btn btn-info btn-sm fa fa-info'
-                  ref="info"
-                  title="Detali partijos Informacija"
-                  role='button'
-                  >
-                </button>
-            </td>
           </tr>
         );
     }

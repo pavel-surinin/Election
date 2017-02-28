@@ -117,26 +117,33 @@ function getMandatesPerParty(self) {
     return mandatesPerParty;
   }
 }
+
 var PartyDetailComponent = React.createClass({
   render: function() {
-    var mandatesPerParty = getMandatesPerParty(this);
-    var partyMembersList = getPartyMembersList(this);
-    var ratedMembersList = getRatedPartyMembersList(this);
-    var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
-    var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
+      var mandatesPerParty = getMandatesPerParty(this);
+      var partyMembersList = getPartyMembersList(this);
+      var ratedMembersList = getRatedPartyMembersList(this);
+      var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
+      var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
+      var ratedPartyStyle = styles.toggleResultNav(this.props.generalResults.votesInMulti);
+      var partyListStyle = styles.toggleResultNav(this.props.partyDetails.members);
+      var partyWinnersStyle = styles.toggleTableStyle(partyWinnersMembersList);
+      var singleWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList);
+      var noWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList && partyWinnersMembersList);
+
     return (
       <div className="col-md-12">
-        <div className="container"><h1 className='yellow'>Partija: {this.props.partyDetails.name}</h1>
+        <div className="container"><h1 className='yellow'>Partija Nr: {this.props.partyDetails.partyNumber} - {this.props.partyDetails.name}  </h1>
         </div>
             {/* nav-pills  */}
             <ul  className="nav nav-pills secondmenu">
               <li className="active">
                 <a  href="#1a" data-toggle="tab">Partijos Informacija</a>
               </li>
-              <li>
-                <a  href="#2a" data-toggle="tab">Pirminis Partijos narių sąrašas</a>
+              <li style={partyListStyle}>
+                <a  href="#2a" data-toggle="tab">Partijos narių sąrašas</a>
               </li>
-              <li>
+              <li style={ratedPartyStyle}>
                 <a  href="#3a" data-toggle="tab">Sureitinguotas Partijos narių sąrašas</a>
               </li>
             </ul>
@@ -144,49 +151,42 @@ var PartyDetailComponent = React.createClass({
               <div className="tab-content clearfix">
                 {/* General info tab-1 */}
                 <div className="tab-pane active" id="1a">
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th className='col-md-12 col-sm-12'>Partijos sąrašo numeris: {this.props.partyDetails.partyNumber}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <th className='col-md-12 col-sm-12'>Reikia lentelės, kurioje matytusi pirmieji partijos sąrašo nariai,
-                        vėliau pagal rezultatus bus galima padaryti, kad rodytų patenkančius į seimą.</th>
-                    </tbody>
-                  </table>
-                    <span className='col-md-12 col-sm-12'>Partijos narių sąrašas daugiamandatėje patenkantis į seimą, pagal momentinius rezultatus. Tai ne galutinis sąrašas, kol rinkimai vis dar vyksta</span>
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th className='col-md-1 col-sm-1'>Nr.</th>
-                        <th className='col-md-2 col-sm-2'>Vardas</th>
-                        <th className='col-md-3 col-sm-3'>Pavardė</th>
-                        <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                        <th className='col-md-2 col-sm-1'>Aprašymas</th>
-                        <th className='col-md-2 col-sm-2'>Apygarda</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                          {partyWinnersMembersList}
-                    </tbody>
-                  </table>
-                    <span className='col-md-12 col-sm-12'>Partijos narių sąrašas vienmandatėje patenkantis į seimą, pagal momentinius rezultatus. Tai ne galutinis sąrašas, kol rinkimai vis dar vyksta</span>
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th className='col-md-1 col-sm-1'>Nr.</th>
-                        <th className='col-md-2 col-sm-2'>Vardas</th>
-                        <th className='col-md-3 col-sm-3'>Pavardė</th>
-                        <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                        <th className='col-md-2 col-sm-1'>Aprašymas</th>
-                        <th className='col-md-2 col-sm-2'>Apygarda</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {singleWinnersByPartyList}
-                    </tbody>
-                  </table>
+                    <div style={partyWinnersStyle}>
+                          <h3>Laimėjusių narių sąrašas daugiamandatėje</h3>
+                        <table className="table table-striped">
+                          <thead>
+                            <tr>
+                              <th className='col-md-1 col-sm-1'>Nr.</th>
+                              <th className='col-md-2 col-sm-2'>Vardas</th>
+                              <th className='col-md-2 col-sm-2'>Pavardė</th>
+                              <th className='col-md-2 col-sm-2'>Gimimo data</th>
+                              <th className='col-md-2 col-sm-1'>Aprašymas</th>
+                              <th className='col-md-3 col-sm-3'>Apygarda</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                                {partyWinnersMembersList}
+                          </tbody>
+                        </table>
+                    </div>
+                    <div style={singleWinnersStyle}>
+                          <h3>Laimėjusių narių sąrašas vienmandatėje</h3>
+                        <table className="table table-striped">
+                          <thead>
+                            <tr>
+                              <th className='col-md-1 col-sm-1'>Nr.</th>
+                              <th className='col-md-2 col-sm-2'>Vardas</th>
+                              <th className='col-md-2 col-sm-2'>Pavardė</th>
+                              <th className='col-md-2 col-sm-2'>Gimimo data</th>
+                              <th className='col-md-2 col-sm-1'>Aprašymas</th>
+                              <th className='col-md-3 col-sm-3'>Apygarda</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {singleWinnersByPartyList}
+                          </tbody>
+                        </table>
+                      </div>
                 </div>
                 {/* Party members list tab-2 */}
                 <div className="tab-pane" id="2a">
@@ -211,14 +211,14 @@ var PartyDetailComponent = React.createClass({
                 </div>
                 {/* Single candidates list tab-3 */}
                 <div className="tab-pane" id="3a">
-                  <h3>Partijos narių sąrašas pagal gautus reitingų rezultatus</h3>
+                  <h3>Narių sąrašas pagal reitingų rezultatus</h3>
                   <div className='col-md-12'>
                     <table className="table table-striped">
                       <thead>
                         <tr>
                           <th className='col-md-1 col-sm-1'>Nr.</th>
-                          <th className='col-md-5 col-sm-3'>Vardas</th>
-                          <th className='col-md-2 col-sm-2'>Partija</th>
+                          <th className='col-md-3 col-sm-3'>Vardas</th>
+                          <th className='col-md-4 col-sm-4'>Pavardė</th>
                           <th className='col-md-2 col-sm-2'>Gimimo data</th>
                           <th className='col-md-2 col-sm-2'>Aprašymas</th>
                           <th className='col-md-2 col-sm-2'>Apygarda</th>
