@@ -1,6 +1,7 @@
 package lt.itakademija.electors.district;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -41,6 +42,11 @@ public class DistrictController {
     @GetMapping("/district/multi/registered")
     public List getDistrictsMultiRegistered(){
         return service.getDistrictMultiRegistered();
+    }
+
+    @GetMapping("/district/{page}/page")
+    public List getDistrictsByPage(@PathVariable Long page){
+        return service.getDistictsByPage(page);
     }
 
     @PostMapping("/district")
