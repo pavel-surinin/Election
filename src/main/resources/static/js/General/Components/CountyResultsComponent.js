@@ -60,14 +60,13 @@ var CountyResultsComponent = React.createClass({
     },
 
     render: function(){
-        console.log('this from countyresults:',this);
         var singleTable = getSingleTable(this);
         var multiTable = getMultiTable(this);
         var self = this;
         var districts = this.props.county.districts.map(function(district,index){
             return(
                 <tr>
-                    <td><a href={"#/counties/" + self.props.countyId + "/" + district.id}>{district.name}</a></td>
+                    <td><a href={"#/county/" + self.props.countyId + "/" + district.id}>{district.name}</a></td>
                     <td>{district.adress}</td>
                     <td>{district.numberOfElectors}</td>
                 </tr>
@@ -85,22 +84,23 @@ var CountyResultsComponent = React.createClass({
 
         return (
             <div className="col-md-12">
-                <div className="container"><h1>{this.props.county.name} rinkimų apygarda</h1></div>
-                <div id="exTab1" className="container">
-                    <ul  className="nav nav-pills">
-                        <li className="active">
-                            <a  href="#1a" data-toggle="tab">Apygardos Informacija</a>
-                        </li>
-                        <li>
-                            <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
-                        </li>
-                        <li>
-                            <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
-                        </li>
-                        <li>
-                            <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
-                        </li>
-                    </ul>
+                <div className="container">
+                <h1 className='yellow'>{this.props.county.name} rinkimų apygarda</h1></div>
+                <ul  className="nav nav-pills secondmenu">
+                <li className="active">
+                <a  href="#1a" data-toggle="tab">Apygardos Informacija</a>
+                </li>
+                <li>
+                <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
+                </li>
+                <li>
+                <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
+                </li>
+                <li>
+                <a href="#4a" data-toggle="tab">{this.props.county.name} apylinkės</a>
+                </li>
+                </ul>
+                <div id="exTab1" className="container shadow">
                     {/* General info here */}
                     <div className="tab-content clearfix">
                         <div className="tab-pane active" id="1a">

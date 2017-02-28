@@ -12,9 +12,8 @@ function getCounties(self){
         })
 
 }
-
 var CountiesContainer = React.createClass({
-    getInitialState() {
+    getInitialState(){
         return {
             countyList: [],
             isLoading : true,

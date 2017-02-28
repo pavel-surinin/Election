@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -68,5 +69,12 @@ public class CandidateRepository {
 
     public void deleteAll(List<CandidateEntity> memberToDelete) {
         memberToDelete.stream().forEach(m -> em.remove(m));
+    }
+
+    public boolean delete(CandidateEntity c) {
+        Query query = em.createQuery(
+                "DELETE FROM CandidateEntity c WHERE c.id = :id");
+        int deletedCount = query.setParameter("id", c.getId()).executeUpdate();
+        return true;
     }
 }

@@ -87,7 +87,7 @@ public class ResultsService {
         report.setVotersCount(votersCount);
 
         int validCount = county.getDistricts()
-                .stream().filter(f -> f.getResultMultiEntity().size() !=0)
+                .stream().filter(f -> f.getResultMultiEntity().size() != 0)
                 .mapToInt(d -> d.getResultMultiEntity()
                         .stream()
                         .mapToInt(r -> r.getVotes().intValue())
@@ -95,6 +95,7 @@ public class ResultsService {
         report.setValidCount(validCount);
 
         int spoiledSingle = getSpoiledSingle(county);
+        report.setSpoiledSingle(spoiledSingle);
         report.setSpoiledSingle(spoiledSingle);
 
         int spoiledMulti = getSpoiledMulti(county);
@@ -150,7 +151,6 @@ public class ResultsService {
         }
         report.setVotesByParty(partiesVotesSummary);
 
-
         List<PartyIntDTO> partyIntDTOS = sortMemberByRatingAndPartyNumber(report);
         report.setReorderedPartyMembersParties(partyIntDTOS);
 
@@ -194,9 +194,12 @@ public class ResultsService {
             for (int i = 0; i < membersWithRating.size(); i++) {
                 membersWithRating.get(i).setNumberInParty(i + 1);
             }
-            membersOriginal.removeAll(membersWithRating);
-            membersOriginal.addAll(membersWithRating);
-            List<CandidateReport> membersSortedByNumber = membersOriginal
+            ArrayList<CandidateReport> membersOriginalClone = new ArrayList<CandidateReport>(membersOriginal);
+
+
+            membersOriginalClone.removeAll(membersWithRating);
+            membersOriginalClone.addAll(membersWithRating);
+            List<CandidateReport> membersSortedByNumber = membersOriginalClone
                     .stream()
                     .sorted(Comparator.comparing(CandidateReport::getNumberInParty))
                     .collect(Collectors.toList());
@@ -326,6 +329,7 @@ public class ResultsService {
                 .filter(v -> v.getPar().getId() == m.getPar().getId())
                 .findFirst()
                 .map(v -> {
+
                     List<CandidateReport> members = v.getPar().getMembers();
                     List<CandidateReport> winnersList = singleWinners.stream().map(dto -> dto.getCandidate()).collect(Collectors.toList());
                     members.removeAll(winnersList);
@@ -412,19 +416,32 @@ public class ResultsService {
                                 }
                             }));
                     List<RatingEntity> sortedRatings = partyRatings.stream().sorted((r1, r2) -> r2.getPoints().compareTo(r1.getPoints())).collect(Collectors.toList());
-                    List<CandidateEntity> candidatesOrderFromRatings = sortedRatings.stream().map(RatingEntity::getCandidate).collect(Collectors.toList());
-                    List<CandidateEntity> candidatesOrderOriginal = p.getMembers().stream().sorted(Comparator.comparing(CandidateEntity::getNumberInParty)).collect(Collectors.toList());
-                    candidatesOrderOriginal.removeAll(candidatesOrderFromRatings);
+                    List<CandidateEntity> candidatesOrderFromRatingsOriginal = sortedRatings.stream().map(RatingEntity::getCandidate).collect(Collectors.toList());
+                    ArrayList<CandidateEntity> candidatesOrderFromRatingsCloned = new ArrayList<>(candidatesOrderFromRatingsOriginal);
+                    List<CandidateEntity> candidatesOrderOriginalBeforeClone = p.getMembers().stream().sorted(Comparator.comparing(CandidateEntity::getNumberInParty)).collect(Collectors.toList());
+                    ArrayList<CandidateEntity> candidatesOrderOriginal = new ArrayList<>(candidatesOrderOriginalBeforeClone);
+                    candidatesOrderOriginal.removeAll(candidatesOrderFromRatingsCloned);
                     List<CandidateEntity> candidatesNewRatingOrder = new ArrayList();
-                    candidatesNewRatingOrder.addAll(candidatesOrderFromRatings);
+                    candidatesNewRatingOrder.addAll(candidatesOrderFromRatingsCloned);
                     candidatesNewRatingOrder.addAll(candidatesOrderOriginal);
+                    List<CandidateEntity> finalModifiedList = new ArrayList<>();
                     for (int i = 0; i < candidatesNewRatingOrder.size(); i++) {
-                        candidatesNewRatingOrder.get(i).setNumberInParty(i + 1);
+                        CandidateEntity candidate = new CandidateEntity();
+                        candidate.setBirthDate(candidatesNewRatingOrder.get(i).getBirthDate());
+                        candidate.setCounty(candidatesNewRatingOrder.get(i).getCounty());
+                        candidate.setName(candidatesNewRatingOrder.get(i).getName());
+                        candidate.setId(candidatesNewRatingOrder.get(i).getId());
+                        candidate.setDescription(candidatesNewRatingOrder.get(i).getDescription());
+                        candidate.setMultiList(candidatesNewRatingOrder.get(i).isMultiList());
+                        candidate.setSurname(candidatesNewRatingOrder.get(i).getSurname());
+                        candidate.setNumberInParty(i + 1);
+                        finalModifiedList.add(candidate);
+
                     }
                     PartyEntity tp = new PartyEntity();
                     tp.setName(p.getName());
                     tp.setId(p.getId());
-                    tp.setMembers(candidatesNewRatingOrder);
+                    tp.setMembers(finalModifiedList);
                     tp.setResults(p.getResults());
                     tp.setPartyNumber(p.getPartyNumber());
 

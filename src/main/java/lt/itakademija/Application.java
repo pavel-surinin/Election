@@ -22,9 +22,7 @@ public class Application {
 //            loader.createRepresentatives();
 //            loader.votesSingle();
 //            loader.votesMulti();
-//
         };
     }
-
 }
 
