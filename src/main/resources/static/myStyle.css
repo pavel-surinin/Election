@@ -54,6 +54,7 @@ body {
   background-repeat: no-repeat;
   font-family: 'Raleway', sans-serif;
   position: relative;
+  word-break: keep-all;
 }
 
 

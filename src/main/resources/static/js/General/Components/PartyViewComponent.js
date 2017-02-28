@@ -23,9 +23,9 @@ var PartyViewComponent = React.createClass({
               <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                 <thead>
                   <tr>
-                    <th className='col-md-2 col-sm-2'>Nr.</th>
-                    <th className='col-md-5 col-sm-5'>Partijos pavadinimas</th>
-                    <th className='col-md-2 col-sm-2'>Narių skaičius</th>
+                    <th className='col-md-1 col-sm-1'>Nr.</th>
+                    <th className='col-md-7 col-sm-7'>Partijos pavadinimas</th>
+                    <th className='col-md-4 col-sm-4'>Narių skaičius</th>
                   </tr>
                 </thead>
                 <tbody>
