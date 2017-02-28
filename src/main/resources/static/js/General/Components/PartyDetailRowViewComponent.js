@@ -2,17 +2,17 @@ var PartyDetailRowViewComponent = React.createClass({
 
   render: function() {
     return (
-      <tr>
-        <td className="small">
+      <tr className="small">
+        <td>
           {this.props.numberInParty}
         </td>
-        <td className="small">
+        <td>
           {this.props.name}
         </td>
-        <td className="small">
+        <td>
           {this.props.surname}
         </td>
-        <td className="small">
+        <td>
           {this.props.birthDate}
         </td>
         <td>
@@ -35,7 +35,7 @@ var PartyDetailRowViewComponent = React.createClass({
               </div>
             </div>
         </td>
-        <td className="small">
+        <td>
           {this.props.countyName}
         </td>
       </tr>

@@ -102,10 +102,7 @@ function getMandatesPerParty(self) {
   if (self.props.generalResults.mandatesPerParty != undefined) {
         var mandatesPerParty = null;
       self.props.generalResults.mandatesPerParty.forEach(function(obj){
-        console.log(obj);
         if(obj.par.id == self.props.pid){
-          console.log("mandatesPerParty");
-          console.log(obj.votes);
           mandatesPerParty = obj.votes;
         }
         });
@@ -125,16 +122,7 @@ var PartyDetailComponent = React.createClass({
       var partyWinnersStyle = styles.toggleTableStyle(partyWinnersMembersList);
       var singleWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList);
       var noWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList && partyWinnersStyle);
-        /*
-        console.log("NoWinner");
-        console.log(noWinnersStyle);
-        console.log("partyWinnersStyle");
-        console.log(mandatesPerParty);
-        console.log(partyWinnersMembersList);
-        console.log(partyWinnersStyle);
-        console.log("singleWinnersStyle");
-        console.log(singleWinnersStyle);
-        */
+
     return (
       <div>
         <div className="container">
@@ -163,10 +151,10 @@ var PartyDetailComponent = React.createClass({
                         <tr>
                           <th className='col-md-1 col-sm-1'>Nr.</th>
                           <th className='col-md-2 col-sm-2'>Vardas</th>
-                          <th className='col-md-3 col-sm-3'>Pavardė</th>
+                          <th className='col-md-2 col-sm-2'>Pavardė</th>
                           <th className='col-md-2 col-sm-2'>Gimimo data</th>
                           <th className='col-md-2 col-sm-1'>Aprašymas</th>
-                          <th className='col-md-2 col-sm-2'>Apygarda</th>
+                          <th className='col-md-3 col-sm-3'>Apygarda</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -186,7 +174,7 @@ var PartyDetailComponent = React.createClass({
                             <th className='col-md-2 col-sm-2'>Vardas</th>
                             <th className='col-md-2 col-sm-2'>Pavardė</th>
                             <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                            <th className='col-md-2 col-sm-1'>Aprašymas</th>
+                            <th className='col-md-2 col-sm-2'>Aprašymas</th>
                             <th className='col-md-3 col-sm-3'>Apygarda</th>
                           </tr>
                         </thead>
@@ -204,7 +192,7 @@ var PartyDetailComponent = React.createClass({
                               <th className='col-md-2 col-sm-2'>Vardas</th>
                               <th className='col-md-2 col-sm-2'>Pavardė</th>
                               <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                              <th className='col-md-2 col-sm-1'>Aprašymas</th>
+                              <th className='col-md-2 col-sm-2'>Aprašymas</th>
                               <th className='col-md-3 col-sm-3'>Apygarda</th>
                             </tr>
                           </thead>

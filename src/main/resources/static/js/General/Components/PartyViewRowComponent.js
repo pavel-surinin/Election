@@ -8,11 +8,11 @@ var PartyViewRowComponent = React.createClass({
 
   render: function() {
     return (
-      <tr>
-        <td className="small">
+      <tr className="small">
+        <td>
           {this.props.partyNumber}
         </td>
-        <td className="small">
+        <td>
         <a href={'#/party/' + this.props.id}>  {this.props.name} </a>
         </td>
         <td>
