@@ -18,7 +18,7 @@ var PartyViewComponent = React.createClass({
           <div className="container">
             <h1 className='yellow'> Partijų sąrašas</h1>
           </div>
-          <div id="exTab1" className="container">
+          <div id="exTab1" className="container shadow">
             <div className="tab-content clearfix">
               <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                 <thead>

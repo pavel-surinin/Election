@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +40,7 @@ public class CountyService {
         return repository.findAll()
                 .stream()
                 .map(ent -> new CountyReport(ent))
+                .sorted(Comparator.comparing(CountyReport::getName))
                 .collect(Collectors.toList());
     }
 
@@ -68,9 +71,14 @@ public class CountyService {
             county.getCandidates()
                     .stream().map(c -> {
                 c.setCounty(null);
-                candidateService.save(c);
+//                candidateService.save(c);
                 return c;
-            }).filter(c -> !c.isMultiList()).forEach(c->candidateService.delete(c.getId()));
+            }).filter(c -> !c.isMultiList()).forEach(c->{
+                System.out.println("Deleting candidate " + c.getId() + c.getName());
+                c.setNumberInParty(null);
+                c.setPartyDependencies(null);
+                candidateService.delete(c);
+            });
         }
         repository.delete(id);
         return true;
@@ -154,6 +162,9 @@ public class CountyService {
                 .collect(Collectors.toList());
     }
 
+    public String getNameById(Long id) {
+        return repository.findById(id).getName();
+    }
 }
 
 

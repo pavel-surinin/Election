@@ -30,7 +30,6 @@ var CandidatesListViewComponent = React.createClass({
           />
         );
       });
-      console.log('candlistview this: ', this);
     return (
           <div className="panel panel-default">
           <div className="panel-heading">

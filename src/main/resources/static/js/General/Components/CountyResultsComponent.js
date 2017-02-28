@@ -60,14 +60,13 @@ var CountyResultsComponent = React.createClass({
     },
 
     render: function(){
-        console.log('this from countyresults:',this);
         var singleTable = getSingleTable(this);
         var multiTable = getMultiTable(this);
         var self = this;
         var districts = this.props.county.districts.map(function(district,index){
             return(
                 <tr>
-                    <td><a href={"#/counties/" + self.props.countyId + "/" + district.id}>{district.name}</a></td>
+                    <td><a href={"#/county/" + self.props.countyId + "/" + district.id}>{district.name}</a></td>
                     <td>{district.adress}</td>
                     <td>{district.numberOfElectors}</td>
                 </tr>
