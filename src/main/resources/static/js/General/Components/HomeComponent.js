@@ -1,6 +1,7 @@
 var HomeComponent = React.createClass({
 
   render: function() {
+    document.title='Rinkimai 2017';
     return (
       <div>
         <div className="jumbotron">

@@ -29,6 +29,7 @@ var CandidatesListContainer = React.createClass({
     });
   },
   render: function() {
+    document.title='Kandidatai Rinkimai 2017';
     if (this.state.isLoading) {
       return (
         <div>

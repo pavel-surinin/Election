@@ -27,6 +27,7 @@ var CandidateContainer = React.createClass({
   },
 
   render: function() {
+    document.title='Administratoriaus Kandidatų Vaizdas Rinkimai 2017';
     console.log('Candidate container THIS', this);
     if (this.state.isLoading) {
       return (
