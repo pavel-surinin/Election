@@ -18,6 +18,11 @@ public class CountyController {
     @Autowired
     CountyService service;
 
+    @GetMapping("county/{id}/name")
+    public String getName(@PathVariable Long id){
+        return service.getNameById(id);
+    }
+
     @GetMapping("/county")
     public List getCountyList(){
         return service.getAll();
@@ -48,6 +53,7 @@ public class CountyController {
 
     @DeleteMapping("/county/{id}")
     public boolean deletecounty(@PathVariable Long id){
+
         return service.delete(id);
     }
 

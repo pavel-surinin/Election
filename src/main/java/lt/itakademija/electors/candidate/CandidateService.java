@@ -49,11 +49,6 @@ public class CandidateService {
     }
 
     @Transactional
-    public boolean delete(Long id){
-        return repository.delete(id);
-    }
-
-    @Transactional
     public boolean deleteCandidatesByPartyId(Long id) {
         PartyEntity party = partyService.getPartyEntityById(id);
 
@@ -103,5 +98,15 @@ public class CandidateService {
 
     public List<CandidateEntity> getCandidatesByCounty(CountyEntity county){
         return repository.findByCounty(county);
+    }
+
+    @Transactional
+    public boolean delete(CandidateEntity c) {
+        return repository.delete(c);
+    }
+
+    @Transactional
+    public boolean delete(Long id){
+        return repository.delete(id);
     }
 }
