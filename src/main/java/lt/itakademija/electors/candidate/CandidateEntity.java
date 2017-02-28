@@ -39,17 +39,17 @@ public class CandidateEntity {
 
     private String description;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name= "COUNTY_ID")
     private CountyEntity county;
 
     @Column(nullable=false)
     private boolean isMultiList = true;
 
-    @OneToMany(mappedBy="candidate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="candidate", cascade = CascadeType.REMOVE)
     private List<ResultSingleEntity> results;
 
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.REMOVE)
     private List<RatingEntity> ratingPoints;
 
     public List<RatingEntity> getRatingPoints() {
