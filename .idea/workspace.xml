@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f73bc44c-a021-4e94-9d6c-5438e92ec20c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/h2/database-dev.lock.db" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/h2/database-dev.mv.db" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Election.iml" afterPath="$PROJECT_DIR$/Election.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/Application.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/CountyResultsComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/CountyResultsComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/CountyResultsMultiTableRow.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/CountyResultsMultiTableRow.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/DistrictResults.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/DistrictResults.js" />
-    </list>
+    <list default="true" id="f73bc44c-a021-4e94-9d6c-5438e92ec20c" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -391,12 +381,12 @@
       <option name="presentableId" value="Default" />
       <updated>1487861748820</updated>
       <workItem from="1487862435923" duration="3542000" />
-      <workItem from="1488272886590" duration="540000" />
+      <workItem from="1488272886590" duration="624000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4512000" />
+    <option name="totallyTimeSpent" value="4596000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
