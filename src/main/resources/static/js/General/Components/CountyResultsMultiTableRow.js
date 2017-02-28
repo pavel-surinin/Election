@@ -38,7 +38,7 @@ var CountyResultsMultiTableRow = React.createClass({
                               {rating.candidate.name} {rating.candidate.surname}
                             </td>
                             <td>
-                              {rating.votes}
+                              {rating.count}
                             </td>
                           </tr>
                       );
