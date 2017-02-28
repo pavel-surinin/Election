@@ -11,6 +11,7 @@ function getPartyMembersList(self) {
         description={member.description}
         numberInParty={member.numberInParty}
         countyName={member.countyName}
+        listType='membersList'
       />
     );
   });
@@ -19,11 +20,6 @@ function getPartyMembersList(self) {
 function getRatedPartyMembersList(self) {
   if (self.props.generalResults.votesInMulti != undefined) {
     var vip = self.props.generalResults.votesInMulti;
-    /*
-    for (var i = 0; i < party.members.length; i++) {
-      console.log(party.members[i]);
-      party.members[i]
-    } */
     var ratedMembersList =[];
     vip.forEach(function(obj){
         if(obj.par.id == self.props.pid){
@@ -38,6 +34,7 @@ function getRatedPartyMembersList(self) {
               description={member.description}
               numberInParty={member.numberInParty}
               countyName={member.countyName}
+              listType='ratedList'
               />
             );
           });
@@ -64,6 +61,7 @@ function getSingleWinnersByPartyList(self) {
               description={member.description}
               numberInParty={member.numberInParty}
               countyName={member.countyName}
+              listType='singleWinnersList'
               />
             );
           });
@@ -95,6 +93,7 @@ function getpartyWinnersMembersList(self, numberOfWinners) {
                   description={member.description}
                   numberInParty={member.numberInParty}
                   countyName={member.countyName}
+                  listType='multiWinnersList'
                   />
                 );
             });
@@ -108,115 +107,114 @@ function getMandatesPerParty(self) {
         var mandatesPerParty = null;
       self.props.generalResults.mandatesPerParty.forEach(function(obj){
         if(obj.par.id == self.props.pid){
-          console.log("mandatesPerParty");
-          console.log(obj.count);
-          mandatesPerParty= obj.count;
+          mandatesPerParty = obj.votes;
         }
         });
     return mandatesPerParty;
   }
 }
+
 var PartyDetailComponent = React.createClass({
   render: function() {
-    var mandatesPerParty = getMandatesPerParty(this);
-    var partyMembersList = getPartyMembersList(this);
-    var ratedMembersList = getRatedPartyMembersList(this);
-    var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
-    var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
+      var mandatesPerParty = getMandatesPerParty(this);
+      var partyMembersList = getPartyMembersList(this);
+      var ratedMembersList = getRatedPartyMembersList(this);
+      var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
+      var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
+      var ratedPartyStyle = styles.toggleResultNav(this.props.generalResults.votesInMulti);
+      var partyListStyle = styles.toggleResultNav(this.props.partyDetails.members);
+      var partyWinnersStyle = styles.toggleTableStyle(partyWinnersMembersList);
+      var singleWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList);
+      var noWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList && partyWinnersStyle);
+
     return (
-      <div className="col-md-12">
-        <div className="container"><h1 className='yellow'>Partija: {this.props.partyDetails.name}</h1>
+      <div>
+        <div className="container">
+          <h1 className='yellow'>Partija Nr: {this.props.partyDetails.partyNumber} - {this.props.partyDetails.name}  </h1>
         </div>
             {/* nav-pills  */}
             <ul  className="nav nav-pills secondmenu">
               <li className="active">
-                <a  href="#1a" data-toggle="tab">Partijos Informacija</a>
+                <a  href="#1a" data-toggle="tab">Partijos narių sąrašas</a>
               </li>
-              <li>
-                <a  href="#2a" data-toggle="tab">Pirminis Partijos narių sąrašas</a>
+              <li style={noWinnersStyle}>
+                <a  href="#2a" data-toggle="tab">Partijos laimėtojų sąrašas</a>
               </li>
-              <li>
+              <li style={ratedPartyStyle}>
                 <a  href="#3a" data-toggle="tab">Sureitinguotas Partijos narių sąrašas</a>
               </li>
             </ul>
             <div id="exTab1" className="container shadow">
               <div className="tab-content clearfix">
-                {/* General info tab-1 */}
+                {/* Party members list tab-1 */}
                 <div className="tab-pane active" id="1a">
-                    <span className='col-md-12 col-sm-12'>Partijos narių sąrašas daugiamandatėje patenkantis į seimą, pagal momentinius rezultatus. Tai ne galutinis sąrašas, kol rinkimai vis dar vyksta</span>
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th className='col-md-1 col-sm-1'>Nr.</th>
-                        <th className='col-md-2 col-sm-2'>Vardas</th>
-                        <th className='col-md-3 col-sm-3'>Pavardė</th>
-                        <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                        <th className='col-md-2 col-sm-1'>Aprašymas</th>
-                        <th className='col-md-2 col-sm-2'>Apygarda</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                          {partyWinnersMembersList}
-                    </tbody>
-                  </table>
-                    <span className='col-md-12 col-sm-12'>Partijos narių sąrašas vienmandatėje patenkantis į seimą, pagal momentinius rezultatus. Tai ne galutinis sąrašas, kol rinkimai vis dar vyksta</span>
-                  <table className="table table-striped">
-                    <thead>
-                      <tr>
-                        <th className='col-md-1 col-sm-1'>Nr.</th>
-                        <th className='col-md-2 col-sm-2'>Vardas</th>
-                        <th className='col-md-3 col-sm-3'>Pavardė</th>
-                        <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                        <th className='col-md-2 col-sm-1'>Aprašymas</th>
-                        <th className='col-md-2 col-sm-2'>Apygarda</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {singleWinnersByPartyList}
-                    </tbody>
-                  </table>
-                </div>
-                {/* Party members list tab-2 */}
-                <div className="tab-pane" id="2a">
                   <h3>Partijos narių sąrašas prieš rinkimus</h3>
-                  <div className='col-md-12'>
                     <table className="table table-striped">
                       <thead>
                         <tr>
                           <th className='col-md-1 col-sm-1'>Nr.</th>
-                          <th className='col-md-2 col-sm-2'>Vardas</th>
-                          <th className='col-md-3 col-sm-3'>Pavardė</th>
+                          <th className='col-md-5 col-sm-5'>Kandidatas</th>
                           <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                          <th className='col-md-2 col-sm-1'>Aprašymas</th>
-                          <th className='col-md-2 col-sm-2'>Apygarda</th>
+                          <th className='col-md-4 col-sm-4'>Apygarda</th>
                         </tr>
                       </thead>
                       <tbody>
                         {partyMembersList}
                       </tbody>
                     </table>
-                  </div>
                 </div>
+                {/* General info tab-2 */}
+                <div className="tab-pane" id="2a">
+                    <div style={partyWinnersStyle}>
+                        <h3>Laimėjusių narių sąrašas daugiamandatėje</h3>
+                      <table className="table table-striped">
+                        <thead>
+                          <tr>
+                            <th className='col-md-1 col-sm-1'>Nr.</th>
+                            <th className='col-md-5 col-sm-5'>Kandidatas</th>
+                            <th className='col-md-2 col-sm-2'>Gimimo data</th>
+                            <th className='col-md-4 col-sm-4'>Apygarda</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                              {partyWinnersMembersList}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div style={singleWinnersStyle}>
+                        <h3>Laimėjusių narių sąrašas vienmandatėje</h3>
+                      <table className="table table-striped">
+                          <thead>
+                            <tr>
+                              <th className='col-md-1 col-sm-1'>Nr.</th>
+                              <th className='col-md-5 col-sm-5'>Kandidatas</th>
+                              <th className='col-md-2 col-sm-2'>Gimimo data</th>
+                              <th className='col-md-4 col-sm-4'>Apygarda</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {singleWinnersByPartyList}
+                          </tbody>
+                      </table>
+                    </div>
+                </div>
+
                 {/* Single candidates list tab-3 */}
                 <div className="tab-pane" id="3a">
-                  <h3>Partijos narių sąrašas pagal gautus reitingų rezultatus</h3>
-                  <div className='col-md-12'>
+                  <h3>Narių sąrašas pagal reitingų rezultatus</h3>
                     <table className="table table-striped">
                       <thead>
                         <tr>
                           <th className='col-md-1 col-sm-1'>Nr.</th>
-                          <th className='col-md-5 col-sm-3'>Vardas</th>
-                          <th className='col-md-2 col-sm-2'>Partija</th>
+                          <th className='col-md-5 col-sm-5'>Kandidatas</th>
                           <th className='col-md-2 col-sm-2'>Gimimo data</th>
-                          <th className='col-md-2 col-sm-2'>Aprašymas</th>
-                          <th className='col-md-2 col-sm-2'>Apygarda</th>
+                          <th className='col-md-4 col-sm-4'>Apygarda</th>
                         </tr>
                       </thead>
                       <tbody>
                         {ratedMembersList}
                       </tbody>
                     </table>
-                  </div>
                 </div>
               </div>
             </div>
