@@ -52,19 +52,19 @@ var chartDataMapper = {
     }
   },
   getDataCountyMulti :
-      function(results){
-          if (results.votesByParty) {
-              var labels = results.votesByParty.map(function(pid){
-                  return pid.par.name;
-              });
-              var votes = results.votesByParty.map(function(pid){
-                  return pid.votes;
-              });
-              return {labels : labels, votes : votes};
-          } else {
-              return null;
-          }
-      },
+  function(results){
+    if (results.votesByParty) {
+      var labels = results.votesByParty.map(function(pid){
+        return pid.par.name;
+      });
+      var votes = results.votesByParty.map(function(pid){
+        return pid.votes;
+      });
+      return {labels : labels, votes : votes};
+    } else {
+      return null;
+    }
+  },
   getDataSingle :
   function(results){
     if (results.votesByCandidate) {
@@ -79,16 +79,30 @@ var chartDataMapper = {
       return null;
     }
   },
-
+  getDataPartyLive :
+  function(results){
+    if (results) {
+      var labels = results.mandatesPerPartyGeneralLive.map(function(line){
+        return line.name;
+      });
+      var votes = results.mandatesPerPartyGeneralLive.map(function(line){
+        return line.number;
+      });
+      return {labels : labels, votes : votes};
+    } else {
+      return {labels : [], votes : []};
+    }
+  },
 };
 var chartss = {
   bar : function(alignment,ctx,data,electionType){
     //bar or horizontalBar
     //var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
-      var mdata =[];
-      if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
-      if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
-      if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
+    var mdata =[];
+    if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
+    if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
+    if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
+    if (electionType =='PartyLive'){mdata = chartDataMapper.getDataPartyLive(data);}
     var myChart = new Chart(ctx, {
       type: alignment,
       data: {
@@ -115,9 +129,9 @@ var chartss = {
   },
   pie : function(ctx,data,electionType){
     var mdata =[];
-      if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
-      if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
-      if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
+    if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
+    if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
+    if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
     var myChart = new Chart(ctx,{
       type: 'pie',
       data: {
@@ -142,7 +156,33 @@ var chartss = {
     });
     return myChart;
   },
-
+  doghnut : function(ctx,data,electionType) {
+    var mdata =[];
+    if (electionType =='DistrictsProgress'){mdata = data;}
+    var myDoughnutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: mdata.labels,
+        datasets: [
+          {
+            data: mdata.votes,
+            backgroundColor: borderColorArr.slice(1, mdata.labels.length+1),
+            hoverBackgroundColor: borderColorArr.slice(1, mdata.labels.length+1),
+          }]
+      },
+      //Chart.defaults.global.legend
+      options: {
+        legend: {
+          position : 'bottom',
+          display: true,
+          labels: {
+            fontColor: '#333333'
+          }
+        }
+      }
+    });
+    return myDoughnutChart;
+  },
 };
 
 window.chartss = chartss;
