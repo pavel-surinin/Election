@@ -20,9 +20,27 @@ public class ResultsGeneralReport {
     private Integer votesCount;
     private Integer spoiledMulti;
     private Integer spoiledSingle;
+    private Integer districtsCount;
+    private Integer districtsVoted;
 
     public Integer getVotersCount() {
         return votersCount;
+    }
+
+    public Integer getDistrictsCount() {
+        return districtsCount;
+    }
+
+    public void setDistrictsCount(Integer districtsCount) {
+        this.districtsCount = districtsCount;
+    }
+
+    public Integer getDistrictsVoted() {
+        return districtsVoted;
+    }
+
+    public void setDistrictsVoted(Integer districtsVoted) {
+        this.districtsVoted = districtsVoted;
     }
 
     public void setVotersCount(Integer votersCount) {

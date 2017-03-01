@@ -304,7 +304,7 @@ public class ResultsService {
 
     public ResultsGeneralReport formGeneralResults() {
         ResultsGeneralReport report = new ResultsGeneralReport();
-        int sumOfVotes = resultMultiRepository.findAll().stream().mapToInt(r -> r.getVotes().intValue()).sum();
+        final int sumOfVotes = resultMultiRepository.findAll().stream().mapToInt(r -> r.getVotes().intValue()).sum();
         List<DistrictEntity> allDistricts = districtRepository.findAll();
         int spoiledMulti = allDistricts.stream().filter(d -> d.getSpoiledMulti() != null).mapToInt(DistrictEntity::getSpoiledMulti).sum();
         int spoiledSingle = allDistricts.stream().filter(d -> d.getSpoiledSingle() != null).mapToInt(DistrictEntity::getSpoiledSingle).sum();
@@ -339,6 +339,11 @@ public class ResultsService {
                 .get()).flatMap(Collection::stream).collect(Collectors.toList());
         report.setMultiWinners(multiWinnersList);
         setGeneralReport(report);
+
+        int districtCount = allDistricts.size();
+        report.setDistrictsCount(districtCount);
+        int districtVoted = allDistricts.stream().filter(d -> d.getResultMultiEntity().size() != 0 && d.getResultSingleEntity().size() != 0).collect(Collectors.toList()).size();
+        report.setDistrictsVoted(districtVoted);
         return report;
     }
 
