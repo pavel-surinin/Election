@@ -450,6 +450,8 @@ public class ResultsService {
                     candidatesNewRatingOrder.addAll(candidatesOrderOriginal);
                     List<CandidateEntity> finalModifiedList = new ArrayList<>();
                     for (int i = 0; i < candidatesNewRatingOrder.size(); i++) {
+                        PartyEntity partyEntity = new PartyEntity();
+                        partyEntity.setName(p.getName());
                         CandidateEntity candidate = new CandidateEntity();
                         candidate.setBirthDate(candidatesNewRatingOrder.get(i).getBirthDate());
                         candidate.setCounty(candidatesNewRatingOrder.get(i).getCounty());
@@ -459,6 +461,7 @@ public class ResultsService {
                         candidate.setMultiList(candidatesNewRatingOrder.get(i).isMultiList());
                         candidate.setSurname(candidatesNewRatingOrder.get(i).getSurname());
                         candidate.setNumberInParty(i + 1);
+                        candidate.setPartyDependencies(partyEntity);
                         finalModifiedList.add(candidate);
 
                     }
