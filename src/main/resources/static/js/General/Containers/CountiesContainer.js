@@ -23,6 +23,7 @@ var CountiesContainer = React.createClass({
         getCounties(this);
     },
     render: function() {
+      document.title='Apygardos Rinkimai 2017';
         if (this.state.isLoading) {
             return (
                 <div>

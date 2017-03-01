@@ -43,6 +43,7 @@ var PartyContainer = React.createClass({
     getParties(this);
   },
   render: function() {
+    document.title='Administratoriaus Partijų Vaizdas Rinkimai 2017';
     if (this.state.isLoading) {
       return (
         <div>

@@ -176,6 +176,7 @@ var MultiResultContainer = React.createClass({
     }
   },
   render: function() {
+    document.title='Atstovo Daugiamandatės Rezultatai Vaizdas Rinkimai 2017';
     if (this.state.isLoading) {
       return <div><img src='/images/loading.gif'/></div>;
     }
