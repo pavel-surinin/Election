@@ -21,9 +21,12 @@ public class ResultsGeneralReport {
     private Integer spoiledMulti;
     private Integer spoiledSingle;
 
+
     public Integer getVotersCount() {
         return votersCount;
     }
+
+
 
     public void setVotersCount(Integer votersCount) {
         this.votersCount = votersCount;
