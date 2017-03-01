@@ -25,6 +25,21 @@ function getDistrict(self,page) {
       console.error('DistrictListContainer.getDistrict.axios.get.district', err);
     });
 }
+
+function getDistrictByLetter(self,letter) {
+  axios
+    .get('/district/' + letter + '/letter')
+    .then(function(response){
+      EventEmitter.publish({ eventType: 'LogCounty' });
+      self.setState({
+        districtList :  response.data,
+        isLoading : false,
+      });
+    })
+    .catch(function(err){
+      console.error('DistrictListContainer.getDistrict.axios.get.district', err);
+    });
+}
 var DistrictListContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -33,12 +48,15 @@ var DistrictListContainer = React.createClass({
       deleteDistrictName : '',
       page : 0,
       districtsCount : 0,
+      letter : 'a',
     };
   },
   componentDidMount: function() {
     if (this.props.location.query.page != null) {
       getDistrictsCount(this);
       getDistrict(this, this.props.location.query.page);
+    } else if(this.props.location.query.letter != null){
+      getDistrictByLetter(this, this.props.location.query.letter);
     } else {
       getDistrictsCount(this);
       getDistrict(this, this.state.page);
@@ -48,10 +66,13 @@ var DistrictListContainer = React.createClass({
     }
   },
   componentWillReceiveProps: function(nextProps) {
-    if (this.props.location.query.page != null) {
+    if (nextProps.location.query.page != null) {
       getDistrictsCount(this);
       getDistrict(this, nextProps.location.query.page);
       this.setState({page : nextProps.location.query.page});
+    } else if(nextProps.location.query.letter != null){
+      getDistrictByLetter(this, nextProps.location.query.letter);
+      this.setState({letter : nextProps.location.query.letter});
     } else {
       getDistrictsCount(this);
       getDistrict(this, this.state.page);

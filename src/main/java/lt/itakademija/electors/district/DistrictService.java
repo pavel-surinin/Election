@@ -7,6 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,5 +96,13 @@ public class DistrictService {
 
     public Integer getNumberOfDistricts() {
         return repository.getDistrictsCount().intValue();
+    }
+
+    public List getDistictsByFirstLetter(String letter) {
+        return repository.getByFirstLetter(letter.toUpperCase())
+                .stream()
+                .map(DistrictReport::new)
+                .sorted(Comparator.comparing(DistrictReport::getCountyName))
+                .collect(Collectors.toList());
     }
 }

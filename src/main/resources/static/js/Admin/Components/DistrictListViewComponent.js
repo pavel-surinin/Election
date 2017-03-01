@@ -35,6 +35,10 @@ function mod(self){
         pagination.push(<li><a href={'#/admin/district/?page=' + i}>{i+1}</a></li>);
       }
     }
+    var alphabet = 'aąbcčdeęėfghiįyjklmnoprsštuųūvzž'.split('');
+    var alphs = alphabet.map(function(letter){
+      return <li><a href={'#/admin/district/?letter=' + letter}>{letter}</a></li>;
+    });
     return (
           <div className='panel panel-default'>
             <div className='panel-heading' style={{paddingTop:20,paddingBottom:20}}>
@@ -50,6 +54,16 @@ function mod(self){
               <div className='panel-body'>
                 {succesCreateMessage}
                 {deleteDistrictMessage}
+                <div className='paginatorCustom'>
+                  <ul className="pagination pagination-sm">
+                    {pagination}
+                  </ul>
+                </div>
+                <div className='paginatorCustom'>
+                  <ul className="pagination pagination-sm">
+                    {alphs}
+                  </ul>
+                </div>
               </div>
                 <table className='table table-striped table-hover'>
                 <thead>
@@ -81,6 +95,11 @@ function mod(self){
               <div className='paginatorCustom'>
                 <ul className="pagination pagination-sm">
                   {pagination}
+                </ul>
+              </div>
+              <div className='paginatorCustom'>
+                <ul className="pagination pagination-sm">
+                  {alphs}
                 </ul>
               </div>
             </div>
