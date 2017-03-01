@@ -14,11 +14,27 @@ function getSingleWinners(self){
   }
     return singleWinners;
 }
+function getMultiWinners(self){
+  var multiWinners = [];
+  if(self.props.results.multiWinners){
+    multiWinners = self.props.results.multiWinners.map(function(mid,index){
+      return(
+        <tr key={index}>
+          <td>{mid.name + ' ' + mid.surname}</td>
+          <td>{mid.partijosPavadinimas}</td>
+          <td>{mid.numberInParty}</td>
+        </tr>
+      );
+    });
+    return multiWinners;
+  }
+
+}
 function showSingleWinners(self){
   var singleWinners = getSingleWinners(self);
-  if(self.props.results){
-    if(self.props.results.districtsVoted == self.props.results.districtsCount){
-      return(
+  if (self.props.results) {
+    if (self.props.results.districtsVoted == self.props.results.districtsCount) {
+      return (
         <div className="panel panel-default" style={{borderRadius: '1px'}}>
           <div className="panel-heading" role="tab" id="headingSix">
             <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
@@ -44,22 +60,66 @@ function showSingleWinners(self){
               </table>
               <div className="pull-right">
                 <i className="fa fa-compress" role="button" data-toggle="collapse"
-                   href="#collapseSix" aria-expanded="false" aria-controls="collapseSix" style={{transform: 'rotate(-45deg)'}}></i>
+                   href="#collapseSix" aria-expanded="false" aria-controls="collapseSix"
+                   style={{transform: 'rotate(-45deg)'}}></i>
               </div>
             </div>
           </div>
 
         </div>
       );
-      } else {
-        return null;
-      }
     } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
+function showMultiWinners(self){
+  var multiWinners = getMultiWinners(self);
+  if(self.props.results){
+    if(self.props.results.districtsVoted == self.props.results.districtsCount){
+      return(
+        <div className="panel panel-default" style={{borderRadius: '1px'}}>
+          <div className="panel-heading" role="tab" id="headingFour">
+            <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
+                href="#collapseFour" aria-expanded="false" aria-controls="collapseFour" ref='title' id='heading'>
+              Daugiamandates nugaletoju sarasas
+              <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
+            </h4>
+          </div>
+          <div id="collapseFour" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+            <div className="panel-body">
+              <table className="table table-striped">
+                <thead>
+                <tr>
+                  <th className='col-md-4 col-sm-4'>Kandidatas</th>
+                  <th className='col-md-4 col-sm-4'>Partija</th>
+                  <th className='col-md-4 col-sm-4'>Numeris partijoje</th>
+                </tr>
+                </thead>
+                <tbody>
+                {multiWinners}
+                </tbody>
+              </table>
+              <div className="pull-right">
+                <i className="fa fa-compress" role="button" data-toggle="collapse"
+                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+                   style={{transform: 'rotate(-45deg)'}}></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      );
+    } else {
+      return null;
+    }
+  } else {
     return null;
   }
 
-  }
-
+}
 function prepareCanvas(chartType,electionType){
   var sp1 = document.createElement('canvas');
   sp1.id = 'canvas' + chartType + electionType;
@@ -87,8 +147,11 @@ var GeneralresultsComponent = React.createClass({
     };
     chartss.doghnut(document.getElementById('canvasDoghnutVoters'), votersData, 'DistrictsProgress');
   },
+
   render: function() {
     console.log('GeneralresultsComponent',this);
+    var MultiWinnersTable = showMultiWinners(this);
+    var SingleWinnersTable = showSingleWinners(this);
     return (
       <div className='container'>
         <h1 className='yellow'>Rezultatai</h1>
@@ -153,26 +216,7 @@ var GeneralresultsComponent = React.createClass({
               </div>
             </div>
           </div>
-          {/*VOTING PROGRESS DONUT END*/}
-
-          <div className="panel panel-default" style={{borderRadius: '1px'}}>
-
-            <div className="panel-heading" role="tab" id="headingFour">
-              <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
-                   href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                  Daugiamandates isrinktuju sarasas
-                  <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
-
-              </h4>
-            </div>
-
-            <div id="collapseFour" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-
-              <div className="panel-body">
-                Kas praejo daugiamandateje.
-              </div>
-            </div>
-          </div>
+          {MultiWinnersTable}
           <div className="panel panel-default" style={{borderRadius: '1px'}}>
 
             <div className="panel-heading" role="tab" id="headingFive">
@@ -190,7 +234,7 @@ var GeneralresultsComponent = React.createClass({
               </div>
             </div>
           </div>
-          {showSingleWinners(this)}
+          {SingleWinnersTable}
         </div>
       </div>
     );
