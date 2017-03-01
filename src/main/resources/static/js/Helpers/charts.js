@@ -79,8 +79,8 @@ var chartDataMapper = {
       return null;
     }
   },
-};
 
+};
 var chartss = {
   bar : function(alignment,ctx,data,electionType){
     //bar or horizontalBar
@@ -141,7 +141,8 @@ var chartss = {
       }
     });
     return myChart;
-  }
+  },
+
 };
 
 window.chartss = chartss;

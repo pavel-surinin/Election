@@ -12,6 +12,7 @@ function getGeneralResults(self) {
   });
 }
 
+
 var GeneralResultsContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -27,6 +28,7 @@ var GeneralResultsContainer = React.createClass({
   },
   render: function() {
     document.title='Rezultatai Rinkimai 2017';
+
     if (this.state.isLoading) {
       return <div><img src='images/loading.gif'/></div>;
     }
