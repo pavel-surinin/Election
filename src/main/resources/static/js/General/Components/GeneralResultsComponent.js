@@ -45,7 +45,7 @@ function showSingleWinners(self){
           </div>
           <div id="collapseSix" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
             <div className="panel-body">
-              <table className="table table-striped">
+              <table width="100%" className="table table-striped" id="responsive-table1">
                 <thead>
                 <tr>
                   <th className='col-md-4 col-sm-4'>Kandidatas</th>
@@ -90,7 +90,7 @@ function showMultiWinners(self){
           </div>
           <div id="collapseFour" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
             <div className="panel-body">
-              <table className="table table-striped">
+              <table width="100%" className="table table-striped" id="responsive-table2">
                 <thead>
                 <tr>
                   <th className='col-md-4 col-sm-4'>Kandidatas</th>
@@ -148,6 +148,26 @@ var GeneralresultsComponent = React.createClass({
     chartss.doghnut(document.getElementById('canvasDoghnutVoters'), votersData, 'DistrictsProgress');
   },
 
+  componentDidMount: function(){
+    $(document).ready(function() {
+      $('#responsive-table1').DataTable({
+        language: {
+          url: 'lithuanian.json'
+        },
+        paging: false,
+        responsive: true,
+        searching: false,
+      });
+      $('#responsive-table2').DataTable({
+        language: {
+          url: 'lithuanian.json'
+        },
+        paging: false,
+        responsive: true,
+        searching: false,
+      });
+    });
+  },
   render: function() {
     console.log('GeneralresultsComponent',this);
     var MultiWinnersTable = showMultiWinners(this);
@@ -217,23 +237,6 @@ var GeneralresultsComponent = React.createClass({
             </div>
           </div>
           {MultiWinnersTable}
-          <div className="panel panel-default" style={{borderRadius: '1px'}}>
-
-            <div className="panel-heading" role="tab" id="headingFive">
-              <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
-                  href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                  Galutinis sarasas
-                  <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
-              </h4>
-            </div>
-
-            <div id="collapseFive" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-
-              <div className="panel-body">
-                Sarasas su visais seimunais.
-              </div>
-            </div>
-          </div>
           {SingleWinnersTable}
         </div>
       </div>
