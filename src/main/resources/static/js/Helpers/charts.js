@@ -79,7 +79,6 @@ var chartDataMapper = {
       return null;
     }
   },
-
 };
 var chartss = {
   bar : function(alignment,ctx,data,electionType){

@@ -292,4 +292,18 @@ body {
   margin: 20px auto;
 }
 
+.panel-title.active > .fa-sort-desc{
+    transition: 0.4s;
+    transform: rotate(-90deg);
+}
+
+h4.panel-title > i{
+    transition: 0.4s;
+    transform: rotate(-90deg);
+     }
+h4.panel-title.collapsed > i{
+    transition: 0.4s;
+    transform: rotate(0deg);
+}
+
 /* PAGINATION END*/
