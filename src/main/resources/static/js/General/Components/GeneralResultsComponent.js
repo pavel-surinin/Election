@@ -11,12 +11,19 @@ var GeneralresultsComponent = React.createClass({
     chartss.bar('horizontalBar', document.getElementById('canvasBarPartyLive'), this.props.results, 'PartyLive');
   },
   loadDoghnutDistrict : function() {
+    var res = this.props.results;
     prepareCanvas('Doghnut', 'District');
     var data = {
       labels : ['Prabalsavusios apylinkės', 'Nebelsavusios apylinkės'],
-      votes : [this.props.results.districtsVoted, (this.props.results.districtsCount - this.props.results.districtsVoted)]
+      votes : [res.districtsVoted, (res.districtsCount - res.districtsVoted)]
     };
-    chartss.doghnut(document.getElementById('DoghnutDistrict'), data, 'DistrictsProgress');
+    chartss.doghnut(document.getElementById('canvasDoghnutDistrict'), data, 'DistrictsProgress');
+    prepareCanvas('Doghnut', 'Voters');
+    var votersData = {
+      labels : ['Rinkėjų skaičius','Prabalsavo rinkėjų'],
+      votes : [res.votersCount,(res.votersCount - res.votesCount)],
+    };
+    chartss.doghnut(document.getElementById('canvasDoghnutVoters'), votersData, 'DistrictsProgress');
   },
   render: function() {
     console.log('GeneralresultsComponent',this);
@@ -60,6 +67,9 @@ var GeneralresultsComponent = React.createClass({
               <div className="panel-body">
                 <div className='chartContainer col-md-6' id='parentDoghnutDistrict'>
                   <canvas id='canvasDoghnutDistrict'></canvas>
+                </div>
+                <div className='chartContainer col-md-6' id='parentDoghnutVoters'>
+                  <canvas id='canvasDoghnutVoters'></canvas>
                 </div>
               </div>
             </div>

@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultsGeneralReport.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/reports/ResultsGeneralReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRespesentativeListViewRowComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Admin/Components/DistrictRespesentativeListViewRowComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/DistrictResults.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/DistrictResults.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/GeneralResultsComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/GeneralResultsComponent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Containers/DistrictResultsContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Containers/DistrictResultsContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Containers/GeneralResultsContainer.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Containers/GeneralResultsContainer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/charts.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/charts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/index.jsx" afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.jsx" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -756,7 +749,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
