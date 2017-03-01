@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="060451d3-70df-4d04-9328-034888eb7396" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" afterPath="$PROJECT_DIR$/src/main/java/lt/itakademija/electors/results/ResultsService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/GeneralResultsComponent.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/General/Components/GeneralResultsComponent.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/charts.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/Helpers/charts.js" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -106,7 +106,14 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+              <folding>
+                <marker date="1488385615774" expanded="true" signature="59:95709" ph="..." />
+                <marker date="1488385615774" expanded="true" signature="98:192" ph="..." />
+                <marker date="1488385615774" expanded="true" signature="95635:95652" ph="..." />
+                <marker date="1488385615774" expanded="true" signature="95635:95670" ph="..." />
+                <marker date="1488385615774" expanded="true" signature="95635:95683" ph="..." />
+                <marker date="1488385615774" expanded="true" signature="95635:95698" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1094,9 +1101,9 @@
         <state relative-caret-position="188">
           <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
-            <element signature="e#430#431#0" expanded="true" />
-            <element signature="e#482#483#0" expanded="true" />
-            <element signature="e#1280#1281#0" expanded="true" />
+            <element signature="e#430#431#0" expanded="false" />
+            <element signature="e#482#483#0" expanded="false" />
+            <element signature="e#1280#1281#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1138,7 +1145,7 @@
         <state relative-caret-position="163">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
-            <element signature="e#618#619#0" expanded="true" />
+            <element signature="e#618#619#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1187,7 +1194,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1488385615774" expanded="true" signature="59:95709" ph="..." />
+            <marker date="1488385615774" expanded="true" signature="98:192" ph="..." />
+            <marker date="1488385615774" expanded="true" signature="95635:95652" ph="..." />
+            <marker date="1488385615774" expanded="true" signature="95635:95670" ph="..." />
+            <marker date="1488385615774" expanded="true" signature="95635:95683" ph="..." />
+            <marker date="1488385615774" expanded="true" signature="95635:95698" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

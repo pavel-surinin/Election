@@ -59,7 +59,6 @@ function showSingleWinners(self){
   }
 
   }
-
 function prepareCanvas(chartType,electionType){
   var sp1 = document.createElement('canvas');
   sp1.id = 'canvas' + chartType + electionType;
@@ -82,19 +81,28 @@ var GeneralresultsComponent = React.createClass({
     chartss.doghnut(document.getElementById('canvasDoghnutDistrict'), data, 'DistrictsProgress');
     prepareCanvas('Doghnut', 'Voters');
     var votersData = {
-      labels : ['Rinkėjų skaičius','Prabalsavo rinkėjų'],
-      votes : [res.votersCount,(res.votersCount - res.votesCount)],
+      labels : ['Prabalsavo rinkėjų','Nebalsavo'],
+      votes : [res.votesCount,(res.votersCount - res.votesCount)],
     };
     chartss.doghnut(document.getElementById('canvasDoghnutVoters'), votersData, 'DistrictsProgress');
+  },
+  componentDidMount: function() {
+    this.loadDoghnutDistrict();
+  },
+  componentWillReceiveProps: function(nextProps) {
+    this.loadDoghnutDistrict();
+  },
+  shouldComponentUpdate: function(nextProps, nextState) {
+    console.log(this);
+    console.log(nextProps);
+    console.log(nextState);
   },
   render: function() {
     console.log('GeneralresultsComponent',this);
     return (
       <div className='container'>
         <h1 className='yellow'>Rezultatai</h1>
-
         <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-        {/*PARTY LIVE CHART START*/}
           <div className="panel panel-default" style={{borderRadius: '1px'}}>
             <div className="panel-heading" role="tab" id="headingOne">
 
@@ -105,18 +113,16 @@ var GeneralresultsComponent = React.createClass({
               </h4>
             </div>
 
-            <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div id="collapseOne" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 
               <div className="panel-body">
                 {/*chart bar*/}
                 <div className='chartContainer col-md-12' id='parentBarPartyLive'>
                   <canvas id='canvasBarPartyLive'></canvas>
                 </div>
-                Superlivegrafikas ouououou
               </div>
             </div>
           </div>
-
 
           <div className="panel panel-default" style={{borderRadius: '1px'}}>
             <div className="panel-heading" role="tab" id="headingTwo">
@@ -142,18 +148,40 @@ var GeneralresultsComponent = React.createClass({
                   <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
               </h4>
             </div>
-            <div id="collapseThree" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div id="collapseThree" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
               <div className="panel-body">
-                <div className='chartContainer col-md-6' id='parentDoghnutDistrict'>
+                <div className='chartContainer col-md-4' id='parentDoghnutDistrict'>
+                <h3>Apylinkių balsavimo progresas</h3>
                   <canvas id='canvasDoghnutDistrict'></canvas>
                 </div>
-                <div className='chartContainer col-md-6' id='parentDoghnutVoters'>
+                <div className='col-md-4'>
+
+                <table className="table table-striped">
+                  <thead>
+                  <tr>
+                    <th className='col-md-4 col-sm-6'>Kandidatas</th>
+                    <th className='col-md-3 col-sm-6'>Skaičius</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                    super
+                    </td>
+                    <td>
+                    10
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+                </div>
+                <div className='chartContainer col-md-4' id='parentDoghnutVoters'>
+                  <h3>Rinkėjų balsavimo aktyvumas</h3>
                   <canvas id='canvasDoghnutVoters'></canvas>
                 </div>
               </div>
             </div>
           </div>
-          {/*VOTING PROGRESS DONUT END*/}
 
           <div className="panel panel-default" style={{borderRadius: '1px'}}>
 
