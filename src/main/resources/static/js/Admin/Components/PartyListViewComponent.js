@@ -1,14 +1,4 @@
 var PartyListViewComponent = React.createClass({
-    componentDidMount: function(){
-      $(document).ready(function() {
-        $('#searchable-table').DataTable({
-          language: {
-            url: 'lithuanian.json'
-          },
-          responsive: true
-        });
-      });
-    },
   render: function() {
     var succesCreateMessage = alerts.showSuccesFixed(this.props.succesCreateText);
     var deletePartyMessage = alerts.showDangerFixed(this.props.deletedPartyText);
@@ -53,7 +43,7 @@ var PartyListViewComponent = React.createClass({
                       <th>
                         Veiksmai
                       </th>
-                  
+
                     </tr>
                   </thead>
                   <tbody>

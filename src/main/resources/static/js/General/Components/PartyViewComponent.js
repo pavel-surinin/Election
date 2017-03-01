@@ -15,17 +15,17 @@ var PartyViewComponent = React.createClass({
     });
     return (
         <div>
-          <div className="container"><h1>Rinkimuose dalyvaujančių Partijų sąrašas</h1>
+          <div className="container">
+            <h1 className='yellow'> Partijų sąrašas</h1>
           </div>
-          <div className="panel panel-default">
-            <div className="panel-body">
-              <table className="table table-striped">
+          <div id="exTab1" className="container shadow">
+            <div className="tab-content clearfix">
+              <table width="100%" className="table table-striped table-hover" id="dataTables-example">
                 <thead>
                   <tr>
-                    <th className='col-md-2 col-sm-2'>Nr.</th>
-                    <th className='col-md-5 col-sm-5'>Partijos pavadinimas</th>
-                    <th className='col-md-2 col-sm-2'>Narių skaičius</th>
-                    <th className='col-md-1 col-sm-1'></th>
+                    <th className='col-md-1 col-sm-1'>Nr.</th>
+                    <th className='col-md-7 col-sm-7'>Partijos pavadinimas</th>
+                    <th className='col-md-4 col-sm-4'>Narių skaičius</th>
                   </tr>
                 </thead>
                 <tbody>

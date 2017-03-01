@@ -2,6 +2,8 @@ package lt.itakademija.electors.district;
 
 import lt.itakademija.exceptions.DistrictCloneException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -15,6 +17,9 @@ public class DistrictService {
 
     @Autowired
     DistrictRepository repository;
+
+    @Autowired
+    DistrictPagingAndSortingRepository pageRepository;
 
     public List<DistrictReport> getDistrictsList() {
         List<DistrictEntity> list = repository.findAll();
@@ -80,5 +85,10 @@ public class DistrictService {
 
     public String getNameById(Long id) {
         return repository.findById(id).getName();
+    }
+
+    public List getDistictsByPage(Long id) {
+        List<DistrictEntity> content = pageRepository.findAll(new PageRequest(id.intValue(), 20)).getContent();
+        return content.stream().map(d -> new DistrictReport(d)).collect(Collectors.toList());
     }
 }
