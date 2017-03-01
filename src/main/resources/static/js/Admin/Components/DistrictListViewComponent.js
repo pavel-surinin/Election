@@ -69,9 +69,6 @@ function mod(self){
                 <thead>
                 <tr>
                   <th>
-                    Eil. Nr.
-                  </th>
-                  <th>
                     Pavadinimas
                   </th>
                   <th>
