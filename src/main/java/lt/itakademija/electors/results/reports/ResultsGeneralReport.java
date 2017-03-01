@@ -3,6 +3,7 @@ package lt.itakademija.electors.results.reports;
 import lt.itakademija.electors.candidate.CandidateReport;
 import lt.itakademija.electors.results.reports.dto.CandidateIntDTO;
 import lt.itakademija.electors.results.reports.dto.PartyIntDTO;
+import lt.itakademija.electors.results.reports.dto.StringLongDTO;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class ResultsGeneralReport {
     private List<CandidateIntDTO> singleWinners;
     private List<CandidateReport> multiWinners;
     private List<PartyIntDTO> votesInMulti;
-    private List<PartyIntDTO> mandatesPerParty;
+    private List<PartyIntDTO> mandatesPerPartyInMulti;
     private List<PartyIntDTO> partiesOverMinimumLine;
     private Integer votersCount;
     private Integer votesCount;
@@ -22,9 +23,18 @@ public class ResultsGeneralReport {
     private Integer spoiledSingle;
     private Integer districtsCount;
     private Integer districtsVoted;
+    private List<StringLongDTO> mandatesPerPartyGeneralLive;
 
     public Integer getVotersCount() {
         return votersCount;
+    }
+
+    public List<StringLongDTO> getMandatesPerPartyGeneralLive() {
+        return mandatesPerPartyGeneralLive;
+    }
+
+    public void setMandatesPerPartyGeneralLive(List<StringLongDTO> mandatesPerPartyGeneralLive) {
+        this.mandatesPerPartyGeneralLive = mandatesPerPartyGeneralLive;
     }
 
     public Integer getDistrictsCount() {
@@ -103,12 +113,12 @@ public class ResultsGeneralReport {
         this.votesInMulti = votesInMulti;
     }
 
-    public List<PartyIntDTO> getMandatesPerParty() {
-        return mandatesPerParty;
+    public List<PartyIntDTO> getMandatesPerPartyInMulti() {
+        return mandatesPerPartyInMulti;
 
     }
 
-    public void setMandatesPerParty(List<PartyIntDTO> mandatesPerParty) {
-        this.mandatesPerParty = mandatesPerParty;
+    public void setMandatesPerPartyInMulti(List<PartyIntDTO> mandatesPerPartyInMulti) {
+        this.mandatesPerPartyInMulti = mandatesPerPartyInMulti;
     }
 }

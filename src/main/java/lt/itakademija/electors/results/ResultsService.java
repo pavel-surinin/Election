@@ -20,6 +20,7 @@ import lt.itakademija.electors.results.reports.ResultDistrictReport;
 import lt.itakademija.electors.results.reports.ResultsGeneralReport;
 import lt.itakademija.electors.results.reports.dto.CandidateIntDTO;
 import lt.itakademija.electors.results.reports.dto.PartyIntDTO;
+import lt.itakademija.electors.results.reports.dto.StringLongDTO;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -323,7 +324,7 @@ public class ResultsService {
 
         int sumPartyVotesOverLine = partiesOverMinimumLine.stream().mapToInt(PartyIntDTO::getVotes).sum();
         List<PartyIntDTO> mandatesPerParty = getMandatesPerParty(partiesOverMinimumLine, sumPartyVotesOverLine);
-        report.setMandatesPerParty(mandatesPerParty);
+        report.setMandatesPerPartyInMulti(mandatesPerParty);
 
         List<CandidateReport> multiWinnersList = mandatesPerParty.stream().map(m -> votesInMulti.stream()
                 .filter(v -> v.getPar().getId() == m.getPar().getId())
@@ -344,6 +345,24 @@ public class ResultsService {
         report.setDistrictsCount(districtCount);
         int districtVoted = allDistricts.stream().filter(d -> d.getResultMultiEntity().size() != 0 && d.getResultSingleEntity().size() != 0).collect(Collectors.toList()).size();
         report.setDistrictsVoted(districtVoted);
+
+        List<StringLongDTO> multiMandatesPerParty = report.getMandatesPerPartyInMulti()
+                .stream()
+                .map(p -> new StringLongDTO(p.getPar().getName(), p.getVotes().longValue()))
+                .collect(Collectors.toList());
+        List<StringLongDTO> singleMandatesPerParty = report.getSingleWinners()
+                .stream()
+                .filter(d->d.getCandidate().getPartijosPavadinimas() != null)
+                .map(c -> new StringLongDTO(c.getCandidate().getPartijosPavadinimas(), 1L))
+                .collect(Collectors.toList());
+        multiMandatesPerParty.addAll(singleMandatesPerParty);
+        Map<String, Long> collect = multiMandatesPerParty
+                .stream()
+                .collect(Collectors.groupingBy(StringLongDTO::getName,
+                        Collectors.summingLong(StringLongDTO::getNumber)));
+        List<StringLongDTO> listOfMandatesPerParty = new ArrayList<>();
+        collect.forEach((s,l)->listOfMandatesPerParty.add(new StringLongDTO(s,l)));
+        report.setMandatesPerPartyGeneralLive(listOfMandatesPerParty.stream().sorted((s1,s2)->s2.getNumber().compareTo(s1.getNumber())).collect(Collectors.toList()));
         return report;
     }
 
