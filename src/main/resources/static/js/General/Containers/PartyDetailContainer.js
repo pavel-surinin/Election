@@ -46,7 +46,7 @@ var PartyDetailContainer = React.createClass({
         </div>
       );
     } else {
-        return (
+      return (
       <PartyDetailComponent
         partyDetails={this.state.partyDetails}
         generalResults={this.state.generalResults}

@@ -39,7 +39,7 @@ function showSingleWinners(self){
           <div className="panel-heading" role="tab" id="headingSix">
             <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
                 href="#collapseSix" aria-expanded="false" aria-controls="collapseSix" ref='title' id='heading'>
-              Vienmandates nugaletoju sarasas
+              Vienmandatės nugalėtojų sąrašas
               <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
             </h4>
           </div>
@@ -84,7 +84,7 @@ function showMultiWinners(self){
           <div className="panel-heading" role="tab" id="headingFour">
             <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
                 href="#collapseFour" aria-expanded="false" aria-controls="collapseFour" ref='title' id='heading'>
-              Daugiamandates nugaletoju sarasas
+              Daugiamandatės nugalėtojų sąrašas
               <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
             </h4>
           </div>
@@ -118,7 +118,6 @@ function showMultiWinners(self){
   } else {
     return null;
   }
-
 }
 function prepareCanvas(chartType,electionType){
   var sp1 = document.createElement('canvas');
@@ -136,19 +135,19 @@ var GeneralresultsComponent = React.createClass({
     var res = this.props.results;
     prepareCanvas('Doghnut', 'District');
     var data = {
-      labels : ['Prabalsavusios apylinkės', 'Nebelsavusios apylinkės'],
+      labels : ['Prabalsavusios apylinkės', 'Nebalsavusios apylinkės'],
       votes : [res.districtsVoted, (res.districtsCount - res.districtsVoted)]
     };
     chartss.doghnut(document.getElementById('canvasDoghnutDistrict'), data, 'DistrictsProgress');
     prepareCanvas('Doghnut', 'Voters');
     var votersData = {
-      labels : ['Rinkėjų skaičius','Prabalsavo rinkėjų'],
-      votes : [res.votersCount,(res.votersCount - res.votesCount)],
+      labels : ['Prabalsavo rinkėjų','Neatvyko balsuoti rinkėjų'],
+      votes : [res.votesCount,(res.votersCount - res.votesCount)],
     };
     chartss.doghnut(document.getElementById('canvasDoghnutVoters'), votersData, 'DistrictsProgress');
   },
-
-  componentDidMount: function(){
+  componentDidMount: function() {
+    this.loadDoghnutDistrict();
     $(document).ready(function() {
       $('#responsive-table1').DataTable({
         language: {
@@ -168,51 +167,40 @@ var GeneralresultsComponent = React.createClass({
       });
     });
   },
+  componentWillReceiveProps: function(nextProps) {
+    this.loadDoghnutDistrict();
+  },
+  shouldComponentUpdate: function(nextProps, nextState) {
+    console.log(this);
+    console.log(nextProps);
+    console.log(nextState);
+  },
   render: function() {
-    console.log('GeneralresultsComponent',this);
     var MultiWinnersTable = showMultiWinners(this);
     var SingleWinnersTable = showSingleWinners(this);
+    var res = this.props.results;
     return (
       <div className='container'>
         <h1 className='yellow'>Rezultatai</h1>
-
         <div className="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-        {/*PARTY LIVE CHART START*/}
           <div className="panel panel-default" style={{borderRadius: '1px'}}>
             <div className="panel-heading" role="tab" id="headingOne">
 
               <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
                   href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" onClick={this.loadBarPartyLive}>
-                  Partijų grafikas (gyvai)
+                  Partijų mandatų grafikas (gyvai)
                 <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
               </h4>
             </div>
 
-            <div id="collapseOne" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div id="collapseOne" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 
               <div className="panel-body">
                 {/*chart bar*/}
+                <h3>Partijos, gauvusios mandatų</h3>
                 <div className='chartContainer col-md-12' id='parentBarPartyLive'>
                   <canvas id='canvasBarPartyLive'></canvas>
                 </div>
-                Superlivegrafikas ouououou
-              </div>
-            </div>
-          </div>
-
-
-          <div className="panel panel-default" style={{borderRadius: '1px'}}>
-            <div className="panel-heading" role="tab" id="headingTwo">
-              <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
-                  href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Kiek praejo bendrai pagal partija grafikas
-                <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
-              </h4>
-            </div>
-
-            <div id="collapseTwo" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-              <div className="panel-body">
-                Grafikas kuris parodo kiek partija turi nariu seime.
               </div>
             </div>
           </div>
@@ -220,17 +208,108 @@ var GeneralresultsComponent = React.createClass({
           <div className="panel panel-default" style={{borderRadius: '1px'}}>
             <div className="panel-heading" role="tab" id="headingThree">
               <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
-                  href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" onClick={this.loadDoghnutDistrict}>
-                  Rinkimu eiga
+                  href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Rinkimų eiga
                   <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
               </h4>
             </div>
-            <div id="collapseThree" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div id="collapseThree" className="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
               <div className="panel-body">
-                <div className='chartContainer col-md-6' id='parentDoghnutDistrict'>
+                <div className='chartContainer col-md-4' id='parentDoghnutDistrict'>
+                <h3>Apylinkių balsavimo progresas</h3>
                   <canvas id='canvasDoghnutDistrict'></canvas>
                 </div>
-                <div className='chartContainer col-md-6' id='parentDoghnutVoters'>
+                <div className='col-md-4'>
+                  <h3>Balsavimo progresas</h3>
+                  <table className="table table-striped">
+                    <thead>
+                    <tr>
+                      <th className='col-md-4 col-sm-6'>Įvykis</th>
+                      <th className='col-md-3 col-sm-6'>Skaičius</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                      Apylinkių prabalsavo
+                      </td>
+                      <td>
+                      {res.districtsVoted}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                      Apylinkių nebalsavo
+                      </td>
+                      <td>
+                      {(res.districtsCount - res.districtsVoted)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                      Viso apylinkių
+                      </td>
+                      <td>
+                      {res.districtsCount}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                      Balsavimo progresas
+                      </td>
+                      <td>
+                      {Math.round((res.districtsVoted / res.districtsCount)* 100)}%
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                  <h3>Rinkėjų aktyvumas</h3>
+                  <table className="table table-striped">
+                    <thead>
+                    <tr>
+                      <th className='col-md-4 col-sm-6'>Įvykis</th>
+                      <th className='col-md-3 col-sm-6'>Skaičius</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>
+                      Rinkėjų prabalsavo
+                      </td>
+                      <td>
+                      {res.votesCount}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                      Rinkėjų nebalsavo
+                      </td>
+                      <td>
+                      {(res.votersCount - res.votesCount)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                      Viso rinkėjų
+                      </td>
+                      <td>
+                      {res.votersCount}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                      Rinkėjų aktyvumas
+                      </td>
+                      <td>
+                      {Math.round((res.votesCount/res.votersCount)*100)}%
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div className='chartContainer col-md-4' id='parentDoghnutVoters'>
+                  <h3>Rinkėjų balsavimo aktyvumas</h3>
                   <canvas id='canvasDoghnutVoters'></canvas>
                 </div>
               </div>
@@ -241,9 +320,6 @@ var GeneralresultsComponent = React.createClass({
         </div>
       </div>
     );
-
   }
-
 });
-
 window.GeneralresultsComponent = GeneralresultsComponent;

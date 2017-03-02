@@ -18,28 +18,42 @@ function getPartyMembersList(self) {
   return partyMembersList;
 }
 function getRatedPartyMembersList(self) {
+  var membersFOL = self.props.partyDetails.members;
+  console.log(self);
+  console.log(self.props.partyDetails);
+  console.log(membersFOL);
+  console.log(membersFOL[0].numberInParty);
   if (self.props.generalResults.votesInMulti != undefined) {
     var vip = self.props.generalResults.votesInMulti;
     var ratedMembersList =[];
     vip.forEach(function(obj){
-        if(obj.par.id == self.props.pid){
+      var numberOld = 0;
+      if(obj.par.id == self.props.pid){
         obj.par.members.forEach(function(member,index) {
-            ratedMembersList.push(
-              <PartyDetailRowViewComponent
-              id={member.id}
-              key={index}
-              name={member.name}
-              surname={member.surname}
-              birthDate={member.birthDate}
-              description={member.description}
-              numberInParty={member.numberInParty}
-              countyName={member.countyName}
-              listType='ratedList'
-              />
-            );
-          });
+          if (membersFOL) {
+            membersFOL.forEach(function(memberFOL){
+              if (memberFOL.id == member.id) {
+                numberOld = (memberFOL.numberInParty - member.numberInParty);
+              }
+            });
           }
+          ratedMembersList.push(
+            <PartyDetailRowViewComponent
+            id={member.id}
+            key={index}
+            name={member.name}
+            surname={member.surname}
+            birthDate={member.birthDate}
+            description={member.description}
+            numberInParty={member.numberInParty}
+            countyName={member.countyName}
+            listType='ratedList'
+            delta={numberOld}
+            />
+            );
         });
+      }
+    });
     return ratedMembersList;
   }
 }
@@ -116,17 +130,16 @@ function getMandatesPerParty(self) {
 
 var PartyDetailComponent = React.createClass({
   render: function() {
-      var mandatesPerParty = getMandatesPerParty(this);
-      var partyMembersList = getPartyMembersList(this);
-      var ratedMembersList = getRatedPartyMembersList(this);
-      var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
-      var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
-      var ratedPartyStyle = styles.toggleResultNav(this.props.generalResults.votesInMulti);
-      var partyListStyle = styles.toggleResultNav(this.props.partyDetails.members);
-      var partyWinnersStyle = styles.toggleTableStyle(partyWinnersMembersList);
-      var singleWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList);
-      var noWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList && partyWinnersStyle);
-
+    var mandatesPerParty = getMandatesPerParty(this);
+    var partyMembersList = getPartyMembersList(this);
+    var ratedMembersList = getRatedPartyMembersList(this);
+    var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
+    var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
+    var ratedPartyStyle = styles.toggleResultNav(this.props.generalResults.votesInMulti);
+    var partyListStyle = styles.toggleResultNav(this.props.partyDetails.members);
+    var partyWinnersStyle = styles.toggleTableStyle(partyWinnersMembersList);
+    var singleWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList);
+    var noWinnersStyle = styles.toggleTableStyle(singleWinnersByPartyList && partyWinnersStyle);
     return (
       <div>
         <div className="container">

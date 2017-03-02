@@ -1,5 +1,5 @@
-var solid = ['#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421','#f57421'];
-
+var solid = ['rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)']
+var doghnutColors = ['rgba(0, 153, 0, 0.85)','rgba(255, 26, 26, 0.85)','rgba(255, 153, 51, 0.85)'];
 var backgroundColorArr = [
   'rgba(255, 51, 51, 0.2)',
   'rgba(51, 255, 51, 0.2)',
@@ -24,8 +24,6 @@ var backgroundColorArr = [
   'rgba(255, 51, 153, 0.2)',
 ];
 var borderColorArr = [
-  'rgba(255, 51, 51, 0.85)',
-  'rgba(51, 255, 51, 0.85)',
   'rgba(255, 99, 132, 0.85)',
   'rgba(54, 162, 235, 0.85)',
   'rgba(255, 206, 86, 0.85)',
@@ -43,6 +41,8 @@ var borderColorArr = [
   'rgba(153, 51, 255, 0.85)',
   'rgba(255, 51, 255, 0.85)',
   'rgba(255, 51, 153, 0.85)',
+  'rgba(255, 51, 51, 0.85)',
+  'rgba(51, 255, 51, 0.85)',
 ];
 var chartDataMapper = {
   getDataMulti :
@@ -118,8 +118,8 @@ var chartss = {
         datasets : [{
           label : 'balsų skaičius',
           data : mdata.votes,
-          backgroundColor : backgroundColorArr.slice(1, mdata.labels.length),
-          borderColor : borderColorArr.slice(1, mdata.labels.length),
+          backgroundColor : solid.slice(1, mdata.labels.length+1),
+          borderColor : solid.slice(1, mdata.labels.length+1),
           borderWidth : 1,
         }]
       },
@@ -166,6 +166,7 @@ var chartss = {
   },
   doghnut : function(ctx,data,electionType) {
     var mdata =[];
+
     if (electionType =='DistrictsProgress'){mdata = data;}
     var myDoughnutChart = new Chart(ctx, {
       type: 'doughnut',
@@ -174,8 +175,8 @@ var chartss = {
         datasets: [
           {
             data: mdata.votes,
-            backgroundColor: borderColorArr.slice(1, mdata.labels.length+1),
-            hoverBackgroundColor: borderColorArr.slice(1, mdata.labels.length+1),
+            backgroundColor: doghnutColors.slice(0, mdata.labels.length+1),
+            hoverBackgroundColor: doghnutColors.slice(0, mdata.labels.length+1),
           }]
       },
       //Chart.defaults.global.legend
