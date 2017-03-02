@@ -41,17 +41,17 @@ public final class RequestFormatter {
         sb.append("]");
         sb.append(", ");
 
-        sb.append("HEADERS: [");
-        boolean firstHeader = true;
-        for (String headerName : Collections.list(request.getHeaderNames())) {
-            if (!firstHeader) {
-                sb.append("; ");
-            }
-            sb.append(headerName).append("='").append(request.getHeader(headerName)).append("'");
-            firstHeader = false;
-        }
-        sb.append("]");
-        sb.append(", ");
+//        sb.append("HEADERS: [");
+//        boolean firstHeader = true;
+//        for (String headerName : Collections.list(request.getHeaderNames())) {
+//            if (!firstHeader) {
+//                sb.append("; ");
+//            }
+//            sb.append(headerName).append("='").append(request.getHeader(headerName)).append("'");
+//            firstHeader = false;
+//        }
+//        sb.append("]");
+//        sb.append(", ");
         if (loginURI.equals(request.getRequestURI().toString())) {
             sb.append("BODY: ");
         } else {
