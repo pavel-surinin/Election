@@ -3,10 +3,18 @@ var PartyDetailRowViewComponent = React.createClass({
     $(this.refs.info).tooltip();
   },
   render: function() {
+    var delta = null;
+    if (this.props.delta > 0) {
+      delta = <span style={{fontSize : '70%' ,color : 'green'}}> +{this.props.delta} </span>;
+    } else if(this.props.delta < 0){
+      delta = <span style={{fontSize : '70%',color : 'red'}}> {this.props.delta} </span>;
+    } else {
+      delta = <span>  </span>;
+    }
     return (
       <tr className="small">
         <td>
-          {this.props.numberInParty}
+          {this.props.numberInParty} {delta}
         </td>
         <td>
           <a href="#"

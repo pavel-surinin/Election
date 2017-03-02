@@ -289,7 +289,7 @@ body {
 }
 
 .paginatorCustom > ul{
-  margin: 20px auto;
+  margin: 5px auto;
 }
 
 .panel-title.active > .fa-sort-desc{
@@ -300,10 +300,20 @@ body {
 h4.panel-title > i{
     transition: 0.4s;
     transform: rotate(-90deg);
-     }
+}
+h4.panel-title:hover > i{
+   transition: 0.4s;
+   transform: rotate(-75deg);
+}
+
 h4.panel-title.collapsed > i{
     transition: 0.4s;
     transform: rotate(0deg);
+}
+
+h4.panel-title.collapsed:hover > i{
+    transition: 0.4s;
+    transform: rotate(-359deg);
 }
 
 /* PAGINATION END*/
