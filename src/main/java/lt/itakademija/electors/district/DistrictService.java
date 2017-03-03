@@ -4,8 +4,11 @@ import lt.itakademija.exceptions.DistrictCloneException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,7 +83,6 @@ public class DistrictService {
                 .filter(dr -> dr.isResultMultiRegistered())
                 .filter(dr -> !dr.isResultMultiApproved())
                 .collect(Collectors.toList());
-
     }
 
     public String getNameById(Long id) {
@@ -88,7 +90,19 @@ public class DistrictService {
     }
 
     public List getDistictsByPage(Long id) {
-        List<DistrictEntity> content = pageRepository.findAll(new PageRequest(id.intValue(), 20)).getContent();
+        List<DistrictEntity> content = pageRepository.findAll(new PageRequest(id.intValue(), 100, Sort.Direction.ASC, "name")).getContent();
         return content.stream().map(d -> new DistrictReport(d)).collect(Collectors.toList());
+    }
+
+    public Integer getNumberOfDistricts() {
+        return repository.getDistrictsCount().intValue();
+    }
+
+    public List getDistictsByFirstLetter(String letter) {
+        return repository.getByFirstLetter(letter.toUpperCase())
+                .stream()
+                .map(DistrictReport::new)
+                .sorted(Comparator.comparing(DistrictReport::getCountyName))
+                .collect(Collectors.toList());
     }
 }

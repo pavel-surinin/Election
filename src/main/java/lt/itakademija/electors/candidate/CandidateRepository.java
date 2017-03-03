@@ -68,7 +68,12 @@ public class CandidateRepository {
     }
 
     public void deleteAll(List<CandidateEntity> memberToDelete) {
-        memberToDelete.stream().forEach(m -> em.remove(m));
+        memberToDelete.stream().forEach(m ->{
+            m.setNumberInParty(null);
+            m.setPartyDependencies(null);
+            save(m);
+            em.remove(m);
+        });
     }
 
     public boolean delete(CandidateEntity c) {

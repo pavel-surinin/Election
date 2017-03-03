@@ -20,13 +20,14 @@ var GeneralResultsContainer = React.createClass({
     };
   },
   componentDidMount: function() {
+    $('#collapseOne').collapse('hide');
     getGeneralResults(this);
   },
   componentWillReceiveProps: function(nextProps) {
     getGeneralResults(this);
   },
   render: function() {
-    document.title='Rezultatai Rinkimai 2017';
+    document.title='Rezultatai - Rinkimai 2017';
     if (this.state.isLoading) {
       return <div><img src='images/loading.gif'/></div>;
     }
