@@ -16,38 +16,37 @@ var App = React.createClass({
     });
   },
   render: function() {
-      document.title='Rinkimai 2017';
-      console.log('this index:',this);
-      return (
-      <div style={{ paddingTop: '20px' }}>
-        <nav className="navbar navbar-default">
-          <div className="container-fluid">
-              <ul className="nav navbar-nav">
-                <li><a href="#/">Pradinis</a></li>
-                <li><a href="#/login">Prisijungti</a></li>
-                <li><a href="#/representative">Atstovas</a></li>
-                <li><a href="#/candidate">Kandidatai</a></li>
-                  <li className="dropdown">
-                    <a className="dropdown-toggle" data-toggle="dropdown">Results district
-                    <span className="caret"></span></a>
-                    <ul className="dropdown-menu">
-                      <li><a href="#/results/district/1">Page Results district 1</a></li>
-                      <li><a href="#/results/district/2">Page Results district 2</a></li>
-                      <li><a href="#/results/district/3">Page Results district 3</a></li>
-                      <li><a href="#/results/district/4">Page Results district 4</a></li>
-                      <li><a href="#/results/district/5">Page Results district 5</a></li>
-                      <li><a href="#/party">Party</a></li>
-                    </ul>
-                  </li>
+    document.title='Rinkimai 2017';
+    return (
+    <div style={{ paddingTop: '20px' }}>
+      <nav className="navbar navbar-default">
+        <div className="container-fluid">
+            <ul className="nav navbar-nav">
+              <li><a href="#/">Pradinis</a></li>
+              <li><a href="#/login">Prisijungti</a></li>
+              <li><a href="#/representative">Atstovas</a></li>
+              <li><a href="#/candidate">Kandidatai</a></li>
+                <li className="dropdown">
+                  <a className="dropdown-toggle" data-toggle="dropdown">Results district
+                  <span className="caret"></span></a>
+                  <ul className="dropdown-menu">
+                    <li><a href="#/results/district/1">Page Results district 1</a></li>
+                    <li><a href="#/results/district/2">Page Results district 2</a></li>
+                    <li><a href="#/results/district/3">Page Results district 3</a></li>
+                    <li><a href="#/results/district/4">Page Results district 4</a></li>
+                    <li><a href="#/results/district/5">Page Results district 5</a></li>
+                    <li><a href="#/party">Party</a></li>
+                  </ul>
+                </li>
 
-              </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li><a href="#/">{this.state.userLogged}</a></li>
-              </ul>
-          </div>
-        </nav>
-        {this.props.children}
-      </div>
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+              <li><a href="#/">{this.state.userLogged}</a></li>
+            </ul>
+        </div>
+      </nav>
+      {this.props.children}
+    </div>
     );
   }
 });

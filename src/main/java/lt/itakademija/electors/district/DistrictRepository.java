@@ -50,4 +50,11 @@ public class DistrictRepository {
     public Long getDistrictsCount(){
         return em.createQuery("SELECT COUNT(c) FROM DistrictEntity c", Long.class).getSingleResult();
     }
+
+    public List<DistrictEntity> getByFirstLetter(String letter) {
+        return
+                em.createQuery("SELECT a FROM DistrictEntity a WHERE a.name LIKE CONCAT(:letter, '%')")
+                        .setParameter("letter", letter)
+                        .getResultList();
+    }
 }

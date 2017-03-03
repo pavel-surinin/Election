@@ -29,7 +29,6 @@ function getSingleTable(self){
   }
   return singleTable;
 }
-
 function getMultiTable(self) {
   if (self.props.results.votesByParty) {
     var multiTable = self.props.results.votesByParty.map(function(p,index){
@@ -55,7 +54,6 @@ function prepareCanvas(chartType,electionType){
   parentDiv.removeChild(document.getElementById('canvas' + chartType + electionType));
   parentDiv.appendChild(sp1);
 }
-
 var DistrictResults  = React.createClass({
   loadSingle : function() {
     prepareCanvas('Pie','Single');

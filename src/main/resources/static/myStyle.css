@@ -29,14 +29,6 @@ ul.secondmenu > li.active:active{
   color: #ed1c24;
   background-color: white;
 }
-/*ul.secondmenu > li{
-  z-index: -1;
-}
-
-ul.secondmenu > li.active{
-  z-index: 1;
-}*/
-
 h1.yellow{
   color: yellow;
   text-transform: uppercase;
@@ -287,4 +279,41 @@ body {
   -webkit-transition: all 0.7s ease; /* Safari */
   transition: all 0.7s ease;
 }
-/*MAIN MENU*/
+/*MAIN MENU END*/
+
+/* PAGINATION */
+.paginatorCustom{
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.paginatorCustom > ul{
+  margin: 5px auto;
+}
+
+.panel-title.active > .fa-sort-desc{
+    transition: 0.4s;
+    transform: rotate(-90deg);
+}
+
+h4.panel-title > i{
+    transition: 0.4s;
+    transform: rotate(-90deg);
+}
+h4.panel-title:hover > i{
+   transition: 0.4s;
+   transform: rotate(-75deg);
+}
+
+h4.panel-title.collapsed > i{
+    transition: 0.4s;
+    transform: rotate(0deg);
+}
+
+h4.panel-title.collapsed:hover > i{
+    transition: 0.4s;
+    transform: rotate(-359deg);
+}
+
+/* PAGINATION END*/

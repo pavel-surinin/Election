@@ -30,7 +30,7 @@ public class CandidateEntity {
     @NotNull
     private Date birthDate;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name= "PARTY_ID")
     private PartyEntity partyDependencies;
 
