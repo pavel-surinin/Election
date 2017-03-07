@@ -3,7 +3,7 @@ package lt.itakademija.storage;
 import lt.itakademija.electors.candidate.CandidateEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyService;
-import lt.itakademija.exceptions.BadCSVFileExceprion;
+import lt.itakademija.exceptions.BadCSVFileException;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
 import lt.itakademija.exceptions.PartyDoesNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class CSVParser {
                         can.setNumberInParty(parseNullOrInteger(line[4]));
                         return can;
                     } catch (Exception t){
-                        throw new BadCSVFileExceprion("Not acceptable CSV data for county single-list", t);
+                        throw new BadCSVFileException("Not acceptable CSV data for county single-list", t);
                     }
                 })
                 .collect(Collectors.toList());
@@ -66,7 +66,7 @@ public class CSVParser {
                         can.setDescription(line[4]);
                         return can;
                     } catch (Exception pe) {
-                        throw new BadCSVFileExceprion("Not acceptable csv data for party-list");
+                        throw new BadCSVFileException("Not acceptable csv data for party-list");
                     }
                 }).collect(Collectors.toList());
     }
