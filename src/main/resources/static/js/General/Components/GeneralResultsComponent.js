@@ -30,6 +30,35 @@ function getMultiWinners(self){
   }
 
 }
+function getMultiWinnersParty(self){
+  var partyWinners = [];
+  if(self.props.results){
+    partyWinners = self.props.results.mandatesPerPartyGeneralLive.map(function(pid,index){
+      return(
+        <tr key={index}>
+          <td>{pid.name}</td>
+          <td>{pid.number}</td>
+        </tr>
+      );
+    });
+    return partyWinners;
+  }
+}
+function getMultiWinnersVotesParty(self){
+  var partyVotes =[];
+  if(self.props.results){
+    partyVotes = self.props.results.votesInMulti.map(function(mid,index){
+      return(
+        <tr key={index}>
+          <td>{mid.par.name}</td>
+          <td>{mid.votes}</td>
+        </tr>
+      );
+    });
+    return partyVotes;
+  }
+}
+
 function showSingleWinners(self){
   var singleWinners = getSingleWinners(self);
   if (self.props.results) {
@@ -119,6 +148,7 @@ function showMultiWinners(self){
     return null;
   }
 }
+
 function prepareCanvas(chartType,electionType){
   var sp1 = document.createElement('canvas');
   sp1.id = 'canvas' + chartType + electionType;
@@ -130,6 +160,10 @@ var GeneralresultsComponent = React.createClass({
   loadBarPartyLive : function() {
     prepareCanvas('Bar','PartyLive');
     chartss.bar('horizontalBar', document.getElementById('canvasBarPartyLive'), this.props.results, 'PartyLive');
+  },
+  loadBarPartyVotes: function(){
+    prepareCanvas('Bar','PartyVotes');
+    chartss.bar('horizontalBar', document.getElementById('canvasBarPartyVotes'), this.props.results, 'PartyVotes');
   },
   loadDoghnutDistrict : function() {
     var res = this.props.results;
@@ -178,6 +212,8 @@ var GeneralresultsComponent = React.createClass({
   render: function() {
     var MultiWinnersTable = showMultiWinners(this);
     var SingleWinnersTable = showSingleWinners(this);
+    var partyWinners = getMultiWinnersParty(this);
+    var partyVotes = getMultiWinnersVotesParty(this);
     var res = this.props.results;
     return (
       <div className='container'>
@@ -198,13 +234,61 @@ var GeneralresultsComponent = React.createClass({
               <div className="panel-body">
                 {/*chart bar*/}
                 <h3>Partijos, gauvusios mandatų</h3>
-                <div className='chartContainer col-md-12' id='parentBarPartyLive'>
-                  <canvas id='canvasBarPartyLive'></canvas>
+                <div className='tableContainer col-md-3'>
+                  <table width="100%" className="table table-striped">
+                    <thead>
+                    <tr>
+                      <th className='col-md-4 col-sm-4'>Partija</th>
+                      <th className='col-md-3 col-sm-3'>Mandatų skaičius</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {partyWinners}
+                    </tbody>
+                  </table>
+                </div>
+                <div className='chartContainer col-md-9' id='parentBarPartyLive' height="100%">
+                  <canvas id='canvasBarPartyLive' height="100%"></canvas>
                 </div>
               </div>
             </div>
           </div>
+          <div className="panel panel-default" style={{borderRadius: '1px'}}>
+            <div className="panel-heading" role="tab" id="headingTwo">
 
+              <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
+                  href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" onClick={this.loadBarPartyVotes}>
+                Partijų grafikas
+                <i className="fa fa-sort-desc pull-right icon-transition" aria-hidden="true" ref='icon'></i>
+              </h4>
+            </div>
+
+            <div id="collapseTwo" className="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+
+              <div className="panel-body">
+                {/*chart bar*/}
+                <h3>Partijos, gavusios balsų</h3>
+
+                <div className='tableContainer col-md-3'>
+                  <table width="100%" className="table table-striped">
+                    <thead>
+                    <tr>
+                      <th className='col-md-4 col-sm-4'>Partija</th>
+                      <th className='col-md-3 col-sm-3'>Balsų skaičius</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {partyVotes}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className='chartContainer col-md-9' id='parentBarPartyVotes' height="100%">
+                  <canvas id='canvasBarPartyVotes'></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="panel panel-default" style={{borderRadius: '1px'}}>
             <div className="panel-heading" role="tab" id="headingThree">
               <h4 className="panel-title collapsed" role="button" data-toggle="collapse"
