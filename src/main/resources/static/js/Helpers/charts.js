@@ -101,7 +101,22 @@ var chartDataMapper = {
       return {labels : [], votes : []};
     }
   },
+  getDataPartyVotes:
+    function(results){
+      if(results){
+        var labels = results.votesInMulti.map(function(vid){
+          return vid.par.name;
+        });
+        var votes = results.votesInMulti.map(function(vid){
+          return vid.votes;
+        });
+        return{labels: labels, votes: votes};
+      } else {
+        return {labels: [], votes: []};
+      }
+    },
 };
+
 var chartss = {
   bar : function(alignment,ctx,data,electionType){
     //bar or horizontalBar
@@ -111,6 +126,7 @@ var chartss = {
     if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
     if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
     if (electionType =='PartyLive'){mdata = chartDataMapper.getDataPartyLive(data);}
+    if(electionType =='PartyVotes'){mdata = chartDataMapper.getDataPartyVotes(data);}
     var myChart = new Chart(ctx, {
       type: alignment,
       data: {
