@@ -352,8 +352,13 @@ public class ResultsService {
                 .collect(Collectors.toList());
         List<StringLongDTO> singleMandatesPerParty = report.getSingleWinners()
                 .stream()
-                .filter(d->d.getCandidate().getPartijosPavadinimas() != null)
-                .map(c -> new StringLongDTO(c.getCandidate().getPartijosPavadinimas(), 1L))
+                .map(c ->{
+                    if(c.getCandidate().getPartijosPavadinimas() == null){
+                    return new StringLongDTO("Nepartiniai", 1L);
+                    } else {
+                    return new StringLongDTO(c.getCandidate().getPartijosPavadinimas(), 1L);
+                    }
+                })
                 .collect(Collectors.toList());
         multiMandatesPerParty.addAll(singleMandatesPerParty);
         Map<String, Long> collect = multiMandatesPerParty
