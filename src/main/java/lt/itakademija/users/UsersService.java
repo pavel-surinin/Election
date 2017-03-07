@@ -53,7 +53,6 @@ public class UsersService {
 
     public String login(UsersEntity user) {
         List<UsersEntity> resp = repository.checkUserLoginPassword(user);
-        System.out.println("---" + resp.size());
         if (resp.size() == 0) {
             return "none";
         } else {
@@ -69,8 +68,6 @@ public class UsersService {
 
     @Transactional
     public void saveUser(UsersEntity user){
-        String hashword = Md5.generate(user.getPassword());
-        user.setPassword(hashword);
         repository.save(user);
     }
 

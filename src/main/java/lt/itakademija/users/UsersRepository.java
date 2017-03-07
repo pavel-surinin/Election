@@ -36,4 +36,10 @@ public class UsersRepository {
                         .setParameter("lg", user.getUsername())
                         .getResultList();
     }
+    public List<UsersEntity> findByUsername(String userName) {
+        return
+                em.createQuery("SELECT u FROM UsersEntity u WHERE u.username = :lg")
+                        .setParameter("lg", userName)
+                        .getResultList();
+    }
 }

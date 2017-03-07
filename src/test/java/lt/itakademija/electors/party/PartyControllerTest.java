@@ -4,32 +4,23 @@ import lt.itakademija.Application;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.candidate.*;
 import lt.itakademija.electors.county.*;
-import lt.itakademija.exceptions.BadCSVFileExceprion;
+import lt.itakademija.exceptions.BadCSVFileException;
 import lt.itakademija.exceptions.PartyNameCloneException;
 import lt.itakademija.exceptions.PartyNumberCloneException;
-import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import static org.junit.Assert.*;
@@ -151,7 +142,7 @@ public class PartyControllerTest {
             partyService.save(name, number, file);
             final int sizeAfterSave = partyRepository.findAll().size();
             assertThat(sizeBeforeSave, CoreMatchers.is(sizeAfterSave - 1));
-        } catch (BadCSVFileExceprion e) {
+        } catch (BadCSVFileException e) {
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
     }

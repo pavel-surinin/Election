@@ -124,7 +124,7 @@ public class CountyService {
                                                             List<CandidateEntity> candidatesNotInMultiList,
                                                             List<CandidateEntity> candidatesFromFile) {
         if(noPartyCandidates.size() + existingCandidates.size() + candidatesNotInMultiList.size() != candidatesFromFile.size()){
-            throw new BadCSVFileExceprion("Bad Candidates data in CSV, not all acndidates are passing bussines logic");
+            throw new BadCSVFileException("Bad Candidates data in CSV, not all acndidates are passing bussines logic");
         }
     }
 

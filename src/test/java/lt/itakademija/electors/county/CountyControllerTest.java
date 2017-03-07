@@ -18,14 +18,13 @@ import lt.itakademija.electors.results.multi.ResultMultiService;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
 import lt.itakademija.electors.results.single.ResultSingleService;
-import lt.itakademija.exceptions.BadCSVFileExceprion;
+import lt.itakademija.exceptions.BadCSVFileException;
 import lt.itakademija.exceptions.CountyCandidatesAlreadyExistException;
 import lt.itakademija.exceptions.NotEqualColumnsCountCsv;
 import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,7 +47,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static lt.itakademija.electors.MyUtils.parseToMultiPart;
 import static org.junit.Assert.*;
 
 /**
@@ -327,7 +324,7 @@ public class CountyControllerTest {
                     return true;
                 }
             });
-        } catch (BadCSVFileExceprion e) {
+        } catch (BadCSVFileException e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
         }
@@ -348,7 +345,7 @@ public class CountyControllerTest {
                     return true;
                 }
             });
-        } catch (BadCSVFileExceprion e) {
+        } catch (BadCSVFileException e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list111111"));
         }
@@ -369,7 +366,7 @@ public class CountyControllerTest {
                     return true;
                 }
             });
-        } catch (BadCSVFileExceprion e) {
+        } catch (BadCSVFileException e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
         }
@@ -390,7 +387,7 @@ public class CountyControllerTest {
                     return true;
                 }
             });
-        } catch (BadCSVFileExceprion e) {
+        } catch (BadCSVFileException e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
@@ -411,7 +408,7 @@ public class CountyControllerTest {
                     return true;
                 }
             });
-        } catch (BadCSVFileExceprion e) {
+        } catch (BadCSVFileException e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable csv data for party-list"));
         }
@@ -433,7 +430,7 @@ public class CountyControllerTest {
                     return true;
                 }
             });
-        } catch (BadCSVFileExceprion e) {
+        } catch (BadCSVFileException e) {
             //verify
             assertThat(e.getMessage(), CoreMatchers.is("Not acceptable CSV data for county single-list"));
         }
