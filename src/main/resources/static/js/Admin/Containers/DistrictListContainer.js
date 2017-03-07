@@ -86,7 +86,7 @@ var DistrictListContainer = React.createClass({
     axios
       .delete('/district/'+ id)
       .then(function(response){
-        getDistrict(self,this.state.page);
+        getDistrict(self,self.state.page);
         self.setState({succesCreateText : '', deletedDistrictName : 'Apylinke ' + name + ' ištrinta.'});
       })
       .catch(function(err){

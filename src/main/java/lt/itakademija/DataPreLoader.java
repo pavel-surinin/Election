@@ -19,6 +19,7 @@ import lt.itakademija.electors.results.multi.ResultMultiService;
 import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleService;
+import lt.itakademija.users.UserRoles;
 import lt.itakademija.users.UsersEntity;
 import lt.itakademija.users.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -391,6 +392,11 @@ public class DataPreLoader {
         UsersEntity admin = new UsersEntity();
         admin.setPassword("admin");
         admin.setUsername("admin");
+        UserRoles userRoles = new UserRoles();
+        userRoles.setName("ADMIN");
+        Set<UserRoles> r = new HashSet<>();
+        r.add(userRoles);
+        admin.setRoles(r);
         usersRepository.save(admin);
     }
 }
