@@ -1,4 +1,8 @@
+var solid = ['rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)','rgba(0, 172, 230, 0.79)']
+var doghnutColors = ['rgba(0, 153, 0, 0.85)','rgba(255, 26, 26, 0.85)','rgba(255, 153, 51, 0.85)'];
 var backgroundColorArr = [
+  'rgba(255, 51, 51, 0.2)',
+  'rgba(51, 255, 51, 0.2)',
   'rgba(255, 99, 132, 0.2)',
   'rgba(54, 162, 235, 0.2)',
   'rgba(255, 206, 86, 0.2)',
@@ -15,6 +19,8 @@ var backgroundColorArr = [
   'rgba(51, 51, 255, 0.2)',
   'rgba(153, 51, 255, 0.2)',
   'rgba(255, 51, 255, 0.2)',
+  'rgba(255, 51, 153, 0.2)',
+  'rgba(255, 51, 153, 0.2)',
   'rgba(255, 51, 153, 0.2)',
 ];
 var borderColorArr = [
@@ -35,13 +41,29 @@ var borderColorArr = [
   'rgba(153, 51, 255, 0.85)',
   'rgba(255, 51, 255, 0.85)',
   'rgba(255, 51, 153, 0.85)',
+  'rgba(255, 51, 51, 0.85)',
+  'rgba(51, 255, 51, 0.85)',
 ];
 var chartDataMapper = {
   getDataMulti :
   function(results){
     if (results.votesByParty) {
       var labels = results.votesByParty.map(function(pid){
-        return pid.party;
+        return pid.name;
+      });
+      var votes = results.votesByParty.map(function(pid){
+        return pid.votes;
+      });
+      return {labels : labels, votes : votes};
+    } else {
+      return null;
+    }
+  },
+  getDataCountyMulti :
+  function(results){
+    if (results.votesByParty) {
+      var labels = results.votesByParty.map(function(pid){
+        return pid.par.name;
       });
       var votes = results.votesByParty.map(function(pid){
         return pid.votes;
@@ -65,12 +87,30 @@ var chartDataMapper = {
       return null;
     }
   },
+  getDataPartyLive :
+  function(results){
+    if (results) {
+      var labels = results.mandatesPerPartyGeneralLive.map(function(line){
+        return line.name;
+      });
+      var votes = results.mandatesPerPartyGeneralLive.map(function(line){
+        return line.number;
+      });
+      return {labels : labels, votes : votes};
+    } else {
+      return {labels : [], votes : []};
+    }
+  },
 };
-
 var chartss = {
   bar : function(alignment,ctx,data,electionType){
     //bar or horizontalBar
-    var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
+    //var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
+    var mdata =[];
+    if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
+    if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
+    if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
+    if (electionType =='PartyLive'){mdata = chartDataMapper.getDataPartyLive(data);}
     var myChart = new Chart(ctx, {
       type: alignment,
       data: {
@@ -78,8 +118,8 @@ var chartss = {
         datasets : [{
           label : 'balsų skaičius',
           data : mdata.votes,
-          backgroundColor : backgroundColorArr.slice(1, mdata.labels.length),
-          borderColor : borderColorArr.slice(1, mdata.labels.length),
+          backgroundColor : solid.slice(1, mdata.labels.length+1),
+          borderColor : solid.slice(1, mdata.labels.length+1),
           borderWidth : 1,
         }]
       },
@@ -96,7 +136,10 @@ var chartss = {
     return myChart;
   },
   pie : function(ctx,data,electionType){
-    var mdata = electionType == 'Single' ? chartDataMapper.getDataSingle(data) : chartDataMapper.getDataMulti(data);
+    var mdata =[];
+    if(electionType == 'Single'){mdata = chartDataMapper.getDataSingle(data);}
+    if(electionType =='Multi'){mdata = chartDataMapper.getDataMulti(data);}
+    if (electionType =='MultiCounty'){mdata = chartDataMapper.getDataCountyMulti(data);}
     var myChart = new Chart(ctx,{
       type: 'pie',
       data: {
@@ -120,7 +163,35 @@ var chartss = {
       }
     });
     return myChart;
-  }
+  },
+  doghnut : function(ctx,data,electionType) {
+    var mdata =[];
+
+    if (electionType =='DistrictsProgress'){mdata = data;}
+    var myDoughnutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: mdata.labels,
+        datasets: [
+          {
+            data: mdata.votes,
+            backgroundColor: doghnutColors.slice(0, mdata.labels.length+1),
+            hoverBackgroundColor: doghnutColors.slice(0, mdata.labels.length+1),
+          }]
+      },
+      //Chart.defaults.global.legend
+      options: {
+        legend: {
+          position : 'bottom',
+          display: true,
+          labels: {
+            fontColor: '#333333'
+          }
+        }
+      }
+    });
+    return myDoughnutChart;
+  },
 };
 
 window.chartss = chartss;

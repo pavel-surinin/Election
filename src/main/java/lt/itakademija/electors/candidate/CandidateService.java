@@ -5,6 +5,7 @@ import lt.itakademija.electors.county.CountyRepository;
 import lt.itakademija.electors.county.CountyService;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.party.PartyEntity;
+import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class CandidateService {
 
+    @Autowired
+    PartyRepository partyRepository;
     @Autowired
     CandidateRepository repository;
     @Autowired
@@ -46,24 +49,19 @@ public class CandidateService {
     }
 
     @Transactional
-    public boolean delete(Long id){
-        return repository.delete(id);
-    }
-
-    @Transactional
     public boolean deleteCandidatesByPartyId(Long id) {
         PartyEntity party = partyService.getPartyEntityById(id);
-        partyService.detach(party);
-//        party.getMembers()
-//                .stream()
-//                .filter(CandidateEntity::isMultiList)
-//                .forEach(m->repository.delete(m.getId()));
+
         List<CandidateEntity> membersToDelete = party.getMembers()
                 .stream()
                 .filter(CandidateEntity::isMultiList)
                 .collect(Collectors.toList());
-        repository.deleteAll(membersToDelete);
 
+        List<CandidateEntity> members = party.getMembers();
+        members.removeAll(membersToDelete);
+        party.setMembers(members);
+        partyService.save(party);
+        repository.deleteAll(membersToDelete);
         return true;
     }
 
@@ -100,5 +98,15 @@ public class CandidateService {
 
     public List<CandidateEntity> getCandidatesByCounty(CountyEntity county){
         return repository.findByCounty(county);
+    }
+
+    @Transactional
+    public boolean delete(CandidateEntity c) {
+        return repository.delete(c);
+    }
+
+    @Transactional
+    public boolean delete(Long id){
+        return repository.delete(id);
     }
 }

@@ -15,9 +15,6 @@
     return (
             <tr>
               <td className="small">
-                {this.props.id}
-              </td>
-              <td className="small">
                 {this.props.name}
               </td>
               <td className="small">

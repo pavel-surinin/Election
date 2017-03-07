@@ -1,6 +1,7 @@
 package lt.itakademija.electors.district;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -23,6 +24,11 @@ public class DistrictController {
         return service.getDistrictById(id);
     }
 
+    @GetMapping("/district/{id}/name")
+    public String getNameById(@PathVariable Long id){
+        return service.getNameById(id);
+    }
+
     @GetMapping("/district/nonerepresentatives")
     public List getDistrictsWithNullRepresentativesList(){
         return service.getDistrictsWithNullRepresentativesList();
@@ -36,6 +42,21 @@ public class DistrictController {
     @GetMapping("/district/multi/registered")
     public List getDistrictsMultiRegistered(){
         return service.getDistrictMultiRegistered();
+    }
+
+    @GetMapping("/district/{page}/page")
+    public List getDistrictsByPage(@PathVariable Long page){
+        return service.getDistictsByPage(page);
+    }
+
+    @GetMapping("/district/{letter}/letter")
+    public List getDistrictsByPage(@PathVariable String letter){
+        return service.getDistictsByFirstLetter(letter);
+    }
+
+    @GetMapping("/district/all")
+    public Integer getNumberOfDistricts(){
+        return service.getNumberOfDistricts();
     }
 
     @PostMapping("/district")

@@ -45,9 +45,6 @@ var DistrictRepresentativeComponent = React.createClass({
                   <thead>
                     <tr>
                       <th>
-                        Nr.
-                      </th>
-                      <th>
                         Vardas
                       </th>
                       <th>

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class PartyIntDTO {
     private PartyReport par;
-    private Integer count;
+    private Integer votes;
     private List<CandidateIntDTO> ratings;
 
     public PartyIntDTO() {
@@ -21,13 +21,13 @@ public class PartyIntDTO {
 
     public PartyIntDTO(PartyEntity par, Integer count, List<RatingEntity> ratingsEnt) {
         this.par = new PartyReport(par);
-        this.count = count;
+        this.votes = count;
         this.ratings = ratingsEnt.stream().map(r -> new CandidateIntDTO(r.getCandidate(),r.getPoints())).collect(Collectors.toList());
     }
 
     public PartyIntDTO(PartyReport par, Integer multiGetMandates) {
         this.par = par;
-        this.count = multiGetMandates;
+        this.votes = multiGetMandates;
     }
 
 
@@ -47,12 +47,12 @@ public class PartyIntDTO {
         this.par = par;
     }
 
-    public Integer getCount() {
-        return count;
+    public Integer getVotes() {
+        return votes;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public void setVotes(Integer votes) {
+        this.votes = votes;
     }
 
     @Override
@@ -61,11 +61,11 @@ public class PartyIntDTO {
         if (o == null || getClass() != o.getClass()) return false;
         PartyIntDTO that = (PartyIntDTO) o;
         return Objects.equals(par, that.par) &&
-                Objects.equals(count, that.count);
+                Objects.equals(votes, that.votes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(par, count);
+        return Objects.hash(par, votes);
     }
 }

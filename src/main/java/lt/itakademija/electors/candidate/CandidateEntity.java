@@ -31,7 +31,7 @@ public class CandidateEntity {
     private Date birthDate;
 
     @ManyToOne
-    @JoinColumn(nullable = true, name= "PARTY_ID")
+    @JoinColumn(name= "PARTY_ID")
     private PartyEntity partyDependencies;
 
     @Column(name = "NUMBER_IN_PARTY")
@@ -40,7 +40,7 @@ public class CandidateEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(nullable = true, name= "COUNTY_ID")
+    @JoinColumn(name= "COUNTY_ID")
     private CountyEntity county;
 
     @Column(nullable=false)

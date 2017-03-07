@@ -129,6 +129,7 @@ var SingleResultContainer = React.createClass({
     }
   },
   render: function() {
+    document.title='Atstovo Vienmandatės Rezultatai Vaizdas Rinkimai 2017';
     if (this.state.isLoading) {
       return <div><img src='/images/loading.gif'/></div>;
     }

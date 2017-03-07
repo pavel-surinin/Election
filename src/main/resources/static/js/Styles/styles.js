@@ -31,6 +31,16 @@ var styles = {
       return {display : 'none'};
     }
   },
+  toggleTableStyle :
+  function(list){
+    if (list == undefined ){
+      return {display : 'none'}
+    } else if( list.length != 0 ) {
+      return {display : 'inherit'};
+    } else {
+      return {display : 'none'};
+    }
+  },
 
 };
 

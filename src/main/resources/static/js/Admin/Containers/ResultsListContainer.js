@@ -71,6 +71,7 @@ var ResultsListContainer = React.createClass({
     approve(this,type,id,name);
   },
   render: function() {
+    document.title='Administratoriaus Rezultatų Vaizdas Rinkimai 2017';
     if (this.state.isLoading) {
       return (
         <div>

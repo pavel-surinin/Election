@@ -25,12 +25,9 @@ var CountyListRowViewComponent = React.createClass({
     var succesMessage = alerts.showSucces(this.props.succesMessage);
     return (
             <tr>
-              <td className='small'>
-                {this.props.id}
-              </td>
-              <td>
-                {this.props.name}
-              </td>
+            <td>
+            {this.props.name}
+            </td>
               <td>
                 <a
                   href={'#/admin/county/' + this.props.id}
@@ -78,12 +75,17 @@ var CountyListRowViewComponent = React.createClass({
                         <div className='modal-footer'>
                           <div className='btn-group'>
                               <button
-                                type='button' onClick={this.onHandleDeleteClick} id={'delete-button-' + this.props.id} className='btn btn-default' data-dismiss='modal'>Taip
+                                type='button'
+                                onClick={this.onHandleDeleteClick}
+                                id={'delete-button-' + this.props.id}
+                                className='btn btn-default'
+                                data-dismiss='modal'>Taip
                               </button>
                               <button type='button' id='close-button'  className='btn btn-default' data-dismiss='modal'>Ne</button>
                           </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
                 &nbsp;

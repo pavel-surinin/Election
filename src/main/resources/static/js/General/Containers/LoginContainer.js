@@ -76,6 +76,7 @@ var LoginContainer = React.createClass({
     });
   },
   render: function() {
+    document.title='Login Rinkimai 2017';
     return (
       <LoginComponent
       onHandleSubmit={this.onHandleSubmit}

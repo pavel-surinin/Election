@@ -53,7 +53,7 @@ public class ResultSingleService {
         if (resultsMulti.size() != 0){
             final long votesSumMulti = resultsMulti.stream().mapToLong(r -> r.getVotes()).sum() + district.getSpoiledMulti();
             if (votesSumMulti != sumOfVotes){
-                throw new NotEqualVotersSumException("Not equal voters sum. MultiResuts sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
+                throw new NotEqualVotersSumException("Not equal voters sum. MultiResults sum is " + votesSumMulti + " .SingleResults entered " + sumOfVotes);
             }
         }
     }
@@ -64,6 +64,7 @@ public class ResultSingleService {
         listOfResults.stream().forEach(res -> res.setApproved(true));
         listOfResults.stream().forEach(res -> repository.save(res));
         resultsService.saveCountyResults(districtRepository.findById(id).getCounty().getId());
+        resultsService.formGeneralResults();
         return "Results approved";
     }
 

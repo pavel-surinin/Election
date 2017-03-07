@@ -30,7 +30,6 @@ var CandidatesListViewComponent = React.createClass({
           />
         );
       });
-      console.log('candlistview this: ', this);
     return (
           <div className="panel panel-default">
           <div className="panel-heading">
@@ -41,7 +40,7 @@ var CandidatesListViewComponent = React.createClass({
             <table width="100%" className="table table-striped" id="searchable-table">
              <thead>
               <tr>
-                <th>Nr.</th>
+                <th>Nr. partijos sąraše</th>
                 <th>Vardas</th>
                 <th>Pavardė</th>
                 <th>Gimimo data</th>
