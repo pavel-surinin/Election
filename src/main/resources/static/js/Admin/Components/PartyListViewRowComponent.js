@@ -44,7 +44,7 @@ var  PartyListViewRowComponent= React.createClass({
                   className="btn btn-primary btn-sm fa fa-pencil">
                 </a>
                 &nbsp;
-                <a href={"#confirmationModal" + this.props.id}  data-toggle="tooltip1" ref="delete" title="Ištrinti" type="button" id={'confirm-delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"></a>
+                <a href={"#confirmationModal" + this.props.id}  data-toggle="tooltip1" ref="delete" title="Ištrinti" type="button" id={'delete-button-' + this.props.id} className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"></a>
                   <div id={'confirmationModal' + this.props.id} className="modal fade" role="dialog">
                     <div className="modal-dialog">
                       <div className="modal-content">
