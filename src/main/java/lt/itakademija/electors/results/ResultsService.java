@@ -48,6 +48,9 @@ public class ResultsService {
     RatingRepository ratingRepository;
 
     public ResultsGeneralReport getGeneralReport() {
+        if (generalReport == null){
+            formGeneralResults();
+        }
         return generalReport;
     }
 
@@ -402,6 +405,7 @@ public class ResultsService {
     private List<CandidateIntDTO> getSingleWinners() {
         return countyRepository.findAll()
                 .stream()
+                .filter(c->!c.getCandidates().isEmpty())
                 .map(county -> {
                     List<ResultSingleEntity> votesForCandidates = county.getCandidates()
                             .stream()
@@ -416,9 +420,15 @@ public class ResultsService {
                         Long sum = resultSingleEntities.stream().mapToLong(ResultSingleEntity::getVotes).sum();
                         list.add(new CandidateIntDTO(candidateEntity, sum.intValue()));
                     });
-                    List<CandidateIntDTO> sortedList = list.stream().sorted((d1, d2) -> d2.getVotes().compareTo(d1.getVotes())).collect(Collectors.toList());
+                    System.out.println("=================");
 
-                    return sortedList.get(0);
+                    List<CandidateIntDTO> sortedList = list
+                            .stream()
+                            .sorted((d1, d2) -> d2.getVotes().compareTo(d1.getVotes()))
+                            .collect(Collectors.toList());
+                    System.out.println(sortedList.size());
+                    System.out.println("=================");
+                    return sortedList.iterator().next();
                 }).collect(Collectors.toList());
     }
 
