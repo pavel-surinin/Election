@@ -1,4 +1,8 @@
 var ResultsSingleListRowComponent = React.createClass({
+  componentDidMount: function () {
+    $(this.refs.approve).tooltip();
+    $(this.refs.deny).tooltip();
+  },
   approve : function(){
     this.props.onHandleApprove(this.props.info.id,'single',this.props.info.name);
   },
@@ -18,23 +22,24 @@ var ResultsSingleListRowComponent = React.createClass({
         <td className="small">
           {this.props.info.votesSingleRegisteredDate}
         </td>
-        <td>
+        <td className="small">
           <div>
             &nbsp;
             <button
               onClick={this.approve}
-              ref="confirm"
+              ref='approve'
               data-toggle="tooltip1"
               title="Patvirtinti"
+              id={'confirm-button-' + this.props.info.id}
               type="button"
               className="btn btn-success btn-sm fa fa-check">
             </button>
             &nbsp;
             <button
               data-target={'#confirmationModalSingle' + this.props.info.id}
-              ref="delete" title="Ištrinti"
+              ref='deny' title="Ištrinti"
               type="button"
-              id={'confirm-delete-button-' + this.props.info.id}
+              id={'delete-button-' + this.props.info.id}
               className="btn btn-danger btn-sm fa fa-trash"
               data-toggle="modal">
             </button>
