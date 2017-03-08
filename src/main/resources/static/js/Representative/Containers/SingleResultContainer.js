@@ -1,16 +1,3 @@
-function getDistrictIdLogged(self) {
-  axios
-    .get('/users/logged/district')
-    .then(function(response){
-      self.setState({
-        districtId:response.data,
-      });
-    })
-    .catch(function(err){
-      console.error('componentWillMount.axios.get.districtId', err);
-    });
-}
-
 function getCandidates(self,district) {
   axios
     .get('candidate/' + district + '/district')
@@ -23,9 +10,9 @@ function getCandidates(self,district) {
       console.error('SingleResultContainer.componentWillMount.axios.get.party', err);
     });
 }
-function getDistrict(self,id) {
+function getDistrict(self) {
   axios
-    .get('/district/' + id)
+    .get('district/representative')
     .then(function(response){
       self.setState({
         districtInfo :  response.data,
@@ -105,7 +92,7 @@ var SingleResultContainer = React.createClass({
           postArray.push(
             {
               'candidate' : {'id' : key},
-              'district' : {'id' : this.state.districtId},
+              'district' : {'id' : this.state.districtInfo.id},
               'votes' : list[key],
               'datePublished' : new Date(),
             }
@@ -113,7 +100,7 @@ var SingleResultContainer = React.createClass({
         }
       }
       axios
-      .post('/result/single', postArray)
+      .post('/result-single', postArray)
       .then(function(response){
         self.setState({isVotesRegistered : true});
       })

@@ -1,5 +1,7 @@
 package lt.itakademija.users;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -9,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-public class UserRoles {
+public class UserRoles implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,11 +51,7 @@ public class UserRoles {
     }
 
     @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", users=" + users +
-                '}';
+    public String getAuthority() {
+        return null;
     }
 }

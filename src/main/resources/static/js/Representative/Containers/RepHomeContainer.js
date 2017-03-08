@@ -1,16 +1,16 @@
-function getDistrictIdLogged(self) {
+function getDistrict(self) {
   axios
-    .get('/users/logged/district')
+    .get('district/representative')
     .then(function(response){
       self.setState({
-        district :  response.data,
+        info :  response.data,
+        isLoading : false,
       });
     })
     .catch(function(err){
-      console.error('componentWillMount.axios.get.districtId', err);
+      console.error('MultiResultContainer.componentWillMount.axios.get.district', err);
     });
 }
-
 
 var RepHomeContainer = React.createClass({
   getInitialState: function() {
@@ -20,23 +20,10 @@ var RepHomeContainer = React.createClass({
     };
   },
   componentWillMount: function() {
-    var self = this;
-    axios.get('/users/logged/district').then(function(r){
-      self.setState({district : r.data});
-      console.log('aaaaaaaaaaaaaaa',r.data);
-    });
+    getDistrict(this);
   },
   componentDidMount : function(){
-    console.log(this);
-    var self = this;
-    axios
-    .get('district/' + this.state.district)
-    .then(function(response){
-      self.setState({info : response.data});
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
+    getDistrict(this);
   },
   render: function() {
     return (
