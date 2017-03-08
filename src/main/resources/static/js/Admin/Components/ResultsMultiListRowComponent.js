@@ -10,7 +10,7 @@ var ResultsMultiListRowComponent = React.createClass({
   },
   componentDidMount: function () {
     $(this.refs.approve).tooltip();
-    $(this.refs.delete).tooltip();
+    $(this.refs.deny).tooltip();
   },
   approve : function(){
     this.props.onHandleApprove(this.props.info.id,'multi',this.props.info.name);
@@ -39,11 +39,16 @@ var ResultsMultiListRowComponent = React.createClass({
                 onClick={this.approve}
                 data-toggle="tooltip1"
                 title="Patvirtinti"
+                id={'confirm-button-' + this.props.info.id}
                 type="button"
                 className="btn btn-success btn-sm fa fa-check"
               ></button>
             &nbsp;
-            <button data-target={"#confirmationModal" + this.props.info.type + this.props.info.id} ref="delete" title="Ištrinti" type="button" id={'confirm-delete-button-' + this.props.info.type + this.props.info.id} className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"></button>
+            <button ref='deny'
+                    data-target={"#confirmationModal" + this.props.info.type + this.props.info.id}
+                    title="Ištrinti" type="button" id={'delete-button-' + this.props.info.id}
+                    className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"
+            ></button>
             <div id={'confirmationModal' + this.props.info.type + this.props.info.id} className="modal fade" role="dialog">
               <div className="modal-dialog">
                 <div className="modal-content">
