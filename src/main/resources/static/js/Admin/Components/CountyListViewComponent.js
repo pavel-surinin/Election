@@ -5,6 +5,7 @@ var CountyListViewComponent = React.createClass({
     var deletedCountyMessage = alerts.showDangerFixed(this.props.deletedCountyName);
     var array = [];
     var self= this.props;
+    var deleteErrorMessages = alerts.showDanger(this.props.deleteErrorMessages);
     this.props.countyList.map(function(county,index) {
       array.push(
         <CountyListRowViewComponent
@@ -37,6 +38,7 @@ var CountyListViewComponent = React.createClass({
               </div>
             </div>
                 <div className="panel-body">
+                {deleteErrorMessages}
                 {succesCreateMessage}
                 {deletedCountyMessage}
               </div>
