@@ -14,6 +14,7 @@ function getDistrict(self) {
   axios
     .get('district/representative')
     .then(function(response){
+      getCandidates(self,response.data.id);
       self.setState({
         districtInfo :  response.data,
         isLoading : false,
@@ -39,7 +40,6 @@ function isCountEqualsOrLess(list,max){
     return true;
   }
 }
-
 function isVotesNegativeValue(list) {
   for (var key1 in list) {
     if (list.hasOwnProperty(key1)) {
@@ -57,7 +57,6 @@ var errorMesages = [];
 var SingleResultContainer = React.createClass({
   getInitialState: function() {
     return {
-      districtId : 5,
       candidatesList : [],
       districtInfo : [],
       isLoading : true,
@@ -66,8 +65,7 @@ var SingleResultContainer = React.createClass({
     };
   },
   componentWillMount: function() {
-    getCandidates(this,this.state.districtId);
-    getDistrict(this,this.state.districtId);
+    getDistrict(this);
   },
   registerVotes :function(id,votes){
     list[id]=votes;
@@ -126,7 +124,13 @@ var SingleResultContainer = React.createClass({
           {alerts.showSucces('Jūsų apylinkės balsai užregistruoti')}
         </div>
       );
-    } else {
+    } else if (this.state.candidatesList.length == 0) {
+      return(
+        <div>
+          {alerts.showSucces(this.state.districtInfo.countyName  + ' apygardai kandidatai dar nepriskirti.')}
+        </div>
+      );
+    } {
       return (
         <SingleResultComponent
           list={this.state.candidatesList}
