@@ -23,6 +23,11 @@ public class UsersController {
     @Autowired
     UsersService service;
 
+    @PostMapping("/search")
+    public List seacrh(@RequestParam("searchFor") String string){
+        return service.search(string);
+    }
+
     @PostMapping("/login/check")
     public Object getUserLogged() {
         if (isRole("ADMIN")) {

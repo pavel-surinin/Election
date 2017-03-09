@@ -6,8 +6,34 @@ var logoStyle ={
 var MenuComponent = React.createClass({
   getInitialState: function() {
     return {
-      l2:''
+      l2:'',
+      searchFor : '',
     };
+  },
+  onSearchClick : function(event){
+    if (event) {
+      event.preventDefault();
+    }
+    var search = document.getElementById('search');
+    var button = document.getElementById('search-button');
+    if (search.style.width == '150px') {
+      search.style.width = '0px';
+      search.style.padding = '0px';
+      search.style.border = '0px';
+      button.style.backgroundColor = 'inherit';
+      button.blur();
+      this.context.router.push('search/' + this.state.searchFor);
+    } else {
+      search.style.width = '150px';
+      search.style.padding = '5px';
+      search.style.border = '1px';
+      search.focus();
+      button.style.backgroundColor = 'black';
+    }
+
+  },
+  onHAndleSearchChange : function(event){
+    this.setState({searchFor : event.target.value});
   },
   render: function() {
     return (
@@ -31,6 +57,16 @@ var MenuComponent = React.createClass({
                 <Link location={this.props.location.pathname} href='county' linkName='Apygardos' />
                 <Link location={this.props.location.pathname} href='results' linkName='Rezultatai' />
               </ul>
+              <div style={{display : 'inline-table', marginRight : '0px', paddingRight : '0px', float : 'right'}}>
+                <div className="input-group my-nav-search">
+                <form onSubmit={this.onSearchClick}>
+                  <input onChange={this.onHAndleSearchChange} style={{width : '0px'}} id='search' type="text" className="form-control search-input" placeholder="Ieškoti..."/>
+                </form>
+                <span className="input-group-btn">
+              <button id='search-button' onClick={this.onSearchClick} className="btn btn-default" type="button"><i className="fa fa-search" aria-hidden="true"></i></button>
+              </span>
+              </div>
+              </div>
             </div>
           </div>
         </nav>
@@ -38,8 +74,12 @@ var MenuComponent = React.createClass({
              {this.props.children}
          </div>
      </div>
-
     );
   }
 });
+
+MenuComponent.contextTypes = {
+  router: React.PropTypes.object.isRequired,
+};
+
 window.MenuComponent = MenuComponent;

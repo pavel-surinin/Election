@@ -122,6 +122,7 @@ ReactDOM.render((
       <Route path="/county/:county" component={CountyResultsContainer}/>
       <Route path="/county/:county/:id" component={DistrictResultsContainer}/>
       <Route path="/results" component={GeneralResultsContainer} />
+      <Route path="/search/:string" component={SearchContainer} />
       <Route path="/contacts" component={EmptyComponent} />
       <Route path="*" component={NoMatch}/>
     </Route>
