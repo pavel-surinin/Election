@@ -22,8 +22,8 @@ var MenuComponent = React.createClass({
       search.style.border = '0px';
       button.style.backgroundColor = 'inherit';
       button.blur();
-      this.context.router.push('search/' + this.state.searchFor);
-    } else {
+      if (this.state.searchFor != '') {this.context.router.push('search/' + this.state.searchFor);}
+    } else  {
       search.style.width = '150px';
       search.style.padding = '5px';
       search.style.border = '1px';

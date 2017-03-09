@@ -1,17 +1,18 @@
 var SearchComponent = React.createClass({
 
   render: function() {
-    var counties = this.props.results[0].map(function(county){
-      return <tr><td>{county.name}</td></tr>;
+    console.log(this.props.results);
+    var counties = this.props.results[0].map(function(county,index){
+      return <tr key={index}><td><a href={'#/county/' + county.id}>{county.name}</a></td></tr>;
     });
-    var districts = this.props.results[1].map(function(district){
-      return <tr><td>{district.name}</td></tr>;
+    var districts = this.props.results[1].map(function(district,index){
+      return <tr key={index}><td><a href={'#/county/' + district.countyId + '/' + district.id}>{district.name}</a></td></tr>;
     });
-    var reps = this.props.results[2].map(function(rep){
-      return <tr><td>{rep.name} {rep.surname}</td></tr>;
+    var reps = this.props.results[2].map(function(rep,index){
+      return <tr key={index}><td><a href={'#/county/' + rep.countyId + '/' + rep.districtId}>{rep.name} {rep.surname}</a></td></tr>;
     });
-    var cand = this.props.results[3].map(function(cand){
-      return <tr><td>{cand.name} {cand.surname}</td></tr>;
+    var cand = this.props.results[3].map(function(cand,index){
+      return <tr key={index}><td><a href={'#/candidate/' + cand.id}>{cand.name} {cand.surname}</a></td></tr>;
     });
     var count = this.props.results[0].length +this.props.results[1].length +this.props.results[2].length + this.props.results[3].length;
     return (

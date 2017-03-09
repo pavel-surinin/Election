@@ -102,7 +102,7 @@ public class UsersService {
         List<DistrictEntity> searchDistricts = districtRepository.search(string);
         list.add(searchDistricts.stream().map(DistrictReport::new).collect(Collectors.toList()));
         List<DistrictRepresentativeEntity> searchDistrictRepresentatives = districtRepresentativeRepository.search(string);
-        list.add(searchDistrictRepresentatives.stream().map(DistrictRepresentativeReport::new).collect(Collectors.toList()));
+        list.add(searchDistrictRepresentatives.stream().map(r->new DistrictRepresentativeReport(r,true)).collect(Collectors.toList()));
         List<CandidateEntity> searchCandidates = candidateRepository.search(string);
         list.add(searchCandidates.stream().map(CandidateReport::new).collect(Collectors.toList()));
         return list;
