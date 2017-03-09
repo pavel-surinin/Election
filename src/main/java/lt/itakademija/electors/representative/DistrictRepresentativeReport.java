@@ -4,15 +4,23 @@ package lt.itakademija.electors.representative;
  * Created by Pavel on 2017-01-16.
  */
 public class DistrictRepresentativeReport {
+    private DistrictRepresentativeEntity ent;
     private Long id;
-
     private String name;
-
     private String surname;
-
     private Long districtId;
-
     private String districtName;
+
+    public DistrictRepresentativeReport() {
+    }
+
+    public DistrictRepresentativeReport(DistrictRepresentativeEntity entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.surname = entity.getSurname();
+        this.districtId = entity.getDistrict().getId();
+        this.districtName = entity.getDistrict().getName();
+    }
 
     public Long getId() {
         return id;

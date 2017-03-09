@@ -315,5 +315,51 @@ h4.panel-title.collapsed:hover > i{
     transition: 0.4s;
     transform: rotate(-359deg);
 }
-
 /* PAGINATION END*/
+/*SEARCH BAR START*/
+
+
+div.my-nav-search{
+  padding: 0px;
+  margin: 8px 0px;
+  background: none;
+}
+
+.search-input{
+  background: black;
+  color : white;
+  border-radius: 1px;
+  width: 0px;
+  border: 0px;
+  padding: 0px;
+  -webkit-transition: all 0.7s ease; /* Safari */
+  transition: all 0.7s ease;
+}
+
+div.my-nav-search > span > button{
+  border: none;
+  border-radius: 1px;
+  background: inherit;
+  color: #22e2bb;
+  padding: 10px 12px;
+  -webkit-transition: all 0.7s ease; /* Safari */
+  transition: all 0.7s ease;
+}
+
+div.my-nav-search > span > button:hover{
+  background: inherit;
+  color: #ff6e21;
+  -webkit-transition: all 0.7s ease; /* Safari */
+  transition: all 0.7s ease;
+}
+
+div.my-nav-search > span > button:active{
+  background: inherit;
+  color: #ff6e21;
+}
+
+div.my-nav-search > span > button:focus{
+  background: inherit;
+  color: #ff6e21
+}
+/*SEARCH BAR END*/

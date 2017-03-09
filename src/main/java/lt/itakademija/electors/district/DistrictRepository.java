@@ -1,5 +1,6 @@
 package lt.itakademija.electors.district;
 
+import lt.itakademija.electors.county.CountyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
@@ -55,6 +56,16 @@ public class DistrictRepository {
         return
                 em.createQuery("SELECT a FROM DistrictEntity a WHERE a.name LIKE CONCAT(:letter, '%')")
                         .setParameter("letter", letter)
+                        .getResultList();
+    }
+
+    public List<DistrictEntity> search(String string) {
+        String lowerCase = string.toLowerCase();
+        String firstUpper = string.substring(0,1).toUpperCase() + string.substring(1,string.length()).toLowerCase();
+        return
+                em.createQuery("SELECT a FROM DistrictEntity a WHERE a.name LIKE CONCAT('%', :string, '%') OR a.name LIKE CONCAT('%', :stringU, '%')")
+                        .setParameter("string", lowerCase)
+                        .setParameter("stringU", firstUpper)
                         .getResultList();
     }
 }
