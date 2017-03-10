@@ -23,6 +23,7 @@ var CandidateDetailContainer = React.createClass({
     getCandidate(this);
   },
   render: function() {
+    document.title = 'Kandidatas: ' +  this.state.info.name + ' ' + this.state.info.surname + ' - Rinkimai 2017';
     if (this.state.isLoading) {
       if (this.state.isLoading) {
         return <div style={{marginTop : '3px', color : 'white', textAlign : 'center'}}><i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></div>;

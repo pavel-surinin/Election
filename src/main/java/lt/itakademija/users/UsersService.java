@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -106,5 +109,14 @@ public class UsersService {
         List<CandidateEntity> searchCandidates = candidateRepository.search(string);
         list.add(searchCandidates.stream().map(CandidateReport::new).collect(Collectors.toList()));
         return list;
+    }
+
+    public FileInputStream getCsvResults() {
+        try {
+            FileInputStream file = new FileInputStream(new File("test-csv/big/names.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    return null;
     }
 }

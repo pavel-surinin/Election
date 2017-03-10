@@ -1,12 +1,11 @@
 var SearchComponent = React.createClass({
 
   render: function() {
-    console.log(this.props.results);
     var counties = this.props.results[0].map(function(county,index){
       return <tr key={index}><td><a href={'#/county/' + county.id}>{county.name}</a></td></tr>;
     });
     var districts = this.props.results[1].map(function(district,index){
-      return <tr key={index}><td><a href={'#/county/' + district.countyId + '/' + district.id}>{district.name}</a></td></tr>;
+      return <tr key={index}><td><a href={'#/county/' + district.countyId + '/' + district.id}>{district.name}</a> <small>({district.countyName} apygarda)</small></td></tr>;
     });
     var reps = this.props.results[2].map(function(rep,index){
       return <tr key={index}><td><a href={'#/county/' + rep.countyId + '/' + rep.districtId}>{rep.name} {rep.surname}</a></td></tr>;

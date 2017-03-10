@@ -2,10 +2,14 @@ package lt.itakademija.users;
 
 import lt.itakademija.electors.representative.DistrictRepresentativeService;
 import lt.itakademija.exceptions.BadCredentialsEnteredException;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +26,17 @@ public class UsersController {
 
     @Autowired
     UsersService service;
+
+    @GetMapping("/results/csv")
+    public Boolean getCsvResults(HttpServletResponse response){
+        try {
+            System.out.println("---------------------" + service.getCsvResults().available());
+            IOUtils.copy(service.getCsvResults(), response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 
     @PostMapping("/search")
     public List seacrh(@RequestParam("searchFor") String string){

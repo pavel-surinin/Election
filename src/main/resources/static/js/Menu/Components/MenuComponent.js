@@ -1,3 +1,14 @@
+var call = null;
+
+function checkState(state,self){
+  if (state.searchFor == '' || state.searchFor.length <= 2) {
+    clearTimeout(call);
+  }
+  if (state.searchFor != '' && state.searchFor.length > 2) {
+    clearTimeout(call);
+    call = setTimeout(function(){self.context.router.push('search/' + state.searchFor);},1000);
+  }
+}
 var logoStyle ={
   height: '24px',
   display: 'inline',
@@ -34,6 +45,15 @@ var MenuComponent = React.createClass({
   },
   onHAndleSearchChange : function(event){
     this.setState({searchFor : event.target.value});
+  },
+  shouldComponentUpdate: function(nextProps, nextState) {
+    if (this.state.searchFor == nextState.searchFor) {
+      // return false;
+      return true;
+    } else {
+      checkState(nextState, this);
+      return true;
+    }
   },
   render: function() {
     return (
