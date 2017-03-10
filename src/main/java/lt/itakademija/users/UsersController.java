@@ -4,6 +4,10 @@ import lt.itakademija.electors.representative.DistrictRepresentativeService;
 import lt.itakademija.exceptions.BadCredentialsEnteredException;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,19 +31,24 @@ public class UsersController {
     @Autowired
     UsersService service;
 
-    @GetMapping("/results/csv")
-    public Boolean getCsvResults(HttpServletResponse response){
+    @GetMapping(value = "/results/csv", produces = "application/csv")
+    public ResponseEntity<InputStreamResource> getCsvResults(HttpServletResponse response) {
+        ClassPathResource file = new ClassPathResource("test-csv/big/names.txt");
+        service.getCsvResults();
         try {
-            System.out.println("---------------------" + service.getCsvResults().available());
-            IOUtils.copy(service.getCsvResults(), response.getOutputStream());
-        } catch (IOException e) {
+            return ResponseEntity
+                    .ok()
+//                    .contentLength(file.contentLength())
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body(new InputStreamResource(service.getCsvResults()));
+        } catch (Throwable e) {
             e.printStackTrace();
         }
-        return true;
+        return null;
     }
 
     @PostMapping("/search")
-    public List seacrh(@RequestParam("searchFor") String string){
+    public List seacrh(@RequestParam("searchFor") String string) {
         return service.search(string);
     }
 

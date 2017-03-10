@@ -313,9 +313,9 @@ public class ResultsService {
         int spoiledMulti = allDistricts.stream().filter(d -> d.getSpoiledMulti() != null).mapToInt(DistrictEntity::getSpoiledMulti).sum();
         int spoiledSingle = allDistricts.stream().filter(d -> d.getSpoiledSingle() != null).mapToInt(DistrictEntity::getSpoiledSingle).sum();
         int numberOfVoters = allDistricts.stream().mapToInt(d -> d.getNumberOfElectors().intValue()).sum();
-        List<PartyIntDTO> votesInMulti = countPartiesVotesRatings();
-        report.setVotesInMulti(votesInMulti);
         List<CandidateIntDTO> singleWinners = getSingleWinners();
+        List<PartyIntDTO> votesInMulti = countPartiesVotesRatings(singleWinners);
+        report.setVotesInMulti(votesInMulti);
         report.setSingleWinners(singleWinners);
         report.setVotesCount(sumOfVotes);
         report.setSpoiledMulti(spoiledMulti);
@@ -342,7 +342,6 @@ public class ResultsService {
                 .map(v -> v.subList(0, m.getVotes() - 1))
                 .get()).flatMap(Collection::stream).collect(Collectors.toList());
         report.setMultiWinners(multiWinnersList);
-        setGeneralReport(report);
 
         int districtCount = allDistricts.size();
         report.setDistrictsCount(districtCount);
@@ -370,7 +369,10 @@ public class ResultsService {
                         Collectors.summingLong(StringLongDTO::getNumber)));
         List<StringLongDTO> listOfMandatesPerParty = new ArrayList<>();
         collect.forEach((s,l)->listOfMandatesPerParty.add(new StringLongDTO(s,l)));
+
         report.setMandatesPerPartyGeneralLive(listOfMandatesPerParty.stream().sorted((s1,s2)->s2.getNumber().compareTo(s1.getNumber())).collect(Collectors.toList()));
+
+        setGeneralReport(report);
         return report;
     }
 
@@ -420,19 +422,15 @@ public class ResultsService {
                         Long sum = resultSingleEntities.stream().mapToLong(ResultSingleEntity::getVotes).sum();
                         list.add(new CandidateIntDTO(candidateEntity, sum.intValue()));
                     });
-                    System.out.println("=================");
-
                     List<CandidateIntDTO> sortedList = list
                             .stream()
                             .sorted((d1, d2) -> d2.getVotes().compareTo(d1.getVotes()))
                             .collect(Collectors.toList());
-                    System.out.println(sortedList.size());
-                    System.out.println("=================");
                     return sortedList.iterator().next();
                 }).collect(Collectors.toList());
     }
 
-    private List<PartyIntDTO> countPartiesVotesRatings() {
+    private List<PartyIntDTO> countPartiesVotesRatings(List<CandidateIntDTO> singleWinners) {
         List<PartyEntity> allParties = partyRepository.findAll();
         return allParties
                 .stream()
@@ -463,8 +461,12 @@ public class ResultsService {
                     List<CandidateEntity> candidatesNewRatingOrder = new ArrayList();
                     candidatesNewRatingOrder.addAll(candidatesOrderFromRatingsCloned);
                     candidatesNewRatingOrder.addAll(candidatesOrderOriginal);
+                    List<Long> singleWinnersIds = singleWinners.stream().map(c -> c.getCandidate().getId()).collect(Collectors.toList());
                     List<CandidateEntity> finalModifiedList = new ArrayList<>();
-                    for (int i = 0; i < candidatesNewRatingOrder.size(); i++) {
+
+                    List<CandidateEntity> listToOrder = candidatesNewRatingOrder.stream().filter(c -> !singleWinnersIds.contains(c.getId())).collect(Collectors.toList());
+
+                    for (int i = 0; i < listToOrder.size(); i++) {
                         PartyEntity partyEntity = new PartyEntity();
                         partyEntity.setName(p.getName());
                         CandidateEntity candidate = new CandidateEntity();
@@ -478,7 +480,6 @@ public class ResultsService {
                         candidate.setNumberInParty(i + 1);
                         candidate.setPartyDependencies(partyEntity);
                         finalModifiedList.add(candidate);
-
                     }
                     PartyEntity tp = new PartyEntity();
                     tp.setName(p.getName());

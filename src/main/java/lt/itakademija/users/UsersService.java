@@ -113,7 +113,7 @@ public class UsersService {
 
     public FileInputStream getCsvResults() {
         try {
-            FileInputStream file = new FileInputStream(new File("test-csv/big/names.txt"));
+            return new FileInputStream(new File("test-csv/bad-data2.csv"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
