@@ -165,11 +165,17 @@ var MultiResultContainer = React.createClass({
       })
       .catch(function(error){
         if (error.response) {
-          if (error.response.status == 417) {
+          if (error.response.status == 418) {
+            errorMesages.push('Reitingo balsų suma negali viršyti balsų sumos atiduotos už partiją x 5');
+          }
+          if (error.response.status == 422) {
+            errorMesages.push('Retingo balų suma kandidatui negali viršity balsų sumos už partiją');
+          }
+          if (error.response.status == 417) {/*418 422*/
             var res = error.response.data.message.split(' ');
             errorMesages.push('Neteisingas biuletenių skaičius, vienmandatieje prabalsavo ' + res[7] + ', jūs užregistravote ' + res[10] + '.');
-            self.setState({errorMesages : errorMesages});
           }
+          self.setState({errorMesages : errorMesages});
         }
       });
     }
