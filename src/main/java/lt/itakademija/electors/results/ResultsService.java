@@ -342,7 +342,6 @@ public class ResultsService {
                                 return !winnersIds.contains(member.getId());
                             })
                             .collect(Collectors.toList());
-//                            members.removeAll(winnersList);
                     return finalMemnbers;
                 })
                 .map(v -> v.subList(0, m.getVotes() - 1))

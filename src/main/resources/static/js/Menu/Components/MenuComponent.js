@@ -6,7 +6,7 @@ function checkState(state,self){
   }
   if (state.searchFor != '' && state.searchFor.length > 2) {
     clearTimeout(call);
-    call = setTimeout(function(){self.context.router.push('search/' + state.searchFor);},1000);
+    call = setTimeout(function(){self.context.router.push('search/' + state.searchFor);},250);
   }
 }
 var logoStyle ={
@@ -42,6 +42,18 @@ var MenuComponent = React.createClass({
       button.style.backgroundColor = 'black';
     }
 
+  },
+  onHanldeFocusOutSearch : function(){
+    var search = document.getElementById('search');
+    var button = document.getElementById('search-button');
+    if (search.style.width == '150px') {
+      search.style.width = '0px';
+      search.style.padding = '0px';
+      search.style.border = '0px';
+      button.style.backgroundColor = 'inherit';
+      button.blur();
+      if (this.state.searchFor != '') {this.context.router.push('search/' + this.state.searchFor);}
+    }
   },
   onHAndleSearchChange : function(event){
     this.setState({searchFor : event.target.value});
@@ -80,7 +92,7 @@ var MenuComponent = React.createClass({
               <div style={{display : 'inline-table', marginRight : '0px', paddingRight : '0px', float : 'right'}}>
                 <div className="input-group my-nav-search">
                 <form onSubmit={this.onSearchClick}>
-                  <input onChange={this.onHAndleSearchChange} style={{width : '0px'}} id='search' type="text" className="form-control search-input" placeholder="Ieškoti..."/>
+                  <input onBlur={this.onHanldeFocusOutSearch} onChange={this.onHAndleSearchChange} style={{width : '0px'}} id='search' type="text" className="form-control search-input" placeholder="Ieškoti..."/>
                 </form>
                 <span className="input-group-btn">
               <button id='search-button' onClick={this.onSearchClick} className="btn btn-default" type="button"><i className="fa fa-search" aria-hidden="true"></i></button>
