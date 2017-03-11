@@ -42,7 +42,7 @@ function getRatedPartyMembersList(self) {
           }
           if (member.numberInParty == mandatesCount+1 && mandatesCount != 0) {
             ratedMembersList.push(<tr><td style={{textAlign : 'center'}} colSpan='4'>
-                    <i className="fa fa-arrow-circle-o-up fa-fw text-success" aria-hidden="true"></i>Kandidatai gaunantys mandatus seime
+                    <i className="fa fa-arrow-circle-o-up fa-fw text-success" aria-hidden="true"></i>Kandidatai gaunantys mandatus Seime
                     <i className="fa fa-arrow-circle-o-up fa-fw text-success" aria-hidden="true"></i>
                     </td></tr>);
           }

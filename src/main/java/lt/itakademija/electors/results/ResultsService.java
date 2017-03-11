@@ -48,7 +48,7 @@ public class ResultsService {
     RatingRepository ratingRepository;
 
     public ResultsGeneralReport getGeneralReport() {
-        if (generalReport == null){
+        if (generalReport == null) {
             formGeneralResults();
         }
         return generalReport;
@@ -336,8 +336,14 @@ public class ResultsService {
 
                     List<CandidateReport> members = v.getPar().getMembers();
                     List<CandidateReport> winnersList = singleWinners.stream().map(dto -> dto.getCandidate()).collect(Collectors.toList());
-                    members.removeAll(winnersList);
-                    return members;
+                    List<CandidateReport> finalMemnbers = members.stream()
+                            .filter(member -> {
+                                List<Long> winnersIds = singleWinners.stream().map(w -> w.getCandidate().getId()).collect(Collectors.toList());
+                                return !winnersIds.contains(member.getId());
+                            })
+                            .collect(Collectors.toList());
+//                            members.removeAll(winnersList);
+                    return finalMemnbers;
                 })
                 .map(v -> v.subList(0, m.getVotes() - 1))
                 .get()).flatMap(Collection::stream).collect(Collectors.toList());
@@ -354,11 +360,11 @@ public class ResultsService {
                 .collect(Collectors.toList());
         List<StringLongDTO> singleMandatesPerParty = report.getSingleWinners()
                 .stream()
-                .map(c ->{
-                    if(c.getCandidate().getPartijosPavadinimas() == null){
-                    return new StringLongDTO("Nepartiniai", 1L);
+                .map(c -> {
+                    if (c.getCandidate().getPartijosPavadinimas() == null) {
+                        return new StringLongDTO("Nepartiniai", 1L);
                     } else {
-                    return new StringLongDTO(c.getCandidate().getPartijosPavadinimas(), 1L);
+                        return new StringLongDTO(c.getCandidate().getPartijosPavadinimas(), 1L);
                     }
                 })
                 .collect(Collectors.toList());
@@ -368,9 +374,9 @@ public class ResultsService {
                 .collect(Collectors.groupingBy(StringLongDTO::getName,
                         Collectors.summingLong(StringLongDTO::getNumber)));
         List<StringLongDTO> listOfMandatesPerParty = new ArrayList<>();
-        collect.forEach((s,l)->listOfMandatesPerParty.add(new StringLongDTO(s,l)));
+        collect.forEach((s, l) -> listOfMandatesPerParty.add(new StringLongDTO(s, l)));
 
-        report.setMandatesPerPartyGeneralLive(listOfMandatesPerParty.stream().sorted((s1,s2)->s2.getNumber().compareTo(s1.getNumber())).collect(Collectors.toList()));
+        report.setMandatesPerPartyGeneralLive(listOfMandatesPerParty.stream().sorted((s1, s2) -> s2.getNumber().compareTo(s1.getNumber())).collect(Collectors.toList()));
 
         setGeneralReport(report);
         return report;
@@ -407,7 +413,7 @@ public class ResultsService {
     private List<CandidateIntDTO> getSingleWinners() {
         return countyRepository.findAll()
                 .stream()
-                .filter(c->!c.getCandidates().isEmpty())
+                .filter(c -> !c.getCandidates().isEmpty())
                 .map(county -> {
                     List<ResultSingleEntity> votesForCandidates = county.getCandidates()
                             .stream()
