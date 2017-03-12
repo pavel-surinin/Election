@@ -29,7 +29,7 @@ var GeneralResultsContainer = React.createClass({
   render: function() {
     document.title='Rezultatai - Rinkimai 2017';
     if (this.state.isLoading) {
-      return <div><img src='images/loading.gif'/></div>;
+      return <div style={{marginTop : '3px', color : 'white', textAlign : 'center'}}><i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></div>;
     }
     return (
       <GeneralresultsComponent

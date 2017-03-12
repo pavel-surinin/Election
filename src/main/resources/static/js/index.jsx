@@ -115,13 +115,15 @@ ReactDOM.render((
     <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
-      <Route path="/candidates" component={CandidatesListContainer} />
+      <Route path="/candidate" component={CandidatesListContainer} />
+      <Route path="/candidate/:id" component={CandidateDetailContainer} />
       <Route path="/party" component={PartyViewContainer} />
       <Route path="/party/:id" component={PartyDetailContainer} />
       <Route path="/county" component={CountiesContainer}/>
       <Route path="/county/:county" component={CountyResultsContainer}/>
       <Route path="/county/:county/:id" component={DistrictResultsContainer}/>
       <Route path="/results" component={GeneralResultsContainer} />
+      <Route path="/search/:string" component={SearchContainer} />
       <Route path="/contacts" component={EmptyComponent} />
       <Route path="/api" component={ResultsApiComponent} />
       <Route path="*" component={NoMatch}/>

@@ -53,7 +53,6 @@ public class CountyController {
 
     @DeleteMapping("/county/{id}")
     public boolean deletecounty(@PathVariable Long id){
-
         return service.delete(id);
     }
 

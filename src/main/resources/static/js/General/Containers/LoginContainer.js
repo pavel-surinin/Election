@@ -10,13 +10,13 @@ var LoginContainer = React.createClass({
   componentWillMount: function() {
     var self = this;
     axios
-    .get('users/logged')
+    .post('/login/check')
     .then(function(response){
       console.log(response.data);
-      if (response.data == 'none') {
-        self.setState({isLogged : false});
-      } else {
+      if (response.data == 'admin' || response.data == 'representative') {
         self.setState({isLogged : true});
+      } else {
+        self.setState({isLogged : false});
       }
     })
     .catch(function(err){
@@ -26,11 +26,14 @@ var LoginContainer = React.createClass({
   onHandleSubmit : function(event){
     event.preventDefault();
     var self = this;
+    console.log('loging container');
+    var data = new FormData();
+    var header = { headers: {
+      'Content-Type': 'multipart/form-data'}};
+    data.append('username', self.state.username);
+    data.append('password', self.state.password);
     axios
-    .post('users/login', {
-      username : self.state.username,
-      password : self.state.password,
-    })
+    .post('/login', data, header)
     .then(function(response){
       if (response.data == 'none') {
         self.setState({wrongAuth : true});
@@ -42,7 +45,10 @@ var LoginContainer = React.createClass({
         }
       }
     })
-    .catch(function(err){
+    .catch(function(error){
+      if (error.response) {
+        if (error.response.status == 401) {self.setState({wrongAuth : true});}
+      }
       console.error('axios error at LoginContainer', err);
     });
   },
@@ -67,7 +73,7 @@ var LoginContainer = React.createClass({
   onHandleLogoutClick : function(){
     var self = this;
     axios
-    .get('/users/logout')
+    .get('/logout')
     .then(function(response) {
       self.setState({isLogged : false});
     })

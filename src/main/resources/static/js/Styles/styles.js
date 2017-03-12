@@ -41,6 +41,17 @@ var styles = {
       return {display : 'none'};
     }
   },
+  partyListStyle :
+  function(candNumber,winnersCount){
+    if (winnersCount) {
+      if (candNumber<=winnersCount) {
+        return {backgroundColor : 'rgb(226, 255, 214)'};
+      } else {
+        return {};
+      }
+    }
+    return {};
+  },
 
 };
 

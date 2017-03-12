@@ -4,15 +4,43 @@ package lt.itakademija.electors.representative;
  * Created by Pavel on 2017-01-16.
  */
 public class DistrictRepresentativeReport {
+    private DistrictRepresentativeEntity ent;
     private Long id;
-
     private String name;
-
     private String surname;
-
     private Long districtId;
-
     private String districtName;
+    private Long countyId;
+
+    public DistrictRepresentativeReport() {
+    }
+
+    public DistrictRepresentativeReport(DistrictRepresentativeEntity entity) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.surname = entity.getSurname();
+        this.districtId = entity.getDistrict().getId();
+        this.districtName = entity.getDistrict().getName();
+    }
+
+    public DistrictRepresentativeReport(DistrictRepresentativeEntity entity, boolean isSearch) {
+        this.id = entity.getId();
+        this.name = entity.getName();
+        this.surname = entity.getSurname();
+        this.districtId = entity.getDistrict().getId();
+        this.districtName = entity.getDistrict().getName();
+        if (isSearch){
+            this.countyId = entity.getDistrict().getCounty().getId();
+        }
+    }
+
+    public Long getCountyId() {
+        return countyId;
+    }
+
+    public void setCountyId(Long countyId) {
+        this.countyId = countyId;
+    }
 
     public Long getId() {
         return id;

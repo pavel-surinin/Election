@@ -11,8 +11,10 @@ var PartyDetailRowViewComponent = React.createClass({
     } else {
       delta = <span>  </span>;
     }
+    var info = null;
+    var backgroundColor = styles.partyListStyle(this.props.numberInParty,this.props.mandatesCount);
     return (
-      <tr className="small">
+      <tr style={backgroundColor} className="small">
         <td>
           {this.props.numberInParty} {delta}
         </td>
