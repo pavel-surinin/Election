@@ -10,7 +10,6 @@ function getDistrictsCount(self) {
       console.error('DistrictListContainer.getDistrict.axios.get.district', err);
     });
 }
-
 function getDistrict(self,page) {
   axios
     .get('/district/' + page + '/page')
@@ -25,7 +24,6 @@ function getDistrict(self,page) {
       console.error('DistrictListContainer.getDistrict.axios.get.district', err);
     });
 }
-
 function getDistrictByLetter(self,letter) {
   axios
     .get('/district/' + letter + '/letter')

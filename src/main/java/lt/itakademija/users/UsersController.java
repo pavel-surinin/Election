@@ -2,10 +2,18 @@ package lt.itakademija.users;
 
 import lt.itakademija.electors.representative.DistrictRepresentativeService;
 import lt.itakademija.exceptions.BadCredentialsEnteredException;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +30,27 @@ public class UsersController {
 
     @Autowired
     UsersService service;
+
+    @GetMapping(value = "/results/csv", produces = "application/csv")
+    public ResponseEntity<InputStreamResource> getCsvResults(HttpServletResponse response) {
+        ClassPathResource file = new ClassPathResource("test-csv/big/names.txt");
+        service.getCsvResults();
+        try {
+            return ResponseEntity
+                    .ok()
+//                    .contentLength(file.contentLength())
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .body(new InputStreamResource(service.getCsvResults()));
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @PostMapping("/search")
+    public List seacrh(@RequestParam("searchFor") String string) {
+        return service.search(string);
+    }
 
     @PostMapping("/login/check")
     public Object getUserLogged() {

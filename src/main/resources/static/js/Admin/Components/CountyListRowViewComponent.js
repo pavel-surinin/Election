@@ -42,12 +42,12 @@ var CountyListRowViewComponent = React.createClass({
                 <a href={'#/admin/county/edit/' + this.props.id} data-toggle='tooltip2' ref='edit' title='Redaguoti' type='button ' id={'edit-button-' + this.props.id} className='btn btn-primary btn-sm fa fa-pencil'></a>
                  <div id={this.props.id} className='modal fade' role='dialog'>
                    <div className='modal-dialog'>
-                     <div className='modal-content'>
+                     <div className='modal-content'  style={{margin: 'auto'}}>
                        <div className='modal-header'>
                          <button type='button' id='modal-close-button' className='close' data-dismiss='modal'>&times;</button>
                          <h5 className='modal-title'>Prisegti kandidatų sąrašą: {this.props.name} apygarda</h5>
                        </div>
-                       <div className='modal-body'>
+                       <div className='modal-body' style={{margin: 'auto'}}>
                          <form onSubmit={this.props.onHandleFormAddSingleCandSubmit} role='form'>
                              <input className='col-xs-10 btn-bs-file btn btn-sm btn-primary btn-outline' onChange={this.onFileChange} ref='file' type='file' name='file' id='file-select'/>
                              <button id={'add-county-single-list-' + this.props.id} className='btn btn-success btn-outline col-xs-1 col-xs-offset-1'>

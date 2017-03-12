@@ -14,7 +14,8 @@ public class ResultMultiController {
     ResultMultiService service;
 
     @PostMapping("/result-multi")
-    public String save(@RequestBody List<ResultMultiEntity> results){
+    public String save(@RequestBody final List<ResultMultiEntity> results){
+        service.validateRatingPoints(results);
         return service.save(results);
     }
 

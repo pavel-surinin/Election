@@ -82,4 +82,18 @@ public class CandidateRepository {
         int deletedCount = query.setParameter("id", c.getId()).executeUpdate();
         return true;
     }
+
+    public List<CandidateEntity> search(String string) {
+        String lowerCase = string.toLowerCase();
+        String firstUpper = string.substring(0,1).toUpperCase() + string.substring(1,string.length()).toLowerCase();
+        return
+                em.createQuery("SELECT a FROM CandidateEntity a" +
+                        " WHERE a.name LIKE CONCAT('%', :string, '%') " +
+                        "OR a.name LIKE CONCAT('%', :stringU, '%') " +
+                        "OR a.surname LIKE CONCAT('%', :string, '%') " +
+                        "OR a.surname LIKE CONCAT('%', :stringU, '%')")
+                        .setParameter("string", lowerCase)
+                        .setParameter("stringU", firstUpper)
+                        .getResultList();
+    }
 }
