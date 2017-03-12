@@ -2,9 +2,14 @@ var ResultsApiComponent = React.createClass({
  componentDidMount: function () {
     $(this.refs.info).tooltip({title: 'Kopijuoti nuorodą', trigger: 'hover'});
     $(this.refs.info).click(function(){
-       $("[data-toggle='tooltip']").tooltip('destroy');
+       $("[data-toggle='tooltip']").tooltip('hide');
          });
-    $(this.refs.infoCopy).tooltip({trigger: 'click'});
+    $(this.refs.infoCopy).tooltip({title: 'Nuoroda nukopijuota!',trigger: 'click'});
+    $(this.refs.infoCopy).click(function(){
+      setTimeout(function(){
+          $("[data-toggle='tooltip1']").tooltip('hide');
+      }, 2000);
+      });
  },
  onShowHide: function () {
    var webDiv = document.getElementById('WebApiDiv');
@@ -41,7 +46,7 @@ var ResultsApiComponent = React.createClass({
                     <input type="text" id="WebApi" className="form-control" value="http://localhost:9090/results/general" readOnly>
                     </input>
                     <span className="input-group-btn" ref="info" data-toggle="tooltip" >
-                        <button onClick={this.onCopy} className="btn btn-default fa fa-floppy-o fa-4" ref="infoCopy" data-toggle="tooltip1" title="Nuoroda nukopijuota" type="button"></button>
+                        <button onClick={this.onCopy} className="btn btn-default fa fa-floppy-o fa-4" ref="infoCopy" data-toggle="tooltip1" type="button"></button>
                     </span>
                   </div>
                 </div>
