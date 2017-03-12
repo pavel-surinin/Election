@@ -46,4 +46,13 @@ public class CountyRepository {
         em.detach(county);
     }
 
+    public List<CountyEntity> search(String string) {
+        String lowerCase = string.toLowerCase();
+        String firstUpper = string.substring(0,1).toUpperCase() + string.substring(1,string.length()).toLowerCase();
+        return
+                em.createQuery("SELECT a FROM CountyEntity a WHERE a.name LIKE CONCAT('%', :string, '%') OR a.name LIKE CONCAT('%', :stringU, '%')")
+                        .setParameter("string", lowerCase)
+                        .setParameter("stringU", firstUpper)
+                        .getResultList();
+    }
 }

@@ -4,13 +4,18 @@ import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.results.ResultsService;
+import lt.itakademija.electors.results.multi.rating.RatingEntity;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
 import lt.itakademija.exceptions.NotEqualVotersSumException;
+import lt.itakademija.exceptions.RatingBiggerThanVotesException;
+import lt.itakademija.exceptions.RatingsSumGreaterThanVotesException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,13 +44,13 @@ public class ResultMultiService {
         final ResultMultiEntity spoiled = results.stream().filter(res -> res.getParty().getId() == -1991L).findAny().get();
         DistrictEntity district = spoiled.getDistrict();
         final DistrictEntity districtEnt = districtRepository.findById(district.getId());
-        validateEqualVotersSum(results,districtEnt);
+        validateEqualVotersSum(results, districtEnt);
         districtEnt.setSpoiledMulti(spoiled.getVotes().intValue());
         districtService.save(districtEnt);
         results.remove(spoiled);
         results.stream().forEach(res -> {
-            if (res.getRating() != null){
-                res.getRating().stream().forEach(rat->rat.setMultiResults(res));
+            if (res.getRating() != null) {
+                res.getRating().stream().forEach(rat -> rat.setMultiResults(res));
             }
             repository.save(res);
         });
@@ -55,9 +60,9 @@ public class ResultMultiService {
     private void validateEqualVotersSum(List<ResultMultiEntity> results, DistrictEntity district) {
         final int sumOfVotes = results.stream().mapToInt(r -> r.getVotes().intValue()).sum();
         final List<ResultSingleEntity> resultsSingle = resultSingleRepository.getResultsByDistrictId(district);
-        if (resultsSingle.size() != 0){
+        if (resultsSingle.size() != 0) {
             final long votesSumMulti = resultsSingle.stream().mapToLong(r -> r.getVotes()).sum() + district.getSpoiledSingle();
-            if (votesSumMulti != sumOfVotes){
+            if (votesSumMulti != sumOfVotes) {
                 throw new NotEqualVotersSumException("Not equal voters sum. SingleResults sum is " + votesSumMulti + " .MultiResults entered " + sumOfVotes);
             }
         }
@@ -84,5 +89,17 @@ public class ResultMultiService {
         DistrictEntity district = districtRepository.findById(id);
         List<ResultMultiEntity> listOfResults = repository.getResultsByDistrictId(district);
         return listOfResults;
+    }
+
+    public void validateRatingPoints(final List<ResultMultiEntity> results) {
+        boolean isValid = results.stream()
+                .allMatch(result -> {
+            boolean isRatingsSumBiggerVotes = (result.getVotes() * 5) < result.getRating().stream().filter(r-> r.getPoints() != null).mapToInt(RatingEntity::getPoints).sum();
+            if (isRatingsSumBiggerVotes){throw new RatingsSumGreaterThanVotesException(result.getParty().getName());}
+            boolean isRatingBiggerVotes = result.getRating().stream().filter(r->r.getPoints() != null).anyMatch(rating -> result.getVotes() < rating.getPoints());
+            if (isRatingBiggerVotes){throw new RatingBiggerThanVotesException(result.getParty().getName());}
+            return !isRatingBiggerVotes && !isRatingsSumBiggerVotes;
+        });
+        System.out.println("Results are valid: " + isValid);
     }
 }

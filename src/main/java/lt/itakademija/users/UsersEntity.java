@@ -1,10 +1,16 @@
 package lt.itakademija.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.springframework.security.config.Elements.PASSWORD_ENCODER;
 
 /**
  * Created by Pavel on 2017-01-10.
@@ -12,6 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class UsersEntity {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +33,7 @@ public class UsersEntity {
 
     private int districtId;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRoles> roles;
@@ -41,6 +48,10 @@ public class UsersEntity {
 
     public Set<UserRoles> getRoles() {
         return roles;
+    }
+
+    public List<String> getRolesStrings() {
+        return roles.stream().map(r -> r.getName()).collect(Collectors.toList());
     }
 
     public void setRoles(Set<UserRoles> roles) {
@@ -68,6 +79,7 @@ public class UsersEntity {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
+        this.password = PASSWORD_ENCODER.encode(password);
     }
 }

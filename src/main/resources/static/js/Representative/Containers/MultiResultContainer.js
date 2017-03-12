@@ -18,9 +18,9 @@ function getParties(self) {
       console.error('MultiResultContainer.componentWillMount.axios.get.party', err);
     });
 }
-function getDistrict(self,id) {
+function getDistrict(self) {
   axios
-    .get('/district/' + id)
+    .get('district/representative')
     .then(function(response){
       self.setState({
         districtInfo :  response.data,
@@ -68,7 +68,6 @@ function getRatings(self,arr,pid) {
             errorMesages.push('Reitingo laukai negali turėti neigiamų reikšmių');
             self.setState({errorMesages : errorMesages});
             throw new RatingnegativeValuesException('Reitingo laukai negali turėti neigiamų reikšmių');}
-            console.log('irasau i reitingus', arr[i].members[j].key, arr[i].members[j].value);
           list.push(
             {
               candidate :
@@ -79,9 +78,9 @@ function getRatings(self,arr,pid) {
       }
     }
   }
-  console.log('Rating for party ' + pid,list);
   return list;
 }
+
 var MultiResultContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -96,7 +95,7 @@ var MultiResultContainer = React.createClass({
   },
   componentWillMount: function() {
     getParties(this);
-    getDistrict(this,this.state.districtId);
+    getDistrict(this);
   },
   componentDidMount: function() {
     this.state.partyList.forEach(function(p) {
@@ -150,7 +149,7 @@ var MultiResultContainer = React.createClass({
           postArray.push(
             {
               'party' : {'id' : key},
-              'district' : {'id' : this.state.districtId},
+              'district' : {'id' : this.state.districtInfo.id},
               'votes' : list[key],
               'datePublished' : new Date(),
               'rating' : getRatings(self,ratings,key),
@@ -166,11 +165,17 @@ var MultiResultContainer = React.createClass({
       })
       .catch(function(error){
         if (error.response) {
-          if (error.response.status == 417) {
+          if (error.response.status == 418) {
+            errorMesages.push('Reitingo balsų suma negali viršyti balsų sumos atiduotos už partiją x 5');
+          }
+          if (error.response.status == 422) {
+            errorMesages.push('Retingo balų suma kandidatui negali viršity balsų sumos už partiją');
+          }
+          if (error.response.status == 417) {/*418 422*/
             var res = error.response.data.message.split(' ');
             errorMesages.push('Neteisingas biuletenių skaičius, vienmandatieje prabalsavo ' + res[7] + ', jūs užregistravote ' + res[10] + '.');
-            self.setState({errorMesages : errorMesages});
           }
+          self.setState({errorMesages : errorMesages});
         }
       });
     }

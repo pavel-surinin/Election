@@ -21,7 +21,7 @@ var LoginComponent = React.createClass({
       }
       return (
         <div className="container vertical-center">
-          <div className="row">
+          <div style={{marginTop : '50px'}} className="row">
             <div className="col-md-4 col-md-offset-4">
               <div className="login-panel panel panel-default">
                 <div className="panel-body">

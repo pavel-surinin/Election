@@ -27,11 +27,7 @@ var PartyViewContainer = React.createClass({
   render: function() {
     document.title='Partijos Rinkimai 2017';
     if (this.state.isLoading) {
-      return (
-        <div>
-          <img src='./Images/loading.gif'/>
-        </div>
-      );
+      return <div style={{marginTop : '3px', color : 'white', textAlign : 'center'}}><i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></div>;
     }
       return (
         <PartyViewComponent

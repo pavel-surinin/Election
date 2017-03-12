@@ -1,4 +1,5 @@
 var fileErrorMesages = [];
+var deleteErrorMessages = [];
 function getCounty(self) {
   axios
     .get('/county')
@@ -13,7 +14,6 @@ function getCounty(self) {
       console.error('CountyContainer.getCounty.axios.get.county', err);
     });
 }
-
 function validate(self, code){
   console.log(self);
   if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas, stulpelių skaičius skiriasi');}
@@ -21,11 +21,12 @@ function validate(self, code){
   if (code == 424) {fileErrorMesages.push('Blogi CSV duomenys, yra kandidatu, kurie jau užregistruoti');}
   if (code == 426) {fileErrorMesages.push('Blogi CSV duomenys, kandidatai jau priskirti apygardai prieš keldami ištrinkite esanti kandidatų sąrašą');}
   if (code == 451) {fileErrorMesages.push('Kandidatas priskiriamas partijai, kuri neregistruota');}
+  if (code == 428) {deleteErrorMessages.push('Šitos apygardos vienmandatės kandidatamas yra užregistruotų balsų, trinti tokią apygardą draudžiama');}
   self.setState({
+    deleteErrorMessages : deleteErrorMessages,
     fileErrorMesages : fileErrorMesages,
   });
 }
-
 var CountyContainer = React.createClass({
   getInitialState: function() {
     return {
@@ -37,17 +38,28 @@ var CountyContainer = React.createClass({
       fileErrorMesages : [],
       succesMessage : '',
       deletedCountyName : '',
+      deleteErrorMessages : [],
     };
   },
   componentWillMount: function() {
-    console.log(this.props);
     if (this.props.location.query.succesCreateText != null) {
       this.setState({succesCreateText : this.props.location.query.succesCreateText});
     }
     getCounty(this);
-    this.setState({fileErrorMesages : []});
+    this.setState({fileErrorMesages : [], deleteErrorMessages : [],});
   },
-
+  componentDidMount: function() {
+    if (this.props.location.query.succesCreateText != null) {
+      this.setState({succesCreateText : this.props.location.query.succesCreateText});
+    }
+    getCounty(this);
+  },
+  componentWillReceiveProps: function(nextProps) {
+    if (this.props.location.query.succesCreateText != null) {
+      this.setState({succesCreateText : this.props.location.query.succesCreateText});
+    }
+    getCounty(this);
+  },
   onHandleFormAddSingleCandSubmit : function(event){
     event.preventDefault();
     this.setState({fileErrorMesages : [], succesMessage : ''});
@@ -83,6 +95,7 @@ var CountyContainer = React.createClass({
     }
   },
   onHandleDelete: function(id, name) {
+    deleteErrorMessages =[];
     var self = this;
     axios
       .delete('/county/'+ id)
@@ -90,7 +103,10 @@ var CountyContainer = React.createClass({
         self.setState({succesCreateText : '' , deletedCountyName : 'Apygarda ' + name + ' ištrinta'});
         getCounty(self);
       })
-      .catch(function(err){
+      .catch(function(error){
+        if (error.response) {
+          validate(self, error.response.status);
+        }
         console.error('CountyContainer.onHandleDelete.axios', err);
       });
   },
@@ -125,6 +141,7 @@ var CountyContainer = React.createClass({
           onHandleAddClick={this.onHandleAddClick}
           succesMessage={this.state.succesMessage}
           deletedCountyName={this.state.deletedCountyName}
+          deleteErrorMessages={this.state.deleteErrorMessages}
         />
       );
     }

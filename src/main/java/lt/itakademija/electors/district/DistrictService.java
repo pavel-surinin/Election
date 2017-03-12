@@ -91,7 +91,7 @@ public class DistrictService {
 
     public List getDistictsByPage(Long id) {
         List<DistrictEntity> content = pageRepository.findAll(new PageRequest(id.intValue(), 100, Sort.Direction.ASC, "name")).getContent();
-        return content.stream().map(d -> new DistrictReport(d)).collect(Collectors.toList());
+        return content.stream().map(DistrictReport::new).collect(Collectors.toList());
     }
 
     public Integer getNumberOfDistricts() {

@@ -1,10 +1,16 @@
 var RepresentativeComponent = React.createClass({
   onHandleLogout : function(){
-    axios.get('/users/logout')
-    .then(function(response){
-      self.context.router.push('/');
+    var self = this;
+    axios
+    .get('/logout')
+    .then(function(response) {
+      console.log(response.data);
+      self.context.router.push('/login');
+    })
+    .catch(function(err){
+      console.error('AdminComponent.onHandleLogout.axios',err);
     });
-  },
+  } ,
   render: function() {
     document.title = 'Atstovo vaizdas - Rinkimai 2017';
     return (

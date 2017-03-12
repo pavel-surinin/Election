@@ -74,9 +74,13 @@ public class CountyService {
 //                candidateService.save(c);
                 return c;
             }).filter(c -> !c.isMultiList()).forEach(c->{
+                if (!c.getResults().isEmpty()){
+                    throw new DeletingCountyWithCandidatesAfterSingleVotingException(c.getName() + " " + c.getSurname());
+                }
                 System.out.println("Deleting candidate " + c.getId() + c.getName());
                 c.setNumberInParty(null);
                 c.setPartyDependencies(null);
+                candidateService.save(c);
                 candidateService.delete(c);
             });
         }
@@ -124,7 +128,7 @@ public class CountyService {
                                                             List<CandidateEntity> candidatesNotInMultiList,
                                                             List<CandidateEntity> candidatesFromFile) {
         if(noPartyCandidates.size() + existingCandidates.size() + candidatesNotInMultiList.size() != candidatesFromFile.size()){
-            throw new BadCSVFileExceprion("Bad Candidates data in CSV, not all acndidates are passing bussines logic");
+            throw new BadCSVFileException("Bad Candidates data in CSV, not all acndidates are passing bussines logic");
         }
     }
 
