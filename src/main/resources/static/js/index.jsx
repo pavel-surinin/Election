@@ -123,6 +123,7 @@ ReactDOM.render((
       <Route path="/county/:county/:id" component={DistrictResultsContainer}/>
       <Route path="/results" component={GeneralResultsContainer} />
       <Route path="/contacts" component={EmptyComponent} />
+      <Route path="/api" component={ResultsApiComponent} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>
