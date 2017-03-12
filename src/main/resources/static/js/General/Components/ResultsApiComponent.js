@@ -1,10 +1,10 @@
 var ResultsApiComponent = React.createClass({
  componentDidMount: function () {
-     $(this.refs.info).tooltip();
+    $(this.refs.info).tooltip({title: 'Kopijuoti nuorodą', trigger: 'hover'});
     $(this.refs.info).click(function(){
-    	$("[data-toggle='tooltip']").tooltip({title: "Nuoroda nukopijuota"});
-      $("[data-toggle='tooltip']").tooltip('toggle');
-    });
+       $("[data-toggle='tooltip']").tooltip('destroy');
+         });
+    $(this.refs.infoCopy).tooltip({trigger: 'click'});
  },
  onShowHide: function () {
    var webDiv = document.getElementById('WebApiDiv');
@@ -40,8 +40,8 @@ var ResultsApiComponent = React.createClass({
                   <div className="input-group input-group-sm">
                     <input type="text" id="WebApi" className="form-control" value="http://localhost:9090/results/general" readOnly>
                     </input>
-                    <span className="input-group-btn" ref="info" data-toggle="tooltip">
-                        <button onClick={this.onCopy} className="btn btn-default fa fa-floppy-o fa-4" ref="info" data-toggle="tooltip" title="Kopijuoti nuorodą" type="button"></button>
+                    <span className="input-group-btn" ref="info" data-toggle="tooltip" >
+                        <button onClick={this.onCopy} className="btn btn-default fa fa-floppy-o fa-4" ref="infoCopy" data-toggle="tooltip1" title="Nuoroda nukopijuota" type="button"></button>
                     </span>
                   </div>
                 </div>
