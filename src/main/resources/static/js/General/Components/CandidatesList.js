@@ -16,27 +16,12 @@ function getCandidateTable(self){
            {cand.birthDate}
         </td>
         <td>
-           {cand.partijosPavadinimas}
+           <a href={'#/party/' + cand.partijosId}>{cand.partijosPavadinimas}</a>
         </td>
         <td>
-          <button ref="info" title="Aprašymas" id={'description-button-' + cand.id}
-          type="button"  className="btn btn-info btn-sm fa fa-info" data-toggle="modal" data-target={'#' + cand.id}></button>
-           <div id={cand.id} className="modal fade" role="dialog">
-            <div className="modal-dialog">
-              <div className="modal-content" style={{margin : 'auto'}}>
-                <div className="modal-header">
-                  <button type="button" id="modal-close-button" className="close" data-dismiss="modal">&times;</button>
-                  <h4 className="modal-title">{cand.name} {cand.surname}</h4>
-                </div>
-                <div className="modal-body">
-                  {cand.description}
-                </div>
-                <div className="modal-footer">
-                  <button type="button" id="close-button"  className="btn btn-default" data-dismiss="modal">Uždaryti</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <a href={'#/candidate/' + cand.id} ref="info" title="Detaliau" id={'description-button-' + cand.id}
+          className="btn btn-info btn-outline btn-sm fa fa-info">
+          </a>
         </td>
       </tr>
     );
