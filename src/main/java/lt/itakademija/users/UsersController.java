@@ -31,22 +31,6 @@ public class UsersController {
     @Autowired
     UsersService service;
 
-    @GetMapping(value = "/results/csv", produces = "application/csv")
-    public ResponseEntity<InputStreamResource> getCsvResults(HttpServletResponse response) {
-        ClassPathResource file = new ClassPathResource("test-csv/big/names.txt");
-        service.getCsvResults();
-        try {
-            return ResponseEntity
-                    .ok()
-//                    .contentLength(file.contentLength())
-                    .contentType(MediaType.TEXT_PLAIN)
-                    .body(new InputStreamResource(service.getCsvResults()));
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @PostMapping("/search")
     public List seacrh(@RequestParam("searchFor") String string) {
         return service.search(string);
