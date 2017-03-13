@@ -127,9 +127,9 @@ function getpartyWinnersMembersList(self, numberOfWinners) {
   }
 }
 function getMandatesPerParty(self) {
-  if (self.props.generalResults.mandatesPerParty != undefined) {
+  if (self.props.generalResults.mandatesPerPartyInMulti != undefined) {
         var mandatesPerParty = null;
-      self.props.generalResults.mandatesPerParty.forEach(function(obj){
+      self.props.generalResults.mandatesPerPartyInMulti.forEach(function(obj){
         if(obj.par.id == self.props.pid){
           mandatesPerParty = obj.votes;
         }
@@ -143,7 +143,7 @@ var PartyDetailComponent = React.createClass({
     var mandatesPerParty = getMandatesPerParty(this);
     var partyMembersList = getPartyMembersList(this);
     var ratedMembersList = getRatedPartyMembersList(this);
-    var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
+    var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty);
     var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
     var ratedPartyStyle = styles.toggleResultNav(this.props.generalResults.votesInMulti);
     var partyListStyle = styles.toggleResultNav(this.props.partyDetails.members);

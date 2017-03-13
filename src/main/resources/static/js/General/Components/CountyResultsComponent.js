@@ -84,6 +84,7 @@ var CountyResultsComponent = React.createClass({
         if (countyResults.districtsVotedSingle){countyInfo.push(<tr><td>Vienmandatėje prabalsavo apylinkių: {countyResults.districtsVotedSingle} </td></tr>)}
         if (countyResults.singleMandateWinner){countyInfo.push(<tr><td>Vienmandatės nugalėtojas: {countyResults.singleMandateWinner.name} {countyResults.singleMandateWinner.surname}</td></tr>)}
         if (countyResults.districtsVotedMulti){countyInfo.push(<tr><td>Daugiamandatėje prabalsavo apylinkių: {countyResults.districtsVotedMulti} </td></tr>)}
+        if (countyResults){countyInfo.push(<tr><td><ResultsApiComponent territory='county' id={this.props.county.id}/></td></tr>)}
 
         return (
             <div className="col-md-12">
