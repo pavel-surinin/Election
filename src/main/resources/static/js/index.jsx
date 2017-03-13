@@ -125,7 +125,6 @@ ReactDOM.render((
       <Route path="/results" component={GeneralResultsContainer} />
       <Route path="/search/:string" component={SearchContainer} />
       <Route path="/contacts" component={EmptyComponent} />
-      <Route path="/api" component={ResultsApiComponent} />
       <Route path="*" component={NoMatch}/>
     </Route>
   </Router>

@@ -261,6 +261,21 @@ body {
   border-bottom-width: :2;
 }
 
+#WebApiDiv {
+  width: 350px;
+  padding: 5px;
+  border: 2px solid #5cb85c;
+  z-index: 1000;
+  border-top-left-radius: 0px;
+  position: absolute;
+}
+
+#WebApiButton{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 5px;
+}
+
 
 
 /*RESULTS FOR NON REGISTERED USERS END*/

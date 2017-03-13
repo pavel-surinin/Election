@@ -31,19 +31,19 @@ var ResultsApiComponent = React.createClass({
    }
  },
   render: function() {
+    var apiLink = 'http://localhost:9090/results/'+this.props.territory+'/'+this.props.id;
     return (
-         <div>
-              <button className="btn btn-success btn-sm" onClick={this.onShowHide}>
-                Web Servisas
-                <span className="caret"></span>
+         <span>
+              <button className="btn btn-success btn-sm" id="WebApiButton" onClick={this.onShowHide}>
+                Rezultatai Web servisui
               </button>
-              <div className="panel" id="WebApiDiv" style={{width: '285px', display: 'none', position: 'absolute', padding: '5px'}}>
-                <div>
+              <div className="panel" id="WebApiDiv" style={{display: 'none'}}>
+                <div className="panel">
                   <h5>
                     Rezultatų Web Serviso Api nuoroda
                   </h5>
                   <div className="input-group input-group-sm">
-                    <input type="text" id="WebApi" className="form-control" value="http://localhost:9090/results/general" readOnly>
+                    <input type="text" id="WebApi" className="form-control" value={apiLink} readOnly>
                     </input>
                     <span className="input-group-btn" ref="info" data-toggle="tooltip" >
                         <button onClick={this.onCopy} className="btn btn-default fa fa-floppy-o fa-4" ref="infoCopy" data-toggle="tooltip1" type="button"></button>
@@ -51,7 +51,7 @@ var ResultsApiComponent = React.createClass({
                   </div>
                 </div>
               </div>
-        </div>
+        </span>
     );
   }
 
