@@ -1,5 +1,6 @@
 package lt.itakademija.electors.representative;
 
+import lt.itakademija.electors.GeneralConditions;
 import lt.itakademija.users.Md5;
 import lt.itakademija.users.UserRoles;
 import lt.itakademija.users.UsersEntity;
@@ -56,6 +57,7 @@ public class DistrictRepresentativeService {
         String password = Md5.generate(username).substring(0,8);
         UsersEntity user = new UsersEntity();
         user.setPassword(password);
+
         System.out.println("Username: " + username + " ,Password: " + password);
         user.setUsername(username);
         Set<UserRoles> roles = new HashSet<>();

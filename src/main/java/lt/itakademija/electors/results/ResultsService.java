@@ -49,8 +49,10 @@ public class ResultsService {
 
     public ResultsGeneralReport getGeneralReport() {
         if (generalReport == null) {
-            formGeneralResults();
+            System.out.println("1");
+            return formGeneralResults();
         }
+        System.out.println("2");
         return generalReport;
     }
 
@@ -333,7 +335,6 @@ public class ResultsService {
                 .filter(v -> v.getPar().getId() == m.getPar().getId())
                 .findFirst()
                 .map(v -> {
-
                     List<CandidateReport> members = v.getPar().getMembers();
                     List<CandidateReport> winnersList = singleWinners.stream().map(dto -> dto.getCandidate()).collect(Collectors.toList());
                     List<CandidateReport> finalMemnbers = members.stream()
@@ -344,14 +345,18 @@ public class ResultsService {
                             .collect(Collectors.toList());
                     return finalMemnbers;
                 })
-                .map(v -> v.subList(0, m.getVotes() - 1))
+                .map(v -> v.subList(0, m.getVotes()))
                 .get()).flatMap(Collection::stream).collect(Collectors.toList());
         report.setMultiWinners(multiWinnersList);
 
         int districtCount = allDistricts.size();
         report.setDistrictsCount(districtCount);
-        int districtVoted = allDistricts.stream().filter(d -> d.getResultMultiEntity().size() != 0 && d.getResultSingleEntity().size() != 0).collect(Collectors.toList()).size();
-        report.setDistrictsVoted(districtVoted);
+
+        Long districtVoted = allDistricts.stream()
+                .filter(d -> !d.getResultMultiEntity().isEmpty() && !d.getResultSingleEntity().isEmpty())
+                .filter(d-> d.getResultMultiEntity().get(0).isApproved() && d.getResultSingleEntity().get(0).isApproved())
+                .count();
+        report.setDistrictsVoted(districtVoted.intValue());
 
         List<StringLongDTO> multiMandatesPerParty = report.getMandatesPerPartyInMulti()
                 .stream()
@@ -469,19 +474,25 @@ public class ResultsService {
                     List<Long> singleWinnersIds = singleWinners.stream().map(c -> c.getCandidate().getId()).collect(Collectors.toList());
                     List<CandidateEntity> finalModifiedList = new ArrayList<>();
 
-                    List<CandidateEntity> listToOrder = candidatesNewRatingOrder.stream().filter(c -> !singleWinnersIds.contains(c.getId())).collect(Collectors.toList());
+                    List<CandidateEntity> listToOrderClassic = new ArrayList();
+                    for (CandidateEntity candidateEntity : candidatesNewRatingOrder) {
+                        boolean isContains = singleWinnersIds.contains(candidateEntity.getId());
+                        if (!isContains){
+                            listToOrderClassic.add(candidateEntity);
+                        }
+                    }
 
-                    for (int i = 0; i < listToOrder.size(); i++) {
+                    for (int i = 0; i < listToOrderClassic.size(); i++) {
                         PartyEntity partyEntity = new PartyEntity();
                         partyEntity.setName(p.getName());
                         CandidateEntity candidate = new CandidateEntity();
-                        candidate.setBirthDate(candidatesNewRatingOrder.get(i).getBirthDate());
-                        candidate.setCounty(candidatesNewRatingOrder.get(i).getCounty());
-                        candidate.setName(candidatesNewRatingOrder.get(i).getName());
-                        candidate.setId(candidatesNewRatingOrder.get(i).getId());
-                        candidate.setDescription(candidatesNewRatingOrder.get(i).getDescription());
-                        candidate.setMultiList(candidatesNewRatingOrder.get(i).isMultiList());
-                        candidate.setSurname(candidatesNewRatingOrder.get(i).getSurname());
+                        candidate.setBirthDate(listToOrderClassic.get(i).getBirthDate());
+                        candidate.setCounty(listToOrderClassic.get(i).getCounty());
+                        candidate.setName(listToOrderClassic.get(i).getName());
+                        candidate.setId(listToOrderClassic.get(i).getId());
+                        candidate.setDescription(listToOrderClassic.get(i).getDescription());
+                        candidate.setMultiList(listToOrderClassic.get(i).isMultiList());
+                        candidate.setSurname(listToOrderClassic.get(i).getSurname());
                         candidate.setNumberInParty(i + 1);
                         candidate.setPartyDependencies(partyEntity);
                         finalModifiedList.add(candidate);

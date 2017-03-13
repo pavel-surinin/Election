@@ -111,12 +111,4 @@ public class UsersService {
         return list;
     }
 
-    public FileInputStream getCsvResults() {
-        try {
-            return new FileInputStream(new File("test-csv/bad-data2.csv"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    return null;
-    }
 }
