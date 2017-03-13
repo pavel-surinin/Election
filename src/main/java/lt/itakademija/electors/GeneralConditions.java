@@ -1,10 +1,16 @@
 package lt.itakademija.electors;
 
+import lt.itakademija.users.UsersEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Pavel on 2017-02-22.
  */
 public class GeneralConditions {
-    private static Float minimumPercentInMulti = 10.0F;
+    //delete before production
+    private static Float minimumPercentInMulti = 5.0F;
     private static Integer numberOfCandidatesInParlament = 141;
     private static boolean isAllCountiesVoted = false;
     private static Integer multiGetMandates = 70;
