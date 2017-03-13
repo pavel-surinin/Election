@@ -41,14 +41,6 @@ public class CandidateServiceTest {
     private PartyService partyService;
     @Mock
     private PartyRepository partyRepository;
-    @Mock
-    private CountyRepository countyRepository;
-    @Mock
-    private DistrictService districtService;
-    @Mock
-    private ResultSingleService resultSingleService;
-    @Mock
-    private ResultSingleRepository resultSingleRepository;
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
@@ -106,26 +98,31 @@ public class CandidateServiceTest {
         CandidateEntity candidate3 = Mockito.mock(CandidateEntity.class);
         when(candidate3.getPartyDependencies()).thenReturn(party1);
 
-        List <CandidateEntity> candidatesList = new LinkedList();
-        List spy = Mockito.spy(candidatesList);
-        spy.add(candidate1);
-        spy.add(candidate2);
-        spy.add(candidate3);
-        Mockito.verify(spy).add(candidate1);
-        Mockito.verify(spy).add(candidate2);
-        Mockito.verify(spy).add(candidate3);
-
-        System.out.print(candidatesList);
         candidateService.deleteCandidatesByPartyId(76L);
         when(candidateService.deleteCandidatesByPartyId(76L)).thenReturn(true);
         Mockito.verify(candidateService).deleteCandidatesByPartyId(76L);
         assertEquals(candidateService.deleteCandidatesByPartyId(76L), true);
 
+        candidateService.deleteCandidatesByPartyId(6L);
+        when(candidateService.deleteCandidatesByPartyId(6L)).thenReturn(true);
+        Mockito.verify(candidateService).deleteCandidatesByPartyId(6L);
+        assertEquals(candidateService.deleteCandidatesByPartyId(6L), true);
     }
 
     @Test
     public void getCandidateByNameSurnameNumberParty() throws Exception {
 
+        CandidateEntity candidate1 = Mockito.mock(CandidateEntity.class);
+        when(candidate1.getName()).thenReturn("Jonas");
+        when(candidate1.getSurname()).thenReturn("Jonaitis");
+        CandidateEntity candidate2 = Mockito.mock(CandidateEntity.class);
+        when(candidate2.getName()).thenReturn("Petras");
+        when(candidate2.getSurname()).thenReturn("Petraitis");
+
+        candidateService.getCandidateByNameSurnameNumberParty(candidate2);
+        when(candidateService.getCandidateByNameSurnameNumberParty(candidate2)).thenReturn(candidate2);
+        Mockito.verify(candidateService).getCandidateByNameSurnameNumberParty(candidate2);
+        assertEquals(candidateService.getCandidateByNameSurnameNumberParty(candidate2), candidate2);
     }
 
     @Test
@@ -135,8 +132,13 @@ public class CandidateServiceTest {
         CandidateEntity candidate2 = Mockito.mock(CandidateEntity.class);
         when(candidate2.getId()).thenReturn(23L);
 
+        candidateRepository.finById(23L);
         when(candidateRepository.finById(23L)).thenReturn(candidate2);
         assertThat(candidateRepository.finById(23L), CoreMatchers.is(candidate2));
+
+        candidateRepository.finById(34L);
+        when(candidateRepository.finById(34L)).thenReturn(candidate1);
+        assertThat(candidateRepository.finById(34L), CoreMatchers.is(candidate1));
     }
 
     @Test
