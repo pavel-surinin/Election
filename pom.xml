@@ -110,7 +110,7 @@
             <version>4.3.5.RELEASE</version>
         </dependency>
         <!--testing END-->
-        <!-- Logging START -->
+        <!--Logging START-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -176,6 +176,7 @@
             <artifactId>spring-web</artifactId>
             <version>4.3.5.RELEASE</version>
         </dependency>
+          <!--Logging END-->
     </dependencies>
 
     <dependencyManagement>
