@@ -7,11 +7,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.MockitoRule;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by Gabriele on 2017-03-14.
@@ -43,11 +45,20 @@ public class PartyServiceTest {
 
     @Test
     public void save() throws Exception {
+        PartyEntity party1 = Mockito.mock(PartyEntity.class);
 
+        partyService.save(party1);
+        when(partyService.save(party1)).thenReturn(party1);
+        Mockito.verify(partyService).save(party1);
+        assertEquals(partyService.save(party1), party1);
     }
 
     @Test
-    public void save1() throws Exception {
+    public void saveWithData() throws Exception {
+        PartyEntity party1 = Mockito.mock(PartyEntity.class);
+        party1.setId(4L);
+        party1.setName("TSLKD");
+        party1.setPartyNumber(2);
 
     }
 
