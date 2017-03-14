@@ -10,6 +10,7 @@ function getGeneralInfo(self) {
   if (dis.spoiledSingle) { districtInfo.push(<tr><td>Sugadintų biuletenių vienmandatėje: {dis.spoiledSingle}</td></tr>);}
   if (dis.votesSingleRegisteredDate) { districtInfo.push(<tr><td>Vienmandatės balsų registravimo data/laikas: {dis.votesSingleRegisteredDate}</td></tr>);}
   if (dis.votesMultiRegisteredDate) { districtInfo.push(<tr><td>Daugiamandatės balsų registravimo data/laikas: {dis.votesMultiRegisteredDate}</td></tr>);}
+  if (dis){districtInfo.push(<tr><td><ResultsApiComponent territory='district' id={dis.id}/></td></tr>)}
   return districtInfo;
 }
 function getSingleTable(self){

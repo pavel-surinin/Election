@@ -48,10 +48,9 @@ var PartyEditContainer = React.createClass({
     };
   },
   submitWithFile : function(){
-    nameErrorMesages = [],
-    numberErrorMesages = [],
-    fileErrorMesages = [],
-    event.preventDefault();
+    nameErrorMesages = [];
+    numberErrorMesages = [];
+    fileErrorMesages = [];
     var self = this;
     //party info constructing data
     var pid = parseInt(this.props.params.id);

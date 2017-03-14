@@ -115,7 +115,8 @@ ReactDOM.render((
     <Route path="/" component={MenuComponent}>
       <IndexRoute component={HomeComponent} />
       <Route path="/login" component={LoginContainer} />
-      <Route path="/candidates" component={CandidatesListContainer} />
+      <Route path="/candidate" component={CandidatesListContainer} />
+      <Route path="/candidate/:id" component={CandidateDetailContainer} />
       <Route path="/party" component={PartyViewContainer} />
       <Route path="/party/:id" component={PartyDetailContainer} />
       <Route path="/county" component={CountiesContainer}/>

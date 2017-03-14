@@ -54,8 +54,9 @@ public class DistrictRepository {
 
     public List<DistrictEntity> getByFirstLetter(String letter) {
         return
-                em.createQuery("SELECT a FROM DistrictEntity a WHERE a.name LIKE CONCAT(:letter, '%')")
+                em.createQuery("SELECT a FROM DistrictEntity a WHERE a.name LIKE CONCAT(:letter, '%') OR  a.name LIKE CONCAT(:letterL, '%')")
                         .setParameter("letter", letter)
+                        .setParameter("letterL", letter.toLowerCase())
                         .getResultList();
     }
 

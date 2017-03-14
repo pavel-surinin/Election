@@ -199,10 +199,10 @@ public class DataPreLoader {
         partyService.save("Teisininkų Partija", 2, file2);
 
         final MultipartFile file3 = parseToMultiPart("test-csv/big/p50-2.csv");
-        partyService.save("IT Partija", 3, file3);
+        partyService.save("Batono Partija", 3, file3);
 
         final MultipartFile file4 = parseToMultiPart("test-csv/big/p50-3.csv");
-        partyService.save("Feministai", 4, file4);
+        partyService.save("IT Partija", 4, file4);
 
         final MultipartFile file5 = parseToMultiPart("test-csv/big/p50-4.csv");
         partyService.save("Monopolistai", 5, file5);

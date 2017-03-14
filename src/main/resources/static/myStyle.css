@@ -167,6 +167,20 @@ body {
   z-index: 15;
 }
 /*RESULTS FOR NON REGISTERED USERS START*/
+
+.panel-default>.panel-heading{
+  text-transform: uppercase;
+  -webkit-box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow:0 3px 5px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.2);
+  margin: -1px;
+  border: none;
+  border-radius: 0;
+  padding: 13;
+  color: rgb(35, 45, 43);
+  background-color: rgb(224, 224, 224);
+}
+
 #exTab1 .tab-content {
   color : #428bca;
   background-color: white;
@@ -245,6 +259,21 @@ body {
   background-color :rgba(37, 36, 36, 0.89);
   border-color: rgba(255, 240, 0, 0.84);
   border-bottom-width: :2;
+}
+
+#WebApiDiv {
+  width: 350px;
+  padding: 5px;
+  border: 2px solid #5cb85c;
+  z-index: 1000;
+  border-top-left-radius: 0px;
+  position: absolute;
+}
+
+#WebApiButton{
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 5px;
 }
 
 

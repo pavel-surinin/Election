@@ -18,16 +18,19 @@ function getPartyMembersList(self) {
   return partyMembersList;
 }
 function getRatedPartyMembersList(self) {
+  var mandatesPerParty= self.props.generalResults.mandatesPerPartyInMulti;
   var membersFOL = self.props.partyDetails.members;
-  console.log(self);
-  console.log(self.props.partyDetails);
-  console.log(membersFOL);
-  console.log(membersFOL[0].numberInParty);
   if (self.props.generalResults.votesInMulti != undefined) {
     var vip = self.props.generalResults.votesInMulti;
     var ratedMembersList =[];
+    var mandatesCount = 0;
     vip.forEach(function(obj){
       var numberOld = 0;
+      mandatesPerParty.forEach(function(p){
+        if (self.props.pid == p.par.id) {
+          mandatesCount = p.votes;
+        }
+      });
       if(obj.par.id == self.props.pid){
         obj.par.members.forEach(function(member,index) {
           if (membersFOL) {
@@ -37,8 +40,15 @@ function getRatedPartyMembersList(self) {
               }
             });
           }
+          if (member.numberInParty == mandatesCount+1 && mandatesCount != 0) {
+            ratedMembersList.push(<tr><td style={{textAlign : 'center'}} colSpan='4'>
+                    <i className="fa fa-arrow-circle-o-up fa-fw text-success" aria-hidden="true"></i>Kandidatai gaunantys mandatus Seime
+                    <i className="fa fa-arrow-circle-o-up fa-fw text-success" aria-hidden="true"></i>
+                    </td></tr>);
+          }
           ratedMembersList.push(
             <PartyDetailRowViewComponent
+            mandatesCount={mandatesCount}
             id={member.id}
             key={index}
             name={member.name}
@@ -117,9 +127,9 @@ function getpartyWinnersMembersList(self, numberOfWinners) {
   }
 }
 function getMandatesPerParty(self) {
-  if (self.props.generalResults.mandatesPerParty != undefined) {
+  if (self.props.generalResults.mandatesPerPartyInMulti != undefined) {
         var mandatesPerParty = null;
-      self.props.generalResults.mandatesPerParty.forEach(function(obj){
+      self.props.generalResults.mandatesPerPartyInMulti.forEach(function(obj){
         if(obj.par.id == self.props.pid){
           mandatesPerParty = obj.votes;
         }
@@ -133,7 +143,7 @@ var PartyDetailComponent = React.createClass({
     var mandatesPerParty = getMandatesPerParty(this);
     var partyMembersList = getPartyMembersList(this);
     var ratedMembersList = getRatedPartyMembersList(this);
-    var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty-1);
+    var partyWinnersMembersList = getpartyWinnersMembersList(this, mandatesPerParty);
     var singleWinnersByPartyList = getSingleWinnersByPartyList(this);
     var ratedPartyStyle = styles.toggleResultNav(this.props.generalResults.votesInMulti);
     var partyListStyle = styles.toggleResultNav(this.props.partyDetails.members);

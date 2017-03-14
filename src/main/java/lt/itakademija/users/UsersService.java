@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,9 +105,10 @@ public class UsersService {
         List<DistrictEntity> searchDistricts = districtRepository.search(string);
         list.add(searchDistricts.stream().map(DistrictReport::new).collect(Collectors.toList()));
         List<DistrictRepresentativeEntity> searchDistrictRepresentatives = districtRepresentativeRepository.search(string);
-        list.add(searchDistrictRepresentatives.stream().map(DistrictRepresentativeReport::new).collect(Collectors.toList()));
+        list.add(searchDistrictRepresentatives.stream().map(r->new DistrictRepresentativeReport(r,true)).collect(Collectors.toList()));
         List<CandidateEntity> searchCandidates = candidateRepository.search(string);
         list.add(searchCandidates.stream().map(CandidateReport::new).collect(Collectors.toList()));
         return list;
     }
+
 }
