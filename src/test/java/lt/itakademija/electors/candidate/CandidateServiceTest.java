@@ -82,21 +82,25 @@ public class CandidateServiceTest {
         Mockito.verify(spy).add(candidate2);
 
         assertEquals(2, spy.size());
+        candidateService.getAllCandidates();
+        when(candidateService.getAllCandidates()).thenReturn(spy);
+        Mockito.verify(candidateService).getAllCandidates();
+        assertEquals(candidateService.getAllCandidates(), spy);
     }
 
     @Test
     public void deleteCandidatesByPartyId() throws Exception {
 
         PartyEntity party1 = Mockito.mock(PartyEntity.class);
-        when(party1.getId()).thenReturn(6L);
+        party1.setId(6L);
         PartyEntity party2 = Mockito.mock(PartyEntity.class);
-        when(party2.getId()).thenReturn(76L);
+        party2.setId(76L);
         CandidateEntity candidate1 = Mockito.mock(CandidateEntity.class);
-        when(candidate1.getPartyDependencies()).thenReturn(party1);
+        candidate1.setPartyDependencies(party1);
         CandidateEntity candidate2 = Mockito.mock(CandidateEntity.class);
-        when(candidate2.getPartyDependencies()).thenReturn(party2);
+        candidate2.setPartyDependencies(party2);
         CandidateEntity candidate3 = Mockito.mock(CandidateEntity.class);
-        when(candidate3.getPartyDependencies()).thenReturn(party1);
+        candidate3.setPartyDependencies(party1);
 
         candidateService.deleteCandidatesByPartyId(76L);
         when(candidateService.deleteCandidatesByPartyId(76L)).thenReturn(true);
@@ -113,11 +117,11 @@ public class CandidateServiceTest {
     public void getCandidateByNameSurnameNumberParty() throws Exception {
 
         CandidateEntity candidate1 = Mockito.mock(CandidateEntity.class);
-        when(candidate1.getName()).thenReturn("Jonas");
-        when(candidate1.getSurname()).thenReturn("Jonaitis");
+        candidate1.setName("Jonas");
+        candidate1.setSurname("Jonaitis");
         CandidateEntity candidate2 = Mockito.mock(CandidateEntity.class);
-        when(candidate2.getName()).thenReturn("Petras");
-        when(candidate2.getSurname()).thenReturn("Petraitis");
+        candidate2.setName("Petras");
+        candidate2.setSurname("Petraitis");
 
         candidateService.getCandidateByNameSurnameNumberParty(candidate2);
         when(candidateService.getCandidateByNameSurnameNumberParty(candidate2)).thenReturn(candidate2);
@@ -128,9 +132,9 @@ public class CandidateServiceTest {
     @Test
     public void getCandidateById() throws Exception {
         CandidateEntity candidate1 = Mockito.mock(CandidateEntity.class);
-        when(candidate1.getId()).thenReturn(34L);
+        candidate1.setId(34L);
         CandidateEntity candidate2 = Mockito.mock(CandidateEntity.class);
-        when(candidate2.getId()).thenReturn(23L);
+        candidate2.setId(23L);
 
         candidateRepository.finById(23L);
         when(candidateRepository.finById(23L)).thenReturn(candidate2);
@@ -144,22 +148,22 @@ public class CandidateServiceTest {
     @Test
     public void getCandidateByDistrictId() throws Exception {
         CountyEntity county1 = Mockito.mock(CountyEntity.class);
-        when(county1.getId()).thenReturn(3L);
+        county1.setId(3L);
         CountyEntity county2 = Mockito.mock(CountyEntity.class);
-        when(county2.getId()).thenReturn(29L);
+        county2.setId(29L);
 
         DistrictEntity district1 = Mockito.mock(DistrictEntity.class);
-        when(district1.getId()).thenReturn(12L);
-        when(district1.getCounty()).thenReturn(county1);
+        district1.setId(12L);
+        district1.setCounty(county1);
 
         DistrictEntity district2 = Mockito.mock(DistrictEntity.class);
-        when(district2.getId()).thenReturn(24L);
-        when(district2.getCounty()).thenReturn(county2);
+        district1.setId(24L);
+        district1.setCounty(county2);
 
         CandidateEntity candidate1 = Mockito.mock(CandidateEntity.class);
-        when(candidate1.getCounty()).thenReturn(county1);
+        candidate1.setCounty(county1);
         CandidateEntity candidate2 = Mockito.mock(CandidateEntity.class);
-        when(candidate2.getCounty()).thenReturn(county2);
+        candidate2.setCounty(county2);
 
         List <CandidateReport> candidatesListDistrict1 = new LinkedList();
         List spyCounty1 = Mockito.spy(candidatesListDistrict1);
@@ -188,9 +192,9 @@ public class CandidateServiceTest {
         CountyEntity county1 = Mockito.mock(CountyEntity.class);
         CountyEntity county2 = Mockito.mock(CountyEntity.class);
         CandidateEntity candidate1 = Mockito.mock(CandidateEntity.class);
-        when(candidate1.getCounty()).thenReturn(county1);
+        candidate1.setCounty(county1);
         CandidateEntity candidate2 = Mockito.mock(CandidateEntity.class);
-        when(candidate2.getCounty()).thenReturn(county2);
+        candidate2.setCounty(county2);
 
         List <CandidateEntity> candidatesListCounty1 = new LinkedList();
         List spyCounty1 = Mockito.spy(candidatesListCounty1);
