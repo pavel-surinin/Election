@@ -57,7 +57,7 @@ var Link = React.createClass({
     var first = {};
     if (res[1] == this.props.href) {
       linkStyle = 'active';
-      if (res[2] != undefined) {
+      if (res[2] != undefined && res[1] != 'candidate') {
         first = {paddingLeft : '10px', paddingRight : '10px'};
         countyName =<a style={{paddingLeft : '0px',paddingRight : '10px'}} href={'#/' + res[1] +'/' + res[2]}> <i className="fa fa-caret-right" aria-hidden="true"></i> {this.state.l2} </a>;
         if (res[3] != undefined) {

@@ -5,6 +5,7 @@ import lt.itakademija.electors.district.DistrictEntity;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.results.multi.ResultMultiEntity;
 import lt.itakademija.electors.results.multi.rating.RatingEntity;
+import lt.itakademija.users.UsersEntity;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -23,6 +24,7 @@ import java.util.List;
  * Created by Pavel on 2017-02-03.
  */
 public class MyUtils {
+
 
 
     public static JSONObject parseStringToJson(String string) {

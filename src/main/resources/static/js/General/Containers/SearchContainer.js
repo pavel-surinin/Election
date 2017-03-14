@@ -30,8 +30,7 @@ var SearchContainer = React.createClass({
     searchFor(nextProps.params.string,this);
   },
   render: function() {
-    document.title = 'Ieškoti: ' + this.props.params.string + ' .Rinkimai 2017';
-    console.log('rendering');
+    document.title = 'Ieškoti: ' + this.props.params.string + ' - Rinkimai 2017';
     if (this.state.isLoading) {
       return <div style={{marginTop : '3px', color : 'white', textAlign : 'center'}}><i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></div>;
     }

@@ -48,9 +48,11 @@ public class ResultsService {
     RatingRepository ratingRepository;
 
     public ResultsGeneralReport getGeneralReport() {
-        if (generalReport == null){
-            formGeneralResults();
+        if (generalReport == null) {
+            System.out.println("1");
+            return formGeneralResults();
         }
+        System.out.println("2");
         return generalReport;
     }
 
@@ -313,9 +315,9 @@ public class ResultsService {
         int spoiledMulti = allDistricts.stream().filter(d -> d.getSpoiledMulti() != null).mapToInt(DistrictEntity::getSpoiledMulti).sum();
         int spoiledSingle = allDistricts.stream().filter(d -> d.getSpoiledSingle() != null).mapToInt(DistrictEntity::getSpoiledSingle).sum();
         int numberOfVoters = allDistricts.stream().mapToInt(d -> d.getNumberOfElectors().intValue()).sum();
-        List<PartyIntDTO> votesInMulti = countPartiesVotesRatings();
-        report.setVotesInMulti(votesInMulti);
         List<CandidateIntDTO> singleWinners = getSingleWinners();
+        List<PartyIntDTO> votesInMulti = countPartiesVotesRatings(singleWinners);
+        report.setVotesInMulti(votesInMulti);
         report.setSingleWinners(singleWinners);
         report.setVotesCount(sumOfVotes);
         report.setSpoiledMulti(spoiledMulti);
@@ -333,21 +335,28 @@ public class ResultsService {
                 .filter(v -> v.getPar().getId() == m.getPar().getId())
                 .findFirst()
                 .map(v -> {
-
                     List<CandidateReport> members = v.getPar().getMembers();
                     List<CandidateReport> winnersList = singleWinners.stream().map(dto -> dto.getCandidate()).collect(Collectors.toList());
-                    members.removeAll(winnersList);
-                    return members;
+                    List<CandidateReport> finalMemnbers = members.stream()
+                            .filter(member -> {
+                                List<Long> winnersIds = singleWinners.stream().map(w -> w.getCandidate().getId()).collect(Collectors.toList());
+                                return !winnersIds.contains(member.getId());
+                            })
+                            .collect(Collectors.toList());
+                    return finalMemnbers;
                 })
-                .map(v -> v.subList(0, m.getVotes() - 1))
+                .map(v -> v.subList(0, m.getVotes()))
                 .get()).flatMap(Collection::stream).collect(Collectors.toList());
         report.setMultiWinners(multiWinnersList);
-        setGeneralReport(report);
 
         int districtCount = allDistricts.size();
         report.setDistrictsCount(districtCount);
-        int districtVoted = allDistricts.stream().filter(d -> d.getResultMultiEntity().size() != 0 && d.getResultSingleEntity().size() != 0).collect(Collectors.toList()).size();
-        report.setDistrictsVoted(districtVoted);
+
+        Long districtVoted = allDistricts.stream()
+                .filter(d -> !d.getResultMultiEntity().isEmpty() && !d.getResultSingleEntity().isEmpty())
+                .filter(d-> d.getResultMultiEntity().get(0).isApproved() && d.getResultSingleEntity().get(0).isApproved())
+                .count();
+        report.setDistrictsVoted(districtVoted.intValue());
 
         List<StringLongDTO> multiMandatesPerParty = report.getMandatesPerPartyInMulti()
                 .stream()
@@ -355,11 +364,11 @@ public class ResultsService {
                 .collect(Collectors.toList());
         List<StringLongDTO> singleMandatesPerParty = report.getSingleWinners()
                 .stream()
-                .map(c ->{
-                    if(c.getCandidate().getPartijosPavadinimas() == null){
-                    return new StringLongDTO("Nepartiniai", 1L);
+                .map(c -> {
+                    if (c.getCandidate().getPartijosPavadinimas() == null) {
+                        return new StringLongDTO("Nepartiniai", 1L);
                     } else {
-                    return new StringLongDTO(c.getCandidate().getPartijosPavadinimas(), 1L);
+                        return new StringLongDTO(c.getCandidate().getPartijosPavadinimas(), 1L);
                     }
                 })
                 .collect(Collectors.toList());
@@ -369,8 +378,11 @@ public class ResultsService {
                 .collect(Collectors.groupingBy(StringLongDTO::getName,
                         Collectors.summingLong(StringLongDTO::getNumber)));
         List<StringLongDTO> listOfMandatesPerParty = new ArrayList<>();
-        collect.forEach((s,l)->listOfMandatesPerParty.add(new StringLongDTO(s,l)));
-        report.setMandatesPerPartyGeneralLive(listOfMandatesPerParty.stream().sorted((s1,s2)->s2.getNumber().compareTo(s1.getNumber())).collect(Collectors.toList()));
+        collect.forEach((s, l) -> listOfMandatesPerParty.add(new StringLongDTO(s, l)));
+
+        report.setMandatesPerPartyGeneralLive(listOfMandatesPerParty.stream().sorted((s1, s2) -> s2.getNumber().compareTo(s1.getNumber())).collect(Collectors.toList()));
+
+        setGeneralReport(report);
         return report;
     }
 
@@ -405,7 +417,7 @@ public class ResultsService {
     private List<CandidateIntDTO> getSingleWinners() {
         return countyRepository.findAll()
                 .stream()
-                .filter(c->!c.getCandidates().isEmpty())
+                .filter(c -> !c.getCandidates().isEmpty())
                 .map(county -> {
                     List<ResultSingleEntity> votesForCandidates = county.getCandidates()
                             .stream()
@@ -420,19 +432,15 @@ public class ResultsService {
                         Long sum = resultSingleEntities.stream().mapToLong(ResultSingleEntity::getVotes).sum();
                         list.add(new CandidateIntDTO(candidateEntity, sum.intValue()));
                     });
-                    System.out.println("=================");
-
                     List<CandidateIntDTO> sortedList = list
                             .stream()
                             .sorted((d1, d2) -> d2.getVotes().compareTo(d1.getVotes()))
                             .collect(Collectors.toList());
-                    System.out.println(sortedList.size());
-                    System.out.println("=================");
                     return sortedList.iterator().next();
                 }).collect(Collectors.toList());
     }
 
-    private List<PartyIntDTO> countPartiesVotesRatings() {
+    private List<PartyIntDTO> countPartiesVotesRatings(List<CandidateIntDTO> singleWinners) {
         List<PartyEntity> allParties = partyRepository.findAll();
         return allParties
                 .stream()
@@ -463,22 +471,31 @@ public class ResultsService {
                     List<CandidateEntity> candidatesNewRatingOrder = new ArrayList();
                     candidatesNewRatingOrder.addAll(candidatesOrderFromRatingsCloned);
                     candidatesNewRatingOrder.addAll(candidatesOrderOriginal);
+                    List<Long> singleWinnersIds = singleWinners.stream().map(c -> c.getCandidate().getId()).collect(Collectors.toList());
                     List<CandidateEntity> finalModifiedList = new ArrayList<>();
-                    for (int i = 0; i < candidatesNewRatingOrder.size(); i++) {
+
+                    List<CandidateEntity> listToOrderClassic = new ArrayList();
+                    for (CandidateEntity candidateEntity : candidatesNewRatingOrder) {
+                        boolean isContains = singleWinnersIds.contains(candidateEntity.getId());
+                        if (!isContains){
+                            listToOrderClassic.add(candidateEntity);
+                        }
+                    }
+
+                    for (int i = 0; i < listToOrderClassic.size(); i++) {
                         PartyEntity partyEntity = new PartyEntity();
                         partyEntity.setName(p.getName());
                         CandidateEntity candidate = new CandidateEntity();
-                        candidate.setBirthDate(candidatesNewRatingOrder.get(i).getBirthDate());
-                        candidate.setCounty(candidatesNewRatingOrder.get(i).getCounty());
-                        candidate.setName(candidatesNewRatingOrder.get(i).getName());
-                        candidate.setId(candidatesNewRatingOrder.get(i).getId());
-                        candidate.setDescription(candidatesNewRatingOrder.get(i).getDescription());
-                        candidate.setMultiList(candidatesNewRatingOrder.get(i).isMultiList());
-                        candidate.setSurname(candidatesNewRatingOrder.get(i).getSurname());
+                        candidate.setBirthDate(listToOrderClassic.get(i).getBirthDate());
+                        candidate.setCounty(listToOrderClassic.get(i).getCounty());
+                        candidate.setName(listToOrderClassic.get(i).getName());
+                        candidate.setId(listToOrderClassic.get(i).getId());
+                        candidate.setDescription(listToOrderClassic.get(i).getDescription());
+                        candidate.setMultiList(listToOrderClassic.get(i).isMultiList());
+                        candidate.setSurname(listToOrderClassic.get(i).getSurname());
                         candidate.setNumberInParty(i + 1);
                         candidate.setPartyDependencies(partyEntity);
                         finalModifiedList.add(candidate);
-
                     }
                     PartyEntity tp = new PartyEntity();
                     tp.setName(p.getName());

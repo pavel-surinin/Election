@@ -12,7 +12,7 @@ function getSingleWinners(self){
       );
     });
   }
-    return singleWinners;
+  return singleWinners;
 }
 function getMultiWinners(self){
   var multiWinners = [];
@@ -58,7 +58,6 @@ function getMultiWinnersVotesParty(self){
     return partyVotes;
   }
 }
-
 function showSingleWinners(self){
   var singleWinners = getSingleWinners(self);
   if (self.props.results) {
@@ -148,7 +147,6 @@ function showMultiWinners(self){
     return null;
   }
 }
-
 function prepareCanvas(chartType,electionType){
   var sp1 = document.createElement('canvas');
   sp1.id = 'canvas' + chartType + electionType;
@@ -203,11 +201,6 @@ var GeneralresultsComponent = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     this.loadDoghnutDistrict();
-  },
-  shouldComponentUpdate: function(nextProps, nextState) {
-    console.log(this);
-    console.log(nextProps);
-    console.log(nextState);
   },
   render: function() {
     var MultiWinnersTable = showMultiWinners(this);
@@ -342,7 +335,7 @@ var GeneralresultsComponent = React.createClass({
                       Balsavimo progresas
                       </td>
                       <td>
-                      {Math.round((res.districtsVoted / res.districtsCount)* 100)}%
+                      {((res.districtsVoted / res.districtsCount)* 100).toFixed(2)}%
                       </td>
                     </tr>
                     </tbody>
@@ -386,7 +379,7 @@ var GeneralresultsComponent = React.createClass({
                       Rinkėjų aktyvumas
                       </td>
                       <td>
-                      {Math.round((res.votesCount/res.votersCount)*100)}%
+                      {((res.votesCount/res.votersCount)*100).toFixed(2)}%
                       </td>
                     </tr>
                     </tbody>

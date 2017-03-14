@@ -1,3 +1,14 @@
+var call = null;
+
+function checkState(state,self){
+  if (state.searchFor == '' || state.searchFor.length <= 2) {
+    clearTimeout(call);
+  }
+  if (state.searchFor != '' && state.searchFor.length > 2) {
+    clearTimeout(call);
+    call = setTimeout(function(){self.context.router.push('search/' + state.searchFor);},250);
+  }
+}
 var logoStyle ={
   height: '24px',
   display: 'inline',
@@ -22,8 +33,8 @@ var MenuComponent = React.createClass({
       search.style.border = '0px';
       button.style.backgroundColor = 'inherit';
       button.blur();
-      this.context.router.push('search/' + this.state.searchFor);
-    } else {
+      if (this.state.searchFor != '') {this.context.router.push('search/' + this.state.searchFor);}
+    } else  {
       search.style.width = '150px';
       search.style.padding = '5px';
       search.style.border = '1px';
@@ -32,8 +43,29 @@ var MenuComponent = React.createClass({
     }
 
   },
+  onHanldeFocusOutSearch : function(){
+    var search = document.getElementById('search');
+    var button = document.getElementById('search-button');
+    if (search.style.width == '150px') {
+      search.style.width = '0px';
+      search.style.padding = '0px';
+      search.style.border = '0px';
+      button.style.backgroundColor = 'inherit';
+      button.blur();
+      if (this.state.searchFor != '') {this.context.router.push('search/' + this.state.searchFor);}
+    }
+  },
   onHAndleSearchChange : function(event){
     this.setState({searchFor : event.target.value});
+  },
+  shouldComponentUpdate: function(nextProps, nextState) {
+    if (this.state.searchFor == nextState.searchFor) {
+      // return false;
+      return true;
+    } else {
+      checkState(nextState, this);
+      return true;
+    }
   },
   render: function() {
     return (
@@ -52,7 +84,7 @@ var MenuComponent = React.createClass({
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
                 <Link location={this.props.location.pathname} href='' linkName='Pradinis' />
-                <Link location={this.props.location.pathname} href='candidates' linkName='Kandidatai' />
+                <Link location={this.props.location.pathname} href='candidate' linkName='Kandidatai' />
                 <Link location={this.props.location.pathname} href='party' linkName='Partijos' />
                 <Link location={this.props.location.pathname} href='county' linkName='Apygardos' />
                 <Link location={this.props.location.pathname} href='results' linkName='Rezultatai' />
@@ -60,7 +92,7 @@ var MenuComponent = React.createClass({
               <div style={{display : 'inline-table', marginRight : '0px', paddingRight : '0px', float : 'right'}}>
                 <div className="input-group my-nav-search">
                 <form onSubmit={this.onSearchClick}>
-                  <input onChange={this.onHAndleSearchChange} style={{width : '0px'}} id='search' type="text" className="form-control search-input" placeholder="Ieškoti..."/>
+                  <input onBlur={this.onHanldeFocusOutSearch} onChange={this.onHAndleSearchChange} style={{width : '0px'}} id='search' type="text" className="form-control search-input" placeholder="Ieškoti..."/>
                 </form>
                 <span className="input-group-btn">
               <button id='search-button' onClick={this.onSearchClick} className="btn btn-default" type="button"><i className="fa fa-search" aria-hidden="true"></i></button>
