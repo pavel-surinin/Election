@@ -1,6 +1,7 @@
 package lt.itakademija.electors.candidate;
 
 import lt.itakademija.Application;
+import lt.itakademija.WebSecurityConfig;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.county.*;
 import lt.itakademija.electors.district.DistrictEntity;
