@@ -5,20 +5,15 @@ import lt.itakademija.WebSecurityConfig;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.county.*;
 import lt.itakademija.electors.district.DistrictEntity;
-import lt.itakademija.electors.district.DistrictReport;
-import lt.itakademija.electors.district.DistrictRepository;
 import lt.itakademija.electors.district.DistrictService;
-import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
 import lt.itakademija.electors.results.single.ResultSingleEntity;
 import lt.itakademija.electors.results.single.ResultSingleRepository;
 import lt.itakademija.electors.results.single.ResultSingleService;
-import lt.itakademija.storage.CSVParser;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +23,17 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithSecurityContextTestExcecutionListener;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.test.context.web.ServletTestExecutionListener;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,47 +47,33 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = {CandidateControllerTest.Config.class, Application.class})
+        classes = {Application.class})
+@ContextConfiguration
+@TestExecutionListeners(listeners={ServletTestExecutionListener.class,
+        DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class,
+        TransactionalTestExecutionListener.class,
+        WithSecurityContextTestExcecutionListener.class})
+@WithMockUser(username="admin",roles={"ADMIN"})
 public class CandidateControllerTest {
-
-    @Autowired
-    CSVParser csvParser;
-
     @Autowired
     TestRestTemplate rest;
-
     @Autowired
     CandidateRepository candidateRepository;
-
     @Autowired
     CandidateService candidateService;
-
     @Autowired
     PartyService partyService;
-
     @Autowired
     PartyRepository partyRepository;
-
     @Autowired
     CountyRepository countyRepository;
-
-    @Autowired
-    CountyService countyService;
-
-    @Autowired
-    DistrictRepository districtRepository;
-
     @Autowired
     DistrictService districtService;
-
     @Autowired
     ResultSingleService resultSingleService;
-
     @Autowired
     ResultSingleRepository resultSingleRepository;
-
-    @Autowired
-    TransactionTemplate transactionTemplate;
 
     String URI = "/candidate";
 
@@ -109,14 +96,12 @@ public class CandidateControllerTest {
 
     @After
     public void tearDown() throws Exception {
-
         candidateRepository.getCandidatesList().stream().forEach(c -> candidateService.delete(c.getId()));
         partyRepository.findAll().stream().forEach(p -> partyService.delete(p.getId()));
     }
 
     @Test
     public void updateCandidateName() throws Exception {
-
         //setup
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
         String name = "Tvarka ir kt";
@@ -170,7 +155,6 @@ public class CandidateControllerTest {
 
     @Test
     public void updateCandidateBirthDate() throws Exception {
-
         //setup
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-2.csv");
         String name = "Miego";
@@ -184,16 +168,12 @@ public class CandidateControllerTest {
 
         String SauliusString = MyUtils.getCandidateJson(null, "Saulius", "Domavicius", "2000-12-12", "Adminas", 92, partyId, countyId);
         ResponseEntity<CandidateEntity> respCandidateCreate = rest.postForEntity(URI, MyUtils.parseStringToJson(SauliusString), CandidateEntity.class);
-
         //exercise
         Long candidateId = respCandidateCreate.getBody().getId();
         String DomasUpdateCandidateString = MyUtils.getCandidateJson(candidateId, "Domas", "Tomavicius", "1990-06-03", "Bedarbis", 80, partyId, countyId);
         ResponseEntity<CandidateEntity> respCandidateUpdate = rest.postForEntity(URI, MyUtils.parseStringToJson(DomasUpdateCandidateString), CandidateEntity.class);
-
-
         //verify
         assertThat(respCandidateUpdate.getStatusCodeValue(), CoreMatchers.is(200));
-
     }
 
     @Test

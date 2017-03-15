@@ -15,13 +15,12 @@ function getCounty(self) {
     });
 }
 function validate(self, code){
-  console.log(self);
   if (code == 415) {fileErrorMesages.push('Netinkamas CSV failas, stulpelių skaičius skiriasi');}
   if (code == 422) {fileErrorMesages.push('Blogi CSV duomenys');}
   if (code == 424) {fileErrorMesages.push('Blogi CSV duomenys, yra kandidatu, kurie jau užregistruoti');}
   if (code == 426) {fileErrorMesages.push('Blogi CSV duomenys, kandidatai jau priskirti apygardai prieš keldami ištrinkite esanti kandidatų sąrašą');}
   if (code == 451) {fileErrorMesages.push('Kandidatas priskiriamas partijai, kuri neregistruota');}
-  if (code == 428) {deleteErrorMessages.push('Šitos apygardos vienmandatės kandidatamas yra užregistruotų balsų, trinti tokią apygardą draudžiama');}
+  if (code == 428) {deleteErrorMessages.push('Šitos apygardos kandidatamas yra užregistruotų balsų, trinti tokią apygardą draudžiama');}
   self.setState({
     deleteErrorMessages : deleteErrorMessages,
     fileErrorMesages : fileErrorMesages,
@@ -82,7 +81,7 @@ var CountyContainer = React.createClass({
       .put('/county', data, header)
       .then(function(response){
         getCounty(self);
-        self.setState({succesMessage : 'Apygardai sėkmingai įkeltas vienmandaties apygardos sąrašas'});
+        self.setState({succesMessage : 'Apygardai sėkmingai įkeltas vienmandatės apygardos sąrašas'});
       })
       .catch(function (error) {
         if (error.response) {

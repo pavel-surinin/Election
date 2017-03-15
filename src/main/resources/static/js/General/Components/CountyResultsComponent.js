@@ -1,3 +1,19 @@
+function showSingleTab(self){
+  if(self.props.results) {
+    return (
+      <li>
+      <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
+      </li>
+    )
+  }
+}
+function showMultiTabe(self){
+  if(self.props.results){
+    <li>
+    <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
+    </li>
+  }
+}
 function getSingleTable(self) {
     var singleTable = [];
     if (self.props.results.votesByCandidate) {
@@ -187,7 +203,7 @@ var CountyResultsComponent = React.createClass({
                                     <th className='col-md-4 col-sm-4'>Pavadinimas</th>
                                     <th className='col-md-3 col-sm-3'>Atstovas</th>
                                     <th className='col-md-4 col-sm-3'>Adresas</th>
-                                    <th className='col-md-2 col-sm-2'>Rinkeju skaicius</th>
+                                    <th className='col-md-2 col-sm-2'>Rinkėjų skaičius</th>
 
                                 </tr>
                                 </thead>

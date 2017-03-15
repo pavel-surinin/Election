@@ -12,7 +12,6 @@ var LoginContainer = React.createClass({
     axios
     .post('/login/check')
     .then(function(response){
-      console.log(response.data);
       if (response.data == 'admin' || response.data == 'representative') {
         self.setState({isLogged : true});
       } else {
@@ -26,7 +25,6 @@ var LoginContainer = React.createClass({
   onHandleSubmit : function(event){
     event.preventDefault();
     var self = this;
-    console.log('loging container');
     var data = new FormData();
     var header = { headers: {
       'Content-Type': 'multipart/form-data'}};

@@ -1,15 +1,11 @@
 package lt.itakademija.electors.results.csv;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
 
 /**
  * Created by Pavel on 2017-03-12.
@@ -17,7 +13,7 @@ import java.io.FileOutputStream;
 @Service
 public class ResultsToCsvService {
 
-    public ResponseEntity gtCsvResults(ResultsCsvStrategy res) {
+    public ResponseEntity getCsvResults(ResultsCsvStrategy res) {
         try {
             return ResponseEntity
                     .ok()
@@ -30,22 +26,12 @@ public class ResultsToCsvService {
     }
 
     private FileInputStream getResultsFile(ResultsCsvStrategy res) {
-        mapResults(res);
+        CSVUtils.writeCsvFile(res.getReportName(), res.getReport());
         try {
             return new FileInputStream(new File("src/main/resources/results-csv/" + res.getReportName() + ".csv"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    private void mapResults(ResultsCsvStrategy res) {
-
-        try {
-            FileOutputStream fis = new FileOutputStream(new File("src/main/resources/results-csv/" + res.getReportName() + ".csv"));
-            IOUtils.write(res.getReport(),fis,"UTF-8");
-        } catch (java.io.IOException e) {
-            e.printStackTrace();
-        }
     }
 }
