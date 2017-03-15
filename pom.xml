@@ -176,7 +176,7 @@
             <artifactId>spring-web</artifactId>
             <version>4.3.5.RELEASE</version>
         </dependency>
-          <!--Logging END-->
+        <!--Logging END-->
     </dependencies>
 
     <dependencyManagement>
