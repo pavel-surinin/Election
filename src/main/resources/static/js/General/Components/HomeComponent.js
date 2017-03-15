@@ -60,7 +60,7 @@ var HomeComponent = React.createClass({
               </div>
                 <div className="col-xs-12 col-sm-6 col-md-4 clearfix">
                   <h2>Rezultaitai CSV</h2>
-                  <p><a target="_blank" href="results/csv/single">Vienmandačių rezultaitai</a> </p>
+                  <p><a target="_blank" href="results/csv/single">Vienmandačių rezultatai</a> </p>
                   <p><a target="_blank" href="results/csv/multi/winners">Daigiamandačių laimėtojai</a></p>
                   <p><a target="_blank" href="results/csv/multi/votes">Daugiamandačių balsai</a></p>
                   <p><a target="_blank" href="results/csv/mandates">Kiek partijos gavo mandatų daugiamandatėse</a></p>
@@ -69,7 +69,7 @@ var HomeComponent = React.createClass({
 
                 <div className="col-xs-12 col-sm-6 col-md-4 ">
                   <h2>Web serviso api</h2>
-                  <p><a target="_blank" href="results/general">Rezultaitai (json)</a> </p>
+                  <p><a target="_blank" href="results/general">Rezultatai (json)</a> </p>
                 </div>
 
                 <div className="col-xs-12 col-sm-6 col-md-4">
@@ -78,10 +78,10 @@ var HomeComponent = React.createClass({
                   <p>Prabalsavo apylinkių {res.districtVoted} iš {res.districtCount}</p>
                   <p>Sugadinta balsų vienmandatėje {res.spoiledSingle}</p>
                   <p>Sugadinta balsų daugiamandatėje {res.spoiledMulti}</p>
-                  <p>Užregitruota Apygardų: {this.state.count[0]}</p>
-                  <p>Užregitruota Apylinkių: {this.state.count[1]}</p>
-                  <p>Užregitruota Partijų: {this.state.count[3]} </p>
-                  <p>Užregitruota Kandidatų: {this.state.count[4]}</p>
+                  <p>Užregistruota Apygardų: {this.state.count[0]}</p>
+                  <p>Užregistruota Apylinkių: {this.state.count[1]}</p>
+                  <p>Užregistruota Partijų: {this.state.count[3]} </p>
+                  <p>Užregistruota Kandidatų: {this.state.count[4]}</p>
                 </div>
             </div>
           </div>

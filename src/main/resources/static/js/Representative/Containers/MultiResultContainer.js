@@ -156,7 +156,6 @@ var MultiResultContainer = React.createClass({
           );
         }
       }
-      console.log('post array',postArray);
       axios
       .post('/result-multi', postArray)
       .then(function(response){

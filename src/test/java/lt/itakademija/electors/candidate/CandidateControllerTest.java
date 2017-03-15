@@ -1,6 +1,7 @@
 package lt.itakademija.electors.candidate;
 
 import lt.itakademija.Application;
+import lt.itakademija.WebSecurityConfig;
 import lt.itakademija.electors.MyUtils;
 import lt.itakademija.electors.county.*;
 import lt.itakademija.electors.district.DistrictEntity;
@@ -100,7 +101,6 @@ public class CandidateControllerTest {
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"USER","ADMIN"})
     public void updateCandidateName() throws Exception {
         //setup
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");

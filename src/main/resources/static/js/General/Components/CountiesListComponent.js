@@ -25,7 +25,7 @@ var CountiesListComponent = React.createClass({
               <tr>
                 <th className='col-md-6 col-sm-6'> Apygarda </th>
                 <th className='col-md-3 col-sm-3'> Apylinkių skaičius</th>
-                <th className='col-md-3 col-sm-3'> Rinkejų skaičius</th>
+                <th className='col-md-3 col-sm-3'> Rinkėjų skaičius</th>
               </tr>
               </thead>
               <tbody>
