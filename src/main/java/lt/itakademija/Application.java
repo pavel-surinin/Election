@@ -15,13 +15,13 @@ public class Application {
     CommandLineRunner init(DataPreLoader loader) {
         return (args) -> {
             loader.createAdmin();
-//            loader.createCounties();
-//            loader.createDistricts();
+            loader.createCounties();
+            loader.createDistricts();
             loader.loadParties();
-//            loader.createNonPartyCandidates();
-//            loader.createRepresentatives();
-//            loader.votesSingle();
-//            loader.votesMulti();
+            loader.createNonPartyCandidates();
+            loader.createRepresentatives();
+            loader.votesSingle();
+            loader.votesMulti();
         };
     }
 }
