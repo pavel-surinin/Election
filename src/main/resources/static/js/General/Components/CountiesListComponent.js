@@ -7,9 +7,9 @@ var CountiesListComponent = React.createClass({
     var countyInfo =this.props.countyList.map(function(county,index) {
       return(
           <tr>
-            <td className="text-info"><a href={'#/county/'+ county.id}><i className="fa fa-angle-right" aria-hidden="true"></i> {county.name}</a></td>
-            <td className="text-info"><i className="fa fa-cubes" aria-hidden="true"></i> {county.districtsCount}</td>
-            <td className="text-info"><i className="fa fa-users" aria-hidden="true"></i> {county.votersCount}</td>
+            <td className=""><a href={'#/county/'+ county.id}><i className="fa fa-angle-right" aria-hidden="true"></i> {county.name}</a></td>
+            <td className=""><i className="fa fa-cubes" aria-hidden="true"></i> {county.districtsCount}</td>
+            <td className=""><i className="fa fa-users" aria-hidden="true"></i> {county.votersCount}</td>
           </tr>
       );
     });
@@ -23,9 +23,9 @@ var CountiesListComponent = React.createClass({
             <table width="100%" className="table table-striped table-hover" id="dataTables-example">
               <thead>
               <tr>
-                <th> Apygarda </th>
-                <th> Apylinkių skaičius</th>
-                <th> Rinkejų skaičius</th>
+                <th className='col-md-6 col-sm-6'> Apygarda </th>
+                <th className='col-md-3 col-sm-3'> Apylinkių skaičius</th>
+                <th className='col-md-3 col-sm-3'> Rinkėjų skaičius</th>
               </tr>
               </thead>
               <tbody>
