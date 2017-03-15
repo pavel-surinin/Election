@@ -229,19 +229,18 @@ public class DistrictServiceTest {
         districtService.save(districtGel);
         Mockito.verify(districtService).save(districtGel);
         districtGel.setName("Geliu");
+        when(districtGel.getName()).thenReturn("Geliu");
         DistrictEntity districtJ = Mockito.mock(DistrictEntity.class);
         districtService.save(districtJ);
         Mockito.verify(districtService).save(districtJ);
         districtJ.setName("Jonu");
+        when(districtJ.getName()).thenReturn("Jonu");
         DistrictEntity districtGot = Mockito.mock(DistrictEntity.class);
         districtService.save(districtGot);
         Mockito.verify(districtService).save(districtGot);
         districtGot.setName("Gotu");
+        when(districtGot.getName()).thenReturn("Gotu");
 
-//        districtService.getDistictsByFirstLetter("g");
-//        when(districtService.getDistictsByFirstLetter("g")).thenCallRealMethod();
-//        Mockito.verify(districtService).getDistictsByFirstLetter("g");
-//        List firstLetterList = districtService.getDistictsByFirstLetter("G");
         List<DistrictEntity> districtsWithG = new LinkedList<>();
         List spyDistrictsWithG = Mockito.spy(districtsWithG);
         spyDistrictsWithG.add(districtGel);
@@ -249,8 +248,24 @@ public class DistrictServiceTest {
         Mockito.verify(spyDistrictsWithG).add(districtGel);
         Mockito.verify(spyDistrictsWithG).add(districtGot);
 
-        assertThat(districtService.getDistictsByFirstLetter("g"), CoreMatchers.is(spyDistrictsWithG));
-        assertThat(districtService.getDistictsByFirstLetter("g").size(), CoreMatchers.is(spyDistrictsWithG.size()));
+        List<DistrictEntity> districtsWithJ = new LinkedList<>();
+        List spyDistrictsWithJ = Mockito.spy(districtsWithJ);
+        spyDistrictsWithJ.add(districtJ);
+        Mockito.verify(spyDistrictsWithJ).add(districtJ);
+
+        districtService.getDistictsByFirstLetter("G");
+        when(districtService.getDistictsByFirstLetter("G")).thenReturn(spyDistrictsWithG);
+        Mockito.verify(districtService).getDistictsByFirstLetter("G");
+
+        districtService.getDistictsByFirstLetter("J");
+        when(districtService.getDistictsByFirstLetter("J")).thenReturn(spyDistrictsWithJ);
+        Mockito.verify(districtService).getDistictsByFirstLetter("J");
+
+        assertThat(districtService.getDistictsByFirstLetter("G"), CoreMatchers.is(spyDistrictsWithG));
+        assertThat(districtService.getDistictsByFirstLetter("G").size(), CoreMatchers.is(spyDistrictsWithG.size()));
+
+        assertThat(districtService.getDistictsByFirstLetter("J"), CoreMatchers.is(spyDistrictsWithJ));
+        assertThat(districtService.getDistictsByFirstLetter("J").size(), CoreMatchers.is(spyDistrictsWithJ.size()));
     }
 
 }
