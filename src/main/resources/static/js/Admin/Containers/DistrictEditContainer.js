@@ -67,7 +67,7 @@ var DistrictEditContainer = React.createClass({
         if(!validation.checkMax(this.state.name,35)) {nameErrorMesages.push('Pavadinimas negali būti ilgesnis, nei 35 simbolių');}
         if(!validation.checkMin(this.state.name,4)) {nameErrorMesages.push('Pavadinimas negali būti trumpesnis, nei 4 simboliai');}
         var adressErrorMesages = [];
-        if(!validation.checkMax(this.state.adress,50)) {adressErrorMesages.push('Adresas negali būti ilgesnis, nei 50 simbolių');}
+        if(!validation.checkMax(this.state.adress,100)) {adressErrorMesages.push('Adresas negali būti ilgesnis, nei 100 simbolių');}
         if(!validation.checkMin(this.state.adress,4)) {adressErrorMesages.push('Adresas negali būti trumpesnis, nei 4 simboliai');}
         var numberErrorMesages = [];
         if(!validation.checkNumber(this.state.numberOfElectors)) {numberErrorMesages.push('Rinkejų skaičiaus laukas priima tik skačius');}

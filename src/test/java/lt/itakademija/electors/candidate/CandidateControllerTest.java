@@ -100,7 +100,6 @@ public class CandidateControllerTest {
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"USER","ADMIN"})
     public void updateCandidateName() throws Exception {
         //setup
         final MultipartFile file = MyUtils.parseToMultiPart("test-csv/data-party-4.csv");
