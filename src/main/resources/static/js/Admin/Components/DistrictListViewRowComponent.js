@@ -39,7 +39,7 @@
                            <button type="button" id="modal-close-button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div className="modal-body">
-                          <h5 className="modal-title">Ar tikrai norite ištrinti {this.props.name} apygardą?</h5>
+                          <h5 className="modal-title">Ar tikrai norite ištrinti {this.props.name} apylinkę?</h5>
                         </div>
                         <div className="modal-footer">
                            <div className="btn-group">

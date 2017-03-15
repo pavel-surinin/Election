@@ -203,7 +203,7 @@ var CountyResultsComponent = React.createClass({
                                     <th className='col-md-4 col-sm-4'>Pavadinimas</th>
                                     <th className='col-md-3 col-sm-3'>Atstovas</th>
                                     <th className='col-md-4 col-sm-3'>Adresas</th>
-                                    <th className='col-md-2 col-sm-2'>Rinkeju skaicius</th>
+                                    <th className='col-md-2 col-sm-2'>Rinkėjų skaičius</th>
 
                                 </tr>
                                 </thead>

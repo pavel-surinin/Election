@@ -104,7 +104,6 @@ var MultiResultContainer = React.createClass({
     );
   },
   onChangePartyRating : function(pid,cid,points){
-    console.log('onPartyReatingChange', pid,cid,points);
     if (ratings.length == 0) {
       this.state.partyList.forEach(function(p) {
         ratings.push(
@@ -157,11 +156,14 @@ var MultiResultContainer = React.createClass({
           );
         }
       }
-      console.log('post array',postArray);
       axios
       .post('/result-multi', postArray)
       .then(function(response){
         self.setState({isVotesRegistered : true});
+        errorMesages = [];
+        list = {};
+        postArray =[];
+        ratings = [];
       })
       .catch(function(error){
         if (error.response) {

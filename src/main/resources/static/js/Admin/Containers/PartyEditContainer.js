@@ -147,7 +147,7 @@ var PartyEditContainer = React.createClass({
       axios
         .delete('/candidate/party/'+ this.props.params.id)
         .then(function(response){
-          self.setState({deletedPartyFileText: 'Partijos sarašas ištrintas'})
+          self.setState({deletedPartyFileText: 'Partijos sąrašas ištrintas'})
           getPartyById(self, self.props.params.id);
         })
         .catch(function(err){

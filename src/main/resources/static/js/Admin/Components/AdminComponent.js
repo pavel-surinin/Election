@@ -80,7 +80,7 @@ var AdminComponent = React.createClass({
 
         <ul className="nav navbar-top-links navbar-right">
         <li>
-        <a href='#a' id="logout-button"  onClick={this.onHandleLogout}>
+        <a href='#/login' id="logout-button"  onClick={this.onHandleLogout}>
         Atsijungti &nbsp;<i className="fa fa-sign-out"></i>
         </a>
         </li>
