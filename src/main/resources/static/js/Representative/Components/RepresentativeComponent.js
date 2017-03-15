@@ -29,7 +29,7 @@ var RepresentativeComponent = React.createClass({
 
               <ul className="nav navbar-top-links navbar-right">
                 <li>
-                    <a href='#a' onClick={this.onHandleLogout}>
+                    <a href='#/login' onClick={this.onHandleLogout}>
                       Atsijungti &nbsp;<i className="fa fa-sign-out"></i>
                     </a>
                   </li>

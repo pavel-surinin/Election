@@ -1,12 +1,6 @@
-function addMinutes(date, minutes) {
-  return new Date(date.getTime() + minutes*60000);
-}
 var ResultsMultiListRowComponent = React.createClass({
   isDeleteActive : function(){
     var time = new Date(this.props.info.votesMultiRegisteredDate);
-    console.log(addMinutes(time, 2) - new Date());
-    console.log(addMinutes(time, 2));
-    console.log((addMinutes(time, 2) - new Date()) < 0);
   },
   componentDidMount: function () {
     $(this.refs.approve).tooltip();
@@ -45,7 +39,7 @@ var ResultsMultiListRowComponent = React.createClass({
               ></button>
             &nbsp;
             <button ref='deny'
-                    data-target={"#confirmationModal" + this.props.info.type + this.props.info.id}
+                    data-target={'#confirmationModal' + this.props.info.type + this.props.info.id}
                     title="Ištrinti" type="button" id={'delete-button-' + this.props.info.id}
                     className="btn btn-danger btn-sm fa fa-trash" data-toggle="modal"
             ></button>
@@ -80,7 +74,6 @@ var ResultsMultiListRowComponent = React.createClass({
       </tr>
     );
   }
-
 });
 
 window.ResultsMultiListRowComponent = ResultsMultiListRowComponent;

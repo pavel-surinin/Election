@@ -1,14 +1,10 @@
 package lt.itakademija.electors.candidate;
 
 import lt.itakademija.electors.county.CountyEntity;
-import lt.itakademija.electors.county.CountyRepository;
 import lt.itakademija.electors.district.DistrictEntity;
-import lt.itakademija.electors.district.DistrictService;
 import lt.itakademija.electors.party.PartyEntity;
 import lt.itakademija.electors.party.PartyRepository;
 import lt.itakademija.electors.party.PartyService;
-import lt.itakademija.electors.results.single.ResultSingleRepository;
-import lt.itakademija.electors.results.single.ResultSingleService;
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
