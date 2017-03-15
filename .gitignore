@@ -1,4 +1,5 @@
 /target/
 /.idea/
 /src/main/resources/h2/
+/src/main/resources/results-csv/
 

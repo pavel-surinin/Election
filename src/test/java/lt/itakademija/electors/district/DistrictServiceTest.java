@@ -87,7 +87,7 @@ public class DistrictServiceTest {
 
     @Test
     public void getDistrictSingleRegistered() throws Exception {
-
+        
     }
 
     @Test

@@ -101,6 +101,9 @@ var SingleResultContainer = React.createClass({
       .post('/result-single', postArray)
       .then(function(response){
         self.setState({isVotesRegistered : true});
+        list = {};
+        postArray = [];
+        errorMesages = [];
       })
       .catch(function(error){
         if (error.response) {
