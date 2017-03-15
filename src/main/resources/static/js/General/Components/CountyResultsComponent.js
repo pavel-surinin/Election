@@ -1,3 +1,19 @@
+function showSingleTab(self){
+  if(self.props.results) {
+    return (
+      <li>
+      <a href="#2a" onClick={this.loadSingle} data-toggle="tab">Vienmandatės rezultatai</a>
+      </li>
+    )
+  }
+}
+function showMultiTabe(self){
+  if(self.props.results){
+    <li>
+    <a href="#3a" onClick={this.loadMulti} data-toggle="tab">Daugiamandatės rezultaitai</a>
+    </li>
+  }
+}
 function getSingleTable(self) {
     var singleTable = [];
     if (self.props.results.votesByCandidate) {
